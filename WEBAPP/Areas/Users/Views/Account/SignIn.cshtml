@@ -5,7 +5,8 @@
 @model System.Web.Mvc.HandleErrorInfo
 
 @{
-    Layout = null;
+    ViewBag.Title = "SIGNIN";
+    Layout = "~/Views/Shared/_LoginPartial.cshtml";
 }
 
 @using (var form = Html.Bootstrap().Form().SetHorizontal().Begin())

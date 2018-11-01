@@ -66,11 +66,11 @@ namespace WEBAPP.Areas.Users.Controllers
 
         [HttpGet]
         [AuthAttribute]
-        public ActionResult SignIn(string returnUrl)
+        public ActionResult SignIn(string returnUrl, string Username)
         {
             ViewBag.message = string.Empty;
             ViewBag.messageHeader = string.Empty;
-            string cdsid = string.Empty;
+            string cdsid = Username;
 
             if (!string.IsNullOrEmpty(Request.ServerVariables["AUTH_USER"].ToString().Trim()))
             {
@@ -109,7 +109,7 @@ namespace WEBAPP.Areas.Users.Controllers
                                     ViewBag.message = string.Concat("-", "Wrong username or password", "<br/>");
                                 }
                                 else if (enmLogInResult == LogInResult.Success)
-                                {
+                                 {
                                     return RedirectToAction("SelectSyatem");
                                 }
                             }
@@ -537,8 +537,8 @@ namespace WEBAPP.Areas.Users.Controllers
 
             var da = new UserDA();
             da.DTO.Execute.ExecuteType = UserExecuteType.GetUser;
-            da.DTO.Model.COM_CODE = "AAT";
-            da.DTO.Model.USER_ID = USER_ID;
+            da.DTO.Model.COM_CODE = "AAT"; // ไม่ได้ใช้
+            da.DTO.Model.USER_ID = USER_ID; //ส่งไปใช้แค่ตัวนี้อย่างเดียว
             da.Select(da.DTO);
 
             if (da.DTO.Result.IsResult)
