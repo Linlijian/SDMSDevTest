@@ -29,6 +29,7 @@ namespace DataAccess.Users
             {
                 case UserExecuteType.GetUser: return GetUser(dto);
                 case UserExecuteType.GetConfigGeraral: return GetConfigGeraral(dto);
+                case UserExecuteType.GetConfigSys: return GetConfigSys(dto);
             }
             return dto;
         }
@@ -68,6 +69,21 @@ namespace DataAccess.Users
                                       SEQUENCE = t2.SEQUENCE,
                                       IMG = t2.IMG,
                                       IMG_COLOR = t2.IMG_COLOR
+                                  }).Distinct().ToList();
+
+            return dto;
+        }
+        private UserDTO GetConfigSys(UserDTO dto)
+        {
+            dto.ConfigGerarals = (from t1 in _DBManger.VSMS_CONFIG_SYS                                  
+                                  orderby t1.SEQUENCE
+                                  select new ModuleModel
+                                  {
+                                      NAME = t1.NAME,
+                                      SEQUENCE = t1.SEQUENCE,
+                                      IMG = t1.IMG,
+                                      IMG_COLOR = t1.IMG_COLOR,
+                                      SYS_CODE = t1.SYS_CODE
                                   }).Distinct().ToList();
 
             return dto;

@@ -110,7 +110,7 @@ namespace WEBAPP.Areas.Users.Controllers
                                 }
                                 else if (enmLogInResult == LogInResult.Success)
                                 {
-                                    return RedirectToAction("SelectModule");
+                                    return RedirectToAction("SelectSyatem");
                                 }
                             }
                         }
@@ -175,7 +175,7 @@ namespace WEBAPP.Areas.Users.Controllers
             }
             #endregion
 
-            return RedirectToAction("SelectModule");
+            return RedirectToAction("SelectSystem");
         }
         
         [HttpGet]
@@ -201,6 +201,7 @@ namespace WEBAPP.Areas.Users.Controllers
         public ActionResult SelectedModule(string NAME)
         {
             Session[SessionSystemName.SYS_SYS_GROUP_NAME] = NAME;
+            Session[SessionSystemName.SYS_MODULE] = NAME; //test
 
             var da = new SECBaseDA();
             da.DTO.Execute.ExecuteType = SECBaseExecuteType.GetMenu;
@@ -212,6 +213,33 @@ namespace WEBAPP.Areas.Users.Controllers
             return Redirect(FormsAuthentication.DefaultUrl);
 
             //return Redirect(Url.Action("Index", "Default", new { area = "Admin" }));
+        }
+
+        [HttpGet]
+        [AuthAttribute]
+        public ActionResult SelectSystem()
+        {
+            if (SessionHelper.SYS_USER_ID.IsNullOrEmpty())
+            {
+                return RedirectToAction("SignIn");
+            }
+
+            var da = new UserDA();
+            da.DTO.Execute.ExecuteType = UserExecuteType.GetConfigSys;
+            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            da.DTO.Model.USG_ID = SessionHelper.SYS_USG_ID;
+            da.Select(da.DTO);
+            SessionHelper.SYS_IsMultipleGroup = (da.DTO.ConfigGerarals.Count > 1);
+            return View(da.DTO.ConfigGerarals);
+        }
+
+        [HttpGet]
+        [AuthAttribute]
+        public ActionResult SelectedSystem(string NAME)
+        {
+            Session[SessionSystemName.SYS_SYS_GROUP_NAME] = NAME;
+            Session[SessionSystemName.SYS_SYSTEM] = NAME; //test
+            return RedirectToAction("SelectModule");
         }
 
         public ActionResult Error(string exception, string errorcode)

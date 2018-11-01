@@ -125,6 +125,9 @@
     <Compile Include="VSMS_CONFIG_GENERAL.cs">
       <DependentUpon>ModelManger.tt</DependentUpon>
     </Compile>
+    <Compile Include="VSMS_CONFIG_SYS.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
     <Compile Include="VSMS_CTRLLOG.cs">
       <DependentUpon>ModelManger.tt</DependentUpon>
     </Compile>
