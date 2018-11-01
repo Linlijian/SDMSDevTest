@@ -61,7 +61,7 @@ namespace DataAccess.Users
         {
             dto.ConfigGerarals = (from t1 in _DBManger.VSMS_USRGRPPRIV
                                   join t2 in _DBManger.VSMS_CONFIG_GENERAL on new { t1.COM_CODE, t1.SYS_CODE } equals new { t2.COM_CODE, t2.SYS_CODE }
-                                  where t1.COM_CODE == dto.Model.COM_CODE && ((decimal?)t1.USG_ID) == dto.Model.USG_ID
+                                  where t1.COM_CODE == dto.Model.COM_CODE && ((decimal?)t1.USG_ID) == dto.Model.USG_ID && t2.SYS_CODE == dto.Model.SYS_GROUP_NAME
                                   orderby t2.SEQUENCE
                                   select new ModuleModel
                                   {

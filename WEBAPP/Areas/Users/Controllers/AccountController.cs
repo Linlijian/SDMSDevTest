@@ -74,7 +74,7 @@ namespace WEBAPP.Areas.Users.Controllers
 
             if (!string.IsNullOrEmpty(Request.ServerVariables["AUTH_USER"].ToString().Trim()))
             {
-                cdsid = Request.ServerVariables["AUTH_USER"].ToString().Split('\\')[1];
+                cdsid = Request.ServerVariables["AUTH_USER"].ToString().Split('\\')[0];
             }
 
             SEC006P001Model dsSys = GET_VSMS_USER(cdsid);
@@ -191,6 +191,9 @@ namespace WEBAPP.Areas.Users.Controllers
             da.DTO.Execute.ExecuteType = UserExecuteType.GetConfigGeraral;
             da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
             da.DTO.Model.USG_ID = SessionHelper.SYS_USG_ID;
+
+            //da.DTO.Model.SYS_GROUP_NAME = SessionHelper.SYS_SYS_GROUP_NAME;
+            da.DTO.Model.SYS_GROUP_NAME = "OUBTF";
             da.Select(da.DTO);
             SessionHelper.SYS_IsMultipleGroup = (da.DTO.ConfigGerarals.Count > 1);
             return View(da.DTO.ConfigGerarals);
