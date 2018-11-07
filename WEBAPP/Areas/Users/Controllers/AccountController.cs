@@ -110,7 +110,7 @@ namespace WEBAPP.Areas.Users.Controllers
                                 }
                                 else if (enmLogInResult == LogInResult.Success)
                                  {
-                                    return RedirectToAction("SelectSyatem");
+                                    return RedirectToAction("SelectSystem");
                                 }
                             }
                         }
@@ -193,7 +193,7 @@ namespace WEBAPP.Areas.Users.Controllers
             da.DTO.Model.USG_ID = SessionHelper.SYS_USG_ID;
 
             //da.DTO.Model.SYS_GROUP_NAME = SessionHelper.SYS_SYS_GROUP_NAME;
-            da.DTO.Model.SYS_GROUP_NAME = "OUBTF";
+            da.DTO.Model.SYS_GROUP_NAME = "SEC01";
             da.Select(da.DTO);
             SessionHelper.SYS_IsMultipleGroup = (da.DTO.ConfigGerarals.Count > 1);
             return View(da.DTO.ConfigGerarals);
