@@ -110,7 +110,7 @@ namespace WEBAPP.Areas.Users.Controllers
                                 }
                                 else if (enmLogInResult == LogInResult.Success)
                                  {
-                                    return RedirectToAction("SelectSystem");
+                                    return RedirectToAction("SelectModule");
                                 }
                             }
                         }
@@ -175,7 +175,7 @@ namespace WEBAPP.Areas.Users.Controllers
             }
             #endregion
 
-            return RedirectToAction("SelectSystem");
+            return RedirectToAction("SelectModule");
         }
         
         [HttpGet]
@@ -193,7 +193,8 @@ namespace WEBAPP.Areas.Users.Controllers
             da.DTO.Model.USG_ID = SessionHelper.SYS_USG_ID;
 
             //da.DTO.Model.SYS_GROUP_NAME = SessionHelper.SYS_SYS_GROUP_NAME;
-            da.DTO.Model.SYS_GROUP_NAME = "SEC01";
+            //da.DTO.Model.SYS_GROUP_NAME = "SEC01";
+
             da.Select(da.DTO);
             SessionHelper.SYS_IsMultipleGroup = (da.DTO.ConfigGerarals.Count > 1);
             return View(da.DTO.ConfigGerarals);
@@ -204,7 +205,7 @@ namespace WEBAPP.Areas.Users.Controllers
         public ActionResult SelectedModule(string NAME)
         {
             Session[SessionSystemName.SYS_SYS_GROUP_NAME] = NAME;
-            Session[SessionSystemName.SYS_MODULE] = NAME; //test
+            //Session[SessionSystemName.SYS_MODULE] = NAME; //test
 
             var da = new SECBaseDA();
             da.DTO.Execute.ExecuteType = SECBaseExecuteType.GetMenu;
