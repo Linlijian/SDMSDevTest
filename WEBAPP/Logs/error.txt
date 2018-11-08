@@ -1,3 +1,19 @@
 ﻿ERROR 2018-10-03 00:13:11,303 AccountController.SignIn2 - The network path was not found
 ERROR 2018-10-03 00:39:17,174 AccountController.SignIn2 - The network path was not found
 ERROR 2018-10-03 00:43:56,368 AccountController.SignIn2 - The network path was not found
+ERROR 2018-11-01 15:23:50,028 AccountController.SignIn2 - Cannot open database "CFZDB" requested by the login. The login failed.
+Login failed for user 'sa'.
+ERROR 2018-11-01 15:24:10,090 AccountController.SignIn2 - Cannot open database "CFZDB" requested by the login. The login failed.
+Login failed for user 'sa'.
+ERROR 2018-11-01 21:57:18,527 BaseController.OnException - 
+Path : Users/Account/SignIn2
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2018-11-08 12:53:47,828 BaseController.OnException - 
+Path : Users/Account/SignIn2
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2018-11-08 12:54:52,560 BaseController.OnException - 
+Path : Users/Account/SignIn2
+Error Messages: Object reference not set to an instance of an object.
+

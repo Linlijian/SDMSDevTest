@@ -48,21 +48,11 @@ namespace DataAccess.SEC
                     USER_FNAME_EN = m.USER_FNAME_EN,
                     USER_LNAME_EN = m.USER_LNAME_EN,
                     TITLE_ID = m.TITLE_ID,
-                    DEPT_ID = m.DEPT_ID,
                     USG_ID = m.USG_ID,
-                    USER_SPEC_ID = m.USER_SPEC_ID,
                     USER_PWD = m.USER_PWD,
-                    USER_EFF_DATE = m.USER_EFF_DATE,
-                    USER_EXP_DATE = m.USER_EXP_DATE,
-                    PWD_EXP_DATE = m.PWD_EXP_DATE,
-                    WNING_USER_DATE = m.WNING_USER_DATE,
-                    WNING_PWD_DATE = m.WNING_PWD_DATE,
-                    END_ACT_DATE = m.END_ACT_DATE,
                     TELEPHONE = m.TELEPHONE,
                     EMAIL = m.EMAIL,
                     USER_STATUS = m.USER_STATUS,
-                    IS_FCP = m.IS_FCP,
-                    IS_NCE = m.IS_NCE,
                     CRET_BY = m.CRET_BY,
                     CRET_DATE = m.CRET_DATE,
                     MNT_BY = m.MNT_BY,
@@ -83,11 +73,6 @@ namespace DataAccess.SEC
         {
             dto.Models = (
                         from a in _DBManger.VSMS_USER
-
-                        join b in _DBManger.VSMS_DEPARTMENT on new { DEPT_ID = a.DEPT_ID.ToString(), COM_CODE = a.COM_CODE } equals new { DEPT_ID = b.DEPT_ID.ToString(), COM_CODE = b.COM_CODE }
-                        into ab
-                        from a_b in ab.DefaultIfEmpty()
-
                         join c in _DBManger.VSMS_USRGROUP on a.USG_ID equals c.USG_ID
                         into ac
                         from a_c in ac.DefaultIfEmpty()
@@ -95,7 +80,6 @@ namespace DataAccess.SEC
                         where (dto.Model.USER_ID == null || a.USER_ID.Contains(dto.Model.USER_ID))
                                 && (dto.Model.USER_FNAME_TH == null || a.USER_FNAME_TH.Contains(dto.Model.USER_FNAME_TH))
                                 && (dto.Model.USER_FNAME_EN == null || a.USER_FNAME_EN.Contains(dto.Model.USER_FNAME_EN))
-                                && (dto.Model.DEPT_ID == null || a.DEPT_ID == dto.Model.DEPT_ID)
                                 && (dto.Model.USG_ID == null || a.USG_ID == dto.Model.USG_ID)
                                 && (dto.Model.IS_DISABLED == null || ((a.IS_DISABLED == null ? "N" : a.IS_DISABLED) == dto.Model.IS_DISABLED))
                         orderby a.USER_ID
@@ -106,7 +90,6 @@ namespace DataAccess.SEC
                             USER_LNAME_TH = a.USER_LNAME_TH,
                             USER_FNAME_EN = a.USER_FNAME_TH,
                             USER_LNAME_EN = a.USER_LNAME_EN,
-                            DEPT_NAME_TH = a_b.DEPT_NAME_TH,
                             USG_NAME_TH = a_c.USG_NAME_TH,
                             IS_DISABLED = a.IS_DISABLED,
                         }).ToList();

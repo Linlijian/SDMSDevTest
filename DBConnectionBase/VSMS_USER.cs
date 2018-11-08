@@ -21,21 +21,11 @@ namespace DataAccess
         public string USER_FNAME_EN { get; set; }
         public string USER_LNAME_EN { get; set; }
         public Nullable<decimal> TITLE_ID { get; set; }
-        public Nullable<decimal> DEPT_ID { get; set; }
         public Nullable<decimal> USG_ID { get; set; }
-        public string USER_SPEC_ID { get; set; }
         public string USER_PWD { get; set; }
-        public Nullable<System.DateTime> USER_EFF_DATE { get; set; }
-        public Nullable<System.DateTime> USER_EXP_DATE { get; set; }
-        public Nullable<System.DateTime> PWD_EXP_DATE { get; set; }
-        public Nullable<System.DateTime> WNING_USER_DATE { get; set; }
-        public Nullable<System.DateTime> WNING_PWD_DATE { get; set; }
-        public Nullable<System.DateTime> END_ACT_DATE { get; set; }
         public string TELEPHONE { get; set; }
         public string EMAIL { get; set; }
         public string USER_STATUS { get; set; }
-        public string IS_FCP { get; set; }
-        public string IS_NCE { get; set; }
         public string IS_DISABLED { get; set; }
         public Nullable<System.DateTime> LAST_LOGIN_DATE { get; set; }
         public string CRET_BY { get; set; }

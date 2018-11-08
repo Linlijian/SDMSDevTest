@@ -131,9 +131,6 @@
     <Compile Include="VSMS_CTRLLOG.cs">
       <DependentUpon>ModelManger.tt</DependentUpon>
     </Compile>
-    <Compile Include="VSMS_DEPARTMENT.cs">
-      <DependentUpon>ModelManger.tt</DependentUpon>
-    </Compile>
     <Compile Include="VSMS_EXCEL.cs">
       <DependentUpon>ModelManger.tt</DependentUpon>
     </Compile>
