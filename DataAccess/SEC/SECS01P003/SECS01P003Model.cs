@@ -6,40 +6,40 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.SEC
 {
-    [Validator(typeof(SEC005P001Validator))]
+    [Validator(typeof(SECS01P003Validator))]
     [Serializable]
-    public class SEC005P001Model : StandardModel
+    public class SECS01P003Model : StandardModel
     {
-        [Display(Name = "PRG_CODE", ResourceType = typeof(Translation.SEC.SEC005P001))]
+        [Display(Name = "PRG_CODE", ResourceType = typeof(Translation.SEC.SECS01P003))]
         public string PRG_CODE { get; set; }
-        [Display(Name = "PRG_NAME_TH", ResourceType = typeof(Translation.SEC.SEC005P001))]
+        [Display(Name = "PRG_NAME_TH", ResourceType = typeof(Translation.SEC.SECS01P003))]
         public string PRG_NAME_TH { get; set; }
-        [Display(Name = "PRG_NAME_EN", ResourceType = typeof(Translation.SEC.SEC005P001))]
+        [Display(Name = "PRG_NAME_EN", ResourceType = typeof(Translation.SEC.SECS01P003))]
         public string PRG_NAME_EN { get; set; }
-        [Display(Name = "PRG_TYPE", ResourceType = typeof(Translation.SEC.SEC005P001))]
+        [Display(Name = "PRG_TYPE", ResourceType = typeof(Translation.SEC.SECS01P003))]
         public string PRG_TYPE { get; set; }
         public IEnumerable<DDLCenterModel> PRG_TYPE_MODEL { get; set; }
-        [Display(Name = "PRG_LEVEL", ResourceType = typeof(Translation.SEC.SEC005P001))]
+        [Display(Name = "PRG_LEVEL", ResourceType = typeof(Translation.SEC.SECS01P003))]
         public decimal? PRG_LEVEL { get; set; }
-        [Display(Name = "PRG_STATUS", ResourceType = typeof(Translation.SEC.SEC005P001))]
+        [Display(Name = "PRG_STATUS", ResourceType = typeof(Translation.SEC.SECS01P003))]
         public string PRG_STATUS { get; set; }
         public IEnumerable<DDLCenterModel> PRG_STATUS_MODEL { get; set; }
-        [Display(Name = "PRG_URL", ResourceType = typeof(Translation.SEC.SEC005P001))]
+        [Display(Name = "PRG_URL", ResourceType = typeof(Translation.SEC.SECS01P003))]
         public string PRG_URL { get; set; }
 
-        [Display(Name = "PRG_IMG", ResourceType = typeof(Translation.SEC.SEC005P001))]
+        [Display(Name = "PRG_IMG", ResourceType = typeof(Translation.SEC.SECS01P003))]
         public string PRG_IMG { get; set; }
 
-        [Display(Name = "PRG_AREA", ResourceType = typeof(Translation.SEC.SEC005P001))]
+        [Display(Name = "PRG_AREA", ResourceType = typeof(Translation.SEC.SECS01P003))]
         public string PRG_AREA { get; set; }
 
-        [Display(Name = "PRG_CONTROLLER", ResourceType = typeof(Translation.SEC.SEC005P001))]
+        [Display(Name = "PRG_CONTROLLER", ResourceType = typeof(Translation.SEC.SECS01P003))]
         public string PRG_CONTROLLER { get; set; }
 
-        [Display(Name = "PRG_ACTION", ResourceType = typeof(Translation.SEC.SEC005P001))]
+        [Display(Name = "PRG_ACTION", ResourceType = typeof(Translation.SEC.SECS01P003))]
         public string PRG_ACTION { get; set; }
 
-        [Display(Name = "PRG_PARAMETER", ResourceType = typeof(Translation.SEC.SEC005P001))]
+        [Display(Name = "PRG_PARAMETER", ResourceType = typeof(Translation.SEC.SECS01P003))]
         public string PRG_PARAMETER { get; set; }
 
         public string PRG_NO { get; set; }
@@ -47,9 +47,9 @@ namespace DataAccess.SEC
         public string SERVER_NAME { get; set; }
     }
 
-    public class SEC005P001Validator : AbstractValidator<SEC005P001Model>
+    public class SECS01P003Validator : AbstractValidator<SECS01P003Model>
     {
-        public SEC005P001Validator()
+        public SECS01P003Validator()
         {
             RuleSet("Add", () =>
             {

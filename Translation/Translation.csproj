@@ -81,11 +81,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SEC004P001.resx</DependentUpon>
     </Compile>
-    <Compile Include="SEC\SEC005P001.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SEC005P001.resx</DependentUpon>
-    </Compile>
     <Compile Include="SEC\SEC008P001.Designer.cs">
       <DependentUpon>SEC008P001.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -120,6 +115,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SECS01P002.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SEC\SECS01P003.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SECS01P003.resx</DependentUpon>
     </Compile>
     <Compile Include="Ux\File.Designer.cs">
       <DependentUpon>File.resx</DependentUpon>
@@ -164,11 +164,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SEC004P001.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SEC\SEC005P001.en-US.resx" />
-    <EmbeddedResource Include="SEC\SEC005P001.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SEC005P001.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="SEC\SEC008P001.en-US.resx" />
     <EmbeddedResource Include="SEC\SEC008P001.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -203,6 +198,11 @@
     <EmbeddedResource Include="SEC\SECS01P002.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SECS01P002.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEC\SECS01P003.en-US.resx" />
+    <EmbeddedResource Include="SEC\SECS01P003.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SECS01P003.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Ux\File.en.US.resx" />
     <EmbeddedResource Include="Ux\File.resx">

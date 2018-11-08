@@ -161,8 +161,8 @@ namespace WEBAPP.Areas.Users.Controllers
             FormsAuthentication.SetAuthCookie(da.DTO.Model.USER_ID, false);
 
             #region Check_DB_SERVER_NAME
-            var daVSMS_PROGRAM = new SEC005P001DA();
-            daVSMS_PROGRAM.DTO.Execute.ExecuteType = SEC005P001ExecuteType.CHECK_DB_SERVER_NAME;
+            var daVSMS_PROGRAM = new SECS01P003DA();
+            daVSMS_PROGRAM.DTO.Execute.ExecuteType = SECS01P003ExecuteType.CHECK_DB_SERVER_NAME;
             daVSMS_PROGRAM.SelectNoEF(daVSMS_PROGRAM.DTO);
 
             if (!daVSMS_PROGRAM.DTO.Model.SERVER_NAME.IsNullOrEmpty())

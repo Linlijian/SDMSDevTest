@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace DataAccess.SEC
 {
     [Serializable]
-    public class SEC005P001DTO : BaseDTO
+    public class SECS01P003DTO : BaseDTO
     {
-        public SEC005P001DTO()
+        public SECS01P003DTO()
         {
-            Model = new SEC005P001Model();
+            Model = new SECS01P003Model();
         }
 
-        public SEC005P001Model Model { get; set; }
-        public List<SEC005P001Model> Models { get; set; }
+        public SECS01P003Model Model { get; set; }
+        public List<SECS01P003Model> Models { get; set; }
     }
 
-    public class SEC005P001ExecuteType : DTOExecuteType
+    public class SECS01P003ExecuteType : DTOExecuteType
     {
         public const string CHECK_DB_SERVER_NAME = "CHECK_DB_SERVER_NAME";
     }

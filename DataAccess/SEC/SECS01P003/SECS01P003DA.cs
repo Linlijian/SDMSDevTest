@@ -4,37 +4,37 @@ using UtilityLib;
 
 namespace DataAccess.SEC
 {
-    public class SEC005P001DA : BaseDA
+    public class SECS01P003DA : BaseDA
     {
-        public SEC005P001DTO DTO { get; set; }
+        public SECS01P003DTO DTO { get; set; }
 
-        public SEC005P001DA()
+        public SECS01P003DA()
         {
-            DTO = new SEC005P001DTO();
+            DTO = new SECS01P003DTO();
         }
 
         #region Select
 
         protected override BaseDTO DoSelect(BaseDTO baseDTO)
         {
-            var dto = (SEC005P001DTO)baseDTO;
+            var dto = (SECS01P003DTO)baseDTO;
             switch (dto.Execute.ExecuteType)
             {
-                case SEC005P001ExecuteType.GetAll: return GetAll(dto);
-                case SEC005P001ExecuteType.GetByID: return GetByID(dto);
-                case SEC005P001ExecuteType.CHECK_DB_SERVER_NAME:
+                case SECS01P003ExecuteType.GetAll: return GetAll(dto);
+                case SECS01P003ExecuteType.GetByID: return GetByID(dto);
+                case SECS01P003ExecuteType.CHECK_DB_SERVER_NAME:
                     return CHECK_DB_SERVER_NAME(dto);
             }
             return dto;
         }
-        private SEC005P001DTO GetAll(SEC005P001DTO dto)
+        private SECS01P003DTO GetAll(SECS01P003DTO dto)
         {
             dto.Models = _DBManger.VSMS_PROGRAM.Where(m => ((dto.Model.PRG_CODE == null || m.PRG_CODE.Contains(dto.Model.PRG_CODE)) &&
                          (dto.Model.PRG_NAME_TH == null || m.PRG_NAME_TH.Contains(dto.Model.PRG_NAME_TH)) &&
                          (dto.Model.PRG_NAME_EN == null || m.PRG_NAME_TH.Contains(dto.Model.PRG_NAME_EN)) &&
                          (dto.Model.PRG_TYPE == null || m.PRG_TYPE == dto.Model.PRG_TYPE) &&
                          (dto.Model.PRG_STATUS == null || m.PRG_STATUS == dto.Model.PRG_STATUS))).OrderBy(m => m.PRG_CODE)
-                        .Select(m => new SEC005P001Model
+                        .Select(m => new SECS01P003Model
                         {
                             COM_CODE = m.COM_CODE,
                             PRG_CODE = m.PRG_CODE,
@@ -54,16 +54,16 @@ namespace DataAccess.SEC
             return dto;
         }
 
-        private SEC005P001DTO GetByID(SEC005P001DTO dto)
+        private SECS01P003DTO GetByID(SECS01P003DTO dto)
         {
             dto.Model = _DBManger.VSMS_PROGRAM
                 .Where(m => m.COM_CODE == dto.Model.COM_CODE).Where(m => m.PRG_CODE == dto.Model.PRG_CODE)
-                .FirstOrDefault().ToNewObject(new SEC005P001Model());
+                .FirstOrDefault().ToNewObject(new SECS01P003Model());
 
             return dto;
         }
 
-        private SEC005P001DTO CHECK_DB_SERVER_NAME(SEC005P001DTO dto)
+        private SECS01P003DTO CHECK_DB_SERVER_NAME(SECS01P003DTO dto)
         {
             string strSQL = @"  SELECT  @@SERVERNAME SERVER_NAME ";
 
@@ -72,7 +72,7 @@ namespace DataAccess.SEC
 
             if (result.Success(dto))
             {
-                dto.Model = result.OutputDataSet.Tables[0].ToObject<SEC005P001Model>();
+                dto.Model = result.OutputDataSet.Tables[0].ToObject<SECS01P003Model>();
             }
 
             return dto;
@@ -83,7 +83,7 @@ namespace DataAccess.SEC
 
         protected override BaseDTO DoInsert(BaseDTO baseDTO)
         {
-            var dto = (SEC005P001DTO)baseDTO;
+            var dto = (SECS01P003DTO)baseDTO;
             dto.Model.PRG_CODE = dto.Model.PRG_CODE.Trim();
 
             var model = dto.Model.ToNewObject(new VSMS_PROGRAM());
@@ -98,7 +98,7 @@ namespace DataAccess.SEC
 
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
-            var dto = (SEC005P001DTO)baseDTO;
+            var dto = (SECS01P003DTO)baseDTO;
 
             var model = _DBManger.VSMS_PROGRAM.First(m => m.COM_CODE == dto.Model.COM_CODE && m.PRG_CODE == dto.Model.PRG_CODE);
             model.MergeObject(dto.Model);
@@ -112,7 +112,7 @@ namespace DataAccess.SEC
 
         protected override BaseDTO DoDelete(BaseDTO baseDTO)
         {
-            var dto = (SEC005P001DTO)baseDTO;
+            var dto = (SECS01P003DTO)baseDTO;
             foreach (var item in dto.Models)
             {
                 var COM_CODE = item.COM_CODE;

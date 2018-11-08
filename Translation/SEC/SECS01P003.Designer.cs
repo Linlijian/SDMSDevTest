@@ -22,14 +22,14 @@ namespace Translation.SEC {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SEC005P001 {
+    public class SECS01P003 {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SEC005P001() {
+        internal SECS01P003() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Translation.SEC {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Translation.SEC.SEC005P001", typeof(SEC005P001).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Translation.SEC.SECS01P003", typeof(SECS01P003).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

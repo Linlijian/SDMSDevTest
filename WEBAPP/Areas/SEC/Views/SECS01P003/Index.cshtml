@@ -3,7 +3,7 @@
 @using DataAccess.SEC
 @using UtilityLib
 
-@model SEC005P001Model
+@model SECS01P003Model
 
 @{
     ViewBag.Title = "Index";
@@ -71,10 +71,10 @@
         Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("COM_CODE"), new VSMParameter("PRG_CODE"))),
         new GridColumn("COM_CODE").SetNotVisible().SetKey(),
         new GridColumn("PRG_CODE").SetNotVisible().SetKey(),
-        new GridColumn("PRG_CODE", Translation.SEC.SEC005P001.PRG_CODE, 10),
-        new GridColumn("PRG_NAME_TH", Translation.SEC.SEC005P001.PRG_NAME_TH, 30),
-        new GridColumn("PRG_NAME_EN", Translation.SEC.SEC005P001.PRG_NAME_EN, 30),
-        new GridColumn("PRG_TYPE", Translation.SEC.SEC005P001.PRG_TYPE, 10),
-        new GridColumn("PRG_STATUS", Translation.SEC.SEC005P001.PRG_STATUS, 7, ColumnsTextAlign.Center)
+        new GridColumn("PRG_CODE", Translation.SEC.SECS01P003.PRG_CODE, 10),
+        new GridColumn("PRG_NAME_TH", Translation.SEC.SECS01P003.PRG_NAME_TH, 30),
+        new GridColumn("PRG_NAME_EN", Translation.SEC.SECS01P003.PRG_NAME_EN, 30),
+        new GridColumn("PRG_TYPE", Translation.SEC.SECS01P003.PRG_TYPE, 10),
+        new GridColumn("PRG_STATUS", Translation.SEC.SECS01P003.PRG_STATUS, 7, ColumnsTextAlign.Center)
         )
 }
