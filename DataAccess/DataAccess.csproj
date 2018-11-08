@@ -78,9 +78,9 @@
     <Compile Include="Admin\Dashboard\DashboardModel.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SEC\SEC000P001\SEC000P001DA.cs" />
-    <Compile Include="SEC\SEC000P001\SEC000P001DTO.cs" />
-    <Compile Include="SEC\SEC000P001\SEC000P001Model.cs" />
+    <Compile Include="SEC\SECS01P001\SEC000P001DA.cs" />
+    <Compile Include="SEC\SECS01P001\SEC000P001DTO.cs" />
+    <Compile Include="SEC\SECS01P001\SEC000P001Model.cs" />
     <Compile Include="SEC\SEC001P001\SEC001P001DA.cs" />
     <Compile Include="SEC\SEC001P001\SEC001P001DTO.cs" />
     <Compile Include="SEC\SEC001P001\SEC001P001Model.cs" />

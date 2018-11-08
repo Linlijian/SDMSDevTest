@@ -1,18 +1,17 @@
 ﻿@using FluentBootstrap
 @using WEBAPP.Helper
+@using DataAccess
 @using DataAccess.SEC
 @using UtilityLib
 
-@model SEC000P001Model
-
+@model SECS01P001Model
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
 }
 
 @using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
 {
-
 
     @Html.AntiForgeryToken()
     using (var row = Html.Bootstrap().GridRow().Begin())
@@ -23,7 +22,7 @@
             {
                 using (r.GridColumn(12).Begin())
                 {
-                    @form.ControlLabel(Translation.SEC.SEC000P001.COM_HEADER)
+                    @form.ControlLabel(Translation.SEC.SECS01P001.COM_HEADER)
                 }
             }
 
@@ -31,11 +30,11 @@
             {
                 using (r.GridColumn(6).Begin())
                 {
-                    @form.InputFor(m => m.COM_CODE, isRequired: true)
+                    @form.InputFor(m => m.COM_CODE, isRequired: true).SetReadonly()
                 }
                 using (r.GridColumn(6).Begin())
                 {
-                    @form.InputFor(m => m.COM_BRANCH)
+                    @form.InputFor(m => m.COM_BRANCH).SetReadonly()
                 }
             }
 
@@ -112,8 +111,8 @@
             {
                 using (r.GridColumn(6).Begin())
                 {
-                    @*@form.SelectFor(m => m.COM_USE_LANGUAGE)*@
-                    @form.SelectFor(t => t.COM_USE_LANGUAGE, Model.COM_USE_LANGUAGE_MODEL.ToSelectList("Value", "Text"))
+                    @form.SelectFor(t => t.COM_USE_LANGUAGE, Model.COM_USE_LANGUAGE_MODEL.ToSelectList("Value", "Text", Model.COM_USE_LANGUAGE))
+
                 }
             }
 
@@ -123,7 +122,7 @@
             {
                 using (r.GridColumn(6).Begin())
                 {
-                    @Html.GetVSMWidgetsBegin(Translation.SEC.SEC000P001.Address_T)
+                    @Html.GetVSMWidgetsBegin(Translation.SEC.SECS01P001.Address_T)
 
                     using (r.GridColumn(12).Begin())
                     {
@@ -133,8 +132,8 @@
                         @form.InputFor(m => m.COM_ROAD_T)
                         @form.InputFor(m => m.COM_AMPHUR_T)
                         @form.InputFor(m => m.COM_DISTRICT_T)
-                        @*@form.SelectFor(m => m.COM_PROVINCE_T)*@
-                        @form.SelectFor(t => t.COM_PROVINCE_T, Model.COM_PROVINCE_T_MODEL.ToSelectList("Value", "Text"))
+                       
+                        @form.SelectFor(t => t.COM_PROVINCE_T, Model.COM_PROVINCE_T_MODEL.ToSelectList("Value", "Text", Model.COM_PROVINCE_T))
                         @form.InputFor(m => m.COM_POST_CODE_T)
                     }
                     @Html.GetVSMWidgetsEnd()
@@ -142,7 +141,7 @@
 
                 using (r.GridColumn(6).Begin())
                 {
-                    @Html.GetVSMWidgetsBegin(Translation.SEC.SEC000P001.Address_Eng)
+                    @Html.GetVSMWidgetsBegin(Translation.SEC.SECS01P001.Address_Eng)
 
                     using (r.GridColumn(12).Begin())
                     {
@@ -152,8 +151,7 @@
                         @form.InputFor(m => m.COM_ROAD_E)
                         @form.InputFor(m => m.COM_AMPHUR_E)
                         @form.InputFor(m => m.COM_DISTRICT_E)
-                       
-                        @form.SelectFor(t => t.COM_PROVINCE_E, Model.COM_PROVINCE_E_MODEL.ToSelectList("Value", "Text"))
+                        @form.SelectFor(t => t.COM_PROVINCE_E, Model.COM_PROVINCE_E_MODEL.ToSelectList("Value", "Text", Model.COM_PROVINCE_E))
                         @form.InputFor(m => m.COM_POST_CODE_E)
                     }
                     @Html.GetVSMWidgetsEnd()
@@ -178,7 +176,7 @@
             {
                 using (r.GridColumn(6).Begin())
                 {
-                    @Html.GetVSMWidgetsBegin(Translation.SEC.SEC000P001.Address_T)
+                    @Html.GetVSMWidgetsBegin(Translation.SEC.SECS01P001.Address_T)
 
                     using (r.GridColumn(12).Begin())
                     {
@@ -188,7 +186,7 @@
                         @form.InputFor(m => m.COM_FAC_ROAD_T)
                         @form.InputFor(m => m.COM_FAC_DISTRICT_T)
                         @form.InputFor(m => m.COM_FAC_AMP_T)
-                        @form.SelectFor(t => t.COM_FAC_PRV_T, Model.COM_FAC_PRV_T_MODEL.ToSelectList("Value", "Text"))
+                        @form.SelectFor(t => t.COM_FAC_PRV_T, Model.COM_FAC_PRV_T_MODEL.ToSelectList("Value", "Text", Model.COM_FAC_PRV_T))
                         @form.InputFor(m => m.COM_FAC_POST_T)
                     }
                     @Html.GetVSMWidgetsEnd()
@@ -196,7 +194,7 @@
 
                 using (r.GridColumn(6).Begin())
                 {
-                    @Html.GetVSMWidgetsBegin(Translation.SEC.SEC000P001.Address_Eng)
+                    @Html.GetVSMWidgetsBegin(Translation.SEC.SECS01P001.Address_Eng)
 
                     using (r.GridColumn(12).Begin())
                     {
@@ -206,19 +204,15 @@
                         @form.InputFor(m => m.COM_FAC_ROAD_E)
                         @form.InputFor(m => m.COM_FAC_DISTRICT_E)
                         @form.InputFor(m => m.COM_FAC_AMP_E)
-                        @form.SelectFor(t => t.COM_FAC_PRV_E, Model.COM_FAC_PRV_E_MODEL.ToSelectList("Value", "Text"))
+                        @form.SelectFor(t => t.COM_FAC_PRV_E, Model.COM_FAC_PRV_E_MODEL.ToSelectList("Value", "Text", Model.COM_FAC_PRV_E))
                         @form.InputFor(m => m.COM_FAC_POST_E)
+
                     }
                     @Html.GetVSMWidgetsEnd()
                 }
             }
 
-
-
-
         }
-
-
     }
 }
 @section modals{
@@ -227,4 +221,3 @@
 @section Scripts {
 
 }
-

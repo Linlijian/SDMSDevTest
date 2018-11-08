@@ -62,7 +62,7 @@ namespace WEBAPP.Areas.SEC.Controllers
         {
             var da = new SEC001P001DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC000P001ExecuteType.GetAll;
+            da.DTO.Execute.ExecuteType = SECS01P001ExecuteType.GetAll;
             if (Request.GetRequest("page").IsNullOrEmpty())
             {
                 model.IsDefaultSearch = true;

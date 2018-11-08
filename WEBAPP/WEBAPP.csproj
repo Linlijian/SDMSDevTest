@@ -222,7 +222,7 @@
     <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Admin\Models\DemoModelView.cs" />
     <Compile Include="Areas\Admin\Models\MasterDetailViewModel.cs" />
-    <Compile Include="Areas\SEC\Controllers\SEC000P001Controller.cs" />
+    <Compile Include="Areas\SEC\Controllers\SECS01P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC001P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC002P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC004P001Controller.cs" />
@@ -767,9 +767,9 @@
     <Content Include="App_Data\FileConfig.json" />
     <Content Include="Content\bootstrap-colorpicker.min.css.map" />
     <Content Include="Areas\SEC\Views\SEC006P001\test.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC000P001\Add.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC000P001\Edit.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC000P001\Index.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS01P001\Add.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS01P001\Edit.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS01P001\Index.cshtml" />
     <Content Include="Areas\SEC\Views\SEC001P001\Add.cshtml" />
     <Content Include="Areas\SEC\Views\SEC001P001\Edit.cshtml" />
     <Content Include="Areas\SEC\Views\SEC001P001\Index.cshtml" />
