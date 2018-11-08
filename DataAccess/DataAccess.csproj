@@ -111,9 +111,9 @@
     <Compile Include="SEC\SEC014P001\SEC014P001DA.cs" />
     <Compile Include="SEC\SEC014P001\SEC014P001DTO.cs" />
     <Compile Include="SEC\SEC014P001\SEC014P001Model.cs" />
-    <Compile Include="SEC\SEC015P001\SEC015P001DA.cs" />
-    <Compile Include="SEC\SEC015P001\SEC015P001DTO.cs" />
-    <Compile Include="SEC\SEC015P001\SEC015P001Model.cs" />
+    <Compile Include="SEC\SECS01P002\SECS01P002DA.cs" />
+    <Compile Include="SEC\SECS01P002\SECS01P002DTO.cs" />
+    <Compile Include="SEC\SECS01P002\SECS01P002Model.cs" />
     <Compile Include="SEC\SECBase\MenuModel.cs" />
     <Compile Include="SEC\SECBase\SECBaseDA.cs" />
     <Compile Include="SEC\SECBase\SECBaseDTO.cs" />

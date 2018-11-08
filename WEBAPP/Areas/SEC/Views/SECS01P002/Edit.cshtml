@@ -3,10 +3,10 @@
 @using DataAccess.SEC
 @using UtilityLib
 
-@model SEC015P001Model
+@model SECS01P002Model
 
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
 }
 
@@ -63,6 +63,7 @@
 @section Scripts {
     <script src="@Url.Content("~/Scripts/fontawesome-iconpicker.min.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap-colorpicker.min.js")"></script>
+
     @Html.GridScript("SystemModels",
         new GridConfig
         {
@@ -71,16 +72,21 @@
             VisibleCheckBox = true,
             DefaultBinding = true,
             ScrollX = false,
-            WidthType = ColumnsWidthType.Percentage
+            WidthType = ColumnsWidthType.Percentage,
+            OnInit = "OnInitSourceSystemModels"
         },
         new GridColumn("SYS_CODE").SetNotVisible().SetKey(),
-        new GridColumn("ROW_NO", Translation.SEC.SEC015P001.NO, 5, ColumnsTextAlign.Center),
-        new GridColumn("SYS_NAME_TH", Translation.SEC.SEC015P001.SYSTEM_NAME_TH, 30),
-        new GridColumn("SYS_NAME_EN", Translation.SEC.SEC015P001.SYSTEM_NAME_EN, 30)
+        new GridColumn("ROW_NO", Translation.SEC.SECS01P002.NO, 5, ColumnsTextAlign.Center),
+        new GridColumn("SYS_NAME_TH", Translation.SEC.SECS01P002.SYSTEM_NAME_TH, 30),
+        new GridColumn("SYS_NAME_EN", Translation.SEC.SECS01P002.SYSTEM_NAME_EN, 30)
 
         )
 
     <script>
+
+        var OnInitSourceSystemModels = function () {
+            GridSystemModels.rows(function (idx, data, node) { return data.SELECTED; }).select();
+        };
         $(document).ready(function () {
             $('#IMG').iconpicker({
                 hideOnSelect: true

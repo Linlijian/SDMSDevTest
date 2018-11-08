@@ -22,14 +22,14 @@ namespace Translation.SEC {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SEC015P001 {
+    public class SECS01P002 {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SEC015P001() {
+        internal SECS01P002() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Translation.SEC {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Translation.SEC.SEC015P001", typeof(SEC015P001).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Translation.SEC.SECS01P002", typeof(SECS01P002).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,20 @@ namespace Translation.SEC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Picture Display.
+        ///   Looks up a localized string similar to Image Icon.
         /// </summary>
         public static string IMG {
             get {
                 return ResourceManager.GetString("IMG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image Color.
+        /// </summary>
+        public static string IMG_COLOR {
+            get {
+                return ResourceManager.GetString("IMG_COLOR", resourceCulture);
             }
         }
         
@@ -97,7 +106,7 @@ namespace Translation.SEC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System Name (En).
+        ///   Looks up a localized string similar to System Name English.
         /// </summary>
         public static string SYSTEM_NAME_EN {
             get {
@@ -106,7 +115,7 @@ namespace Translation.SEC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System Name (Th).
+        ///   Looks up a localized string similar to System Name Thai.
         /// </summary>
         public static string SYSTEM_NAME_TH {
             get {

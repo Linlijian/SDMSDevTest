@@ -6,15 +6,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.SEC
 {
-    [Validator(typeof(SEC015P001Validator))]
+    [Validator(typeof(SECS01P002Validator))]
     [Serializable]
-    public class SEC015P001Model : StandardModel
+    public class SECS01P002Model : StandardModel
     {
         public decimal ID { get; set; }
-        [Display(Name = "NAME", ResourceType = typeof(Translation.SEC.SEC015P001))]
+        [Display(Name = "NAME", ResourceType = typeof(Translation.SEC.SECS01P002))]
         public string NAME { get; set; }
         public string NAME_Old { get; set; }
-        [Display(Name = "SEQUENCE", ResourceType = typeof(Translation.SEC.SEC015P001))]
+        [Display(Name = "SEQUENCE", ResourceType = typeof(Translation.SEC.SECS01P002))]
         public Nullable<int> SEQUENCE { get; set; }
         public string SYS_CODE { get; set; }
         public string STR_VALUE { get; set; }
@@ -23,9 +23,9 @@ namespace DataAccess.SEC
         public string IMG { get; set; }
         public string IMG_COLOR { get; set; }
 
-        public List<SEC015P001_SystemModel> SystemModels { get; set; }
+        public List<SECS01P002_SystemModel> SystemModels { get; set; }
     }
-    public class SEC015P001_SystemModel : StandardModel
+    public class SECS01P002_SystemModel : StandardModel
     {
         public string SYS_CODE { get; set; }
         public int? ROW_NO { get; set; }
@@ -36,9 +36,9 @@ namespace DataAccess.SEC
         public bool SELECTED { get; set; }
     }
 
-    public class SEC015P001Validator : AbstractValidator<SEC015P001Model>
+    public class SECS01P002Validator : AbstractValidator<SECS01P002Model>
     {
-        public SEC015P001Validator()
+        public SECS01P002Validator()
         {
             //If Not Empty Set Start 1,...
             RuleSet("Add", () =>

@@ -118,21 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="IMG" xml:space="preserve">
-    <value>Picture Display</value>
+    <value>Image Icon</value>
+  </data>
+  <data name="IMG_COLOR" xml:space="preserve">
+    <value>Image Color</value>
   </data>
   <data name="NAME" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="NO" xml:space="preserve">
-    <value>No.</value>
+    <value>ลำดับ</value>
   </data>
   <data name="SEQUENCE" xml:space="preserve">
     <value>Sequence</value>
   </data>
   <data name="SYSTEM_NAME_EN" xml:space="preserve">
-    <value>System Name (En)</value>
+    <value>System Name English</value>
   </data>
   <data name="SYSTEM_NAME_TH" xml:space="preserve">
-    <value>System Name (Th)</value>
+    <value>System Name Thai</value>
   </data>
 </root>

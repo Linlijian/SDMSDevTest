@@ -232,7 +232,7 @@
     <Compile Include="Areas\SEC\Controllers\SEC008P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC012P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC014P001Controller.cs" />
-    <Compile Include="Areas\SEC\Controllers\SEC015P001Controller.cs" />
+    <Compile Include="Areas\SEC\Controllers\SECS01P002Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECBaseController.cs" />
     <Compile Include="Areas\SEC\SECAreaRegistration.cs" />
     <Compile Include="Areas\Users\Controllers\AccountController.cs" />
@@ -782,9 +782,9 @@
     <Content Include="Areas\SEC\Views\SEC004P001\Index.cshtml" />
     <Content Include="Areas\SEC\Views\SEC012P001\Index.cshtml" />
     <Content Include="Areas\SEC\Views\SEC014P001\Index.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC015P001\Add.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC015P001\Edit.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC015P001\Index.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS01P002\Add.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS01P002\Edit.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS01P002\Index.cshtml" />
     <Content Include="Areas\Users\Views\Account\SelectSystem.cshtml" />
     <None Include="Properties\PublishProfiles\March.pubxml" />
     <None Include="Reports\DataSet\DemoReport.xsd">

@@ -3,7 +3,7 @@
 @using DataAccess.SEC
 @using UtilityLib
 
-@model SEC015P001Model
+@model SECS01P002Model
 
 @{
     ViewBag.Title = "Index";
@@ -48,7 +48,7 @@
         },
         Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("NAME"))),
         new GridColumn("NAME").SetNotVisible().SetKey(),
-        new GridColumn("NAME", Translation.SEC.SEC015P001.NAME, 100)
+        new GridColumn("NAME", Translation.SEC.SECS01P002.NAME, 100)
         )
 
 }

@@ -4,14 +4,14 @@ using UtilityLib;
 
 namespace DataAccess.SEC
 {
-    public class SEC015P001DA : BaseDA
+    public class SECS01P002DA : BaseDA
     {
-        public SEC015P001DTO DTO { get; set; }
+        public SECS01P002DTO DTO { get; set; }
 
         #region ====Property========
-        public SEC015P001DA()
+        public SECS01P002DA()
         {
-            DTO = new SEC015P001DTO();
+            DTO = new SECS01P002DTO();
         }
 
         #endregion
@@ -19,16 +19,16 @@ namespace DataAccess.SEC
         #region ====Select==========
         protected override BaseDTO DoSelect(BaseDTO baseDTO)
         {
-            var dto = (SEC015P001DTO)baseDTO;
+            var dto = (SECS01P002DTO)baseDTO;
             switch (dto.Execute.ExecuteType)
             {
-                case SEC015P001ExecuteType.GetAll: return GetAll(dto);
-                case SEC015P001ExecuteType.GetSystemDetail: return GetSystemDetail(dto);
-                case SEC015P001ExecuteType.GetByID: return GetByID(dto);
+                case SECS01P002ExecuteType.GetAll: return GetAll(dto);
+                case SECS01P002ExecuteType.GetSystemDetail: return GetSystemDetail(dto);
+                case SECS01P002ExecuteType.GetByID: return GetByID(dto);
             }
             return dto;
         }
-        private SEC015P001DTO GetAll(SEC015P001DTO dto)
+        private SECS01P002DTO GetAll(SECS01P002DTO dto)
         {
             dto.Models = _DBManger.VSMS_CONFIG_GENERAL
                   .Where(m => ((dto.Model.NAME == null || dto.Model.NAME == string.Empty) || m.NAME.Contains(dto.Model.NAME)))
@@ -37,10 +37,10 @@ namespace DataAccess.SEC
                   {
                       NAME = m.NAME,
                       SEQUENCE = m.SEQUENCE
-                  }).Distinct().Select(m => new SEC015P001Model { NAME = m.NAME, SEQUENCE = m.SEQUENCE }).ToList();
+                  }).Distinct().Select(m => new SECS01P002Model { NAME = m.NAME, SEQUENCE = m.SEQUENCE }).ToList();
             return dto;
         }
-        private SEC015P001DTO GetSystemDetail(SEC015P001DTO dto)
+        private SECS01P002DTO GetSystemDetail(SECS01P002DTO dto)
         {
             var cmd = @"select t1.SYS_CODE,
                                t1.SYS_NAME_TH,
@@ -63,16 +63,16 @@ namespace DataAccess.SEC
             var result = _DBMangerNoEF.ExecuteDataSet(cmd, parameters, CommandType.Text);
             if (result.Success(dto))
             {
-                dto.Model.SystemModels = result.OutputDataSet.Tables[0].ToList<SEC015P001_SystemModel>();
+                dto.Model.SystemModels = result.OutputDataSet.Tables[0].ToList<SECS01P002_SystemModel>();
             }
             return dto;
         }
 
-        private SEC015P001DTO GetByID(SEC015P001DTO dto)
+        private SECS01P002DTO GetByID(SECS01P002DTO dto)
         {
             dto.Model = _DBManger.VSMS_CONFIG_GENERAL
                 .Where(m => m.NAME == dto.Model.NAME)
-                .FirstOrDefault().ToNewObject(new SEC015P001Model());
+                .FirstOrDefault().ToNewObject(new SECS01P002Model());
             return dto;
         }
         #endregion
@@ -80,7 +80,7 @@ namespace DataAccess.SEC
         #region ====Insert==========
         protected override BaseDTO DoInsert(BaseDTO baseDTO)
         {
-            var dto = (SEC015P001DTO)baseDTO;
+            var dto = (SECS01P002DTO)baseDTO;
 
             if (dto.Model.SystemModels.Count() > 0)
             {
@@ -108,7 +108,7 @@ namespace DataAccess.SEC
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
             //Delete
-            var dto = (SEC015P001DTO)baseDTO;
+            var dto = (SECS01P002DTO)baseDTO;
             var group_name = dto.Model.NAME_Old;
 
             var items = _DBManger.VSMS_CONFIG_GENERAL.Where(m => m.NAME == group_name);
@@ -121,7 +121,7 @@ namespace DataAccess.SEC
                 {
                     var ID = _DBManger.VSMS_CONFIG_GENERAL.Max(m => m.ID).AsDecimalNull() + 1;
 
-                    var data = new SEC015P001Model();
+                    var data = new SECS01P002Model();
                     data = dto.Model;
                     data.ID = ID.AsDecimal();
                     data.SYS_CODE = item.SYS_CODE.Trim();
@@ -146,7 +146,7 @@ namespace DataAccess.SEC
         #region ====Delete==========
         protected override BaseDTO DoDelete(BaseDTO baseDTO)
         {
-            var dto = (SEC015P001DTO)baseDTO;
+            var dto = (SECS01P002DTO)baseDTO;
             foreach (var item in dto.Models)
             {
                 var group_name = item.NAME;

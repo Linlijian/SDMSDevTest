@@ -10,20 +10,20 @@ using WEBAPP.Helper;
 
 namespace WEBAPP.Areas.SEC.Controllers
 {
-    public class SEC015P001Controller : SECBaseController
+    public class SECS01P002Controller : SECBaseController
     {
         #region Property
-        private SEC015P001Model localModel = new SEC015P001Model();
-        private SEC015P001Model TempModel
+        private SECS01P002Model localModel = new SECS01P002Model();
+        private SECS01P002Model TempModel
         {
             get
             {
                 if (TempData["Model" + SessionHelper.SYS_CurrentAreaController] == null)
                 {
-                    TempData["Model" + SessionHelper.SYS_CurrentAreaController] = new SEC015P001Model();
+                    TempData["Model" + SessionHelper.SYS_CurrentAreaController] = new SECS01P002Model();
                 }
                 TempData.Keep("Model" + SessionHelper.SYS_CurrentAreaController);
-                return TempData["Model" + SessionHelper.SYS_CurrentAreaController] as SEC015P001Model;
+                return TempData["Model" + SessionHelper.SYS_CurrentAreaController] as SECS01P002Model;
             }
             set
             {
@@ -31,17 +31,17 @@ namespace WEBAPP.Areas.SEC.Controllers
                 TempData.Keep("Model" + SessionHelper.SYS_CurrentAreaController);
             }
         }
-        private SEC015P001Model TempSearch
+        private SECS01P002Model TempSearch
         {
             get
             {
                 if (TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] == null)
                 {
-                    TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] = new SEC015P001Model();
+                    TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] = new SECS01P002Model();
                 }
                 TempData.Keep(StandardActionName.Search + SessionHelper.SYS_CurrentAreaController);
 
-                return TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] as SEC015P001Model;
+                return TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] as SECS01P002Model;
             }
             set { TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] = value; }
         }
@@ -59,11 +59,11 @@ namespace WEBAPP.Areas.SEC.Controllers
             return View(StandardActionName.Index, localModel);
         }
 
-        public ActionResult Search(SEC015P001Model model)
+        public ActionResult Search(SECS01P002Model model)
         {
-            var da = new SEC015P001DA();
+            var da = new SECS01P002DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC015P001ExecuteType.GetAll;
+            da.DTO.Execute.ExecuteType = SECS01P002ExecuteType.GetAll;
             if (Request.GetRequest("page").IsNullOrEmpty())
             {
                 model.IsDefaultSearch = true;
@@ -75,7 +75,7 @@ namespace WEBAPP.Areas.SEC.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteSearch(List<SEC015P001Model> data)
+        public ActionResult DeleteSearch(List<SECS01P002Model> data)
         {
             var jsonResult = new JsonResult();
             if (data != null && data.Count > 0)
@@ -99,9 +99,9 @@ namespace WEBAPP.Areas.SEC.Controllers
 
         public ActionResult BindSystem()
         {
-            var da = new SEC015P001DA();
+            var da = new SECS01P002DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC015P001ExecuteType.GetSystemDetail;
+            da.DTO.Execute.ExecuteType = SECS01P002ExecuteType.GetSystemDetail;
             da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
             da.DTO.Model.NAME = TempModel.NAME;
             da.SelectNoEF(da.DTO);
@@ -110,7 +110,7 @@ namespace WEBAPP.Areas.SEC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveCreate(SEC015P001Model model)
+        public ActionResult SaveCreate(SECS01P002Model model)
         {
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
@@ -131,9 +131,9 @@ namespace WEBAPP.Areas.SEC.Controllers
         {
             SetDefaulButton(StandardButtonMode.Modify);
 
-            var da = new SEC015P001DA();
+            var da = new SECS01P002DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC015P001ExecuteType.GetByID;
+            da.DTO.Execute.ExecuteType = SECS01P002ExecuteType.GetByID;
             TempModel.NAME = da.DTO.Model.NAME = NAME;
             da.Select(da.DTO);
             if (da.DTO.Model != null)
@@ -144,7 +144,7 @@ namespace WEBAPP.Areas.SEC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveModify(SEC015P001Model model)
+        public ActionResult SaveModify(SECS01P002Model model)
         {
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
@@ -165,7 +165,7 @@ namespace WEBAPP.Areas.SEC.Controllers
         public ActionResult Info(decimal ID)
         {
             SetDefaulButton(StandardButtonMode.View);
-            var da = new SEC015P001DA();
+            var da = new SECS01P002DA();
             SetStandardErrorLog(da.DTO);
             da.DTO.Execute.ExecuteType = DTOExecuteType.GetByID;
             TempModel.ID = da.DTO.Model.ID = ID;
@@ -182,7 +182,7 @@ namespace WEBAPP.Areas.SEC.Controllers
         #region Mehtod
         private DTOResult SaveData(string mode, object model)
         {
-            var da = new SEC015P001DA();
+            var da = new SECS01P002DA();
             //ในกรณีที่มีการ SaveLog ให้ Include SetStandardLog ด้วย
             SetStandardLog(
                da.DTO,
@@ -193,20 +193,20 @@ namespace WEBAPP.Areas.SEC.Controllers
             if (mode == StandardActionName.SaveCreate)
             {
                 SetStandardField(model);
-                da.DTO.Model = (SEC015P001Model)model;
+                da.DTO.Model = (SECS01P002Model)model;
                 da.Insert(da.DTO);
             }
             else if (mode == StandardActionName.SaveModify)
             {
                 SetStandardField(model);
-                da.DTO.Model = (SEC015P001Model)model;
+                da.DTO.Model = (SECS01P002Model)model;
                 da.Update(da.DTO);
             }
             else if (mode == StandardActionName.Delete)
             {
-                da.DTO.Model = new SEC015P001Model();
+                da.DTO.Model = new SECS01P002Model();
                 SetStandardField(da.DTO.Model);
-                da.DTO.Models = (List<SEC015P001Model>)model;
+                da.DTO.Models = (List<SECS01P002Model>)model;
                 da.Delete(da.DTO);
             }
             return da.DTO.Result;
