@@ -4,14 +4,14 @@ using UtilityLib;
 
 namespace DataAccess.SEC
 {
-    public class SEC004P001DA : BaseDA
+    public class SECS01P004DA : BaseDA
     {
-        public SEC004P001DTO DTO { get; set; }
+        public SECS01P004DTO DTO { get; set; }
 
         #region ====Property========
-        public SEC004P001DA()
+        public SECS01P004DA()
         {
-            DTO = new SEC004P001DTO();
+            DTO = new SECS01P004DTO();
         }
 
         #endregion
@@ -19,16 +19,16 @@ namespace DataAccess.SEC
         #region ====Select==========
         protected override BaseDTO DoSelect(BaseDTO baseDTO)
         {
-            var dto = (SEC004P001DTO)baseDTO;
+            var dto = (SECS01P004DTO)baseDTO;
             switch (dto.Execute.ExecuteType)
             {
-                case SEC004P001ExecuteType.GetAll: return GetAll(dto);
-                case SEC004P001ExecuteType.GetByID: return GetByID(dto);
-                case SEC004P001ExecuteType.GetSeqMax: return GetSeqMax(dto);
+                case SECS01P004ExecuteType.GetAll: return GetAll(dto);
+                case SECS01P004ExecuteType.GetByID: return GetByID(dto);
+                case SECS01P004ExecuteType.GetSeqMax: return GetSeqMax(dto);
             }
             return dto;
         }
-        private SEC004P001DTO GetAll(SEC004P001DTO dto)
+        private SECS01P004DTO GetAll(SECS01P004DTO dto)
         {
             dto.Models = _DBManger.VSMS_SYSTEM
                 .Where(m => 
@@ -39,7 +39,7 @@ namespace DataAccess.SEC
                     && ((dto.Model.SYS_STATUS == null || dto.Model.SYS_STATUS == string.Empty) || m.SYS_STATUS.Contains(dto.Model.SYS_STATUS))
                     )
                 .OrderBy(m => new { m.SYS_SEQ })
-                .Select(m => new SEC004P001Model
+                .Select(m => new SECS01P004Model
                 {
                     SYS_CODE = m.SYS_CODE,
                     SYS_SEQ = m.SYS_SEQ,
@@ -50,13 +50,13 @@ namespace DataAccess.SEC
             return dto;
         }
 
-        private SEC004P001DTO GetByID(SEC004P001DTO dto)
+        private SECS01P004DTO GetByID(SECS01P004DTO dto)
         {
             dto.Model = _DBManger.VSMS_SYSTEM
                 .Where(m => (m.COM_CODE == dto.Model.COM_CODE) 
                     && (m.SYS_CODE == dto.Model.SYS_CODE)
                 )
-                .FirstOrDefault().ToNewObject(new SEC004P001Model());
+                .FirstOrDefault().ToNewObject(new SECS01P004Model());
 
             int? sys_no = _DBManger.VSMS_SYSTEM.Max(m => m.SYS_SEQ).AsIntNull();
             dto.Model.SYS_NO = sys_no;
@@ -64,7 +64,7 @@ namespace DataAccess.SEC
             return dto;
         }
 
-        private SEC004P001DTO GetSeqMax(SEC004P001DTO dto)
+        private SECS01P004DTO GetSeqMax(SECS01P004DTO dto)
         {
             int? sys_no = _DBManger.VSMS_SYSTEM.Max(m => m.SYS_SEQ).AsIntNull();
             dto.Model.SYS_NO = sys_no;
@@ -76,7 +76,7 @@ namespace DataAccess.SEC
         #region ====Insert==========
         protected override BaseDTO DoInsert(BaseDTO baseDTO)
         {
-            var dto = (SEC004P001DTO)baseDTO;
+            var dto = (SECS01P004DTO)baseDTO;
             var model = dto.Model.ToNewObject(new VSMS_SYSTEM());
             _DBManger.VSMS_SYSTEM.Add(model);
 
@@ -87,7 +87,7 @@ namespace DataAccess.SEC
         #region ====Update==========
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
-            var dto = (SEC004P001DTO)baseDTO;
+            var dto = (SECS01P004DTO)baseDTO;
             var SYS_CODE = dto.Model.SYS_CODE;
             var model = _DBManger.VSMS_SYSTEM.First(m => m.SYS_CODE == SYS_CODE);
             model.MergeObject(dto.Model);
@@ -99,7 +99,7 @@ namespace DataAccess.SEC
         #region ====Delete==========
         protected override BaseDTO DoDelete(BaseDTO baseDTO)
         {
-            var dto = (SEC004P001DTO)baseDTO;
+            var dto = (SECS01P004DTO)baseDTO;
             foreach (var item in dto.Models)
             {
                 var items = _DBManger.VSMS_SYSTEM.Where(m => m.COM_CODE == dto.Model.COM_CODE && m.SYS_CODE == item.SYS_CODE);

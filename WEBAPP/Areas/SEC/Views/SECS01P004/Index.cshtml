@@ -3,7 +3,7 @@
 @using DataAccess.SEC
 @using UtilityLib
 
-@model SEC004P001Model
+@model SECS01P004Model
 
 @{
     ViewBag.Title = "Index";
@@ -69,11 +69,11 @@
         },
         Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("SYS_CODE"))),
         new GridColumn("SYS_CODE").SetNotVisible().SetKey(),
-        new GridColumn("SYS_CODE", Translation.SEC.SEC004P001.SYS_CODE, 10),
-        new GridColumn("SYS_SEQ", Translation.SEC.SEC004P001.SYS_SEQ, 5, ColumnsTextAlign.Right),
-        new GridColumn("SYS_NAME_TH", Translation.SEC.SEC004P001.SYS_NAME_TH, 20),
-        new GridColumn("SYS_NAME_EN", Translation.SEC.SEC004P001.SYS_NAME_EN, 20),
-        new GridColumn("SYS_STATUS", Translation.SEC.SEC004P001.SYS_STATUS, 5, align: ColumnsTextAlign.Center, render: "getStatus")
+        new GridColumn("SYS_CODE", Translation.SEC.SECS01P004.SYS_CODE, 10),
+        new GridColumn("SYS_SEQ", Translation.SEC.SECS01P004.SYS_SEQ, 5, ColumnsTextAlign.Right),
+        new GridColumn("SYS_NAME_TH", Translation.SEC.SECS01P004.SYS_NAME_TH, 20),
+        new GridColumn("SYS_NAME_EN", Translation.SEC.SECS01P004.SYS_NAME_EN, 20),
+        new GridColumn("SYS_STATUS", Translation.SEC.SECS01P004.SYS_STATUS, 5, align: ColumnsTextAlign.Center, render: "getStatus")
 
         )
 

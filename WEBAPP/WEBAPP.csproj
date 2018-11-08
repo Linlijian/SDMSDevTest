@@ -225,7 +225,7 @@
     <Compile Include="Areas\SEC\Controllers\SECS01P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC001P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC002P001Controller.cs" />
-    <Compile Include="Areas\SEC\Controllers\SEC004P001Controller.cs" />
+    <Compile Include="Areas\SEC\Controllers\SECS01P004Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS01P003Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC006P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC007P001Controller.cs" />
@@ -777,9 +777,9 @@
     <Content Include="Areas\SEC\Views\SEC002P001\Edit.cshtml" />
     <Content Include="Areas\SEC\Views\SEC002P001\Index.cshtml" />
     <Content Include="Areas\SEC\Views\SEC002P001\Info.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC004P001\Add.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC004P001\Edit.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC004P001\Index.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS01P004\Add.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS01P004\Edit.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS01P004\Index.cshtml" />
     <Content Include="Areas\SEC\Views\SEC012P001\Index.cshtml" />
     <Content Include="Areas\SEC\Views\SEC014P001\Index.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P002\Add.cshtml" />

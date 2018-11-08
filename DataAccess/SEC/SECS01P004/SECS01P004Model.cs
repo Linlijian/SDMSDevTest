@@ -6,29 +6,29 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.SEC
 {
-    [Validator(typeof(SEC004P001Validator))]
+    [Validator(typeof(SECS01P004Validator))]
     [Serializable]
-    public class SEC004P001Model : StandardModel
+    public class SECS01P004Model : StandardModel
     {
-        [Display(Name = "SYS_CODE", ResourceType = typeof(Translation.SEC.SEC004P001))]
+        [Display(Name = "SYS_CODE", ResourceType = typeof(Translation.SEC.SECS01P004))]
         public string SYS_CODE { get; set; }
-        [Display(Name = "SYS_NO", ResourceType = typeof(Translation.SEC.SEC004P001))]
+        [Display(Name = "SYS_NO", ResourceType = typeof(Translation.SEC.SECS01P004))]
         public int? SYS_NO { get; set; }
-        [Display(Name = "SYS_SEQ", ResourceType = typeof(Translation.SEC.SEC004P001))]
+        [Display(Name = "SYS_SEQ", ResourceType = typeof(Translation.SEC.SECS01P004))]
         public Nullable<decimal> SYS_SEQ { get; set; }
-        [Display(Name = "SYS_NAME_TH", ResourceType = typeof(Translation.SEC.SEC004P001))]
+        [Display(Name = "SYS_NAME_TH", ResourceType = typeof(Translation.SEC.SECS01P004))]
         public string SYS_NAME_TH { get; set; }
-        [Display(Name = "SYS_NAME_EN", ResourceType = typeof(Translation.SEC.SEC004P001))]
+        [Display(Name = "SYS_NAME_EN", ResourceType = typeof(Translation.SEC.SECS01P004))]
         public string SYS_NAME_EN { get; set; }
-        [Display(Name = "SYS_STATUS", ResourceType = typeof(Translation.SEC.SEC004P001))]
+        [Display(Name = "SYS_STATUS", ResourceType = typeof(Translation.SEC.SECS01P004))]
         public string SYS_STATUS { get; set; }
         public IEnumerable<DDLCenterModel> SYS_STATUS_MODEL { get; set; }
 
     }
 
-    public class SEC004P001Validator : AbstractValidator<SEC004P001Model>
+    public class SECS01P004Validator : AbstractValidator<SECS01P004Model>
     {
-        public SEC004P001Validator()
+        public SECS01P004Validator()
         {
             //If Not Empty Set Start 1,...
             RuleSet("Add", () =>
