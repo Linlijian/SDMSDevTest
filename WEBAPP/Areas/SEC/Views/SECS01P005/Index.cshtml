@@ -4,7 +4,7 @@
 @using UtilityLib
 @using UtilityLib
 
-@model SEC008P001Model
+@model SECS01P005Model
 
 @{
     ViewBag.Title = "Index";
@@ -56,9 +56,9 @@
         Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("COM_CODE"), new VSMParameter("SYS_CODE"))),
         new GridColumn("COM_CODE", null, 0).SetKey().SetNotVisible(),
         new GridColumn("COM_NAME", Translation.CenterLang.Center.COM_CODE, 30),
-        new GridColumn("SYS_CODE", Translation.SEC.SEC008P001.SYS_CODE, 7).SetKey(),
-        new GridColumn("SYS_NAME_TH", Translation.SEC.SEC008P001.SYS_NAME_TH, 30),
-        new GridColumn("SYS_NAME_EN", Translation.SEC.SEC008P001.SYS_NAME_EN, 30)
+        new GridColumn("SYS_CODE", Translation.SEC.SECS01P005.SYS_CODE, 7).SetKey(),
+        new GridColumn("SYS_NAME_TH", Translation.SEC.SECS01P005.SYS_NAME_TH, 30),
+        new GridColumn("SYS_NAME_EN", Translation.SEC.SECS01P005.SYS_NAME_EN, 30)
         )
 
     <script type="text/javascript">

@@ -4,7 +4,7 @@
 @using UtilityLib
 @using UtilityLib
 
-@model SEC008P001Model
+@model SECS01P005Model
 
 @{
     ViewBag.Title = "Edit";
@@ -94,8 +94,8 @@
             Searching = true,
             VisibleExportButton = false
         },
-        new GridColumn("PRG_CODE", Translation.SEC.SEC008P001.PRG_CODE, 20).SetKey(),
-        new GridColumn("PRG_NAME", Translation.SEC.SEC008P001.PRG_NAME, 80)
+        new GridColumn("PRG_CODE", Translation.SEC.SECS01P005.PRG_CODE, 20).SetKey(),
+        new GridColumn("PRG_NAME", Translation.SEC.SECS01P005.PRG_NAME, 80)
         )
 
     @Html.GridScript("SysPrg",
@@ -111,8 +111,8 @@
             ScrollCollapse = true,
             VisibleExportButton = false
         },
-        new GridColumn("PRG_CODE", Translation.SEC.SEC008P001.PRG_CODE, 20).SetKey().SetOrderable(false),
-        new GridColumn("PRG_NAME", Translation.SEC.SEC008P001.PRG_NAME, 80).SetOrderable(false)
+        new GridColumn("PRG_CODE", Translation.SEC.SECS01P005.PRG_CODE, 20).SetKey().SetOrderable(false),
+        new GridColumn("PRG_NAME", Translation.SEC.SECS01P005.PRG_NAME, 80).SetOrderable(false)
         )
 
     <script type="text/javascript">

@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace DataAccess.SEC
 {
     [Serializable]
-    public class SEC008P001DTO : BaseDTO
+    public class SECS01P005DTO : BaseDTO
     {
-        public SEC008P001DTO()
+        public SECS01P005DTO()
         {
-            Model = new SEC008P001Model();
+            Model = new SECS01P005Model();
         }
 
-        public SEC008P001Model Model { get; set; }
-        public List<SEC008P001Model> Models { get; set; }
+        public SECS01P005Model Model { get; set; }
+        public List<SECS01P005Model> Models { get; set; }
     }
 
-    public class SEC008P001ExecuteType : DTOExecuteType
+    public class SECS01P005ExecuteType : DTOExecuteType
     {
         public const string GetProgram = "GetProgram";
         public const string GetSysPrg = "GetSysPrg";

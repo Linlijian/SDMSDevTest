@@ -229,7 +229,7 @@
     <Compile Include="Areas\SEC\Controllers\SECS01P003Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC006P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC007P001Controller.cs" />
-    <Compile Include="Areas\SEC\Controllers\SEC008P001Controller.cs" />
+    <Compile Include="Areas\SEC\Controllers\SECS01P005Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC012P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC014P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS01P002Controller.cs" />
@@ -413,8 +413,8 @@
     <Content Include="Areas\SEC\Views\SEC007P001\ConfSysSeq.cshtml" />
     <Content Include="Areas\SEC\Views\SEC007P001\Edit.cshtml" />
     <Content Include="Areas\SEC\Views\SEC007P001\Index.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC008P001\Edit.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC008P001\Index.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS01P005\Edit.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS01P005\Index.cshtml" />
     <Content Include="Areas\SEC\Views\web.config" />
     <Content Include="Areas\Users\Views\Account\Error.cshtml" />
     <Content Include="Areas\Users\Views\Account\SelectModule.cshtml" />

@@ -7,20 +7,20 @@ using UtilityLib;
 
 namespace WEBAPP.Areas.SEC.Controllers
 {
-    public class SEC008P001Controller : SECBaseController
+    public class SECS01P005Controller : SECBaseController
     {
         #region Property
-        private SEC008P001Model localModel = new SEC008P001Model();
-        private SEC008P001Model TempModel
+        private SECS01P005Model localModel = new SECS01P005Model();
+        private SECS01P005Model TempModel
         {
             get
             {
                 if (TempData["Model" + SessionHelper.SYS_CurrentAreaController] == null)
                 {
-                    TempData["Model" + SessionHelper.SYS_CurrentAreaController] = new SEC008P001Model();
+                    TempData["Model" + SessionHelper.SYS_CurrentAreaController] = new SECS01P005Model();
                 }
                 TempData.Keep("Model" + SessionHelper.SYS_CurrentAreaController);
-                return TempData["Model" + SessionHelper.SYS_CurrentAreaController] as SEC008P001Model;
+                return TempData["Model" + SessionHelper.SYS_CurrentAreaController] as SECS01P005Model;
             }
             set
             {
@@ -28,17 +28,17 @@ namespace WEBAPP.Areas.SEC.Controllers
                 TempData.Keep("Model" + SessionHelper.SYS_CurrentAreaController);
             }
         }
-        private SEC008P001Model TempSearch
+        private SECS01P005Model TempSearch
         {
             get
             {
                 if (TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] == null)
                 {
-                    TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] = new SEC008P001Model();
+                    TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] = new SECS01P005Model();
                 }
                 TempData.Keep(StandardActionName.Search + SessionHelper.SYS_CurrentAreaController);
 
-                return TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] as SEC008P001Model;
+                return TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] as SECS01P005Model;
             }
             set { TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] = value; }
         }
@@ -65,7 +65,7 @@ namespace WEBAPP.Areas.SEC.Controllers
         public ActionResult Edit(string COM_CODE, string SYS_CODE)
         {
             SetDefaulButton(StandardButtonMode.Modify);
-            localModel = new SEC008P001Model();
+            localModel = new SECS01P005Model();
             TempModel.COM_CODE = localModel.COM_CODE = COM_CODE;
             TempModel.SYS_CODE = localModel.SYS_CODE = SYS_CODE;
             localModel.COM_CODE_MODEL = GetDDLCenter(DDLCenterKey.DD_VSMS_COMPANY_001);
@@ -75,11 +75,11 @@ namespace WEBAPP.Areas.SEC.Controllers
         #endregion
 
         #region Action
-        public ActionResult Search(SEC008P001Model model)
+        public ActionResult Search(SECS01P005Model model)
         {
-            var da = new SEC008P001DA();
+            var da = new SECS01P005DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC008P001ExecuteType.GetAll;
+            da.DTO.Execute.ExecuteType = SECS01P005ExecuteType.GetAll;
             if (Request.GetRequest("page").IsNullOrEmpty())
             {
                 model.IsDefaultSearch = true;
@@ -92,7 +92,7 @@ namespace WEBAPP.Areas.SEC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveModify(List<SEC008P001Model> SysPrg)
+        public ActionResult SaveModify(List<SECS01P005Model> SysPrg)
         {
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
@@ -115,16 +115,16 @@ namespace WEBAPP.Areas.SEC.Controllers
         }
         public ActionResult GetProgram()
         {
-            var da = new SEC008P001DA();
-            da.DTO.Execute.ExecuteType = SEC008P001ExecuteType.GetProgram;
+            var da = new SECS01P005DA();
+            da.DTO.Execute.ExecuteType = SECS01P005ExecuteType.GetProgram;
             da.DTO.Model = TempModel.CloneObject();
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models);
         }
         public ActionResult GetSysPrg()
         {
-            var da = new SEC008P001DA();
-            da.DTO.Execute.ExecuteType = SEC008P001ExecuteType.GetSysPrg;
+            var da = new SECS01P005DA();
+            da.DTO.Execute.ExecuteType = SECS01P005ExecuteType.GetSysPrg;
             da.DTO.Model = TempModel.CloneObject();
             da.Select(da.DTO);
             return JsonAllowGet(da.DTO.Models);
@@ -134,7 +134,7 @@ namespace WEBAPP.Areas.SEC.Controllers
         #region Method
         private DTOResult SaveData(string mode, object model)
         {
-            var da = new SEC008P001DA();
+            var da = new SECS01P005DA();
             //ในกรณีที่มีการ SaveLog ให้ Include SetStandardLog ด้วย
             SetStandardLog(
                da.DTO,
@@ -144,7 +144,7 @@ namespace WEBAPP.Areas.SEC.Controllers
             if (mode == StandardActionName.SaveModify)
             {
                 SetStandardField(model);
-                da.DTO.Models = (List<SEC008P001Model>)model;
+                da.DTO.Models = (List<SECS01P005Model>)model;
                 da.DTO.Model.COM_CODE = TempModel.COM_CODE;
                 da.DTO.Model.SYS_CODE = TempModel.SYS_CODE;
                 da.Update(da.DTO);

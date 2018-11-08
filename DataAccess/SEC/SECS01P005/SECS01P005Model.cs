@@ -6,23 +6,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.SEC
 {
-    [Validator(typeof(SEC008P001Validator))]
+    [Validator(typeof(SECS01P005Validator))]
     [Serializable]
-    public class SEC008P001Model : StandardModel
+    public class SECS01P005Model : StandardModel
     {
 
         public string COM_NAME { get; set; }
         public string COM_NAME_TH { get; set; }
         public string COM_NAME_EN { get; set; }
-        [Display(Name = "PRG_CODE", ResourceType = typeof(Translation.SEC.SEC008P001))]
+        [Display(Name = "PRG_CODE", ResourceType = typeof(Translation.SEC.SECS01P005))]
         public string PRG_CODE { get; set; }
         public string PRG_NAME { get; set; }
-        [Display(Name = "PRG_NAME_TH", ResourceType = typeof(Translation.SEC.SEC008P001))]
+        [Display(Name = "PRG_NAME_TH", ResourceType = typeof(Translation.SEC.SECS01P005))]
         public string PRG_NAME_TH { get; set; }
-        [Display(Name = "PRG_NAME_EN", ResourceType = typeof(Translation.SEC.SEC008P001))]
+        [Display(Name = "PRG_NAME_EN", ResourceType = typeof(Translation.SEC.SECS01P005))]
         public string PRG_NAME_EN { get; set; }
         public Nullable<int> PRG_SEQ { get; set; }
-        [Display(Name = "SYS_NAME", ResourceType = typeof(Translation.SEC.SEC008P001))]
+        [Display(Name = "SYS_NAME", ResourceType = typeof(Translation.SEC.SECS01P005))]
         public string SYS_CODE { get; set; }
         public string SYS_NAME_TH { get; set; }
         public string SYS_NAME_EN { get; set; }
@@ -32,9 +32,9 @@ namespace DataAccess.SEC
 
     }
 
-    public class SEC008P001Validator : AbstractValidator<SEC008P001Model>
+    public class SECS01P005Validator : AbstractValidator<SECS01P005Model>
     {
-        public SEC008P001Validator()
+        public SECS01P005Validator()
         {
             RuleSet("Add", () =>
             {
