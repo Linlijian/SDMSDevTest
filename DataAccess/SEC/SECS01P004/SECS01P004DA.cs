@@ -81,6 +81,7 @@ namespace DataAccess.SEC
             {
                 dto.Model.SYS_STATUS = dto.Model.SYS_STATUS.Trim();
             }
+
             var model = dto.Model.ToNewObject(new VSMS_SYSTEM());
             _DBManger.VSMS_SYSTEM.Add(model);
 
@@ -96,6 +97,7 @@ namespace DataAccess.SEC
             {
                 dto.Model.SYS_STATUS = dto.Model.SYS_STATUS.Trim();
             }
+
             var SYS_CODE = dto.Model.SYS_CODE;
             var model = _DBManger.VSMS_SYSTEM.First(m => m.SYS_CODE == SYS_CODE);
             model.MergeObject(dto.Model);
