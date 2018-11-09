@@ -223,15 +223,12 @@
     <Compile Include="Areas\Admin\Models\DemoModelView.cs" />
     <Compile Include="Areas\Admin\Models\MasterDetailViewModel.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS01P001Controller.cs" />
-    <Compile Include="Areas\SEC\Controllers\SEC001P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS02P003Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS01P004Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS01P003Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS02P002Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS02P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS01P005Controller.cs" />
-    <Compile Include="Areas\SEC\Controllers\SEC012P001Controller.cs" />
-    <Compile Include="Areas\SEC\Controllers\SEC014P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS01P002Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECBaseController.cs" />
     <Compile Include="Areas\SEC\SECAreaRegistration.cs" />
@@ -770,9 +767,6 @@
     <Content Include="Areas\SEC\Views\SECS01P001\Add.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P001\Edit.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P001\Index.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC001P001\Add.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC001P001\Edit.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC001P001\Index.cshtml" />
     <Content Include="Areas\SEC\Views\SECS02P003\Add.cshtml" />
     <Content Include="Areas\SEC\Views\SECS02P003\Edit.cshtml" />
     <Content Include="Areas\SEC\Views\SECS02P003\Index.cshtml" />
@@ -780,8 +774,6 @@
     <Content Include="Areas\SEC\Views\SECS01P004\Add.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P004\Edit.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P004\Index.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC012P001\Index.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC014P001\Index.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P002\Add.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P002\Edit.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P002\Index.cshtml" />
