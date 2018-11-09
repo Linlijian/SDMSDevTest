@@ -77,7 +77,7 @@ namespace WEBAPP.Areas.Users.Controllers
                 cdsid = Request.ServerVariables["AUTH_USER"].ToString().Split('\\')[0];
             }
 
-            SEC006P001Model dsSys = GET_VSMS_USER(cdsid);
+            SECS02P002Model dsSys = GET_VSMS_USER(cdsid);
 
             if (!dsSys.USER_ID.IsNullOrEmpty())
             {
@@ -508,11 +508,11 @@ namespace WEBAPP.Areas.Users.Controllers
         }
 
 
-        private SEC006P001Model GET_VSMS_USER(string USER_ID)
+        private SECS02P002Model GET_VSMS_USER(string USER_ID)
         {
-            var da = new SEC006P001DA();
+            var da = new SECS02P002DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC006P001ExecuteType.GetByID;
+            da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.GetByID;
             da.DTO.Model.USER_ID = USER_ID;
 
             da.Select(da.DTO);

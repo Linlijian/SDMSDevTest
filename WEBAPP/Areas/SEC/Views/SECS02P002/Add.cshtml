@@ -3,10 +3,10 @@
 @using DataAccess.SEC
 @using UtilityLib
 
-@model SEC006P001Model
+@model SECS02P002Model
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Add";
     Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
 }
 
@@ -21,7 +21,7 @@
             {
                 using (r.GridColumn(6).Begin())
                 {
-                    @form.InputFor(m => m.USER_ID, isRequired: true).IsDisabled()
+                    @form.InputFor(m => m.USER_ID, isRequired: true)
                 }
             }
 
@@ -99,7 +99,7 @@
                 {
                     using (r.GridColumn(6).Begin())
                     {
-                        @form.CheckBoxFor(t => t.IS_DISABLED).SetControlLabel("Permission").AddContent(Translation.SEC.SEC006P001.IS_DISABLED_ADD)
+                        @form.CheckBoxFor(t => t.IS_DISABLED).SetControlLabel("Permission").AddContent(Translation.SEC.SECS02P002.IS_DISABLED_ADD)
                     }
                 }
 
@@ -129,7 +129,6 @@
         t => t.ComUserModel,
         CustomControl.GetMultiSelectConfig(
             "AC_VSMS_COMPANY_001",
-            new DefaultConfig("Bind_ComForUser"),
             "COM_CODE",
             "COM_NAME_E"
         )

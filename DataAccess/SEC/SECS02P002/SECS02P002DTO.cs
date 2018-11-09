@@ -6,18 +6,18 @@ using System.ComponentModel;
 namespace DataAccess.SEC
 {
     [Serializable]
-    public class SEC006P001DTO : BaseDTO
+    public class SECS02P002DTO : BaseDTO
     {
-        public SEC006P001DTO()
+        public SECS02P002DTO()
         {
-            Model = new SEC006P001Model();
+            Model = new SECS02P002Model();
         }
 
-        public SEC006P001Model Model { get; set; }
-        public List<SEC006P001Model> Models { get; set; }
+        public SECS02P002Model Model { get; set; }
+        public List<SECS02P002Model> Models { get; set; }
     }
 
-    public class SEC006P001ExecuteType : DTOExecuteType
+    public class SECS02P002ExecuteType : DTOExecuteType
     {
         public const string GetQuerySearchAll = "GetQuerySearchAll";
         public const string GetQueryCheckUserAdmin = "GetQueryCheckUserAdmin";

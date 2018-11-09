@@ -4,14 +4,14 @@ using UtilityLib;
 
 namespace DataAccess.SEC
 {
-    public class SEC006P001DA : BaseDA
+    public class SECS02P002DA : BaseDA
     {
-        public SEC006P001DTO DTO { get; set; }
+        public SECS02P002DTO DTO { get; set; }
 
         #region ====Property========
-        public SEC006P001DA()
+        public SECS02P002DA()
         {
-            DTO = new SEC006P001DTO();
+            DTO = new SECS02P002DTO();
         }
 
         #endregion
@@ -19,27 +19,27 @@ namespace DataAccess.SEC
         #region ====Select==========
         protected override BaseDTO DoSelect(BaseDTO baseDTO)
         {
-            var dto = (SEC006P001DTO)baseDTO;
+            var dto = (SECS02P002DTO)baseDTO;
             switch (dto.Execute.ExecuteType)
             {
-                case SEC006P001ExecuteType.GetAll: return GetAll(dto);
-                case SEC006P001ExecuteType.GetByID: return GetByID(dto);
-                case SEC006P001ExecuteType.GetQuerySearchAll:
+                case SECS02P002ExecuteType.GetAll: return GetAll(dto);
+                case SECS02P002ExecuteType.GetByID: return GetByID(dto);
+                case SECS02P002ExecuteType.GetQuerySearchAll:
                     return GetQuerySearchAll(dto);
-                case SEC006P001ExecuteType.GetQueryCheckUserAdmin:
+                case SECS02P002ExecuteType.GetQueryCheckUserAdmin:
                     return GetQueryCheckUserAdmin(dto);
-                case SEC006P001ExecuteType.GetUserCOM:
+                case SECS02P002ExecuteType.GetUserCOM:
                     return GetUserCOM(dto);
             }
             return dto;
         }
 
-        private SEC006P001DTO GetAll(SEC006P001DTO dto)
+        private SECS02P002DTO GetAll(SECS02P002DTO dto)
         {
             dto.Models = _DBManger.VSMS_USER
                 .Where(m => (m.USER_ID == dto.Model.USER_ID))
                 .OrderBy(m => new { m.USER_ID })
-                .Select(m => new SEC006P001Model
+                .Select(m => new SECS02P002Model
                 {
                     COM_CODE = m.COM_CODE,
                     USER_ID = m.USER_ID,
@@ -62,14 +62,14 @@ namespace DataAccess.SEC
                 }).ToList();
             return dto;
         }
-        private SEC006P001DTO GetByID(SEC006P001DTO dto)
+        private SECS02P002DTO GetByID(SECS02P002DTO dto)
         {
             dto.Model = _DBManger.VSMS_USER
                 .Where(m => m.USER_ID == dto.Model.USER_ID)
-                .FirstOrDefault().ToNewObject(new SEC006P001Model());
+                .FirstOrDefault().ToNewObject(new SECS02P002Model());
             return dto;
         }
-        private SEC006P001DTO GetQuerySearchAll(SEC006P001DTO dto)
+        private SECS02P002DTO GetQuerySearchAll(SECS02P002DTO dto)
         {
             dto.Models = (
                         from a in _DBManger.VSMS_USER
@@ -83,7 +83,7 @@ namespace DataAccess.SEC
                                 && (dto.Model.USG_ID == null || a.USG_ID == dto.Model.USG_ID)
                                 && (dto.Model.IS_DISABLED == null || ((a.IS_DISABLED == null ? "N" : a.IS_DISABLED) == dto.Model.IS_DISABLED))
                         orderby a.USER_ID
-                        select new SEC006P001Model
+                        select new SECS02P002Model
                         {
                             USER_ID = a.USER_ID,
                             USER_FNAME_TH = a.USER_FNAME_TH,
@@ -97,7 +97,7 @@ namespace DataAccess.SEC
             //dto.Models = _DBManger.VSMS_USER
             //    .Where(m => (m.COM_CODE == dto.Model.COM_CODE))
             //    .OrderBy(m => new { m.USER_ID })
-            //    .Select(m => new SEC006P001Model
+            //    .Select(m => new SECS02P002Model
             //    {
             //        COM_CODE = m.COM_CODE,
             //        USER_ID = m.USER_ID,
@@ -130,7 +130,7 @@ namespace DataAccess.SEC
             //    }).ToList();
             return dto;
         }
-        private SEC006P001DTO GetQueryCheckUserAdmin(SEC006P001DTO dto)
+        private SECS02P002DTO GetQueryCheckUserAdmin(SECS02P002DTO dto)
         {
             string strSQL = @"  SELECT USG_LEVEL 
                                 FROM VSMS_USRGROUP a inner join VSMS_USER b on a.COM_CODE = b.COM_CODE and a.USG_ID = b.USG_ID
@@ -154,12 +154,12 @@ namespace DataAccess.SEC
 
             if (result.Success(dto))
             {
-                dto.Models = result.OutputDataSet.Tables[0].ToList<SEC006P001Model>();
+                dto.Models = result.OutputDataSet.Tables[0].ToList<SECS02P002Model>();
             }
 
             return dto;
         }
-        private SEC006P001DTO GetUserCOM(SEC006P001DTO dto)
+        private SECS02P002DTO GetUserCOM(SECS02P002DTO dto)
         {
             string strSQL = @"  select VUC.*
 		                                ,VC.COM_NAME_E
@@ -179,7 +179,7 @@ namespace DataAccess.SEC
 
             if (result.Success(dto))
             {
-                dto.Model.ComUserModel = result.OutputDataSet.Tables[0].ToList<SEC006P001_CompanyForUserModel>();
+                dto.Model.ComUserModel = result.OutputDataSet.Tables[0].ToList<SECS02P002_CompanyForUserModel>();
             }
 
             return dto;
@@ -189,7 +189,7 @@ namespace DataAccess.SEC
         #region ====Insert==========
         protected override BaseDTO DoInsert(BaseDTO baseDTO)
         {
-            var dto = (SEC006P001DTO)baseDTO;
+            var dto = (SECS02P002DTO)baseDTO;
 
             #region delete insert USERCOM //insert ไม่ต้อง
             //var USER_ID = dto.Model.USER_ID.AsString();
@@ -222,7 +222,7 @@ namespace DataAccess.SEC
         #region ====Update==========
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
-            var dto = (SEC006P001DTO)baseDTO;
+            var dto = (SECS02P002DTO)baseDTO;
             var USER_ID = dto.Model.USER_ID.AsString();
             var COM_CODE = dto.Model.COM_CODE.AsString();
 
@@ -245,7 +245,7 @@ namespace DataAccess.SEC
         #region ====Delete==========
         protected override BaseDTO DoDelete(BaseDTO baseDTO)
         {
-            var dto = (SEC006P001DTO)baseDTO;
+            var dto = (SECS02P002DTO)baseDTO;
 
             foreach (var item in dto.Models)
             {

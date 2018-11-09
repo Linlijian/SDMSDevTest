@@ -227,7 +227,7 @@
     <Compile Include="Areas\SEC\Controllers\SEC002P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS01P004Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS01P003Controller.cs" />
-    <Compile Include="Areas\SEC\Controllers\SEC006P001Controller.cs" />
+    <Compile Include="Areas\SEC\Controllers\SECS02P002Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS02P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS01P005Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SEC012P001Controller.cs" />
@@ -404,9 +404,9 @@
     <Content Include="Areas\SEC\Views\SECS01P003\Add.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P003\Edit.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P003\Index.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC006P001\Add.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC006P001\Edit.cshtml" />
-    <Content Include="Areas\SEC\Views\SEC006P001\Index.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS02P002\Add.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS02P002\Edit.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS02P002\Index.cshtml" />
     <Content Include="Areas\SEC\Views\SECS02P001\Add.cshtml" />
     <Content Include="Areas\SEC\Views\SECS02P001\ConfPrg.cshtml" />
     <Content Include="Areas\SEC\Views\SECS02P001\ConfPrgSeq.cshtml" />
@@ -766,7 +766,7 @@
     <Content Include="App_Data\DBConnection.json" />
     <Content Include="App_Data\FileConfig.json" />
     <Content Include="Content\bootstrap-colorpicker.min.css.map" />
-    <Content Include="Areas\SEC\Views\SEC006P001\test.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS02P002\test.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P001\Add.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P001\Edit.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P001\Index.cshtml" />

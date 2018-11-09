@@ -6,53 +6,53 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.SEC
 {
-    [Validator(typeof(SEC006P001Validator))]
+    [Validator(typeof(SECS02P002Validator))]
     [Serializable]
-    public class SEC006P001Model : StandardModel
+    public class SECS02P002Model : StandardModel
     {
-        [Display(Name = "USER_ID", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "USER_ID", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string USER_ID { get; set; }
 
-        [Display(Name = "USER_FNAME_TH", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "USER_FNAME_TH", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string USER_FNAME_TH { get; set; }
 
-        [Display(Name = "USER_LNAME_TH", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "USER_LNAME_TH", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string USER_LNAME_TH { get; set; }
 
-        [Display(Name = "USER_FNAME_EN", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "USER_FNAME_EN", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string USER_FNAME_EN { get; set; }
 
-        [Display(Name = "USER_LNAME_EN", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "USER_LNAME_EN", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string USER_LNAME_EN { get; set; }
 
-        [Display(Name = "TITLE_ID", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "TITLE_ID", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public decimal? TITLE_ID { get; set; }
         public string TITLE_NAME_TH { get; set; }
         public IEnumerable<DDLCenterModel> TITLE_ID_MODEL { get; set; }
 
         public string DEPT_NAME_TH { get; set; }
 
-        [Display(Name = "DEPT_ID", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "DEPT_ID", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public decimal? DEPT_ID { get; set; }
         public IEnumerable<DDLCenterModel> DEPT_ID_MODEL { get; set; }
 
         public string USG_NAME_TH { get; set; }
 
-        [Display(Name = "USG_ID", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "USG_ID", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public decimal? USG_ID { get; set; }
         public IEnumerable<DDLCenterModel> USG_ID_MODEL { get; set; }
 
         public string USG_LEVEL { get; set; }
 
-        [Display(Name = "USER_STATUS", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "USER_STATUS", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string USER_STATUS { get; set; }
         public IEnumerable<DDLCenterModel> USER_STATUS_MODEL { get; set; }
 
-        [Display(Name = "IS_DISABLED", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "IS_DISABLED", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string IS_DISABLED { get; set; }
         public IEnumerable<DDLCenterModel> IS_DISABLED_MODEL { get; set; }
 
-        [Display(Name = "USER_SPEC_ID", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "USER_SPEC_ID", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string USER_SPEC_ID { get; set; }
 
         public string USER_PWD { get; set; }
@@ -63,26 +63,26 @@ namespace DataAccess.SEC
         public DateTime? WNING_PWD_DATE { get; set; }
         public DateTime? END_ACT_DATE { get; set; }
 
-        [Display(Name = "TELEPHONE", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "TELEPHONE", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string TELEPHONE { get; set; }
 
-        [Display(Name = "EMAIL", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "EMAIL", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string EMAIL { get; set; }
 
         public string IS_FCP { get; set; }
         public string IS_NCE { get; set; }
         public DateTime? LAST_LOGIN_DATE { get; set; }
 
-        [Display(Name = "ComUserModel", ResourceType = typeof(Translation.SEC.SEC006P001))]
-        public List<SEC006P001_CompanyForUserModel> ComUserModel { get; set; }
+        [Display(Name = "ComUserModel", ResourceType = typeof(Translation.SEC.SECS02P002))]
+        public List<SECS02P002_CompanyForUserModel> ComUserModel { get; set; }
     }
 
-    public class SEC006P001_CompanyForUserModel 
+    public class SECS02P002_CompanyForUserModel 
     {
-        [Display(Name = "COM_CODE", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "COM_CODE", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string COM_CODE { get; set; }
 
-        [Display(Name = "COM_NAME_E", ResourceType = typeof(Translation.SEC.SEC006P001))]
+        [Display(Name = "COM_NAME_E", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string COM_NAME_E { get; set; }
 
         public string USER_ID { get; set; }
@@ -104,9 +104,9 @@ namespace DataAccess.SEC
         public Nullable<System.DateTime> MNT_DATE { get; set; }
     }
 
-    public class SEC006P001Validator : AbstractValidator<SEC006P001Model>
+    public class SECS02P002Validator : AbstractValidator<SECS02P002Model>
     {
-        public SEC006P001Validator()
+        public SECS02P002Validator()
         {
             RuleSet("Add", () =>
             {

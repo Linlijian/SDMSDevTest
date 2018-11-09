@@ -3,7 +3,7 @@
 @using DataAccess.SEC
 @using UtilityLib
 
-@model SEC006P001Model
+@model SECS02P002Model
 
 @{
     ViewBag.Title = "Index";
@@ -89,10 +89,10 @@
         var RenderACTIVE = function (data, type, full, meta) {
             var tag = '';
             if (data == 'Y') {
-                tag = '<span class=\"label \">@Translation.SEC.SEC006P001.STATUS_DISBLE</span>';
+                tag = '<span class=\"label \">@Translation.SEC.SECS02P002.STATUS_DISBLE</span>';
             }
             else if (data == 'N') {
-                tag = '<span class=\"label \">@Translation.SEC.SEC006P001.STATUS_ENABLE</span>';
+                tag = '<span class=\"label \">@Translation.SEC.SECS02P002.STATUS_ENABLE</span>';
             }
             return tag;
         };
@@ -109,15 +109,15 @@
             //CustomsExportConfig = new DefaultConfig(Url.Action("CustomsExport"))
         },
         Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("USER_ID"))),
-        new GridColumn("USER_ID", Translation.SEC.SEC006P001.USER_ID, 50).SetKey(),
+        new GridColumn("USER_ID", Translation.SEC.SECS02P002.USER_ID, 50).SetKey(),
         new GridColumn("COM_CODE", null, null).SetKey().SetNotVisible(),
-        new GridColumn("USER_FNAME_TH", Translation.SEC.SEC006P001.USER_FNAME_TH, 50),
-        new GridColumn("USER_LNAME_TH", Translation.SEC.SEC006P001.USER_LNAME_TH, 50),
-        new GridColumn("USER_FNAME_EN", Translation.SEC.SEC006P001.USER_FNAME_EN, 50),
-        new GridColumn("USER_LNAME_EN", Translation.SEC.SEC006P001.USER_LNAME_EN, 50),
-        new GridColumn("DEPT_NAME_TH", Translation.SEC.SEC006P001.DEPT_NAME_TH, 50),
-        new GridColumn("USG_NAME_TH", Translation.SEC.SEC006P001.USG_NAME_TH, 50),
-        new GridColumn("IS_DISABLED", Translation.SEC.SEC006P001.STATUS, 50, align: ColumnsTextAlign.Center, render: "RenderACTIVE")
+        new GridColumn("USER_FNAME_TH", Translation.SEC.SECS02P002.USER_FNAME_TH, 50),
+        new GridColumn("USER_LNAME_TH", Translation.SEC.SECS02P002.USER_LNAME_TH, 50),
+        new GridColumn("USER_FNAME_EN", Translation.SEC.SECS02P002.USER_FNAME_EN, 50),
+        new GridColumn("USER_LNAME_EN", Translation.SEC.SECS02P002.USER_LNAME_EN, 50),
+        new GridColumn("DEPT_NAME_TH", Translation.SEC.SECS02P002.DEPT_NAME_TH, 50),
+        new GridColumn("USG_NAME_TH", Translation.SEC.SECS02P002.USG_NAME_TH, 50),
+        new GridColumn("IS_DISABLED", Translation.SEC.SECS02P002.STATUS, 50, align: ColumnsTextAlign.Center, render: "RenderACTIVE")
         )
 
 }
