@@ -192,13 +192,15 @@ namespace DataAccess.SEC
         private void Valid()
         {
             RuleFor(m => m.COM_CODE).NotEmpty();
-            RuleFor(m => m.COM_BRANCH).NotEmpty();
+            RuleFor(m => m.COM_BRANCH).NotEmpty().Length(1, 5);
             RuleFor(m => m.COM_NAME_T).NotEmpty();
             RuleFor(m => m.COM_NAME_E).NotEmpty();
             RuleFor(m => m.COM_BRANCH_T).NotEmpty();
             RuleFor(m => m.COM_BRANCH_E).NotEmpty();
             RuleFor(m => m.COM_FAC_NAME_T).NotEmpty();
             RuleFor(m => m.COM_FAC_NAME_E).NotEmpty();
+
+            //RuleFor(m => m.COM_BRANCH).NotEmpty().Length(1, 16);
         }
     }
 }

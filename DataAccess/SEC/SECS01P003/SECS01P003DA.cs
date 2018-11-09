@@ -87,6 +87,11 @@ namespace DataAccess.SEC
             dto.Model.PRG_CODE = dto.Model.PRG_CODE.Trim();
 
             var model = dto.Model.ToNewObject(new VSMS_PROGRAM());
+            if(model.PRG_STATUS != null)
+            {
+                model.PRG_STATUS = model.PRG_STATUS.Trim();
+            }
+            
             _DBManger.VSMS_PROGRAM.Add(model);
             
             return dto;

@@ -137,6 +137,16 @@ namespace WEBAPP.Areas.SEC.Controllers
                 model.COM_POST_CODE_E = da.DTO.Model.COM_CODE;   //เอาค่ารหัสไปษณีออกมาเเสดง 
                 model.COM_FAC_POST_E = da.DTO.Model.COM_CODE;
                 localModel = da.DTO.Model;
+                if (da.DTO.Model.COM_USE_LANGUAGE == "T")
+                {
+                    localModel.COM_USE_LANGUAGE = "T    ";
+                }
+                else if(da.DTO.Model.COM_USE_LANGUAGE == "E")
+                {
+                    localModel.COM_USE_LANGUAGE = "E    ";
+                }
+
+
             }
             SetDefaultData();   //set ค่า DDL
 

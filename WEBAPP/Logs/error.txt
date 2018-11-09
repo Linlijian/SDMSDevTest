@@ -17,3 +17,8 @@ ERROR 2018-11-08 12:54:52,560 BaseController.OnException -
 Path : Users/Account/SignIn2
 Error Messages: Object reference not set to an instance of an object.
 
+ERROR 2018-11-09 11:08:32,157 BaseDA.SetStandardLog - SetStandardLog : The underlying provider failed on Open.
+ERROR 2018-11-09 11:09:06,832 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+

@@ -79,6 +79,12 @@ namespace DataAccess.SEC
         protected override BaseDTO DoInsert(BaseDTO baseDTO)
         {
             var dto = (SECS01P001DTO)baseDTO;
+            if(dto.Model.COM_USE_LANGUAGE != null)
+            {
+                dto.Model.COM_USE_LANGUAGE = dto.Model.COM_USE_LANGUAGE.Trim();
+            }
+            
+
             //var COM_CODE = _DBManger.VSMS_COMPANY.Max(m => m.COM_CODE).AsString() + 1;
             //dto.Model.COM_CODE = COM_CODE;
 
@@ -88,7 +94,8 @@ namespace DataAccess.SEC
 
             model.COM_CODE = COM_CODE;
             model.COM_BRANCH = COM_BRANCH;
-
+            model.CRET_BY = model.CRET_BY.Trim();
+            model.MNT_BY = model.MNT_BY.Trim();
             _DBManger.VSMS_COMPANY.Add(model);
             return dto;
         }
@@ -98,7 +105,10 @@ namespace DataAccess.SEC
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
             var dto = (SECS01P001DTO)baseDTO;
-
+            if (dto.Model.COM_USE_LANGUAGE != null)
+            {
+                dto.Model.COM_USE_LANGUAGE = dto.Model.COM_USE_LANGUAGE.Trim();
+            }
             var COM_CODE = dto.Model.COM_CODE;  //เอา  COM_CODE มาหาในเทเบิล เพื่อ อัพเดท
             var COM_BRANCH = dto.Model.COM_BRANCH;
             var model = _DBManger.VSMS_COMPANY.First(m => m.COM_CODE == COM_CODE && m.COM_BRANCH == COM_BRANCH);
