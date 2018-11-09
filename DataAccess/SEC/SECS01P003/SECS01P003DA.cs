@@ -104,7 +104,10 @@ namespace DataAccess.SEC
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
             var dto = (SECS01P003DTO)baseDTO;
-
+            if (dto.Model.PRG_STATUS != null)
+            {
+                dto.Model.PRG_STATUS = dto.Model.PRG_STATUS.Trim();
+            }
             var model = _DBManger.VSMS_PROGRAM.First(m => m.COM_CODE == dto.Model.COM_CODE && m.PRG_CODE == dto.Model.PRG_CODE);
             model.MergeObject(dto.Model);
 
