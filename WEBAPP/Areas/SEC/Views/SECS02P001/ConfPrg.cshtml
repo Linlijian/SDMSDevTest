@@ -1,5 +1,5 @@
 ﻿@using WEBAPP.Helper
-@model DataAccess.SEC.SEC007P001Model
+@model DataAccess.SEC.SECS02P001Model
 
 @{
     ViewBag.Title = "ConfPrg";
@@ -13,7 +13,7 @@
     {
         using (row.GridColumn(12).SetXs(12).Begin())
         {
-            @Html.GetVSMWidgetsBegin(Translation.SEC.SEC007P001.TitleUsgDetail)
+            @Html.GetVSMWidgetsBegin(Translation.SEC.SECS02P001.TitleUsgDetail)
 
             using (var row1 = Html.Bootstrap().GridRow().Begin())
             {
@@ -36,7 +36,7 @@
 
             @Html.GetVSMWidgetsEnd()
 
-            @Html.GetVSMWidgetsBegin(Translation.SEC.SEC007P001.TitleSetPermissionToUsg)
+            @Html.GetVSMWidgetsBegin(Translation.SEC.SECS02P001.TitleSetPermissionToUsg)
             using (var row1 = Html.Bootstrap().GridRow().Begin())
             {
                 using (row1.GridColumn(6).Begin())
@@ -293,8 +293,8 @@
             Paging = false,
             WidthType = ColumnsWidthType.Percentage
         },
-        new GridColumn("PRG_CODE", Translation.SEC.SEC007P001.PRG_CODE, 10).SetKey(),
-        new GridColumn("PRG_NAME", Translation.SEC.SEC007P001.PRG_NAME, 40),
+        new GridColumn("PRG_CODE", Translation.SEC.SECS02P001.PRG_CODE, 10).SetKey(),
+        new GridColumn("PRG_NAME", Translation.SEC.SECS02P001.PRG_NAME, 40),
         new GridColumn("ROLE_SEARCH", "<input id=\\\"chkSearchAll\\\" type=\\\"checkbox\\\" class=\\\"ace ace-switch ace-switch-5\\\" /><span class=\\\"lbl middle\\\"></span>Search", 10, align: ColumnsTextAlign.Center, render: "RenderROLE_SEARCH").SetOrderable(false),
         new GridColumn("ROLE_ADD", "<input id=\\\"chkAddAll\\\" type=\\\"checkbox\\\" class=\\\"ace ace-switch ace-switch-5\\\" /><span class=\\\"lbl middle\\\"></span>Add", 10, align: ColumnsTextAlign.Center, render: "RenderROLE_ADD").SetOrderable(false),
         new GridColumn("ROLE_EDIT", "<input id=\\\"chkEditAll\\\" type=\\\"checkbox\\\" class=\\\"ace ace-switch ace-switch-5\\\" /><span class=\\\"lbl middle\\\"></span>Edit", 10, align: ColumnsTextAlign.Center, render: "RenderROLE_EDIT").SetOrderable(false),

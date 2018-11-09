@@ -1,8 +1,8 @@
 ﻿@using WEBAPP.Helper
-@model DataAccess.SEC.SEC007P001Model
+@model DataAccess.SEC.SECS02P001Model
 
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
 }
 
@@ -19,7 +19,8 @@
                 using (row1.GridColumn(6).Begin())
                 {
                     @form.HiddenFor(m => m.COM_CODE)
-                    @form.InputFor(m => m.USG_CODE, isRequired: true).SetMaxLength(8)
+                    @form.HiddenFor(m => m.USG_ID)
+                    @form.InputFor(m => m.USG_CODE, isRequired: true).SetMaxLength(8).SetReadonly()
                 }
             }
             using (var row1 = Html.Bootstrap().GridRow().Begin())
@@ -50,9 +51,6 @@
     }
 }
 
-@section modals{
-
-}
-
 @section Scripts {
+   
 }

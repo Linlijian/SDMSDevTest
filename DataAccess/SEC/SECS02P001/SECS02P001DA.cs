@@ -4,49 +4,49 @@ using UtilityLib;
 
 namespace DataAccess.SEC
 {
-    public class SEC007P001DA : BaseDA
+    public class SECS02P001DA : BaseDA
     {
-        public SEC007P001DTO DTO
+        public SECS02P001DTO DTO
         {
             get;
             set;
         }
 
-        public SEC007P001DA()
+        public SECS02P001DA()
         {
-            DTO = new SEC007P001DTO();
+            DTO = new SECS02P001DTO();
         }
 
         #region Select
         protected override BaseDTO DoSelect(BaseDTO DTO)
         {
-            var dto = (SEC007P001DTO)DTO;
+            var dto = (SECS02P001DTO)DTO;
 
             switch (dto.Execute.ExecuteType)
             {
-                case SEC007P001ExecuteType.GetAll:
+                case SECS02P001ExecuteType.GetAll:
                     return GetAll(dto);
-                case SEC007P001ExecuteType.GetByID:
+                case SECS02P001ExecuteType.GetByID:
                     return GetByID(dto);
-                case SEC007P001ExecuteType.GetUsgPriv:
+                case SECS02P001ExecuteType.GetUsgPriv:
                     return GetUsgPriv(dto);
-                case SEC007P001ExecuteType.GetSysSeq:
+                case SECS02P001ExecuteType.GetSysSeq:
                     return GetSysSeq(dto);
-                case SEC007P001ExecuteType.GetPrgSeq:
+                case SECS02P001ExecuteType.GetPrgSeq:
                     return GetPrgSeq(dto); 
             }
 
             return dto;
         }
 
-        private SEC007P001DTO GetAll(SEC007P001DTO dto)
+        private SECS02P001DTO GetAll(SECS02P001DTO dto)
         {
             dto.Models = (from t1 in _DBManger.VSMS_USRGROUP.AsEnumerable()
                           where (dto.Model.USG_NAME_TH.IsNullOrEmpty() || t1.USG_NAME_TH.Contains(dto.Model.USG_NAME_TH)) &&
                           (dto.Model.USG_NAME_EN.IsNullOrEmpty() || t1.USG_NAME_EN.Contains(dto.Model.USG_NAME_EN)) &&
                           (dto.Model.USG_CODE.IsNullOrEmpty() || t1.USG_NAME_TH.Contains(dto.Model.USG_CODE)) &&
                           (dto.Model.USG_STATUS.IsNullOrEmpty() || t1.USG_STATUS == dto.Model.USG_STATUS)
-                          select new SEC007P001Model
+                          select new SECS02P001Model
                           {
                               COM_CODE = t1.COM_CODE,
                               USG_ID = t1.USG_ID,
@@ -59,15 +59,15 @@ namespace DataAccess.SEC
 
             return dto;
         }
-        private SEC007P001DTO GetByID(SEC007P001DTO dto)
+        private SECS02P001DTO GetByID(SECS02P001DTO dto)
         {
             dto.Model = _DBManger.VSMS_USRGROUP
                 .Where(m => m.COM_CODE == dto.Model.COM_CODE && m.USG_ID == dto.Model.USG_ID)
-                .FirstOrDefault().ToNewObject(new SEC007P001Model());
+                .FirstOrDefault().ToNewObject(new SECS02P001Model());
             return dto;
         }
 
-        private SEC007P001DTO GetUsgPriv(SEC007P001DTO dto)
+        private SECS02P001DTO GetUsgPriv(SECS02P001DTO dto)
         {
             var cmd = @"
                         select t1.SYS_CODE,
@@ -106,12 +106,12 @@ namespace DataAccess.SEC
             var result = _DBMangerNoEF.ExecuteDataSet(cmd, parameters, CommandType.Text);
             if (result.Success(dto))
             {
-                dto.Model.PRIV_MODEL = result.OutputDataSet.Tables[0].ToList<SEC007P00101Model>();
+                dto.Model.PRIV_MODEL = result.OutputDataSet.Tables[0].ToList<SECS02P00101Model>();
             }
             return dto;
         }
 
-        private SEC007P001DTO GetSysSeq(SEC007P001DTO dto)
+        private SECS02P001DTO GetSysSeq(SECS02P001DTO dto)
         {
             var cmd = @"
                     select t1.COM_CODE, t1.SYS_CODE, t1.SYS_SEQ, t2.SYS_NAME_TH, t2.SYS_NAME_EN
@@ -136,11 +136,11 @@ namespace DataAccess.SEC
             var result = _DBMangerNoEF.ExecuteDataSet(cmd, parameters, CommandType.Text);
             if (result.Success(dto))
             {
-                dto.Model.PRIV_MODEL = result.OutputDataSet.Tables[0].ToList<SEC007P00101Model>();
+                dto.Model.PRIV_MODEL = result.OutputDataSet.Tables[0].ToList<SECS02P00101Model>();
             }
             return dto;
         }
-        private SEC007P001DTO GetPrgSeq(SEC007P001DTO dto)
+        private SECS02P001DTO GetPrgSeq(SECS02P001DTO dto)
         {
             var cmd = @"
                     select t1.COM_CODE, t1.PRG_CODE, t1.PRG_SEQ, t2.PRG_NAME_TH, t2.PRG_NAME_EN
@@ -167,7 +167,7 @@ namespace DataAccess.SEC
             var result = _DBMangerNoEF.ExecuteDataSet(cmd, parameters, CommandType.Text);
             if (result.Success(dto))
             {
-                dto.Model.PRIV_MODEL = result.OutputDataSet.Tables[0].ToList<SEC007P00101Model>();
+                dto.Model.PRIV_MODEL = result.OutputDataSet.Tables[0].ToList<SECS02P00101Model>();
             }
             return dto;
         }
@@ -176,18 +176,18 @@ namespace DataAccess.SEC
         #region Insert
         protected override BaseDTO DoInsert(BaseDTO DTO)
         {
-            var dto = (SEC007P001DTO)DTO;
+            var dto = (SECS02P001DTO)DTO;
 
             switch (dto.Execute.ExecuteType)
             {
-                case SEC007P001ExecuteType.InsertData:
+                case SECS02P001ExecuteType.InsertData:
                     return InsertData(dto);
             }
 
             return dto;
         }
 
-        private SEC007P001DTO InsertData(SEC007P001DTO dto)
+        private SECS02P001DTO InsertData(SECS02P001DTO dto)
         {
             var model = dto.Model.ToNewObject(new VSMS_USRGROUP());
             _DBManger.VSMS_USRGROUP.Add(model);
@@ -198,29 +198,29 @@ namespace DataAccess.SEC
         #region Update
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
-            var dto = (SEC007P001DTO)DTO;
+            var dto = (SECS02P001DTO)DTO;
             switch (dto.Execute.ExecuteType)
             {
-                case SEC007P001ExecuteType.UpdateData:
+                case SECS02P001ExecuteType.UpdateData:
                     return UpdateData(dto);
-                case SEC007P001ExecuteType.UpdateUsgPriv:
+                case SECS02P001ExecuteType.UpdateUsgPriv:
                     return UpdateUsgPriv(dto);
-                case SEC007P001ExecuteType.UpdateSysSeq:
+                case SECS02P001ExecuteType.UpdateSysSeq:
                     return UpdateSysSeq(dto);
-                case SEC007P001ExecuteType.UpdatePrgSeq:
+                case SECS02P001ExecuteType.UpdatePrgSeq:
                     return UpdatePrgSeq(dto);
             }
 
             return dto;
         }
 
-        private SEC007P001DTO UpdateData(SEC007P001DTO dto)
+        private SECS02P001DTO UpdateData(SECS02P001DTO dto)
         {
             var model = _DBManger.VSMS_USRGROUP.Where(m => m.COM_CODE == dto.Model.COM_CODE && m.USG_ID == dto.Model.USG_ID).FirstOrDefault();
             model = model.MergeObject(dto.Model);
             return dto;
         }
-        private SEC007P001DTO UpdateUsgPriv(SEC007P001DTO dto)
+        private SECS02P001DTO UpdateUsgPriv(SECS02P001DTO dto)
         {
             var dels = dto.Model.PRIV_MODEL.Where(m => m.ROLE_SEARCH != "T" && !m.USRGRPPRIV_ID.IsNullOrEmpty()).Select(m => m.USRGRPPRIV_ID);
             if (dels != null && dels.Count() > 0)
@@ -253,7 +253,7 @@ namespace DataAccess.SEC
             }
             return dto;
         }
-        private SEC007P001DTO UpdateSysSeq(SEC007P001DTO dto)
+        private SECS02P001DTO UpdateSysSeq(SECS02P001DTO dto)
         {
             var update = from t1 in _DBManger.VSMS_USRGRPPRIV
                          join t2 in _DBManger.VSMS_CONFIG_GENERAL on new { t1.COM_CODE, t1.SYS_CODE } equals new { t2.COM_CODE, t2.SYS_CODE }
@@ -275,7 +275,7 @@ namespace DataAccess.SEC
             return dto;
         }
 
-        private SEC007P001DTO UpdatePrgSeq(SEC007P001DTO dto)
+        private SECS02P001DTO UpdatePrgSeq(SECS02P001DTO dto)
         {
             var update = from t1 in _DBManger.VSMS_USRGRPPRIV
                          join t2 in _DBManger.VSMS_CONFIG_GENERAL on new { t1.COM_CODE, t1.SYS_CODE } equals new { t2.COM_CODE, t2.SYS_CODE }
@@ -301,15 +301,15 @@ namespace DataAccess.SEC
         #region Delete
         protected override BaseDTO DoDelete(BaseDTO baseDTO)
         {
-            var dto = (SEC007P001DTO)DTO;
+            var dto = (SECS02P001DTO)DTO;
             switch (dto.Execute.ExecuteType)
             {
-                case SEC007P001ExecuteType.DeleteData:
+                case SECS02P001ExecuteType.DeleteData:
                     return DeleteData(dto);
             }
             return dto;
         }
-        private SEC007P001DTO DeleteData(SEC007P001DTO dto)
+        private SECS02P001DTO DeleteData(SECS02P001DTO dto)
         {
             foreach (var item in dto.Models)
             {

@@ -10,20 +10,20 @@ using WEBAPP.Helper;
 
 namespace WEBAPP.Areas.SEC.Controllers
 {
-    public class SEC007P001Controller : SECBaseController
+    public class SECS02P001Controller : SECBaseController
     {
         #region Property
-        private SEC007P001Model localModel = new SEC007P001Model();
-        private SEC007P001Model TempModel
+        private SECS02P001Model localModel = new SECS02P001Model();
+        private SECS02P001Model TempModel
         {
             get
             {
                 if (TempData["Model" + SessionHelper.SYS_CurrentAreaController] == null)
                 {
-                    TempData["Model" + SessionHelper.SYS_CurrentAreaController] = new SEC007P001Model();
+                    TempData["Model" + SessionHelper.SYS_CurrentAreaController] = new SECS02P001Model();
                 }
                 TempData.Keep("Model" + SessionHelper.SYS_CurrentAreaController);
-                return TempData["Model" + SessionHelper.SYS_CurrentAreaController] as SEC007P001Model;
+                return TempData["Model" + SessionHelper.SYS_CurrentAreaController] as SECS02P001Model;
             }
             set
             {
@@ -31,17 +31,17 @@ namespace WEBAPP.Areas.SEC.Controllers
                 TempData.Keep("Model" + SessionHelper.SYS_CurrentAreaController);
             }
         }
-        private SEC007P001Model TempSearch
+        private SECS02P001Model TempSearch
         {
             get
             {
                 if (TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] == null)
                 {
-                    TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] = new SEC007P001Model();
+                    TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] = new SECS02P001Model();
                 }
                 TempData.Keep(StandardActionName.Search + SessionHelper.SYS_CurrentAreaController);
 
-                return TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] as SEC007P001Model;
+                return TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] as SECS02P001Model;
             }
             set { TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] = value; }
         }
@@ -75,9 +75,9 @@ namespace WEBAPP.Areas.SEC.Controllers
         public ActionResult Edit(string COM_CODE, decimal? USG_ID)
         {
             SetDefaulButton(StandardButtonMode.Modify);
-            var da = new SEC007P001DA();
+            var da = new SECS02P001DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.GetByID;
+            da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.GetByID;
 
             TempModel = null;
             TempModel.COM_CODE = da.DTO.Model.COM_CODE = COM_CODE;
@@ -99,9 +99,9 @@ namespace WEBAPP.Areas.SEC.Controllers
         {
             SetDefaulButton(StandardButtonMode.Other);
             AddStandardButton(StandardButtonName.SaveModify, url: Url.Action("SaveConfPrg"));
-            var da = new SEC007P001DA();
+            var da = new SECS02P001DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.GetByID;
+            da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.GetByID;
 
             TempModel = null;
             TempModel.COM_CODE = da.DTO.Model.COM_CODE = COM_CODE;
@@ -121,9 +121,9 @@ namespace WEBAPP.Areas.SEC.Controllers
         {
             SetDefaulButton(StandardButtonMode.Other);
             AddStandardButton(StandardButtonName.SaveModify, url: Url.Action("SaveConfSysSeq"));
-            var da = new SEC007P001DA();
+            var da = new SECS02P001DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.GetByID;
+            da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.GetByID;
 
             TempModel = null;
             TempModel.COM_CODE = da.DTO.Model.COM_CODE = COM_CODE;
@@ -142,9 +142,9 @@ namespace WEBAPP.Areas.SEC.Controllers
         {
             SetDefaulButton(StandardButtonMode.Other);
             AddStandardButton(StandardButtonName.SaveModify, url: Url.Action("SaveConfPrgSeq"));
-            var da = new SEC007P001DA();
+            var da = new SECS02P001DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.GetByID;
+            da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.GetByID;
 
             TempModel = null;
             TempModel.COM_CODE = da.DTO.Model.COM_CODE = COM_CODE;
@@ -162,11 +162,11 @@ namespace WEBAPP.Areas.SEC.Controllers
         #endregion
 
         #region Action
-        public ActionResult Search(SEC007P001Model model)
+        public ActionResult Search(SECS02P001Model model)
         {
-            var da = new SEC007P001DA();
+            var da = new SECS02P001DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.GetAll;
+            da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.GetAll;
 
             if (Request.GetRequest("page").IsNullOrEmpty())
             {
@@ -182,7 +182,7 @@ namespace WEBAPP.Areas.SEC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveCreate(SEC007P001Model model, string button = "")
+        public ActionResult SaveCreate(SECS02P001Model model, string button = "")
         {
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
@@ -200,7 +200,7 @@ namespace WEBAPP.Areas.SEC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveModify(SEC007P001Model model)
+        public ActionResult SaveModify(SECS02P001Model model)
         {
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
@@ -218,7 +218,7 @@ namespace WEBAPP.Areas.SEC.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteSearch(List<SEC007P001Model> data)
+        public ActionResult DeleteSearch(List<SECS02P001Model> data)
         {
             var jsonResult = new JsonResult();
 
@@ -237,9 +237,9 @@ namespace WEBAPP.Areas.SEC.Controllers
         }
         public ActionResult SYS_CODE_OnChange(string SYS_CODE)
         {
-            var da = new SEC007P001DA();
+            var da = new SECS02P001DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.GetUsgPriv;
+            da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.GetUsgPriv;
             da.DTO.Model = TempModel.CloneObject();
             da.DTO.Model.SYS_CODE = SYS_CODE;
             da.SelectNoEF(da.DTO);
@@ -247,7 +247,7 @@ namespace WEBAPP.Areas.SEC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveConfPrg(SEC007P001Model model)
+        public ActionResult SaveConfPrg(SECS02P001Model model)
         {
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
@@ -271,9 +271,9 @@ namespace WEBAPP.Areas.SEC.Controllers
 
         public ActionResult GetSysSeq(string SYS_GROUP_NAME)
         {
-            var da = new SEC007P001DA();
+            var da = new SECS02P001DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.GetSysSeq;
+            da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.GetSysSeq;
             da.DTO.Model = TempModel.CloneObject();
             da.DTO.Model.SYS_GROUP_NAME = SYS_GROUP_NAME;
             da.SelectNoEF(da.DTO);
@@ -283,7 +283,7 @@ namespace WEBAPP.Areas.SEC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveConfSysSeq(SEC007P001Model model)
+        public ActionResult SaveConfSysSeq(SECS02P001Model model)
         {
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
@@ -307,9 +307,9 @@ namespace WEBAPP.Areas.SEC.Controllers
 
         public ActionResult GetPrgSeq(string SYS_GROUP_NAME, string SYS_CODE)
         {
-            var da = new SEC007P001DA();
+            var da = new SECS02P001DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.GetPrgSeq;
+            da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.GetPrgSeq;
             da.DTO.Model = TempModel.CloneObject();
             da.DTO.Model.SYS_GROUP_NAME = SYS_GROUP_NAME;
             da.DTO.Model.SYS_CODE = SYS_CODE;
@@ -320,7 +320,7 @@ namespace WEBAPP.Areas.SEC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveConfPrgSeq(SEC007P001Model model)
+        public ActionResult SaveConfPrgSeq(SECS02P001Model model)
         {
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
@@ -352,7 +352,7 @@ namespace WEBAPP.Areas.SEC.Controllers
         #region Method
         private DTOResult SaveData(string mode, object model)
         {
-            var da = new SEC007P001DA();
+            var da = new SECS02P001DA();
 
             SetStandardLog(
                da.DTO,
@@ -362,44 +362,44 @@ namespace WEBAPP.Areas.SEC.Controllers
             if (mode == StandardActionName.SaveCreate)
             {
                 SetStandardField(model);
-                da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.InsertData;
-                da.DTO.Model = (SEC007P001Model)model;
+                da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.InsertData;
+                da.DTO.Model = (SECS02P001Model)model;
                 da.Insert(da.DTO);
             }
             else if (mode == StandardActionName.SaveModify)
             {
                 SetStandardField(model);
-                da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.UpdateData;
-                da.DTO.Model = (SEC007P001Model)model;
+                da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.UpdateData;
+                da.DTO.Model = (SECS02P001Model)model;
                 da.Update(da.DTO);
             }
             else if (mode == StandardActionName.Delete)
             {
-                da.DTO.Model = new SEC007P001Model();
+                da.DTO.Model = new SECS02P001Model();
                 SetStandardField(da.DTO.Model);
-                da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.DeleteData;
-                da.DTO.Models = (List<SEC007P001Model>)model;
+                da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.DeleteData;
+                da.DTO.Models = (List<SECS02P001Model>)model;
                 da.Delete(da.DTO);
             }
             else if (mode == "SaveConfPrg")
             {
                 SetStandardField(model);
-                da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.UpdateUsgPriv;
-                da.DTO.Model = (SEC007P001Model)model;
+                da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.UpdateUsgPriv;
+                da.DTO.Model = (SECS02P001Model)model;
                 da.Update(da.DTO);
             }
             else if (mode == "SaveConfSysSeq")
             {
                 SetStandardField(model);
-                da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.UpdateSysSeq;
-                da.DTO.Model = (SEC007P001Model)model;
+                da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.UpdateSysSeq;
+                da.DTO.Model = (SECS02P001Model)model;
                 da.Update(da.DTO);
             }
             else if (mode == "SaveConfPrgSeq")
             {
                 SetStandardField(model);
-                da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.UpdatePrgSeq;
-                da.DTO.Model = (SEC007P001Model)model;
+                da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.UpdatePrgSeq;
+                da.DTO.Model = (SECS02P001Model)model;
                 da.Update(da.DTO);
             }
 

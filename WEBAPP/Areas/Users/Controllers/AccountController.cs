@@ -89,7 +89,7 @@ namespace WEBAPP.Areas.Users.Controllers
                 {
                     if (!dsSys.COM_CODE.IsNullOrEmpty() && !dsSys.USG_ID.IsNullOrEmpty())
                     {
-                        SEC007P001Model dsUSerGroup = GET_VSMS_USRGROUP(dsSys.COM_CODE, dsSys.USG_ID);
+                        SECS02P001Model dsUSerGroup = GET_VSMS_USRGROUP(dsSys.COM_CODE, dsSys.USG_ID);
                         if (!dsUSerGroup.COM_CODE.IsNullOrEmpty() &&
                             dsUSerGroup.USG_ID != null &&
                             !dsUSerGroup.USG_CODE.IsNullOrEmpty())
@@ -519,11 +519,11 @@ namespace WEBAPP.Areas.Users.Controllers
 
             return da.DTO.Model;
         }
-        private SEC007P001Model GET_VSMS_USRGROUP(string COM_CODE, decimal? USG_ID)
+        private SECS02P001Model GET_VSMS_USRGROUP(string COM_CODE, decimal? USG_ID)
         {
-            var da = new SEC007P001DA();
+            var da = new SECS02P001DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SEC007P001ExecuteType.GetByID;
+            da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.GetByID;
             da.DTO.Model.COM_CODE = COM_CODE;
             da.DTO.Model.USG_ID = USG_ID;
 

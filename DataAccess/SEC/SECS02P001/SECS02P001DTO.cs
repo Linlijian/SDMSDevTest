@@ -4,18 +4,18 @@ using System.Collections.Generic;
 namespace DataAccess.SEC
 {
     [Serializable]
-    public class SEC007P001DTO : BaseDTO
+    public class SECS02P001DTO : BaseDTO
     {
-        public SEC007P001DTO()
+        public SECS02P001DTO()
         {
-            Model = new SEC007P001Model();
-            Models = new List<SEC007P001Model>();
+            Model = new SECS02P001Model();
+            Models = new List<SECS02P001Model>();
         }
-        public SEC007P001Model Model { get; set; }
-        public List<SEC007P001Model> Models { get; set; }
+        public SECS02P001Model Model { get; set; }
+        public List<SECS02P001Model> Models { get; set; }
     }
 
-    public class SEC007P001ExecuteType : DTOExecuteType
+    public class SECS02P001ExecuteType : DTOExecuteType
     {
         public const string GetUsgPriv = "GetUsgPriv";
         public const string GetSysSeq = "GetSysSeq";
