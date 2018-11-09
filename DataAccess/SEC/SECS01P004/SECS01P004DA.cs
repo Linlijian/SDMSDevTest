@@ -77,6 +77,10 @@ namespace DataAccess.SEC
         protected override BaseDTO DoInsert(BaseDTO baseDTO)
         {
             var dto = (SECS01P004DTO)baseDTO;
+            if (dto.Model.SYS_STATUS != null)
+            {
+                dto.Model.SYS_STATUS = dto.Model.SYS_STATUS.Trim();
+            }
             var model = dto.Model.ToNewObject(new VSMS_SYSTEM());
             _DBManger.VSMS_SYSTEM.Add(model);
 
@@ -88,6 +92,10 @@ namespace DataAccess.SEC
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
             var dto = (SECS01P004DTO)baseDTO;
+            if (dto.Model.SYS_STATUS != null)
+            {
+                dto.Model.SYS_STATUS = dto.Model.SYS_STATUS.Trim();
+            }
             var SYS_CODE = dto.Model.SYS_CODE;
             var model = _DBManger.VSMS_SYSTEM.First(m => m.SYS_CODE == SYS_CODE);
             model.MergeObject(dto.Model);
