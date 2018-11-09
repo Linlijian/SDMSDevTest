@@ -141,6 +141,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SECS02P002.resx</DependentUpon>
     </Compile>
+    <Compile Include="SEC\SECS02P003.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SECS02P003.resx</DependentUpon>
+    </Compile>
     <Compile Include="Ux\File.Designer.cs">
       <DependentUpon>File.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -243,6 +248,11 @@
     <EmbeddedResource Include="SEC\SECS02P002.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SECS02P002.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEC\SECS02P003.en-US.resx" />
+    <EmbeddedResource Include="SEC\SECS02P003.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SECS02P003.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Ux\File.en.US.resx" />
     <EmbeddedResource Include="Ux\File.resx">

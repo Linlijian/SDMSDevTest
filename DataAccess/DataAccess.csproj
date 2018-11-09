@@ -84,9 +84,9 @@
     <Compile Include="SEC\SEC001P001\SEC001P001DA.cs" />
     <Compile Include="SEC\SEC001P001\SEC001P001DTO.cs" />
     <Compile Include="SEC\SEC001P001\SEC001P001Model.cs" />
-    <Compile Include="SEC\SEC002P001\SEC002P001DA.cs" />
-    <Compile Include="SEC\SEC002P001\SEC002P001DTO.cs" />
-    <Compile Include="SEC\SEC002P001\SEC002P001Model.cs" />
+    <Compile Include="SEC\SECS02P003\SECS02P003DA.cs" />
+    <Compile Include="SEC\SECS02P003\SECS02P003DTO.cs" />
+    <Compile Include="SEC\SECS02P003\SECS02P003Model.cs" />
     <Compile Include="SEC\SECS01P004\SECS01P004DA.cs" />
     <Compile Include="SEC\SECS01P004\SECS01P004DTO.cs" />
     <Compile Include="SEC\SECS01P004\SECS01P004Model.cs" />

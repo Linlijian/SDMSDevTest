@@ -1,15 +1,15 @@
 ﻿@using FluentBootstrap
 @using WEBAPP.Helper
-@using DataAccess
 @using DataAccess.SEC
 @using UtilityLib
 
-@model SEC002P001Model
+@model SECS02P003Model
 
 @{
-    ViewBag.Title = "Info";
+    ViewBag.Title = "Add";
     Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
 }
+
 @using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
 {
     @Html.AntiForgeryToken()
@@ -21,11 +21,11 @@
             {
                 using (r.GridColumn(6).Begin())
                 {
-                    @form.InputFor(m => m.TITLE_NAME_TH, isRequired: true).SetReadonly()
+                    @form.InputFor(m => m.TITLE_NAME_TH, isRequired: true)
                 }
                 using (r.GridColumn(6).Begin())
                 {
-                    @form.InputFor(m => m.TITLE_NAME_EN).SetReadonly()
+                    @form.InputFor(m => m.TITLE_NAME_EN)
                 }
             }
         }
@@ -37,3 +37,4 @@
 @section Scripts {
 
 }
+
