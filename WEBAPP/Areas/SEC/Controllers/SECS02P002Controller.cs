@@ -305,14 +305,30 @@ namespace WEBAPP.Areas.SEC.Controllers
             da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
             da.SelectNoEF(da.DTO);
 
-            if (da.DTO.Models[0].USG_LEVEL.AsString() == "S")
+            if (da.DTO.Models.Count > 0)
             {
-                return GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_001);
+                if (da.DTO.Models[0].USG_LEVEL.AsString() == "S")
+                {
+                    return GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_001);
+                }
+                else
+                {//
+                    return GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_002);
+                }
             }
             else
-            {//
+            {
                 return GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_002);
             }
+
+            //if (da.DTO.Models[0].USG_LEVEL.AsString() == "S")
+            //{
+            //    return GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_001);
+            //}
+            //else
+            //{//
+            //    return GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_002);
+            //}
         }
 
         private List<DDLCenterModel> BindTITLE_ID_MODEL()
