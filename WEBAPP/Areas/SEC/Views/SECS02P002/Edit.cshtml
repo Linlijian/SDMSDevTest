@@ -65,10 +65,10 @@
 
                 @using (var r = Html.Bootstrap().GridRow().Begin())
                 {
-                    using (r.GridColumn(6).Begin())
+                    @*using (r.GridColumn(6).Begin())
                     {
                         @form.SelectFor(t => t.DEPT_ID, Model.DEPT_ID_MODEL.ToSelectList("Value", "Text", Model.DEPT_ID), isRequired: true)
-                    }
+                    }*@
                     using (r.GridColumn(6).Begin())
                     {
                         @form.InputFor(t => t.USER_SPEC_ID)

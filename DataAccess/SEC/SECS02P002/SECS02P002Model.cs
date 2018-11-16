@@ -27,6 +27,7 @@ namespace DataAccess.SEC
 
         [Display(Name = "TITLE_ID", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public decimal? TITLE_ID { get; set; }
+        [Display(Name = "TITLE_NAME_TH", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string TITLE_NAME_TH { get; set; }
         public IEnumerable<DDLCenterModel> TITLE_ID_MODEL { get; set; }
 
@@ -111,7 +112,7 @@ namespace DataAccess.SEC
             RuleSet("Add", () =>
             {
                 Valid();
-                RuleFor(m => m.USER_ID).NotEmpty();
+                //RuleFor(m => m.USER_ID).NotEmpty();
             });
 
             RuleSet("Edit", () =>
@@ -125,7 +126,7 @@ namespace DataAccess.SEC
             RuleFor(m => m.USER_FNAME_TH).NotEmpty();
             RuleFor(m => m.USER_FNAME_EN).NotEmpty();
             RuleFor(m => m.TITLE_ID).NotEmpty();
-            RuleFor(m => m.USG_ID).NotEmpty();
+            //RuleFor(m => m.USG_ID).NotEmpty();
             RuleFor(m => m.DEPT_ID).NotEmpty();
             RuleFor(m => m.USER_STATUS).NotEmpty();
         }

@@ -55,7 +55,8 @@
                 {
                     using (r.GridColumn(6).Begin())
                     {
-                        @form.SelectFor(t => t.TITLE_ID, Model.TITLE_ID_MODEL.ToSelectList("Value", "Text", Model.TITLE_ID), isRequired: true)
+                        @*@form.SelectFor(t => t.TITLE_ID, Model.TITLE_ID_MODEL.ToSelectList("Value", "Text", Model.TITLE_ID), isRequired: true)*@
+                        @form.SelectFor(t => t.TITLE_NAME_TH, Model.TITLE_ID_MODEL.ToSelectList("Value", "Text", Model.TITLE_ID), isRequired: true)
                     }
                     using (r.GridColumn(6).Begin())
                     {
@@ -65,10 +66,10 @@
 
                 @using (var r = Html.Bootstrap().GridRow().Begin())
                 {
-                    using (r.GridColumn(6).Begin())
+                    @*using (r.GridColumn(6).Begin())
                     {
                         @form.SelectFor(t => t.DEPT_ID, Model.DEPT_ID_MODEL.ToSelectList("Value", "Text", Model.DEPT_ID), isRequired: true)
-                    }
+                    }*@
                     using (r.GridColumn(6).Begin())
                     {
                         @form.InputFor(t => t.USER_SPEC_ID)
@@ -111,7 +112,7 @@
                 {
                     using (r.GridColumn(12).Begin())
                     {
-                        @Html.GetVSMMultiSelectFor(t => t.ComUserModel, "AC_VSMS_COMPANY_001", true, 2)
+                        @Html.GetVSMMultiSelectFor(t => t.ComUserModel, "AC_VSMS_COMPANY_001", false, 2)
                     }
                 }
             </fieldset>

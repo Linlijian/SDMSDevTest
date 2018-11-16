@@ -269,13 +269,13 @@ namespace WEBAPP.Areas.SEC.Controllers
             if (mode == StandardActionName.Index)
             {
                 localModel.IS_DISABLED_MODEL = BindIS_DISABLED_MODEL();
-                localModel.DEPT_ID_MODEL = BindDEPT_ID_MODEL();
+                //localModel.DEPT_ID_MODEL = BindDEPT_ID_MODEL();
                 localModel.USG_ID_MODEL = BindUSG_ID_MODEL();
             }
             else if (mode == StandardActionName.Add || mode == StandardActionName.Edit)
             {
                 localModel.IS_DISABLED_MODEL = BindIS_DISABLED_MODEL();
-                localModel.DEPT_ID_MODEL = BindDEPT_ID_MODEL();
+                //localModel.DEPT_ID_MODEL = BindDEPT_ID_MODEL();
                 localModel.USG_ID_MODEL = BindUSG_ID_MODEL_ADD();
                 localModel.TITLE_ID_MODEL = BindTITLE_ID_MODEL();
                 localModel.USER_STATUS_MODEL = BindUSER_STATUS_MODEL();
@@ -333,7 +333,8 @@ namespace WEBAPP.Areas.SEC.Controllers
 
         private List<DDLCenterModel> BindTITLE_ID_MODEL()
         {
-            return GetDDLCenter(DDLCenterKey.DD_VSMS_TITLE_001, new VSMParameter(SessionHelper.SYS_COM_CODE));
+            //return GetDDLCenter(DDLCenterKey.DD_VSMS_TITLE_001, new VSMParameter(SessionHelper.SYS_COM_CODE));
+            return GetDDLCenter(DDLCenterKey.DD_VSMS_TITLE_001);
         }
 
         private List<DDLCenterModel> BindUSER_STATUS_MODEL()

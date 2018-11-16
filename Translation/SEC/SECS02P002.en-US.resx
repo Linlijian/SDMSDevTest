@@ -186,4 +186,7 @@
   <data name="USG_NAME_TH" xml:space="preserve">
     <value>User Group ID</value>
   </data>
+  <data name="TITLE_NAME_TH" xml:space="preserve">
+    <value>Title Name</value>
+  </data>
 </root>

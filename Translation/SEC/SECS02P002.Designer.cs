@@ -187,6 +187,15 @@ namespace Translation.SEC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Title Name.
+        /// </summary>
+        public static string TITLE_NAME_TH {
+            get {
+                return ResourceManager.GetString("TITLE_NAME_TH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Name (Eng).
         /// </summary>
         public static string USER_FNAME_EN {
