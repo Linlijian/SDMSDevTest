@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ComUserModel" xml:space="preserve">
-    <value>Add Company</value>
-  </data>
   <data name="COM_CODE" xml:space="preserve">
     <value>Com Code</value>
   </data>
@@ -188,5 +185,8 @@
   </data>
   <data name="USG_NAME_TH" xml:space="preserve">
     <value>User Group ID</value>
+  </data>
+  <data name="APP_CODE" xml:space="preserve">
+    <value>Add Application</value>
   </data>
 </root>

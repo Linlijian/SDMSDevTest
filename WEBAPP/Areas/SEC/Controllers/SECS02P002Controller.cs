@@ -85,6 +85,8 @@ namespace WEBAPP.Areas.SEC.Controllers
             if (da.DTO.Model != null)
             {
                 localModel = da.DTO.Model;
+                localModel.APP_CODE = da.DTO.Model.COM_CODE;
+                TempModel.COM_CODE = da.DTO.Model.COM_CODE;
             }
 
             SetDefaultData(StandardActionName.Edit);
@@ -106,15 +108,6 @@ namespace WEBAPP.Areas.SEC.Controllers
                 localModel = da.DTO.Model;
             }
             return View(StandardActionName.Info, localModel);
-        }
-
-        public ActionResult test()
-        {
-            SetDefaulButton(StandardButtonMode.Other);
-            AddStandardButton(StandardButtonName.LoadFile);
-
-            localModel.USER_EFF_DATE = DateTime.Now;
-            return View(localModel);
         }
         #endregion
 
@@ -178,8 +171,7 @@ namespace WEBAPP.Areas.SEC.Controllers
         {
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
-            {
-                model.DEPT_ID = TempModel.DEPT_ID;
+            {                
                 var result = SaveData(StandardActionName.SaveModify, model);
                 jsonResult = Success(result, StandardActionName.SaveModify, Url.Action(StandardActionName.Index, new { page = 1 }));
             }
@@ -213,21 +205,6 @@ namespace WEBAPP.Areas.SEC.Controllers
         }
         #endregion
 
-        #region Event
-        public JsonResult Bind_ComForUser()
-        {
-            var da = new SECS02P002DA();
-            SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.GetUserCOM;
-
-            da.DTO.Model.USER_ID = TempModel.USER_ID;
-
-            da.SelectNoEF(da.DTO);
-
-            return JsonAllowGet(da.DTO.Model.ComUserModel);
-        }
-        #endregion
-
         #region ====Private Mehtod====
         private DTOResult SaveData(string mode, object model)
         {
@@ -249,15 +226,15 @@ namespace WEBAPP.Areas.SEC.Controllers
             }
             else if (mode == StandardActionName.SaveModify)
             {
-                SetStandardField(model);
+                SetStandardField(model);               
                 da.DTO.Model = (SECS02P002Model)model;
-                SetStandardField(da.DTO.Model.ComUserModel);
-                da.Update(da.DTO);
+                da.DTO.Model.COM_CODE = TempModel.COM_CODE;
+                //SetStandardField(da.DTO.Model.ComUserModel);
+                da.UpdateNoEF(da.DTO);
             }
             else if (mode == StandardActionName.Delete)
             {
                 da.DTO.Model = new SECS02P002Model();
-                SetStandardField(da.DTO.Model);
                 da.DTO.Models = (List<SECS02P002Model>)model;
                 da.Delete(da.DTO);
             }
@@ -275,10 +252,20 @@ namespace WEBAPP.Areas.SEC.Controllers
             else if (mode == StandardActionName.Add || mode == StandardActionName.Edit)
             {
                 localModel.IS_DISABLED_MODEL = BindIS_DISABLED_MODEL();
-                //localModel.DEPT_ID_MODEL = BindDEPT_ID_MODEL();
+                localModel.APP_CODE_MODEL = BindAPP_CODE();
                 localModel.USG_ID_MODEL = BindUSG_ID_MODEL_ADD();
                 localModel.TITLE_ID_MODEL = BindTITLE_ID_MODEL();
                 localModel.USER_STATUS_MODEL = BindUSER_STATUS_MODEL();
+
+                Set(localModel);
+            }
+        }
+
+        private void Set(SECS02P002Model model)
+        {
+            foreach (var item in model.USER_STATUS_MODEL)
+            {
+                item.Value = item.Value.Trim();
             }
         }
 
@@ -320,6 +307,12 @@ namespace WEBAPP.Areas.SEC.Controllers
         {
             //return GetDDLCenter(DDLCenterKey.DD_VSMS_TITLE_001, new VSMParameter(SessionHelper.SYS_COM_CODE));
             return GetDDLCenter(DDLCenterKey.DD_VSMS_TITLE_001);
+        }
+
+        private List<DDLCenterModel> BindAPP_CODE()
+        {
+            //return GetDDLCenter(DDLCenterKey.DD_VSMS_TITLE_001, new VSMParameter(SessionHelper.SYS_COM_CODE));
+            return GetDDLCenter(DDLCenterKey.DD_VSMS_COMPANY_001);
         }
 
         private List<DDLCenterModel> BindUSER_STATUS_MODEL()

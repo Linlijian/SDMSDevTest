@@ -61,6 +61,15 @@ namespace Translation.SEC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Application.
+        /// </summary>
+        public static string APP_CODE {
+            get {
+                return ResourceManager.GetString("APP_CODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Com Code.
         /// </summary>
         public static string COM_CODE {
@@ -75,15 +84,6 @@ namespace Translation.SEC {
         public static string COM_NAME_E {
             get {
                 return ResourceManager.GetString("COM_NAME_E", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add Company.
-        /// </summary>
-        public static string ComUserModel {
-            get {
-                return ResourceManager.GetString("ComUserModel", resourceCulture);
             }
         }
         

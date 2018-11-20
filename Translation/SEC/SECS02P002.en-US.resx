@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ComUserModel" xml:space="preserve">
-    <value>Add Company</value>
+  <data name="APP_CODE" xml:space="preserve">
+    <value>Add Application</value>
   </data>
   <data name="COM_CODE" xml:space="preserve">
     <value>Com Code</value>
