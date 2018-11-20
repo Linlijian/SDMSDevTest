@@ -75,18 +75,19 @@ namespace DataAccess.SEC
         public DateTime? LAST_LOGIN_DATE { get; set; }
 
         [Display(Name = "ComUserModel", ResourceType = typeof(Translation.SEC.SECS02P002))]
-        public List<SECS02P002_CompanyForUserModel> ComUserModel { get; set; }
+       public List<SECS02P002_CompanyForUserModel> ComUserModel { get; set; }
+        // public SECS02P002_CompanyForUserModel ComUserModel { get; set; }
+        public int IS_DUP { get; set; }
     }
 
     public class SECS02P002_CompanyForUserModel 
     {
-        [Display(Name = "COM_CODE", ResourceType = typeof(Translation.SEC.SECS02P002))]
+
+        [Display(Name = "COM_CODE", ResourceType = typeof(Translation.CenterLang.Center))]
         public string COM_CODE { get; set; }
 
-        [Display(Name = "COM_NAME_E", ResourceType = typeof(Translation.SEC.SECS02P002))]
-        public string COM_NAME_E { get; set; }
-
         public string USER_ID { get; set; }
+        public decimal? USG_ID { get; set; }
 
         [Display(Name = "CRET_BY", ResourceType = typeof(Translation.CenterLang.Center))]
         public string CRET_BY { get; set; }
@@ -103,6 +104,27 @@ namespace DataAccess.SEC
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> MNT_DATE { get; set; }
+
+
+
+        //[Display(Name = "COM_CODE", ResourceType = typeof(Translation.SEC.SECS02P002))]
+        //public string COM_CODE { get; set; }
+
+        //[Display(Name = "CRET_BY", ResourceType = typeof(Translation.CenterLang.Center))]
+        //public string CRET_BY { get; set; }
+
+        //[Display(Name = "CRET_DATE", ResourceType = typeof(Translation.CenterLang.Center))]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
+        //public Nullable<System.DateTime> CRET_DATE { get; set; }
+
+        //[Display(Name = "MNT_BY", ResourceType = typeof(Translation.CenterLang.Center))]
+        //public string MNT_BY { get; set; }
+
+        //[Display(Name = "MNT_DATE", ResourceType = typeof(Translation.CenterLang.Center))]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
+        //public Nullable<System.DateTime> MNT_DATE { get; set; }
     }
 
     public class SECS02P002Validator : AbstractValidator<SECS02P002Model>

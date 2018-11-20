@@ -244,8 +244,8 @@ namespace WEBAPP.Areas.SEC.Controllers
             {
                 SetStandardField(model);
                 da.DTO.Model = (SECS02P002Model)model;
-                SetStandardField(da.DTO.Model.ComUserModel);
-                da.Insert(da.DTO);
+               // SetStandardField(da.DTO.Model.ComUserModel);
+                da.InsertNoEF(da.DTO);
             }
             else if (mode == StandardActionName.SaveModify)
             {
@@ -298,28 +298,13 @@ namespace WEBAPP.Areas.SEC.Controllers
         }
         private List<DDLCenterModel> BindUSG_ID_MODEL_ADD()
         {
-            var da = new SECS02P002DA();
-            SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.GetQueryCheckUserAdmin;
-            da.DTO.Model.USER_ID = SessionHelper.SYS_USER_ID;
-            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-            da.SelectNoEF(da.DTO);
-
-            if (da.DTO.Models.Count > 0)
-            {
-                if (da.DTO.Models[0].USG_LEVEL.AsString() == "S")
-                {
-                    return GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_001);
-                }
-                else
-                {//
-                    return GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_002);
-                }
-            }
-            else
-            {
-                return GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_002);
-            }
+            return GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_002);
+            //var da = new SECS02P002DA();
+            //SetStandardErrorLog(da.DTO);
+            //da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.GetQueryCheckUserAdmin;
+            //da.DTO.Model.USER_ID = SessionHelper.SYS_USER_ID;
+            //da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            //da.SelectNoEF(da.DTO);
 
             //if (da.DTO.Models[0].USG_LEVEL.AsString() == "S")
             //{

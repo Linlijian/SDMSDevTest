@@ -16,10 +16,10 @@ namespace DataAccess
     {
         public string COM_CODE { get; set; }
         public string USER_ID { get; set; }
+        public Nullable<decimal> USG_ID { get; set; }
         public string CRET_BY { get; set; }
         public Nullable<System.DateTime> CRET_DATE { get; set; }
         public string MNT_BY { get; set; }
         public Nullable<System.DateTime> MNT_DATE { get; set; }
-        public Nullable<decimal> USG_ID { get; set; }
     }
 }
