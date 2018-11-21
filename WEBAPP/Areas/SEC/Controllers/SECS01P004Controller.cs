@@ -171,6 +171,15 @@ namespace WEBAPP.Areas.SEC.Controllers
         private void SetDefaultData(string mode = "")
         {
             localModel.SYS_STATUS_MODEL = BindStatus();
+            Set(localModel);
+        }
+
+        private void Set(SECS01P004Model model)
+        {
+            foreach (var item in model.SYS_STATUS_MODEL)
+            {
+                item.Value = item.Value.Trim();
+            }
         }
 
         private List<DDLCenterModel> BindStatus()
