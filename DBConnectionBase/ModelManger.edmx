@@ -331,13 +331,13 @@
           <EntitySet Name="VSMS_SYSTEM" EntityType="AATModel.VSMS_SYSTEM" />
           <EntitySet Name="VSMS_CTRLLOG" EntityType="AATModel.VSMS_CTRLLOG" />
           <EntitySet Name="VSMS_USRGROUP" EntityType="AATModel.VSMS_USRGROUP" />
-          <EntitySet Name="VSMS_USERCOM" EntityType="AATModel.VSMS_USERCOM" />
           <EntitySet Name="VSMS_COMPANY" EntityType="AATModel.VSMS_COMPANY" />
           <EntitySet Name="VSMS_SYS_PGC" EntityType="AATModel.VSMS_SYS_PGC" />
           <EntitySet Name="VSMS_TITLE" EntityType="AATModel.VSMS_TITLE" />
           <EntitySet Name="VSMS_CONFIG_FTP" EntityType="AATModel.VSMS_CONFIG_FTP" />
           <EntitySet Name="VSMS_CONFIG_SYS" EntityType="AATModel.VSMS_CONFIG_SYS" />
           <EntitySet Name="VSMS_USER" EntityType="AATModel.VSMS_USER" />
+          <EntitySet Name="VSMS_USERCOM" EntityType="AATModel.VSMS_USERCOM" />
         </EntityContainer>
         <EntityType Name="VSMS_EXCEL">
           <Key>
@@ -490,19 +490,6 @@
           <Property Name="MNT_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
           <Property Name="MNT_DATE" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="VSMS_USERCOM">
-          <Key>
-            <PropertyRef Name="COM_CODE" />
-            <PropertyRef Name="USER_ID" />
-          </Key>
-          <Property Name="COM_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
-          <Property Name="USER_ID" Type="String" Nullable="false" MaxLength="16" FixedLength="true" Unicode="false" />
-          <Property Name="CRET_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
-          <Property Name="CRET_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MNT_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
-          <Property Name="MNT_DATE" Type="DateTime" Precision="3" />
-          <Property Name="USG_ID" Type="Decimal" Precision="18" Scale="0" />
-        </EntityType>
         <EntityType Name="VSMS_COMPANY">
           <Key>
             <PropertyRef Name="COM_CODE" />
@@ -630,6 +617,19 @@
           <Property Name="USER_STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="IS_DISABLED" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="LAST_LOGIN_DATE" Type="DateTime" Precision="3" />
+          <Property Name="CRET_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="CRET_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MNT_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="MNT_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VSMS_USERCOM">
+          <Key>
+            <PropertyRef Name="COM_CODE" />
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="COM_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="USER_ID" Type="String" Nullable="false" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="USG_ID" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CRET_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
           <Property Name="CRET_DATE" Type="DateTime" Precision="3" />
           <Property Name="MNT_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
@@ -789,19 +789,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VSMS_USERCOM">
-            <EntityTypeMapping TypeName="AATModel.VSMS_USERCOM">
-              <MappingFragment StoreEntitySet="VSMS_USERCOM">
-                <ScalarProperty Name="USG_ID" ColumnName="USG_ID" />
-                <ScalarProperty Name="MNT_DATE" ColumnName="MNT_DATE" />
-                <ScalarProperty Name="MNT_BY" ColumnName="MNT_BY" />
-                <ScalarProperty Name="CRET_DATE" ColumnName="CRET_DATE" />
-                <ScalarProperty Name="CRET_BY" ColumnName="CRET_BY" />
-                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
-                <ScalarProperty Name="COM_CODE" ColumnName="COM_CODE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VSMS_COMPANY">
             <EntityTypeMapping TypeName="AATModel.VSMS_COMPANY">
               <MappingFragment StoreEntitySet="VSMS_COMPANY">
@@ -933,6 +920,19 @@
                 <ScalarProperty Name="USER_FNAME_EN" ColumnName="USER_FNAME_EN" />
                 <ScalarProperty Name="USER_LNAME_TH" ColumnName="USER_LNAME_TH" />
                 <ScalarProperty Name="USER_FNAME_TH" ColumnName="USER_FNAME_TH" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="COM_CODE" ColumnName="COM_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSMS_USERCOM">
+            <EntityTypeMapping TypeName="AATModel.VSMS_USERCOM">
+              <MappingFragment StoreEntitySet="VSMS_USERCOM">
+                <ScalarProperty Name="MNT_DATE" ColumnName="MNT_DATE" />
+                <ScalarProperty Name="MNT_BY" ColumnName="MNT_BY" />
+                <ScalarProperty Name="CRET_DATE" ColumnName="CRET_DATE" />
+                <ScalarProperty Name="CRET_BY" ColumnName="CRET_BY" />
+                <ScalarProperty Name="USG_ID" ColumnName="USG_ID" />
                 <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
                 <ScalarProperty Name="COM_CODE" ColumnName="COM_CODE" />
               </MappingFragment>

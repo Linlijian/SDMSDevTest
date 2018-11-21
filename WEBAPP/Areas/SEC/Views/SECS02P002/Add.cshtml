@@ -66,18 +66,6 @@
 
                 @using (var r = Html.Bootstrap().GridRow().Begin())
                 {
-                    @*using (r.GridColumn(6).Begin())
-                    {
-                        @form.SelectFor(t => t.DEPT_ID, Model.DEPT_ID_MODEL.ToSelectList("Value", "Text", Model.DEPT_ID), isRequired: true)
-                    }*@
-                    using (r.GridColumn(6).Begin())
-                    {
-                        @form.InputFor(t => t.USER_SPEC_ID)
-                    }
-                }
-
-                @using (var r = Html.Bootstrap().GridRow().Begin())
-                {
                     using (r.GridColumn(6).Begin())
                     {
                         @form.InputFor(t => t.TELEPHONE)
@@ -102,40 +90,13 @@
                     {
                         @form.CheckBoxFor(t => t.IS_DISABLED).SetControlLabel("Permission").AddContent(Translation.SEC.SECS02P002.IS_DISABLED_ADD)
                     }
-                }
-
-            </fieldset>
-
-            <fieldset>
-                <legend></legend>
-                @using (var r = Html.Bootstrap().GridRow().Begin())
-                {
-                    using (r.GridColumn(12).Begin())
+                    using (r.GridColumn(6).Begin())
                     {
-                        @Html.GetVSMMultiSelectFor(t => t.ComUserModel, "AC_VSMS_COMPANY_001", false, 2)
+                        @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
                     }
                 }
+
             </fieldset>
-        }
-
-
+        }       
     }
 }
-@section modals{
-    @Html.GetVSMMultiSelectModalFor(t => t.ComUserModel)
-}
-
-@section Scripts {
-    @Html.GetVSMMultiSelectScriptFor(
-        t => t.ComUserModel,
-        CustomControl.GetMultiSelectConfig(
-            "AC_VSMS_COMPANY_001",
-            "COM_CODE",
-            "COM_NAME_E"
-        )
-    )
-
-    <script type="text/javascript">
-    </script>
-}
-
