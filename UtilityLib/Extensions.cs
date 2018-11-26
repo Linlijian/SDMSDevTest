@@ -112,6 +112,28 @@ namespace UtilityLib
 
         }
 
+        public static DateTime AsDateDatePicker(this object data, DateTime? defaultValue = null)
+        {
+            if (IsNullOrEmpty(data))
+                return defaultValue != null ? Convert.ToDateTime(defaultValue) : DateTime.MinValue;
+
+            var dutchCultureInfo = CultureInfo.CreateSpecificCulture("en-US");
+            dutchCultureInfo.DateTimeFormat.ShortDatePattern = "d/M/yyyy";
+            dutchCultureInfo.DateTimeFormat.DateSeparator = "/";
+
+            var culture = Thread.CurrentThread.CurrentCulture;
+            Thread.CurrentThread.CurrentCulture = dutchCultureInfo;
+            DateTime dtTime = Convert.ToDateTime(data);
+
+            var date = string.Format("{0:dd/MM/yyyy}", dtTime);
+
+            DateTime newDate = DateTime.ParseExact(date, "MM/dd/yyyy", dutchCultureInfo, DateTimeStyles.None);
+
+            Thread.CurrentThread.CurrentCulture = culture;
+            return newDate;
+
+        }
+
         public static DateTime? AsDateTimeNull(this object data)
         {
             //return IsNullOrEmpty(data) ? (DateTime?)null : Convert.ToDateTime(data);
