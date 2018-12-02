@@ -240,3 +240,5 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/WEBAPP/Reports/DataSet/Users/Account1.Designer.cs
+/WEBAPP/Reports/DataSet/DemoReport1.Designer.cs
