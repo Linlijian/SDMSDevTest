@@ -121,8 +121,6 @@
           </Key>
           <Property Name="COM_CODE" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="PRG_CODE" Type="char" MaxLength="15" Nullable="false" />
-          <Property Name="FIRST_COL" Type="char" MaxLength="1" />
-          <Property Name="NAME_TB_LOG" Type="varchar" MaxLength="50" />
           <Property Name="CRET_BY" Type="char" MaxLength="16" />
           <Property Name="CRET_DATE" Type="datetime" />
           <Property Name="MNT_BY" Type="char" MaxLength="16" />
@@ -187,7 +185,6 @@
           <Property Name="SYS_CODE" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="PRG_CODE" Type="char" MaxLength="15" Nullable="false" />
           <Property Name="PRG_SEQ" Type="int" />
-          <Property Name="SEC_CTRL_FLAG" Type="char" MaxLength="1" />
           <Property Name="CRET_BY" Type="char" MaxLength="16" />
           <Property Name="CRET_DATE" Type="datetime" />
           <Property Name="MNT_BY" Type="char" MaxLength="16" />
@@ -240,6 +237,7 @@
           <Property Name="USER_STATUS" Type="char" MaxLength="1" />
           <Property Name="IS_DISABLED" Type="char" MaxLength="1" />
           <Property Name="LAST_LOGIN_DATE" Type="datetime" />
+          <Property Name="DEPARTMENT" Type="varchar" MaxLength="20" />
           <Property Name="CRET_BY" Type="char" MaxLength="16" />
           <Property Name="CRET_DATE" Type="datetime" />
           <Property Name="MNT_BY" Type="char" MaxLength="16" />
@@ -323,7 +321,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="AATModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="AATEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="VSMS_EXCEL" EntityType="AATModel.VSMS_EXCEL" />
           <EntitySet Name="VSMS_EXCEL_DETAIL" EntityType="AATModel.VSMS_EXCEL_DETAIL" />
           <EntitySet Name="VSMS_PROGRAM" EntityType="AATModel.VSMS_PROGRAM" />
           <EntitySet Name="VSMS_USRGRPPRIV" EntityType="AATModel.VSMS_USRGRPPRIV" />
@@ -332,27 +329,14 @@
           <EntitySet Name="VSMS_CTRLLOG" EntityType="AATModel.VSMS_CTRLLOG" />
           <EntitySet Name="VSMS_USRGROUP" EntityType="AATModel.VSMS_USRGROUP" />
           <EntitySet Name="VSMS_COMPANY" EntityType="AATModel.VSMS_COMPANY" />
-          <EntitySet Name="VSMS_SYS_PGC" EntityType="AATModel.VSMS_SYS_PGC" />
           <EntitySet Name="VSMS_TITLE" EntityType="AATModel.VSMS_TITLE" />
           <EntitySet Name="VSMS_CONFIG_FTP" EntityType="AATModel.VSMS_CONFIG_FTP" />
           <EntitySet Name="VSMS_CONFIG_SYS" EntityType="AATModel.VSMS_CONFIG_SYS" />
           <EntitySet Name="VSMS_USER" EntityType="AATModel.VSMS_USER" />
           <EntitySet Name="VSMS_USERCOM" EntityType="AATModel.VSMS_USERCOM" />
+          <EntitySet Name="VSMS_EXCEL" EntityType="AATModel.VSMS_EXCEL" />
+          <EntitySet Name="VSMS_SYS_PGC" EntityType="AATModel.VSMS_SYS_PGC" />
         </EntityContainer>
-        <EntityType Name="VSMS_EXCEL">
-          <Key>
-            <PropertyRef Name="COM_CODE" />
-            <PropertyRef Name="PRG_CODE" />
-          </Key>
-          <Property Name="COM_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
-          <Property Name="PRG_CODE" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="FIRST_COL" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="NAME_TB_LOG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CRET_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
-          <Property Name="CRET_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MNT_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
-          <Property Name="MNT_DATE" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="VSMS_EXCEL_DETAIL">
           <Key>
             <PropertyRef Name="COM_CODE" />
@@ -546,22 +530,6 @@
           <Property Name="MNT_BY" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="MNT_DATE" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="VSMS_SYS_PGC">
-          <Key>
-            <PropertyRef Name="COM_CODE" />
-            <PropertyRef Name="SYS_CODE" />
-            <PropertyRef Name="PRG_CODE" />
-          </Key>
-          <Property Name="COM_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
-          <Property Name="SYS_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
-          <Property Name="PRG_CODE" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
-          <Property Name="PRG_SEQ" Type="Int32" />
-          <Property Name="SEC_CTRL_FLAG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="CRET_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
-          <Property Name="CRET_DATE" Type="DateTime" Precision="3" />
-          <Property Name="MNT_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
-          <Property Name="MNT_DATE" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="VSMS_TITLE">
           <Key>
             <PropertyRef Name="TITLE_ID" />
@@ -621,6 +589,7 @@
           <Property Name="CRET_DATE" Type="DateTime" Precision="3" />
           <Property Name="MNT_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
           <Property Name="MNT_DATE" Type="DateTime" Precision="3" />
+          <Property Name="DEPARTMENT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VSMS_USERCOM">
           <Key>
@@ -635,26 +604,39 @@
           <Property Name="MNT_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
           <Property Name="MNT_DATE" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="VSMS_EXCEL">
+          <Key>
+            <PropertyRef Name="COM_CODE" />
+            <PropertyRef Name="PRG_CODE" />
+          </Key>
+          <Property Name="COM_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="PRG_CODE" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="CRET_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="CRET_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MNT_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="MNT_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VSMS_SYS_PGC">
+          <Key>
+            <PropertyRef Name="COM_CODE" />
+            <PropertyRef Name="SYS_CODE" />
+            <PropertyRef Name="PRG_CODE" />
+          </Key>
+          <Property Name="COM_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="SYS_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="PRG_CODE" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="PRG_SEQ" Type="Int32" />
+          <Property Name="CRET_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="CRET_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MNT_BY" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="MNT_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SEC_AATModelStoreContainer" CdmEntityContainer="AATEntities">
-          <EntitySetMapping Name="VSMS_EXCEL">
-            <EntityTypeMapping TypeName="AATModel.VSMS_EXCEL">
-              <MappingFragment StoreEntitySet="VSMS_EXCEL">
-                <ScalarProperty Name="MNT_DATE" ColumnName="MNT_DATE" />
-                <ScalarProperty Name="MNT_BY" ColumnName="MNT_BY" />
-                <ScalarProperty Name="CRET_DATE" ColumnName="CRET_DATE" />
-                <ScalarProperty Name="CRET_BY" ColumnName="CRET_BY" />
-                <ScalarProperty Name="NAME_TB_LOG" ColumnName="NAME_TB_LOG" />
-                <ScalarProperty Name="FIRST_COL" ColumnName="FIRST_COL" />
-                <ScalarProperty Name="PRG_CODE" ColumnName="PRG_CODE" />
-                <ScalarProperty Name="COM_CODE" ColumnName="COM_CODE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VSMS_EXCEL_DETAIL">
             <EntityTypeMapping TypeName="AATModel.VSMS_EXCEL_DETAIL">
               <MappingFragment StoreEntitySet="VSMS_EXCEL_DETAIL">
@@ -846,21 +828,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VSMS_SYS_PGC">
-            <EntityTypeMapping TypeName="AATModel.VSMS_SYS_PGC">
-              <MappingFragment StoreEntitySet="VSMS_SYS_PGC">
-                <ScalarProperty Name="MNT_DATE" ColumnName="MNT_DATE" />
-                <ScalarProperty Name="MNT_BY" ColumnName="MNT_BY" />
-                <ScalarProperty Name="CRET_DATE" ColumnName="CRET_DATE" />
-                <ScalarProperty Name="CRET_BY" ColumnName="CRET_BY" />
-                <ScalarProperty Name="SEC_CTRL_FLAG" ColumnName="SEC_CTRL_FLAG" />
-                <ScalarProperty Name="PRG_SEQ" ColumnName="PRG_SEQ" />
-                <ScalarProperty Name="PRG_CODE" ColumnName="PRG_CODE" />
-                <ScalarProperty Name="SYS_CODE" ColumnName="SYS_CODE" />
-                <ScalarProperty Name="COM_CODE" ColumnName="COM_CODE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VSMS_TITLE">
             <EntityTypeMapping TypeName="AATModel.VSMS_TITLE">
               <MappingFragment StoreEntitySet="VSMS_TITLE">
@@ -904,6 +871,7 @@
           <EntitySetMapping Name="VSMS_USER">
             <EntityTypeMapping TypeName="AATModel.VSMS_USER">
               <MappingFragment StoreEntitySet="VSMS_USER">
+                <ScalarProperty Name="DEPARTMENT" ColumnName="DEPARTMENT" />
                 <ScalarProperty Name="MNT_DATE" ColumnName="MNT_DATE" />
                 <ScalarProperty Name="MNT_BY" ColumnName="MNT_BY" />
                 <ScalarProperty Name="CRET_DATE" ColumnName="CRET_DATE" />
@@ -934,6 +902,32 @@
                 <ScalarProperty Name="CRET_BY" ColumnName="CRET_BY" />
                 <ScalarProperty Name="USG_ID" ColumnName="USG_ID" />
                 <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="COM_CODE" ColumnName="COM_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSMS_EXCEL">
+            <EntityTypeMapping TypeName="AATModel.VSMS_EXCEL">
+              <MappingFragment StoreEntitySet="VSMS_EXCEL">
+                <ScalarProperty Name="MNT_DATE" ColumnName="MNT_DATE" />
+                <ScalarProperty Name="MNT_BY" ColumnName="MNT_BY" />
+                <ScalarProperty Name="CRET_DATE" ColumnName="CRET_DATE" />
+                <ScalarProperty Name="CRET_BY" ColumnName="CRET_BY" />
+                <ScalarProperty Name="PRG_CODE" ColumnName="PRG_CODE" />
+                <ScalarProperty Name="COM_CODE" ColumnName="COM_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSMS_SYS_PGC">
+            <EntityTypeMapping TypeName="AATModel.VSMS_SYS_PGC">
+              <MappingFragment StoreEntitySet="VSMS_SYS_PGC">
+                <ScalarProperty Name="MNT_DATE" ColumnName="MNT_DATE" />
+                <ScalarProperty Name="MNT_BY" ColumnName="MNT_BY" />
+                <ScalarProperty Name="CRET_DATE" ColumnName="CRET_DATE" />
+                <ScalarProperty Name="CRET_BY" ColumnName="CRET_BY" />
+                <ScalarProperty Name="PRG_SEQ" ColumnName="PRG_SEQ" />
+                <ScalarProperty Name="PRG_CODE" ColumnName="PRG_CODE" />
+                <ScalarProperty Name="SYS_CODE" ColumnName="SYS_CODE" />
                 <ScalarProperty Name="COM_CODE" ColumnName="COM_CODE" />
               </MappingFragment>
             </EntityTypeMapping>

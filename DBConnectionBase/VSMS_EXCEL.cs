@@ -16,8 +16,6 @@ namespace DataAccess
     {
         public string COM_CODE { get; set; }
         public string PRG_CODE { get; set; }
-        public string FIRST_COL { get; set; }
-        public string NAME_TB_LOG { get; set; }
         public string CRET_BY { get; set; }
         public Nullable<System.DateTime> CRET_DATE { get; set; }
         public string MNT_BY { get; set; }

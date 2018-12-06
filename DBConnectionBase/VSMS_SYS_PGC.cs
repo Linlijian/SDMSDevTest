@@ -18,7 +18,6 @@ namespace DataAccess
         public string SYS_CODE { get; set; }
         public string PRG_CODE { get; set; }
         public Nullable<int> PRG_SEQ { get; set; }
-        public string SEC_CTRL_FLAG { get; set; }
         public string CRET_BY { get; set; }
         public Nullable<System.DateTime> CRET_DATE { get; set; }
         public string MNT_BY { get; set; }

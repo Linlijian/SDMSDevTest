@@ -40,8 +40,6 @@ namespace DataAccess.EXC001
                         {
                             COM_CODE = a.COM_CODE,
                             PRG_CODE = a.PRG_CODE,
-                            FIRST_COL = b.FIRST_COL,
-                            NAME_TB_LOG = b.NAME_TB_LOG,
                             COL_NAME = a.COL_NAME,
                             LIST_NO = a.LIST_NO,
                             COL_TYPE = a.COL_TYPE,

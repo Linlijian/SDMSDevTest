@@ -30,7 +30,6 @@ namespace DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<VSMS_EXCEL> VSMS_EXCEL { get; set; }
         public virtual DbSet<VSMS_EXCEL_DETAIL> VSMS_EXCEL_DETAIL { get; set; }
         public virtual DbSet<VSMS_PROGRAM> VSMS_PROGRAM { get; set; }
         public virtual DbSet<VSMS_USRGRPPRIV> VSMS_USRGRPPRIV { get; set; }
@@ -39,11 +38,12 @@ namespace DataAccess
         public virtual DbSet<VSMS_CTRLLOG> VSMS_CTRLLOG { get; set; }
         public virtual DbSet<VSMS_USRGROUP> VSMS_USRGROUP { get; set; }
         public virtual DbSet<VSMS_COMPANY> VSMS_COMPANY { get; set; }
-        public virtual DbSet<VSMS_SYS_PGC> VSMS_SYS_PGC { get; set; }
         public virtual DbSet<VSMS_TITLE> VSMS_TITLE { get; set; }
         public virtual DbSet<VSMS_CONFIG_FTP> VSMS_CONFIG_FTP { get; set; }
         public virtual DbSet<VSMS_CONFIG_SYS> VSMS_CONFIG_SYS { get; set; }
         public virtual DbSet<VSMS_USER> VSMS_USER { get; set; }
         public virtual DbSet<VSMS_USERCOM> VSMS_USERCOM { get; set; }
+        public virtual DbSet<VSMS_EXCEL> VSMS_EXCEL { get; set; }
+        public virtual DbSet<VSMS_SYS_PGC> VSMS_SYS_PGC { get; set; }
     }
 }
