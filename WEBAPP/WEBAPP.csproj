@@ -222,6 +222,10 @@
     <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Admin\Models\DemoModelView.cs" />
     <Compile Include="Areas\Admin\Models\MasterDetailViewModel.cs" />
+    <Compile Include="Areas\MIS\Controllers\MISBaseController.cs" />
+    <Compile Include="Areas\MIS\MISAreaRegistration.cs" />
+    <Compile Include="Areas\MST\Controllers\MSTBaseController.cs" />
+    <Compile Include="Areas\MST\MSTAreaRegistration.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS01P001Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS02P003Controller.cs" />
     <Compile Include="Areas\SEC\Controllers\SECS01P004Controller.cs" />
@@ -778,6 +782,8 @@
     <Content Include="Areas\SEC\Views\SECS01P002\Edit.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P002\Index.cshtml" />
     <Content Include="Areas\Users\Views\Account\SelectSystem.cshtml" />
+    <Content Include="Areas\MIS\Views\web.config" />
+    <Content Include="Areas\MST\Views\web.config" />
     <None Include="Properties\PublishProfiles\March.pubxml" />
     <None Include="Reports\DataSet\DemoReport.xsd">
       <Generator>MSDataSetGenerator</Generator>
