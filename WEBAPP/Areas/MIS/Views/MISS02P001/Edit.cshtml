@@ -1,0 +1,193 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MIS
+@using UtilityLib
+
+@model MISS02P001Model
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var row1 = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row1.GridColumn(6).SetMdOffset(2).Begin())
+        {
+            @form.InputFor(m => m.YEAR).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4).SetReadonly()
+        }
+    }
+
+    using (var row1 = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row1.GridColumn(12).Begin())
+        {
+            @Html.GetVSMDetailFor(m => m.Details, isRequired: true)
+        }
+    }
+}
+
+@section modals{
+
+    @Html.GetVSMModalDetailBeginFor(m => m.Details)
+
+    @using (var formPopup = Html.Bootstrap().Form().SetId("formDetails").SetHorizontal().Begin())
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).SetXs(6).Begin())
+            {
+                @formPopup.SelectFor(t => t.TYPE_DAY, Model.TYPE_DAY_MODEL.ToSelectList("Value", "Text"), isRequired: true)
+            }
+        }
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.InputNumberFor(t => t.DAY, positiveInt: true, isRequired: true).RemoveCss(Css.TextRight, "number-format").SetHelp("Formate: dd Example: (14)").SetIndexParameter(0).SetMaxLength(2)
+            }
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.InputNumberFor(t => t.MONTH, positiveInt: true, isRequired: true).RemoveCss(Css.TextRight, "number-format").SetHelp("Formate: mm Example: (02)").SetIndexParameter(1).SetMaxLength(2)
+            }
+        }
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.InputNumberFor(t => t.YEAR, positiveInt: true).SetReadonly().RemoveCss(Css.TextRight, "number-format").SetIndexParameter(2)
+            }
+        }
+        @formPopup.HiddenFor(t => t.DEPLOYMENT_DATE)
+    }
+    @Html.GetVSMModalDetailEnd()
+
+}
+
+
+@section Scripts {
+    @Html.GetVSMDetailScriptFor(
+            t => t.Details,
+            new VSMDetailConfig
+            {
+                DefaultConfig = new DefaultConfig(Url.Action("Bind_Detail")),
+                IsRequired = true,
+                Searching = true,
+                ScrollX = false,
+                OnBeforeAdd = "OnBeforeAddDetail",
+                WidthType = ColumnsWidthType.Pixel
+            },
+
+            new GridColumn("YEAR").SetNotVisible(),
+            new GridColumn("DAY").SetNotVisible(),
+            new GridColumn("MONTH").SetNotVisible(),
+            new GridColumn("COM_CODE").SetNotVisible(),
+
+
+            new GridColumn("DEPLOYMENT_DATE", Translation.MIS.MISS02P001.DEPLOYMENT_DATE, 10, ColumnsTextAlign.Center),
+            new GridColumn("TYPE_DAY", Translation.MIS.MISS02P001.TYPE_DAY, 20, render: "RENDER_TYPEDAY")
+        )
+
+
+    <script>
+
+    //year
+    function OnBeforeAddDetail(e) {
+        $("#formDetails #YEAR").val($("#form1 #YEAR").val());
+    }
+
+    var RENDER_TYPEDAY = function (data, type, full, meta) {
+        var tag = '';
+
+        if (!isNullOrEmpty(data)) {
+            if (data == "H") {
+                tag = "Holiday";
+            } else if (data == "W") {
+                tag = "Saturday Working";
+            } else if (data == "S") {
+                tag = "Send Program Package";
+            } else if (data == "D") {
+                tag = "Deployment on PROD/QA.";
+            } else {
+                tag = "V-Smart infrom issue no deployment";
+            }
+        }
+
+        return tag;
+    };
+
+   // $("#btnAddDetails").hide()
+    $("#formDetails").change(function () { $("#form1 #YEAR").prop("readonly", true); })
+    //$("#form1 #YEAR").change(function () { $("#btnAddDetails").show() })
+
+    $("#btnSaveDetails").on("click", function () {
+        var d = $("#formDetails #DAY").val();
+        var m = $("#formDetails #MONTH").val();
+        var y = $("#formDetails #YEAR").val();
+
+        var date = d + "/" + m + "/" + y;
+        //var strdate = new Date(date);
+        $("#formDetails #DEPLOYMENT_DATE").val(date);
+        console.log(date);
+        @*$.ajax({
+            url: '@Url.Action("Bind_DetailAdd")',
+            type: "post",
+            data: date
+        });*@
+
+    });
+
+
+
+    $(document).ready(function () {
+
+            //month
+            $("#MONTH").JDatepicker();
+            $("#MONTH").datepicker({
+                locale: "en",
+                format: "mm",  //  format: "yyyymm", ปีเดือน
+                autoclose: true,
+                orientation: 'bottom',
+                enableOnReadonly: false,
+                minViewMode: 'months',
+                maxViewMode: 'months',
+                startView: 'months'
+            }).on("hide", function (selected) {
+                $(this).blur();
+            }).next().on(ace.click_event, function () {
+                $(this).prev().focus();
+            });
+
+            //day
+            $("#DAY").JDatepicker();
+            $("#DAY").datepicker({
+                format: "dd",
+                locale: "en",
+                autoclose: true,
+                orientation: 'bottom',
+                enableOnReadonly: false
+
+            });
+
+            var sortable1 = $("#sortable-format").html();
+            var sortable2 = $("#sortable-seperate").html();
+
+            $('.btn-refreshSort').click(function () {
+                if (this.id == "refresh-1") {
+                    $("#sortable-format").html(sortable1).sortable("refresh");
+                }
+                else if (this.id == "refresh-2") {
+                    $("#sortable-seperate").html(sortable2).sortable("refresh");
+                }
+            });
+        });
+
+    
+    </script>
+
+
+
+}

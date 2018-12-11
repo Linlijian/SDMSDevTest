@@ -112,7 +112,7 @@ namespace UtilityLib
 
         }
 
-        public static DateTime AsDateDatePicker(this object data, DateTime? defaultValue = null)
+        public static DateTime AsDatePicker(this object data, DateTime? defaultValue = null)
         {
             if (IsNullOrEmpty(data))
                 return defaultValue != null ? Convert.ToDateTime(defaultValue) : DateTime.MinValue;

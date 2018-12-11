@@ -60,6 +60,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Default.resx</DependentUpon>
     </Compile>
+    <Compile Include="MIS\MISS02P001.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MISS02P001.resx</DependentUpon>
+    </Compile>
     <Compile Include="ProgramInfo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -130,6 +135,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Default.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="MIS\MISS02P001.en-US.resx" />
+    <EmbeddedResource Include="MIS\MISS02P001.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MISS02P001.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProgramInfo.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ProgramInfo.Designer.cs</LastGenOutput>
@@ -184,7 +194,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MIS\" />
     <Folder Include="MST\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

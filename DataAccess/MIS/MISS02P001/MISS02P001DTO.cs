@@ -1,0 +1,28 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+
+namespace DataAccess.MIS
+{
+    [Serializable]
+    public class MISS02P001DTO : BaseDTO
+    {
+        public MISS02P001DTO()
+        {
+            Model = new MISS02P001Model();   // new โมเดล 
+        }
+
+        public MISS02P001Model Model { get; set; }   //model
+        public List<MISS02P001Model> Models { get; set; }  //list 
+    }
+
+    public class MISS02P001ExecuteType : DTOExecuteType
+    {
+        public const string GetDetailByID = "GetDetailByID";
+        public const string DeleteDetail = "DeleteDetail";
+        public const string Delect = "Delect";
+        
+
+    }
+}
