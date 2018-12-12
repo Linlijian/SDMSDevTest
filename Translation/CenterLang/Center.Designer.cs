@@ -169,6 +169,15 @@ namespace Translation.CenterLang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Would you like to log out and close browser?.
+        /// </summary>
+        public static string CLOSE_BROWSER {
+            get {
+                return ResourceManager.GetString("CLOSE_BROWSER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ชื่อบริษัท.
         /// </summary>
         public static string COM_CODE {
@@ -246,6 +255,15 @@ namespace Translation.CenterLang {
         public static string ConfirmClosePage {
             get {
                 return ResourceManager.GetString("ConfirmClosePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Completed.
+        /// </summary>
+        public static string ConfirmCompleted {
+            get {
+                return ResourceManager.GetString("ConfirmCompleted", resourceCulture);
             }
         }
         
@@ -727,6 +745,15 @@ namespace Translation.CenterLang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to สวัสดี.
+        /// </summary>
+        public static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to พบปัญหาการใช้งาน กรุณาติดต่อ Help Desk โทร..
         /// </summary>
         public static string HelpDesk {
@@ -741,15 +768,6 @@ namespace Translation.CenterLang {
         public static string HISTORY {
             get {
                 return ResourceManager.GetString("HISTORY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to สวัสดี.
-        /// </summary>
-        public static string Hollo {
-            get {
-                return ResourceManager.GetString("Hollo", resourceCulture);
             }
         }
         
@@ -1231,7 +1249,7 @@ namespace Translation.CenterLang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to เงื่อนไขและข้อกำหนดการใช้บริการทางอินเทอร์เน็ตของสำนักงานคณะกรรมการกำกับและส่งเสริมการประกอบธุรกิจประกันภัย (คปภ.).
+        ///   Looks up a localized string similar to เงื่อนไขและข้อกำหนดการใช้บริการทางอินเทอร์เน็ตของ ออโต้อัลลายแอนซ์ (ประเทศไทย) จำกัด.
         /// </summary>
         public static string TermsofService {
             get {
@@ -1290,6 +1308,33 @@ namespace Translation.CenterLang {
         public static string Upload {
             get {
                 return ResourceManager.GetString("Upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload excel file incompleted. Please check excel file..
+        /// </summary>
+        public static string UPLOAD_ERROR {
+            get {
+                return ResourceManager.GetString("UPLOAD_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to เงื่อนไขการอัปโหลด.
+        /// </summary>
+        public static string UPLOAD_INSTRUCTION {
+            get {
+                return ResourceManager.GetString("UPLOAD_INSTRUCTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Completed.
+        /// </summary>
+        public static string UploadCompleted {
+            get {
+                return ResourceManager.GetString("UploadCompleted", resourceCulture);
             }
         }
         

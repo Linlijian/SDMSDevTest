@@ -153,6 +153,9 @@
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="CLOSE_BROWSER" xml:space="preserve">
+    <value>Would you like to log out and close browser?</value>
+  </data>
   <data name="COM_CODE" xml:space="preserve">
     <value>Company Name</value>
   </data>
@@ -177,6 +180,10 @@
   <data name="ConfirmClosePage" xml:space="preserve">
     <value>Do your want to close this page?</value>
   </data>
+  <data name="ConfirmCompleted" xml:space="preserve">
+    <value>Confirm Completed</value>
+    <comment>This message for Confirm button Process is completed.</comment>
+  </data>
   <data name="ConfirmDelete" xml:space="preserve">
     <value>Are you sure to continue?</value>
   </data>
@@ -197,6 +204,9 @@
   </data>
   <data name="Copy" xml:space="preserve">
     <value>Copy</value>
+  </data>
+  <data name="CopyRight" xml:space="preserve">
+    <value>©️2018 AUTOALLIANCE (Thailand). All Right reserved.</value>
   </data>
   <data name="CRET_BY" xml:space="preserve">
     <value>Created By Code</value>
@@ -228,6 +238,9 @@
   <data name="Download" xml:space="preserve">
     <value>Download</value>
   </data>
+  <data name="DownloadCompleted" xml:space="preserve">
+    <value>Download Completed</value>
+  </data>
   <data name="DownloadTemplate" xml:space="preserve">
     <value>Download Template</value>
   </data>
@@ -238,7 +251,7 @@
     <value>Do you want go to home page?</value>
   </data>
   <data name="DuplcateData" xml:space="preserve">
-    <value>Duplcate Data</value>
+    <value>Duplicate Data</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
@@ -246,8 +259,14 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="EXCEL_UPLOAD" xml:space="preserve">
+    <value>Load Data</value>
+  </data>
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>
+  </data>
+  <data name="ExportExcel" xml:space="preserve">
+    <value>Export Excel</value>
   </data>
   <data name="FAQ" xml:space="preserve">
     <value>FAQ</value>
@@ -327,14 +346,14 @@
   <data name="gridProcessing" xml:space="preserve">
     <value>Processing...</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
   <data name="HelpDesk" xml:space="preserve">
     <value>For assistance, please contact help desk at</value>
   </data>
   <data name="HISTORY" xml:space="preserve">
     <value>History</value>
-  </data>
-  <data name="Hollo" xml:space="preserve">
-    <value>Hollo</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
@@ -353,6 +372,9 @@
   </data>
   <data name="Last" xml:space="preserve">
     <value>Last</value>
+  </data>
+  <data name="LoadFile" xml:space="preserve">
+    <value>Load File</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
@@ -407,6 +429,30 @@
   </data>
   <data name="PrivacyPolicy" xml:space="preserve">
     <value>Privacy Policy</value>
+  </data>
+  <data name="ProcessComplete" xml:space="preserve">
+    <value>Process Complete</value>
+  </data>
+  <data name="Processing" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="ProcessNotComplete" xml:space="preserve">
+    <value>Process Not Complete</value>
+  </data>
+  <data name="PROCESS_COMPLETE" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="PROCESS_INCOMPLETE" xml:space="preserve">
+    <value>Incomplete</value>
+  </data>
+  <data name="PROCESS_PROCESSING" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="PROCESS_WAITING" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="PROCESS_WARNING" xml:space="preserve">
+    <value>Warning</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
@@ -469,7 +515,7 @@
     <value>System</value>
   </data>
   <data name="TermsofService" xml:space="preserve">
-    <value>เงื่อนไขและข้อกำหนดการใช้บริการทางอินเทอร์เน็ตของสำนักงานคณะกรรมการกำกับและส่งเสริมการประกอบธุรกิจประกันภัย (คปภ.)</value>
+    <value>เงื่อนไขและข้อกำหนดการใช้บริการทางอินเทอร์เน็ตของ ออโต้อัลลายแอนซ์ (ประเทศไทย) จำกัด</value>
   </data>
   <data name="TermsofServiceF" xml:space="preserve">
     <value>Terms of Service</value>
@@ -489,6 +535,16 @@
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>
   </data>
+  <data name="UploadCompleted" xml:space="preserve">
+    <value>Upload Completed</value>
+    <comment>This message for Load File button upload is completed.</comment>
+  </data>
+  <data name="UPLOAD_ERROR" xml:space="preserve">
+    <value>Upload excel file incompleted. Please check excel file.</value>
+  </data>
+  <data name="UPLOAD_INSTRUCTION" xml:space="preserve">
+    <value>Upload Instruction</value>
+  </data>
   <data name="UserInfo" xml:space="preserve">
     <value>User Info</value>
   </data>
@@ -500,18 +556,6 @@
   </data>
   <data name="UsingNotComplete" xml:space="preserve">
     <value>Active Not Complete</value>
-  </data>
-  <data name="ValidateError" xml:space="preserve">
-    <value>Validate Error</value>
-  </data>
-  <data name="Verify" xml:space="preserve">
-    <value>Verify</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="EXCEL_UPLOAD" xml:space="preserve">
-    <value>Load Data</value>
   </data>
   <data name="ValComplete" xml:space="preserve">
     <value>Complete</value>
@@ -525,43 +569,16 @@
   <data name="ValFileName" xml:space="preserve">
     <value>File Name</value>
   </data>
+  <data name="ValidateError" xml:space="preserve">
+    <value>Validate Error</value>
+  </data>
   <data name="ValRecordAll" xml:space="preserve">
     <value>Record All</value>
   </data>
-  <data name="ExportExcel" xml:space="preserve">
-    <value>Export Excel</value>
+  <data name="Verify" xml:space="preserve">
+    <value>Verify</value>
   </data>
-  <data name="LoadFile" xml:space="preserve">
-    <value>Load File</value>
-  </data>
-  <data name="DownloadCompleted" xml:space="preserve">
-    <value>Download Completed</value>
-  </data>
-  <data name="CopyRight" xml:space="preserve">
-    <value>©️2018 AUTOALLIANCE (Thailand). All Right reserved.</value>
-  </data>
-  <data name="Processing" xml:space="preserve">
-    <value>Processing</value>
-  </data>
-  <data name="ProcessNotComplete" xml:space="preserve">
-    <value>Process Not Complete</value>
-  </data>
-  <data name="ProcessComplete" xml:space="preserve">
-    <value>Process Complete</value>
-  </data>
-  <data name="PROCESS_COMPLETE" xml:space="preserve">
-    <value>Complete</value>
-  </data>
-  <data name="PROCESS_INCOMPLETE" xml:space="preserve">
-    <value>Incomplete</value>
-  </data>
-  <data name="PROCESS_PROCESSING" xml:space="preserve">
-    <value>Processing</value>
-  </data>
-  <data name="PROCESS_WAITING" xml:space="preserve">
-    <value>Waiting</value>
-  </data>
-  <data name="PROCESS_WARNING" xml:space="preserve">
-    <value>Warning</value>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>
