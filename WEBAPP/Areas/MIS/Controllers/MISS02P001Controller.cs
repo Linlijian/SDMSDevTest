@@ -44,17 +44,18 @@ namespace WEBAPP.Areas.MIS.Controllers
             }
             set { TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] = value; }
         }
-
         #endregion
 
         #region Action 
         public ActionResult Index()
         {
             SetDefaulButton(StandardButtonMode.Index);
+            AddStandardButton(StandardButtonName.DownloadTemplate, url: "MISS02TP001");
+            //AddStandardButton(StandardButtonName.LoadFile);
+            AddStandardButton(StandardButtonName.Upload);
             if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
             {
                 localModel = TempSearch.CloneObject();
-
             }
             return View(StandardActionName.Index, localModel);
         }
@@ -192,6 +193,48 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
+        [RuleSetForClientSideMessages("Upload")]
+        public ActionResult Upload()
+        {
+            SetDefaulButton(StandardButtonMode.Other);
+            AddStandardButton(StandardButtonName.LoadFile);
+            AddButton(StandButtonType.Button, "Confirm", Translation.CenterLang.Center.Confirm, iconCssClass: FaIcons.FaCog, iconPosition: StandardIconPosition.BeforeText, url: Url.Action("Confirm"), isValidate: true,index: 0);
+            return View(localModel);
+        }
+        public ActionResult Confirm()
+        {
+            //call sp for tans table dpeloy_tmp to deploy 
+            SetDefaulButton(StandardButtonMode.Other);
+            AddStandardButton(StandardButtonName.LoadFile);
+            AddButton(StandButtonType.Button, "Confirm", Translation.CenterLang.Center.Confirm, iconCssClass: FaIcons.FaCog, iconPosition: StandardIconPosition.BeforeText, url: Url.Action("Confirm"), isValidate: true, index: 0);
+            return View(localModel);
+        }
+        public ActionResult LoadExcel(MISS02P001Model model)
+        {
+            var jsonResult = new JsonResult();
+
+            model.ds = ExcelData.TBL_SELECT;
+            model.CLIENT_ID = TempModel.CLIENT_ID = Guid.NewGuid().ToString();
+            //model.FILE_EXCEL = ExcelData.UPLOAD_FILENAME;
+
+            var result = SaveData("Upload", model);
+            if (result.IsResult)
+            {
+                var sp = new MISS02P001DA();
+                if (sp.DTO.Result.IsResult)
+                {
+                    return Json(new WEBAPP.Models.AjaxResult("Upload", true, AlertStyles.Success, "Load Excel File Completed!"));
+                }
+                else
+                {
+                    return Json(new WEBAPP.Models.AjaxResult("Upload", false, AlertStyles.Error, "Load Excel File InComplete!"));
+                }
+            }
+
+            return Json(new WEBAPP.Models.AjaxResult("Upload", false, AlertStyles.Error, "Load Excel File InComplete!"));
+
+
+        }
         #endregion
 
         #region Mehtod  
@@ -221,6 +264,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             {
                 SetStandardField(model);
                 da.DTO.Model = (MISS02P001Model)model;
+                da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.Insert;
                 da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
 
                 da.InsertNoEF(da.DTO);
@@ -239,6 +283,21 @@ namespace WEBAPP.Areas.MIS.Controllers
                 da.DTO.Models = (List<MISS02P001Model>)model;
                 da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
                 da.DeleteNoEF(da.DTO);
+            }
+            else if (mode == "Upload")
+            {
+                da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.CallSPInsertExcel;
+                SetStandardField(model);
+
+                da.DTO.Model = (MISS02P001Model)model;
+                da.InsertNoEF(da.DTO);
+
+                if (da.DTO.Result.IsResult)
+                {
+                    da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.ValidateExcel;
+                    da.InsertNoEF(da.DTO);
+                    //da.DTO.Model.LOAD_TYPE = "C";
+                }
             }
             return da.DTO.Result;
         }

@@ -31,8 +31,11 @@ namespace DataAccess.MIS
         public string ALL_SPP { get; set; } //S
         public string ALL_DEPLOYMENT_IT { get; set; } //I
         public string ALL_DEPLOYMENT_DATE { get; set; } //D
+        public string CLIENT_ID { get; set; }
 
         public List<MISS02P001DetailPModel> Details { get; set; }
+
+        public System.Data.DataSet ds { get; set; }
     }
 
     public class MISS02P001DetailPModel

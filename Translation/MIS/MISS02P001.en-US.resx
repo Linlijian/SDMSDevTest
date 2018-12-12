@@ -144,8 +144,14 @@
   <data name="MONTH" xml:space="preserve">
     <value>Month</value>
   </data>
+  <data name="REMARK" xml:space="preserve">
+    <value>Note</value>
+  </data>
   <data name="TYPE_DAY" xml:space="preserve">
     <value>Type Day</value>
+  </data>
+  <data name="UPLOAD_INSTRUCTION" xml:space="preserve">
+    <value>Upload Instruction</value>
   </data>
   <data name="YEAR" xml:space="preserve">
     <value>Year</value>

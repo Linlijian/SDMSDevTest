@@ -142,11 +142,29 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Note.
+        /// </summary>
+        public static string REMARK {
+            get {
+                return ResourceManager.GetString("REMARK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type Day.
         /// </summary>
         public static string TYPE_DAY {
             get {
                 return ResourceManager.GetString("TYPE_DAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Instruction.
+        /// </summary>
+        public static string UPLOAD_INSTRUCTION {
+            get {
+                return ResourceManager.GetString("UPLOAD_INSTRUCTION", resourceCulture);
             }
         }
         

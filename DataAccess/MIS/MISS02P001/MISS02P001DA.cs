@@ -118,6 +118,15 @@ namespace DataAccess.MIS
         protected override BaseDTO DoInsert(BaseDTO baseDTO)
         {
             var dto = (MISS02P001DTO)baseDTO;
+            switch (dto.Execute.ExecuteType)
+            {
+                case MISS02P001ExecuteType.Insert: return Insert(dto);
+                case MISS02P001ExecuteType.CallSPInsertExcel: return CallSPInsertExcel(dto);
+            }
+            return dto;
+        }
+        private MISS02P001DTO Insert(MISS02P001DTO dto)
+        {
             if (dto.Model.Details.Count() > 0)
             {
                 foreach (var item in dto.Model.Details)
@@ -173,6 +182,7 @@ namespace DataAccess.MIS
                 dto.Result.IsResult = false;
                 dto.Result.ResultMsg = "No data to save";
             }
+
             return dto;
         }
         private MISS02P001DTO InsertTemp(MISS02P001DTO dto)
@@ -190,6 +200,12 @@ namespace DataAccess.MIS
                 dto.Result.IsResult = false;
                 dto.Result.ResultMsg = result.ErrorMessage;
             }
+
+            return dto;
+        }
+        private MISS02P001DTO CallSPInsertExcel(MISS02P001DTO dto)
+        {
+            //ClearData();
 
             return dto;
         }
