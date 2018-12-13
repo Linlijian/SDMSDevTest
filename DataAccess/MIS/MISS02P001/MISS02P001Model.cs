@@ -18,9 +18,7 @@ namespace DataAccess.MIS
         public string DAY { get; set; }
 
         [Display(Name = "DEPLOYMENT_DATE", ResourceType = typeof(Translation.MIS.MISS02P001))]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? DEPLOYMENT_DATE { get; set; }
+        public string DEPLOYMENT_DATE { get; set; }
 
         [Display(Name = "TYPE_DAY", ResourceType = typeof(Translation.MIS.MISS02P001))]
         public string TYPE_DAY { get; set; }
@@ -32,6 +30,13 @@ namespace DataAccess.MIS
         public string ALL_DEPLOYMENT_IT { get; set; } //I
         public string ALL_DEPLOYMENT_DATE { get; set; } //D
         public string CLIENT_ID { get; set; }
+        public string YYYY { get; set; }
+        public string MM { get; set; }
+        public string DD { get; set; }
+        public string FILE_EXCEL { get; set; }
+
+        public string ERROR_CODE { get; set; }
+        public string ERROR_MSG { get; set; }
 
         public List<MISS02P001DetailPModel> Details { get; set; }
 

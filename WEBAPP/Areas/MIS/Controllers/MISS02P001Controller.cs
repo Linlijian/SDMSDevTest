@@ -215,13 +215,13 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             model.ds = ExcelData.TBL_SELECT;
             model.CLIENT_ID = TempModel.CLIENT_ID = Guid.NewGuid().ToString();
-            //model.FILE_EXCEL = ExcelData.UPLOAD_FILENAME;
+            model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            model.FILE_EXCEL = ExcelData.UPLOAD_FILENAME;
 
             var result = SaveData("Upload", model);
             if (result.IsResult)
             {
-                var sp = new MISS02P001DA();
-                if (sp.DTO.Result.IsResult)
+                if (model.ERROR_CODE == "0")
                 {
                     return Json(new WEBAPP.Models.AjaxResult("Upload", true, AlertStyles.Success, "Load Excel File Completed!"));
                 }
@@ -272,6 +272,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             else if (mode == StandardActionName.SaveModify)
             {
                 SetStandardField(model);
+                da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.Update;
                 da.DTO.Model = (MISS02P001Model)model;
 
                 da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
@@ -294,9 +295,8 @@ namespace WEBAPP.Areas.MIS.Controllers
 
                 if (da.DTO.Result.IsResult)
                 {
-                    da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.ValidateExcel;
-                    da.InsertNoEF(da.DTO);
-                    //da.DTO.Model.LOAD_TYPE = "C";
+                    da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.ValidateExl;
+                    da.UpdateNoEF(da.DTO);
                 }
             }
             return da.DTO.Result;

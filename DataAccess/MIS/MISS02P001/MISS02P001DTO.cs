@@ -22,8 +22,9 @@ namespace DataAccess.MIS
         public const string GetDetailByID = "GetDetailByID";
         public const string Insert = "Insert";
         public const string CallSPInsertExcel = "CallSPInsertExcel";
-        public const string ValidateExcel = "ValidateExcel";
-        
+        public const string Update = "Update";
+        public const string ValidateExl = "ValidateExl"; 
+
 
     }
 }

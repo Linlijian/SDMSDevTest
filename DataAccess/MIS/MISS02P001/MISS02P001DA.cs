@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
+using System.Globalization;
 using System.Linq;
 using UtilityLib;
 
@@ -122,6 +124,7 @@ namespace DataAccess.MIS
             {
                 case MISS02P001ExecuteType.Insert: return Insert(dto);
                 case MISS02P001ExecuteType.CallSPInsertExcel: return CallSPInsertExcel(dto);
+                //case MISS02P001ExecuteType.ValidateExl: return ValidateExl(dto);
             }
             return dto;
         }
@@ -203,11 +206,105 @@ namespace DataAccess.MIS
 
             return dto;
         }
-        private MISS02P001DTO CallSPInsertExcel(MISS02P001DTO dto)
+        private MISS02P001DTO ValidateExl(MISS02P001DTO dto)
         {
-            //ClearData();
+            var parameters = CreateParameter();
+
+            parameters.AddParameter("error_code", null, ParameterDirection.Output);
+            parameters.AddParameter("error_msg", null, ParameterDirection.Output);
+            parameters.AddParameter("CLIENT_ID ", dto.Model.CLIENT_ID);
+            parameters.AddParameter("YEAR", dto.Model.YEAR);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
+            parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
+
+            var result = _DBMangerNoEF.ExecuteDataSet("[dbo].[SP_VSMS_DEPLOY_003]", parameters, CommandType.StoredProcedure);
+            //dto.Model.ERROR_CODE = result.OutputData["error_code"].ToString().Trim();
+            //dto.Model.ERROR_MSG = result.OutputData["error_msg"].ToString().Trim();
+
+            if (!result.Status)
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+            }
+            else
+            {
+                if (result.OutputData["error_code"].ToString().Trim() != "0")
+                {
+                    dto.Result.IsResult = false;
+                    dto.Result.ResultMsg = result.OutputData["error_msg"].ToString().Trim();
+                }
+            }
 
             return dto;
+        }
+        private MISS02P001DTO CallSPInsertExcel(MISS02P001DTO dto)
+        {
+            if (dto.Result.IsResult)
+            {
+                DelTempExl();
+
+                var ds = dto.Model.ds;
+                var CLIENT_ID = dto.Model.CLIENT_ID;
+                var YEAR = dto.Model.YEAR;
+                foreach (var item in ds.Tables[0].ToList<MISS02P001Model>())
+                {
+                    SplitDate(item);
+                    var parameters = CreateParameter();
+
+                    parameters.AddParameter("error_code", null, ParameterDirection.Output);
+                    parameters.AddParameter("error_msg", null, ParameterDirection.Output);
+                    parameters.AddParameter("CLIENT_ID ", dto.Model.CLIENT_ID);
+                    parameters.AddParameter("DAY", item.DD);
+                    parameters.AddParameter("MONTH", item.MM);
+                    parameters.AddParameter("YYYY ", item.YYYY);
+                    parameters.AddParameter("YEAR", YEAR);
+                    parameters.AddParameter("YEAR_EXL ", item.YEAR);
+                    parameters.AddParameter("DEPLOYMENT_DATE ", item.DEPLOYMENT_DATE);
+                    parameters.AddParameter("TYPE_DAY ", item.TYPE_DAY);
+
+                    var result = _DBMangerNoEF.ExecuteDataSet("[dbo].[SP_VSMS_DEPLOY_002]", parameters, CommandType.StoredProcedure);
+                    dto.Model.ERROR_CODE = result.OutputData["error_code"].ToString().Trim();
+                    dto.Model.ERROR_MSG = result.OutputData["error_msg"].ToString().Trim();
+
+                    if (!result.Status)
+                    {
+                        dto.Result.IsResult = false;
+                        dto.Result.ResultMsg = result.ErrorMessage;
+                        break;
+                    }
+                    else
+                    {
+                        if (result.OutputData["error_code"].ToString().Trim() != "0"){
+                            dto.Result.IsResult = false;
+                            dto.Result.ResultMsg = result.OutputData["error_msg"].ToString().Trim();
+                        }
+                    }
+                }
+            }
+
+                return dto;
+        }
+        public MISS02P001Model SplitDate(MISS02P001Model item)
+        {
+
+            //DateTime date = DateTime.ParseExact(item.DEPLOYMENT_DATE, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            //item.YYYY  = date.Year.ToString();
+            //item.MM  = date.Month.ToString();
+            //item.DD  = date.Day.ToString();
+
+            string[] date = item.DEPLOYMENT_DATE.Split('/');
+            int year, month, day;
+
+            int.TryParse(date[0], out day);
+            int.TryParse(date[1], out month);
+            int.TryParse(date[2], out year);
+
+            item.YYYY = year.ToString();
+            item.MM = month.ToString();
+            item.DD = day.ToString();
+
+            return item;
         }
         #endregion
 
@@ -315,6 +412,16 @@ namespace DataAccess.MIS
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
             var dto = (MISS02P001DTO)baseDTO;
+            switch (dto.Execute.ExecuteType)
+            {
+                case MISS02P001ExecuteType.Update: return Update(dto);
+
+                case MISS02P001ExecuteType.ValidateExl: return ValidateExl(dto);
+            }
+            return dto;
+        }
+        private MISS02P001DTO Update(MISS02P001DTO dto)
+        {
             if (dto.Model.Details.Count() > 0)
             {
                 InsertTemp(dto);
@@ -398,7 +505,7 @@ namespace DataAccess.MIS
                         }
                     }
                 }
-                
+
             }
             else
             {
@@ -407,7 +514,6 @@ namespace DataAccess.MIS
             }
             return dto;
         }
-
         public bool isInsert(MISS02P001DetailPModel date, string COM_CODE)
         {
             string strSQL = @"SELECT COUNT(DEPLOYMENT_DATE) AS DEPLOYMENT_DATE 
@@ -464,9 +570,17 @@ namespace DataAccess.MIS
             
             return dto;
         }
+        private void DelTempExl()
+        {
+            //clear data
+            string strSQL;
+            strSQL = "DELETE FROM VSMS_DEPLOY_EXCEL";
+            var result = _DBMangerNoEF.ExecuteNonQuery(strSQL, null, CommandType.Text);
+            strSQL = "DELETE FROM VSMS_DEPLOY_TEMP";
+            result = _DBMangerNoEF.ExecuteNonQuery(strSQL, null, CommandType.Text);
+        }
 
-       
-       
+
         #endregion
     }
 }
