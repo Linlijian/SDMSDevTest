@@ -24,10 +24,10 @@ namespace WEBAPP.Areas.Ux.Controllers
             da.DTO.Model.PRG_CODE = PRG_CODE;
             da.Select(da.DTO);
 
-            var r = model.EXCEL_UPLOAD[0].File.ToArrayByte();
+            //var r = model.EXCEL_UPLOAD[0].File.ToArrayByte();
             var a =model.EXCEL_UPLOAD[0].FILE_NAME;
 
-            EXC001Model result = WEBAPP.Helper.ExcelData.ValidateExcel(r, model.EXCEL_UPLOAD[0].FILE_NAME, SessionHelper.SYS_COM_CODE, PRG_CODE, da.DTO.Models);
+            EXC001Model result = WEBAPP.Helper.ExcelData.ValidateExcel(model.EXCEL_UPLOAD[0].File.ToArrayByte(), model.EXCEL_UPLOAD[0].FILE_NAME, SessionHelper.SYS_COM_CODE, PRG_CODE, da.DTO.Models);
 
             return JsonAllowGet(result);
         }
