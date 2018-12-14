@@ -34,6 +34,8 @@ namespace DataAccess.MIS
         public string MM { get; set; }
         public string DD { get; set; }
         public string FILE_EXCEL { get; set; }
+        public string FLAG { get; set; }
+        public string REMARK { get; set; }
 
         public string ERROR_CODE { get; set; }
         public string ERROR_MSG { get; set; }
@@ -58,17 +60,38 @@ namespace DataAccess.MIS
 
         [Display(Name = "DEPLOYMENT_DATE", ResourceType = typeof(Translation.MIS.MISS02P001))]
         public string DEPLOYMENT_DATE { get; set; }
+
+        public string COM_CODE { get; set; }
     }
     public class MISS02P001Validator : AbstractValidator<MISS02P001Model>
     {
         public MISS02P001Validator()
         {
-
+            RuleSet("Add", () =>
+            {
+                Valid();
+                RuleFor(m => m.YEAR).Store("CD_MISS02P001_001", m => m.COM_CODE, m => m.MONTH, m => m.DAY).NotEmpty();
+                RuleFor(m => m.COM_CODE).Store("CD_MISS02P001_001", m => m.YEAR, m => m.MONTH, m => m.DAY).NotEmpty();
+                RuleFor(m => m.MONTH).Store("CD_MISS02P001_001", m => m.COM_CODE, m => m.YEAR, m => m.DAY).NotEmpty();
+                RuleFor(m => m.DAY).Store("CD_MISS02P001_001", m => m.COM_CODE, m => m.MONTH, m => m.YEAR).NotEmpty();
+            });
+            RuleSet("Edit", () =>
+            {
+                Valid();
+                RuleFor(m => m.YEAR).Store("CD_MISS02P001_001", m => m.COM_CODE, m => m.MONTH, m => m.DAY).NotEmpty();
+                RuleFor(m => m.COM_CODE).Store("CD_MISS02P001_001", m => m.YEAR, m => m.MONTH, m => m.DAY).NotEmpty();
+                RuleFor(m => m.MONTH).Store("CD_MISS02P001_001", m => m.COM_CODE, m => m.YEAR, m => m.DAY).NotEmpty();
+                RuleFor(m => m.DAY).Store("CD_MISS02P001_001", m => m.COM_CODE, m => m.MONTH, m => m.YEAR).NotEmpty();
+            });
+            RuleSet("Upload", () =>
+            {
+                RuleFor(t => t.YEAR).NotEmpty();
+            });
         }
 
         private void Valid()
         {
-
+            RuleFor(t => t.TYPE_DAY).NotEmpty();
         }
     }
 }

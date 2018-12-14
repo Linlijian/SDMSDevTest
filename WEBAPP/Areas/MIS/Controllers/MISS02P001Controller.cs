@@ -93,7 +93,8 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             SetDefaulButton(StandardButtonMode.Create);
             SetDefaultData();
-           
+            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+
             return View(StandardActionName.Add, localModel);
         }
         [HttpPost]
@@ -120,6 +121,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             TempModel.YEAR = model.YEAR;
             localModel.YEAR = model.YEAR; 
             TempModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
             SetDefaultData();   //set ค่า DDL
 
 
@@ -198,42 +200,49 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             SetDefaulButton(StandardButtonMode.Other);
             AddStandardButton(StandardButtonName.LoadFile);
-            AddButton(StandButtonType.Button, "Confirm", Translation.CenterLang.Center.Confirm, iconCssClass: FaIcons.FaCog, iconPosition: StandardIconPosition.BeforeText, url: Url.Action("Confirm"), isValidate: true,index: 0);
-            return View(localModel);
-        }
-        public ActionResult Confirm()
-        {
-            //call sp for tans table dpeloy_tmp to deploy 
-            SetDefaulButton(StandardButtonMode.Other);
-            AddStandardButton(StandardButtonName.LoadFile);
-            AddButton(StandButtonType.Button, "Confirm", Translation.CenterLang.Center.Confirm, iconCssClass: FaIcons.FaCog, iconPosition: StandardIconPosition.BeforeText, url: Url.Action("Confirm"), isValidate: true, index: 0);
             return View(localModel);
         }
         public ActionResult LoadExcel(MISS02P001Model model)
         {
             var jsonResult = new JsonResult();
-
-            model.ds = ExcelData.TBL_SELECT;
-            model.CLIENT_ID = TempModel.CLIENT_ID = Guid.NewGuid().ToString();
-            model.COM_CODE = SessionHelper.SYS_COM_CODE;
-            model.FILE_EXCEL = ExcelData.UPLOAD_FILENAME;
-
-            var result = SaveData("Upload", model);
-            if (result.IsResult)
+            if (ModelState.IsValid)
             {
-                if (model.ERROR_CODE == "0")
+                model.ds = ExcelData.TBL_SELECT;
+                model.CLIENT_ID = TempModel.CLIENT_ID = Guid.NewGuid().ToString();
+                model.COM_CODE = SessionHelper.SYS_COM_CODE;
+                model.FILE_EXCEL = ExcelData.UPLOAD_FILENAME;
+
+                var result = SaveData("Upload", model);
+                if (result.IsResult)
                 {
-                    return Json(new WEBAPP.Models.AjaxResult("Upload", true, AlertStyles.Success, "Load Excel File Completed!"));
+                    if (model.ERROR_CODE == "0" && model.ERROR_MSG == "")
+                    {
+                        TempModel.ERROR_CODE = "C";
+                        return Json(new WEBAPP.Models.AjaxResult("Upload", true, AlertStyles.Success, "Load Excel File Completed!"));
+                    }
+                    else
+                    {
+                        return Json(new WEBAPP.Models.AjaxResult("Upload", false, AlertStyles.Error, "Load Excel File InComplete!"));
+                    }
                 }
-                else
-                {
-                    return Json(new WEBAPP.Models.AjaxResult("Upload", false, AlertStyles.Error, "Load Excel File InComplete!"));
-                }
+
+                return Json(new WEBAPP.Models.AjaxResult("Upload", false, AlertStyles.Error, "Load Excel File InComplete!" + " " + result.ResultMsg));
+            }
+            else
+            {
+                jsonResult = ValidateError(ModelState, StandardActionName.SaveModify);
             }
 
-            return Json(new WEBAPP.Models.AjaxResult("Upload", false, AlertStyles.Error, "Load Excel File InComplete!"));
+            return jsonResult;
+        }
+        public ActionResult SearchExl()
+        {
+            var da = new MISS02P001DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.GetExl;
+            da.SelectNoEF(da.DTO);
 
-
+            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
         #endregion
 
@@ -291,6 +300,8 @@ namespace WEBAPP.Areas.MIS.Controllers
                 SetStandardField(model);
 
                 da.DTO.Model = (MISS02P001Model)model;
+                da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+
                 da.InsertNoEF(da.DTO);
 
                 if (da.DTO.Result.IsResult)

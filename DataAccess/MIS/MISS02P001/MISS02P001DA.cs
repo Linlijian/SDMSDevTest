@@ -27,6 +27,7 @@ namespace DataAccess.MIS
                 case MISS02P001ExecuteType.GetAll: return GetAll(dto);
                 case MISS02P001ExecuteType.GetByID: return GetByID(dto);
                 case MISS02P001ExecuteType.GetDetailByID: return GetDetailByID(dto);
+                case MISS02P001ExecuteType.GetExl: return GetExl(dto);
 
             }
             return dto;
@@ -72,7 +73,20 @@ namespace DataAccess.MIS
 
             return dto;
         }
+        private MISS02P001DTO GetExl(MISS02P001DTO dto)
+        {
+            string strSQL = @"SELECT * FROM [dbo].[VSMS_DEPLOY_EXCEL] WHERE (1=1)";
+            var parameters = CreateParameter();
 
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Models = result.OutputDataSet.Tables[0].ToList<MISS02P001Model>();
+            }
+
+            return dto;
+        }
         private MISS02P001DTO GetByID(MISS02P001DTO dto)
         {
             string strSQL = @"SELECT * FROM [dbo].[VSMS_DEPLOY] WHERE (1=1)
@@ -124,7 +138,6 @@ namespace DataAccess.MIS
             {
                 case MISS02P001ExecuteType.Insert: return Insert(dto);
                 case MISS02P001ExecuteType.CallSPInsertExcel: return CallSPInsertExcel(dto);
-                //case MISS02P001ExecuteType.ValidateExl: return ValidateExl(dto);
             }
             return dto;
         }
@@ -132,9 +145,11 @@ namespace DataAccess.MIS
         {
             if (dto.Model.Details.Count() > 0)
             {
-                foreach (var item in dto.Model.Details)
+                if (Check_Dup(dto))
                 {
-                    string strSQL1 = @"INSERT INTO [dbo].[VSMS_DEPLOY]
+                    foreach (var item in dto.Model.Details)
+                    {
+                        string strSQL1 = @"INSERT INTO [dbo].[VSMS_DEPLOY]
                                        ([COM_CODE]
                                        ,[DAY]
                                        ,[MONTH]
@@ -157,27 +172,33 @@ namespace DataAccess.MIS
                                         ,@MNT_BY 
                                         ,@MNT_DATE)";
 
-                    var parameters1 = CreateParameter();
+                        var parameters1 = CreateParameter();
 
-                    parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
-                    parameters1.AddParameter("DAY", item.DAY);
-                    parameters1.AddParameter("MONTH", item.MONTH);
-                    parameters1.AddParameter("YEAR", item.YEAR);
-                    parameters1.AddParameter("DEPLOYMENT_DATE", item.DEPLOYMENT_DATE);
-                    parameters1.AddParameter("TYPE_DAY", item.TYPE_DAY);
-                    parameters1.AddParameter("CRET_BY", dto.Model.CRET_BY);
-                    parameters1.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
-                    parameters1.AddParameter("MNT_BY", dto.Model.MNT_BY);
-                    parameters1.AddParameter("MNT_DATE", dto.Model.MNT_DATE);
+                        parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
+                        parameters1.AddParameter("DAY", item.DAY);
+                        parameters1.AddParameter("MONTH", item.MONTH);
+                        parameters1.AddParameter("YEAR", item.YEAR);
+                        parameters1.AddParameter("DEPLOYMENT_DATE", item.DEPLOYMENT_DATE);
+                        parameters1.AddParameter("TYPE_DAY", item.TYPE_DAY);
+                        parameters1.AddParameter("CRET_BY", dto.Model.CRET_BY);
+                        parameters1.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
+                        parameters1.AddParameter("MNT_BY", dto.Model.MNT_BY);
+                        parameters1.AddParameter("MNT_DATE", dto.Model.MNT_DATE);
 
 
-                    var result = _DBMangerNoEF.ExecuteNonQuery(strSQL1, parameters1, CommandType.Text);
-                    if (!result.Success(dto))
-                    {
-                        dto.Result.IsResult = false;
-                        dto.Result.ResultMsg = result.ErrorMessage;
-                        break;
+                        var result = _DBMangerNoEF.ExecuteNonQuery(strSQL1, parameters1, CommandType.Text);
+                        if (!result.Success(dto))
+                        {
+                            dto.Result.IsResult = false;
+                            dto.Result.ResultMsg = result.ErrorMessage;
+                            break;
+                        }
                     }
+                }
+                else
+                {
+                    dto.Result.IsResult = false;
+                    dto.Result.ResultMsg = "YEAR IS DUPLICATION!";
                 }
             }
             else
@@ -187,6 +208,36 @@ namespace DataAccess.MIS
             }
 
             return dto;
+        }
+        private bool Check_Dup(MISS02P001DTO dto)
+        {
+            string strSQL1 = @"SELECT COUNT(YEAR) AS YEAR
+                                        WHERE YEAR = @YEAR,
+                                            AND COM_CODE = @COM_CODE";
+
+            var parameters1 = CreateParameter();
+
+            parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters1.AddParameter("YEAR", dto.Model.YEAR);
+
+
+            var result = _DBMangerNoEF.ExecuteNonQuery(strSQL1, parameters1, CommandType.Text);
+            bool IsDup = false;
+            if (result.Success(dto))
+            {
+                string a = result.OutputDataSet.Tables[0].Rows[0][0].ToString();               
+                if (a != "0")
+                    IsDup = true;
+                else
+                    IsDup = false;
+            }
+            else
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+            }
+
+            return IsDup;
         }
         private MISS02P001DTO InsertTemp(MISS02P001DTO dto)
         {
@@ -211,7 +262,7 @@ namespace DataAccess.MIS
             var parameters = CreateParameter();
 
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
-            parameters.AddParameter("error_msg", null, ParameterDirection.Output);
+            parameters.AddParameter("flag", null, ParameterDirection.Output);
             parameters.AddParameter("CLIENT_ID ", dto.Model.CLIENT_ID);
             parameters.AddParameter("YEAR", dto.Model.YEAR);
             parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
@@ -219,8 +270,6 @@ namespace DataAccess.MIS
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
 
             var result = _DBMangerNoEF.ExecuteDataSet("[dbo].[SP_VSMS_DEPLOY_003]", parameters, CommandType.StoredProcedure);
-            //dto.Model.ERROR_CODE = result.OutputData["error_code"].ToString().Trim();
-            //dto.Model.ERROR_MSG = result.OutputData["error_msg"].ToString().Trim();
 
             if (!result.Status)
             {
@@ -232,8 +281,9 @@ namespace DataAccess.MIS
                 if (result.OutputData["error_code"].ToString().Trim() != "0")
                 {
                     dto.Result.IsResult = false;
-                    dto.Result.ResultMsg = result.OutputData["error_msg"].ToString().Trim();
+                    dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
                 }
+                dto.Model.ERROR_MSG = result.OutputData["flag"].ToString().Trim();
             }
 
             return dto;
@@ -249,37 +299,49 @@ namespace DataAccess.MIS
                 var YEAR = dto.Model.YEAR;
                 foreach (var item in ds.Tables[0].ToList<MISS02P001Model>())
                 {
-                    SplitDate(item);
-                    var parameters = CreateParameter();
-
-                    parameters.AddParameter("error_code", null, ParameterDirection.Output);
-                    parameters.AddParameter("error_msg", null, ParameterDirection.Output);
-                    parameters.AddParameter("CLIENT_ID ", dto.Model.CLIENT_ID);
-                    parameters.AddParameter("DAY", item.DD);
-                    parameters.AddParameter("MONTH", item.MM);
-                    parameters.AddParameter("YYYY ", item.YYYY);
-                    parameters.AddParameter("YEAR", YEAR);
-                    parameters.AddParameter("YEAR_EXL ", item.YEAR);
-                    parameters.AddParameter("DEPLOYMENT_DATE ", item.DEPLOYMENT_DATE);
-                    parameters.AddParameter("TYPE_DAY ", item.TYPE_DAY);
-
-                    var result = _DBMangerNoEF.ExecuteDataSet("[dbo].[SP_VSMS_DEPLOY_002]", parameters, CommandType.StoredProcedure);
-                    dto.Model.ERROR_CODE = result.OutputData["error_code"].ToString().Trim();
-                    dto.Model.ERROR_MSG = result.OutputData["error_msg"].ToString().Trim();
-
-                    if (!result.Status)
+                    int i = item.DEPLOYMENT_DATE.Length;
+                    if(i == 10)
                     {
-                        dto.Result.IsResult = false;
-                        dto.Result.ResultMsg = result.ErrorMessage;
-                        break;
+                        SplitDate(item);
+                        var parameters = CreateParameter();
+
+                        parameters.AddParameter("error_code", null, ParameterDirection.Output);
+                        parameters.AddParameter("COM_CODE ", dto.Model.COM_CODE);
+                        parameters.AddParameter("CLIENT_ID ", dto.Model.CLIENT_ID);
+                        parameters.AddParameter("DAY", item.DD);
+                        parameters.AddParameter("MONTH", item.MM);
+                        parameters.AddParameter("YYYY ", item.YYYY);
+                        parameters.AddParameter("YEAR", YEAR);
+                        parameters.AddParameter("YEAR_EXL ", item.YEAR);
+                        parameters.AddParameter("DEPLOYMENT_DATE ", item.DEPLOYMENT_DATE);
+                        parameters.AddParameter("TYPE_DAY ", item.TYPE_DAY);
+
+                        var result = _DBMangerNoEF.ExecuteDataSet("[dbo].[SP_VSMS_DEPLOY_002]", parameters, CommandType.StoredProcedure);
+                        dto.Model.ERROR_CODE = result.OutputData["error_code"].ToString().Trim();
+
+                        if (!result.Status)
+                        {
+                            dto.Result.IsResult = false;
+                            dto.Result.ResultMsg = result.ErrorMessage;
+                            break;
+                        }
+                        else
+                        {
+                            if (result.OutputData["error_code"].ToString().Trim() != "0")
+                            {
+                                dto.Result.IsResult = false;
+                                dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
+                            }
+                        }
                     }
                     else
                     {
-                        if (result.OutputData["error_code"].ToString().Trim() != "0"){
-                            dto.Result.IsResult = false;
-                            dto.Result.ResultMsg = result.OutputData["error_msg"].ToString().Trim();
-                        }
+                        dto.Result.IsResult = false;
+                        dto.Result.ResultMsg = "PLEASE RE-CHECK EXCEL FILE";
+                        break;
                     }
+
+                   
                 }
             }
 
@@ -303,6 +365,11 @@ namespace DataAccess.MIS
             item.YYYY = year.ToString();
             item.MM = month.ToString();
             item.DD = day.ToString();
+
+            if (item.MM.Length != 2)
+                item.MM = "0" + item.MM;
+            if (item.DD.Length != 2)
+                item.DD = "0" + item.DD;
 
             return item;
         }

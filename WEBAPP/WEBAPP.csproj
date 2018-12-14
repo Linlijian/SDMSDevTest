@@ -1020,6 +1020,7 @@
     <Content Include="Views\Partials\_StandardFileSummaryScript.cshtml" />
     <Content Include="Views\Shared\_LayoutChildPageWizardCircle.cshtml" />
     <Content Include="Views\Partials\_ButtonHeaderWizardCircle.cshtml" />
+    <Content Include="Uploads\Template\MIS\MISS02TP001.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\AdminBase\" />
@@ -1032,7 +1033,6 @@
     <Folder Include="ClientBin\" />
     <Folder Include="Content\template\ace\assets\font-awesome\4.4.0\" />
     <Folder Include="Reports\Page\" />
-    <Folder Include="Uploads\Template\" />
     <Folder Include="Uploads\Temp\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

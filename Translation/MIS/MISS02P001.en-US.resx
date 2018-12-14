@@ -141,6 +141,9 @@
   <data name="DEPLOYMENT_DATE" xml:space="preserve">
     <value>V-Smart infrom issue no deployment on next Monday</value>
   </data>
+  <data name="FLAG" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="MONTH" xml:space="preserve">
     <value>Month</value>
   </data>
