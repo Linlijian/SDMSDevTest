@@ -80,6 +80,9 @@
     <Compile Include="MIS\MISS02P001\MISS02P001DA.cs" />
     <Compile Include="MIS\MISS02P001\MISS02P001DTO.cs" />
     <Compile Include="MIS\MISS02P001\MISS02P001Model.cs" />
+    <Compile Include="MST\MSTS01P001\MSTS01P001DA.cs" />
+    <Compile Include="MST\MSTS01P001\MSTS01P001DTO.cs" />
+    <Compile Include="MST\MSTS01P001\MSTS01P001Model.cs" />
     <Compile Include="MST\MSTS03P001\MSTS03P001DA.cs" />
     <Compile Include="MST\MSTS03P001\MSTS03P001DTO.cs" />
     <Compile Include="MST\MSTS03P001\MSTS03P001Model.cs" />
@@ -144,9 +147,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MST\MSTS01P001\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
