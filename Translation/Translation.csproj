@@ -65,6 +65,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MISS02P001.resx</DependentUpon>
     </Compile>
+    <Compile Include="MST\MSTS03P001.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MSTS03P001.resx</DependentUpon>
+    </Compile>
     <Compile Include="ProgramInfo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -140,6 +145,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MISS02P001.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="MST\MSTS03P001.en-US.resx" />
+    <EmbeddedResource Include="MST\MSTS03P001.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MSTS03P001.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProgramInfo.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ProgramInfo.Designer.cs</LastGenOutput>
@@ -193,9 +203,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MST\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
