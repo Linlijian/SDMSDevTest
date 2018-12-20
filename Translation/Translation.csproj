@@ -55,6 +55,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Center.resx</DependentUpon>
     </Compile>
+    <Compile Include="CenterLang\Validate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Validate.resx</DependentUpon>
+    </Compile>
     <Compile Include="Default.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -140,6 +145,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Center.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterLang\Validate.en-US.resx" />
+    <EmbeddedResource Include="CenterLang\Validate.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Validate.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Default.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
