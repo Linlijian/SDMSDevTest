@@ -50,13 +50,11 @@ namespace WEBAPP.Areas.MST.Controllers
         public ActionResult Index()
         {
             SetDefaulButton(StandardButtonMode.Index);
-            AddStandardButton(StandardButtonName.DownloadTemplate, url: "MISS02TP001");
-            //AddStandardButton(StandardButtonName.LoadFile);
-            AddStandardButton(StandardButtonName.Upload);
             if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
             {
                 localModel = TempSearch.CloneObject();
             }
+            SetDefaultData(StandardActionName.Index);
             return View(StandardActionName.Index, localModel);
         }
         public ActionResult Search(MSTS03P001Model model)
@@ -92,7 +90,7 @@ namespace WEBAPP.Areas.MST.Controllers
         public ActionResult Add()
         {
             SetDefaulButton(StandardButtonMode.Create);
-            SetDefaultData();
+            SetDefaultData(StandardActionName.Add);
             localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
 
             return View(StandardActionName.Add, localModel);
@@ -117,10 +115,17 @@ namespace WEBAPP.Areas.MST.Controllers
         [RuleSetForClientSideMessages("Edit")]
         public ActionResult Edit(MSTS03P001Model model)
         {
+            var da = new MSTS03P001DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MSTS03P001ExecuteType.GetByID;
+            TempModel.PIT_ID =  da.DTO.Model.PIT_ID = model.PIT_ID;
+            da.SelectNoEF(da.DTO);
+
+            localModel = da.DTO.Model;
+            
+
             SetDefaulButton(StandardButtonMode.Modify);
-
-            SetDefaultData();   //set ค่า DDL
-
+            SetDefaultData(StandardActionName.Edit);   //set ค่า DDL
 
             return View(StandardActionName.Edit, localModel);
         }
@@ -131,6 +136,7 @@ namespace WEBAPP.Areas.MST.Controllers
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
             {
+                //model.PIT_ID = TempModel.PIT_ID;
                 var result = SaveData(StandardActionName.SaveModify, model);
                 jsonResult = Success(result, StandardActionName.SaveModify, Url.Action(StandardActionName.Index, new { page = 1 }));
             }
@@ -146,12 +152,25 @@ namespace WEBAPP.Areas.MST.Controllers
         //----------------------- DDL-----------------------
         private void SetDefaultData(string mode = "")
         {
-
+            if(mode == "Index")
+            {
+                localModel.KEY_ID_MODEL = BindKeyId();
+            }
+            else if(mode == "Edit" || mode == "Add")
+            {
+                localModel.KEY_ID_MODEL = BindKeyId();
+                localModel.T_RES_TYPE_MODEL = BindTypeTime();
+                localModel.RES_TYPE_MODEL = BindTypeTime();
+            }
         }
 
-        private List<DDLCenterModel> BindTypeDate()
+        private List<DDLCenterModel> BindKeyId()
         {
-            return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_TYPEDATE);
+            return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_KEY_ID);
+        }
+        private List<DDLCenterModel> BindTypeTime()
+        {
+            return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_TYPETIME);
         }
 
         //----------------------------------------------//
@@ -181,7 +200,6 @@ namespace WEBAPP.Areas.MST.Controllers
                 da.DTO.Model = (MSTS03P001Model)model;
 
                 da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-                //da.DTO.Model.COM_BRANCH = TempModel.COM_BRANCH.TrimEnd();
                 da.UpdateNoEF(da.DTO);
             }
             else if (mode == StandardActionName.Delete)
@@ -190,22 +208,7 @@ namespace WEBAPP.Areas.MST.Controllers
                 da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
                 da.DeleteNoEF(da.DTO);
             }
-            else if (mode == "Upload")
-            {
-                da.DTO.Execute.ExecuteType = MSTS03P001ExecuteType.CallSPInsertExcel;
-                SetStandardField(model);
-
-                da.DTO.Model = (MSTS03P001Model)model;
-                da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-
-                da.InsertNoEF(da.DTO);
-
-                if (da.DTO.Result.IsResult)
-                {
-                    da.DTO.Execute.ExecuteType = MSTS03P001ExecuteType.ValidateExl;
-                    da.UpdateNoEF(da.DTO);
-                }
-            }
+           
             return da.DTO.Result;
         }
 

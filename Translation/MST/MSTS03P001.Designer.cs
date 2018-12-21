@@ -59,5 +59,86 @@ namespace Translation.MST {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Type.
+        /// </summary>
+        public static string ISSUE_TYPE {
+            get {
+                return ResourceManager.GetString("ISSUE_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string KEY_ID {
+            get {
+                return ResourceManager.GetString("KEY_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Priority Criteria.
+        /// </summary>
+        public static string PRIORITY_CRITERIA {
+            get {
+                return ResourceManager.GetString("PRIORITY_CRITERIA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Priority Name.
+        /// </summary>
+        public static string PRIORITY_NAME {
+            get {
+                return ResourceManager.GetString("PRIORITY_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remark.
+        /// </summary>
+        public static string REMASK {
+            get {
+                return ResourceManager.GetString("REMASK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Response Time.
+        /// </summary>
+        public static string RES_TIME {
+            get {
+                return ResourceManager.GetString("RES_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Type.
+        /// </summary>
+        public static string RES_TYPE {
+            get {
+                return ResourceManager.GetString("RES_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target Resolution Time.
+        /// </summary>
+        public static string T_RES_TIME {
+            get {
+                return ResourceManager.GetString("T_RES_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Type.
+        /// </summary>
+        public static string T_RES_TYPE {
+            get {
+                return ResourceManager.GetString("T_RES_TYPE", resourceCulture);
+            }
+        }
     }
 }

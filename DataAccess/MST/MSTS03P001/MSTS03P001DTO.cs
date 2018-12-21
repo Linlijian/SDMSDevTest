@@ -19,14 +19,7 @@ namespace DataAccess.MST
 
     public class MSTS03P001ExecuteType : DTOExecuteType
     {
-        public const string GetDetailByID = "GetDetailByID";
         public const string Insert = "Insert";
-        public const string CallSPInsertExcel = "CallSPInsertExcel";
-        public const string Confirm = "Confirm";
         public const string Update = "Update";
-        public const string ValidateExl = "ValidateExl";
-        public const string GetExl = "GetExl";
-
-
     }
 }
