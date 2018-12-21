@@ -17,5 +17,7 @@ namespace DataAccess
 		public const string DD_VSMS_USRGROUP_002 = "DD_VSMS_USRGROUP_002";
 		public const string DD_VSMS_USRGROUP_003 = "DD_VSMS_USRGROUP_003";
 		public const string DD_VSMS_USRGROUP_004 = "DD_VSMS_USRGROUP_004";
-	}
+        public const string DD_VSMS_FIX_KEY_ID = "DD_VSMS_FIX_KEY_ID";
+        public const string DD_VSMS_FIX_TYPETIME = "DD_VSMS_FIX_TYPETIME";
+    }
 }
