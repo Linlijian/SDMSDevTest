@@ -59,5 +59,59 @@ namespace Translation.MST {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Used.
+        /// </summary>
+        public static string IS_USE {
+            get {
+                return ResourceManager.GetString("IS_USE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Type.
+        /// </summary>
+        public static string ISSUE_TYPE {
+            get {
+                return ResourceManager.GetString("ISSUE_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Programmer.
+        /// </summary>
+        public static string MAN_PLM_PRG {
+            get {
+                return ResourceManager.GetString("MAN_PLM_PRG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QA &amp; Support Desk.
+        /// </summary>
+        public static string MAN_PLM_QA {
+            get {
+                return ResourceManager.GetString("MAN_PLM_QA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SA &amp; Lead Support.
+        /// </summary>
+        public static string MAN_PLM_SA {
+            get {
+                return ResourceManager.GetString("MAN_PLM_SA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type Rate.
+        /// </summary>
+        public static string TYPE_RATE {
+            get {
+                return ResourceManager.GetString("TYPE_RATE", resourceCulture);
+            }
+        }
     }
 }

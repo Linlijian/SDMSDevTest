@@ -46,15 +46,48 @@ namespace DataAccess.MST
         protected override BaseDTO DoInsert(BaseDTO baseDTO)
         {
             var dto = (MSTS01P001DTO)baseDTO;
-            switch (dto.Execute.ExecuteType)
-            {
-                case MSTS01P001ExecuteType.Insert: return Insert(dto);
 
+            string strSQL1 = @"INSERT INTO [dbo].[VSMS_MANDAY]
+                                       ([COM_CODE]
+                                        ,[ISSUE_TYPE]
+                                        ,[TYPE_RATE]
+                                        ,[MAN_PLM_SA]
+                                        ,[MAN_PLM_QA]
+                                        ,[MAN_PLM_PRG]
+                                        ,[CRET_BY]
+                                        ,[CRET_DATE]
+                                        ,[MNT_BY]
+                                        ,[MNT_DATE])
+                            VALUES
+                                        (@COM_CODE
+                                        ,@ISSUE_TYPE
+                                        ,@TYPE_RATE
+                                        ,@MAN_PLM_SA
+                                        ,@MAN_PLM_QA
+                                        ,@MAN_PLM_PRG
+                                        ,@CRET_BY
+                                        ,@CRET_DATE
+                                        ,@MNT_BY
+                                        ,@MNT_DATE)";
+
+            var parameters1 = CreateParameter();
+            parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters1.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
+            parameters1.AddParameter("TYPE_RATE", dto.Model.TYPE_RATE);
+            parameters1.AddParameter("MAN_PLM_SA", dto.Model.MAN_PLM_SA);
+            parameters1.AddParameter("MAN_PLM_QA", dto.Model.MAN_PLM_QA);
+            parameters1.AddParameter("MAN_PLM_PRG", dto.Model.MAN_PLM_PRG);
+            parameters1.AddParameter("CRET_BY", dto.Model.CRET_BY);
+            parameters1.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
+            parameters1.AddParameter("MNT_BY", dto.Model.MNT_BY);
+            parameters1.AddParameter("MNT_DATE", dto.Model.MNT_DATE);
+
+            var result = _DBMangerNoEF.ExecuteNonQuery(strSQL1, parameters1, CommandType.Text);
+            if (!result.Success(dto))
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
             }
-            return dto;
-        }
-        private MSTS01P001DTO Insert(MSTS01P001DTO dto)
-        {
 
             return dto;
         }
@@ -65,15 +98,7 @@ namespace DataAccess.MST
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
             var dto = (MSTS01P001DTO)baseDTO;
-            switch (dto.Execute.ExecuteType)
-            {
-                case MSTS01P001ExecuteType.Update: return Update(dto);
-            }
-            return dto;
-        }
-        private MSTS01P001DTO Update(MSTS01P001DTO dto)
-        {
-
+ 
             return dto;
         }
         #endregion

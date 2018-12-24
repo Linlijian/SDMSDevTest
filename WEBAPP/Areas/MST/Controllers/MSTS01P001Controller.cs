@@ -50,13 +50,11 @@ namespace WEBAPP.Areas.MST.Controllers
         public ActionResult Index()
         {
             SetDefaulButton(StandardButtonMode.Index);
-            AddStandardButton(StandardButtonName.DownloadTemplate, url: "MISS02TP001");
-            //AddStandardButton(StandardButtonName.LoadFile);
-            AddStandardButton(StandardButtonName.Upload);
             if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
             {
                 localModel = TempSearch.CloneObject();
             }
+            SetDefaultData();
             return View(StandardActionName.Index, localModel);
         }
         public ActionResult Search(MSTS01P001Model model)
@@ -92,7 +90,7 @@ namespace WEBAPP.Areas.MST.Controllers
         public ActionResult Add()
         {
             SetDefaulButton(StandardButtonMode.Create);
-            SetDefaultData();
+            SetDefaultData();   //set ค่า DDL
             localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
 
             return View(StandardActionName.Add, localModel);
@@ -146,12 +144,16 @@ namespace WEBAPP.Areas.MST.Controllers
         //----------------------- DDL-----------------------
         private void SetDefaultData(string mode = "")
         {
-
+            localModel.TYPE_RATE_MODEL = BindTyprRate();
+            localModel.ISSUE_TYPE_MODEL = BindIssueType();
         }
-
-        private List<DDLCenterModel> BindTypeDate()
+        private List<DDLCenterModel> BindIssueType()
         {
-            return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_TYPEDATE);
+            return GetDDLCenter(DDLCenterKey.DD_VSMS_ISSUETYPE, new VSMParameter(SessionHelper.SYS_COM_CODE.Trim()));
+        }
+        private List<DDLCenterModel> BindTyprRate()
+        {
+            return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_TYPE_RATE);
         }
 
         //----------------------------------------------//
@@ -169,7 +171,6 @@ namespace WEBAPP.Areas.MST.Controllers
             {
                 SetStandardField(model);
                 da.DTO.Model = (MSTS01P001Model)model;
-                da.DTO.Execute.ExecuteType = MSTS01P001ExecuteType.Insert;
                 da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
 
                 da.InsertNoEF(da.DTO);
@@ -177,11 +178,9 @@ namespace WEBAPP.Areas.MST.Controllers
             else if (mode == StandardActionName.SaveModify)
             {
                 SetStandardField(model);
-                da.DTO.Execute.ExecuteType = MSTS01P001ExecuteType.Update;
                 da.DTO.Model = (MSTS01P001Model)model;
 
                 da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-                //da.DTO.Model.COM_BRANCH = TempModel.COM_BRANCH.TrimEnd();
                 da.UpdateNoEF(da.DTO);
             }
             else if (mode == StandardActionName.Delete)
@@ -190,22 +189,7 @@ namespace WEBAPP.Areas.MST.Controllers
                 da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
                 da.DeleteNoEF(da.DTO);
             }
-            else if (mode == "Upload")
-            {
-                da.DTO.Execute.ExecuteType = MSTS01P001ExecuteType.CallSPInsertExcel;
-                SetStandardField(model);
-
-                da.DTO.Model = (MSTS01P001Model)model;
-                da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-
-                da.InsertNoEF(da.DTO);
-
-                if (da.DTO.Result.IsResult)
-                {
-                    da.DTO.Execute.ExecuteType = MSTS01P001ExecuteType.ValidateExl;
-                    da.UpdateNoEF(da.DTO);
-                }
-            }
+           
             return da.DTO.Result;
         }
 

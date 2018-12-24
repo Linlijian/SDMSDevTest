@@ -83,6 +83,9 @@
     <Compile Include="MST\MSTS01P001\MSTS01P001DA.cs" />
     <Compile Include="MST\MSTS01P001\MSTS01P001DTO.cs" />
     <Compile Include="MST\MSTS01P001\MSTS01P001Model.cs" />
+    <Compile Include="MST\MSTS02P001\MSTS02P001DA.cs" />
+    <Compile Include="MST\MSTS02P001\MSTS02P001DTO.cs" />
+    <Compile Include="MST\MSTS02P001\MSTS02P001Model.cs" />
     <Compile Include="MST\MSTS03P001\MSTS03P001DA.cs" />
     <Compile Include="MST\MSTS03P001\MSTS03P001DTO.cs" />
     <Compile Include="MST\MSTS03P001\MSTS03P001Model.cs" />
