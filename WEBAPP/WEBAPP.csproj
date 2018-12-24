@@ -226,6 +226,7 @@
     <Compile Include="Areas\MIS\Controllers\MISS02P001Controller.cs" />
     <Compile Include="Areas\MIS\MISAreaRegistration.cs" />
     <Compile Include="Areas\MST\Controllers\MSTBaseController.cs" />
+    <Compile Include="Areas\MST\Controllers\MSTS02P001Controller.cs" />
     <Compile Include="Areas\MST\Controllers\MSTS01P001Controller.cs" />
     <Compile Include="Areas\MST\Controllers\MSTS03P001Controller.cs" />
     <Compile Include="Areas\MST\MSTAreaRegistration.cs" />
@@ -799,6 +800,9 @@
     <Content Include="Areas\MST\Views\MSTS01P001\Add.cshtml" />
     <Content Include="Areas\MST\Views\MSTS01P001\Edit.cshtml" />
     <Content Include="Areas\MST\Views\MSTS01P001\Index.cshtml" />
+    <Content Include="Areas\MST\Views\MSTS02P001\Add.cshtml" />
+    <Content Include="Areas\MST\Views\MSTS02P001\Edit.cshtml" />
+    <Content Include="Areas\MST\Views\MSTS02P001\Index.cshtml" />
     <None Include="Properties\PublishProfiles\March.pubxml" />
     <None Include="Reports\DataSet\DemoReport.xsd">
       <Generator>MSDataSetGenerator</Generator>
