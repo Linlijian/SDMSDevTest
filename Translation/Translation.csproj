@@ -75,6 +75,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MSTS01P001.resx</DependentUpon>
     </Compile>
+    <Compile Include="MST\MSTS02P001.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MSTS02P001.resx</DependentUpon>
+    </Compile>
     <Compile Include="MST\MSTS03P001.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -164,6 +169,11 @@
     <EmbeddedResource Include="MST\MSTS01P001.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MSTS01P001.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MST\MSTS02P001.en-US.resx" />
+    <EmbeddedResource Include="MST\MSTS02P001.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MSTS02P001.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="MST\MSTS03P001.en-US.resx" />
     <EmbeddedResource Include="MST\MSTS03P001.resx">
