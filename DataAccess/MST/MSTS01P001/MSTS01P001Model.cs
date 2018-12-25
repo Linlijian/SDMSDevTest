@@ -33,17 +33,21 @@ namespace DataAccess.MST
             RuleSet("Add", () =>
             {
                 Valid();
+                RuleFor(m => m.COM_CODE).Store("CD_MSTS01P001_001", m => m.ISSUE_TYPE, m => m.TYPE_RATE).NotEmpty();
+                RuleFor(m => m.ISSUE_TYPE).Store("CD_MSTS01P001_001", m => m.COM_CODE, m => m.TYPE_RATE).NotEmpty();
+                RuleFor(m => m.TYPE_RATE).Store("CD_MSTS01P001_001", m => m.COM_CODE, m => m.ISSUE_TYPE).NotEmpty();
             });
             RuleSet("Edit", () =>
             {
                 Valid();
+                RuleFor(m => m.COM_CODE).Store("CD_MSTS01P001_001", m => m.ISSUE_TYPE, m => m.TYPE_RATE).NotEmpty();
+                RuleFor(m => m.ISSUE_TYPE).Store("CD_MSTS01P001_001", m => m.COM_CODE, m => m.TYPE_RATE).NotEmpty();
+                RuleFor(m => m.TYPE_RATE).Store("CD_MSTS01P001_001", m => m.COM_CODE, m => m.ISSUE_TYPE).NotEmpty();
             });
         }
 
         private void Valid()
         {
-            RuleFor(t => t.ISSUE_TYPE).NotEmpty();
-            RuleFor(t => t.TYPE_RATE).NotEmpty();
             RuleFor(t => t.MAN_PLM_SA).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
             RuleFor(t => t.MAN_PLM_QA).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
             RuleFor(t => t.MAN_PLM_PRG).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);

@@ -68,6 +68,7 @@ namespace WEBAPP.Areas.MST.Controllers
                 TempSearch = model;
             }
             da.DTO.Model = TempSearch;
+            SetStandardField(da.DTO.Model);
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
@@ -115,11 +116,19 @@ namespace WEBAPP.Areas.MST.Controllers
         [RuleSetForClientSideMessages("Edit")]
         public ActionResult Edit(MSTS01P001Model model)
         {
+            var da = new MSTS01P001DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MSTS01P001ExecuteType.GetByID;
+            da.DTO.Model.ISSUE_TYPE = model.ISSUE_TYPE;
+            da.DTO.Model.TYPE_RATE = model.TYPE_RATE;
+            da.DTO.Model.COM_CODE = model.COM_CODE;
+
+            da.SelectNoEF(da.DTO);
+            localModel = da.DTO.Model;
+
             SetDefaulButton(StandardButtonMode.Modify);
-
             SetDefaultData();   //set ค่า DDL
-
-
+           
             return View(StandardActionName.Edit, localModel);
         }
         [HttpPost]
@@ -160,6 +169,7 @@ namespace WEBAPP.Areas.MST.Controllers
         private DTOResult SaveData(string mode, object model)
         {
             var da = new MSTS01P001DA();
+            SetStandardField(da.DTO.Model);
             //ในกรณีที่มีการ SaveLog ให้ Include SetStandardLog ด้วย
             //SetStandardLog(
             //   da.DTO,
@@ -171,7 +181,6 @@ namespace WEBAPP.Areas.MST.Controllers
             {
                 SetStandardField(model);
                 da.DTO.Model = (MSTS01P001Model)model;
-                da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
 
                 da.InsertNoEF(da.DTO);
             }
@@ -179,14 +188,12 @@ namespace WEBAPP.Areas.MST.Controllers
             {
                 SetStandardField(model);
                 da.DTO.Model = (MSTS01P001Model)model;
-
-                da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+                
                 da.UpdateNoEF(da.DTO);
             }
             else if (mode == StandardActionName.Delete)
             {
                 da.DTO.Models = (List<MSTS01P001Model>)model;
-                da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
                 da.DeleteNoEF(da.DTO);
             }
            

@@ -32,11 +32,51 @@ namespace DataAccess.MST
 
         private MSTS01P001DTO GetAll(MSTS01P001DTO dto)
         {
+            string strSQL = @"      SELECT *
+                                    FROM [dbo].[VSMS_MANDAY]
+                                    WHERE (1=1) AND COM_CODE = @COM_CODE";
 
+            var parameters = CreateParameter();
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+
+            if (!dto.Model.ISSUE_TYPE.IsNullOrEmpty())
+            {
+                strSQL += " AND ISSUE_TYPE = @ISSUE_TYPE";
+                parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
+            }
+            if (!dto.Model.TYPE_RATE.IsNullOrEmpty())
+            {
+                strSQL += " AND TYPE_RATE = @TYPE_RATE";
+                parameters.AddParameter("TYPE_RATE", dto.Model.TYPE_RATE);
+            }
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Models = result.OutputDataSet.Tables[0].ToList<MSTS01P001Model>();
+            }
             return dto;
         }
         private MSTS01P001DTO GetByID(MSTS01P001DTO dto)
         {
+            string strSQL = @"      SELECT *
+                                    FROM [dbo].[VSMS_MANDAY]
+                                    WHERE (1=1) AND COM_CODE = @COM_CODE
+                                        AND TYPE_RATE = @TYPE_RATE
+                                        AND ISSUE_TYPE = @ISSUE_TYPE";
+
+            var parameters = CreateParameter();
+            parameters.AddParameter("TYPE_RATE", dto.Model.TYPE_RATE);
+            parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model = result.OutputDataSet.Tables[0].ToObject<MSTS01P001Model>();
+            }
 
             return dto;
         }
@@ -98,7 +138,35 @@ namespace DataAccess.MST
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
             var dto = (MSTS01P001DTO)baseDTO;
- 
+
+            var parameters = CreateParameter();
+
+            parameters.AddParameter("error_code", null, ParameterDirection.Output);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
+            parameters.AddParameter("TYPE_RATE", dto.Model.TYPE_RATE);
+            parameters.AddParameter("MAN_PLM_SA", dto.Model.MAN_PLM_SA);
+            parameters.AddParameter("MAN_PLM_QA", dto.Model.MAN_PLM_QA);
+            parameters.AddParameter("MAN_PLM_PRG", dto.Model.MAN_PLM_PRG);
+            parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
+            parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
+
+            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_MANDAY_001]", parameters, CommandType.StoredProcedure);
+
+            if (!result.Status)
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+            }
+            else
+            {
+                if (result.OutputData["error_code"].ToString().Trim() != "0")
+                {
+                    dto.Result.IsResult = false;
+                    dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
+                }
+            }
+
             return dto;
         }
         #endregion
@@ -111,7 +179,23 @@ namespace DataAccess.MST
             {
                 foreach (var item in dto.Models)
                 {
+                    string strSQL = @" DELETE FROM VSMS_MANDAY 
+                                                WHERE COM_CODE = @COM_CODE 
+                                                AND ISSUE_TYPE = @ISSUE_TYPE 
+                                                AND TYPE_RATE = @TYPE_RATE";
 
+                    var parameters = CreateParameter();
+                    parameters.AddParameter("COM_CODE", item.COM_CODE);
+                    parameters.AddParameter("ISSUE_TYPE", item.ISSUE_TYPE);
+                    parameters.AddParameter("TYPE_RATE", item.TYPE_RATE);
+
+                    var result = _DBMangerNoEF.ExecuteNonQuery(strSQL, parameters, CommandType.Text);
+                    if (!result.Status)
+                    {
+                        dto.Result.IsResult = false;
+                        dto.Result.ResultMsg = result.ErrorMessage;
+                        break;
+                    }
                 }
             }
 

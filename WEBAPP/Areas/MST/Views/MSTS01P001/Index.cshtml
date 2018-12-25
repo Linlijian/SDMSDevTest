@@ -58,9 +58,26 @@
                 new VSMParameter("TYPE_RATE"))),
         new GridColumn("COM_CODE").SetNotVisible().SetKey(),
         new GridColumn("ISSUE_TYPE", Translation.MST.MSTS01P001.ISSUE_TYPE, 10).SetKey(),
-        new GridColumn("TYPE_RATE", Translation.MST.MSTS01P001.TYPE_RATE, 10).SetKey(),
-        new GridColumn("MAN_PLM_SA", Translation.MST.MSTS01P001.MAN_PLM_SA, 10),
-        new GridColumn("MAN_PLM_QA", Translation.MST.MSTS01P001.MAN_PLM_QA, 10, ColumnsTextAlign.Right),
-        new GridColumn("MAN_PLM_PRG", Translation.MST.MSTS01P001.MAN_PLM_PRG, 10)
+        new GridColumn("TYPE_RATE", Translation.MST.MSTS01P001.TYPE_RATE, 10, render: "RENDER_TYPERATE").SetKey(),
+        new GridColumn("MAN_PLM_SA", Translation.MST.MSTS01P001.MAN_PLM_SA, 10, ColumnsType.Number, ColumnsTextAlign.Right),
+        new GridColumn("MAN_PLM_QA", Translation.MST.MSTS01P001.MAN_PLM_QA, 10, ColumnsType.Number, ColumnsTextAlign.Right),
+        new GridColumn("MAN_PLM_PRG", Translation.MST.MSTS01P001.MAN_PLM_PRG, 10, ColumnsType.Number, ColumnsTextAlign.Right)
         )
+
+    <script>
+        var RENDER_TYPERATE = function (data, type, full, meta) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                if (data == "S") {
+                    tag = "Standard";
+                } else if (data == "M") {
+                    tag = "Maximum";
+                } 
+            }
+
+            return tag;
+        };
+
+    </script>
 }
