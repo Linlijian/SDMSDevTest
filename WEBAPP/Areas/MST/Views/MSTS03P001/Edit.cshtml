@@ -100,14 +100,21 @@
 
 
 <script type="text/javascript">
+    //$("#btnFinish").removeAttr("disabled");
+    // $("#formDetailModels #P_NO").attr("disabled", "disabled");
     $(document).ready(function () {
         CLOSE_ALL();
         var x = '@Model.KEY_ID';
+        var a = '@Model.IS_USED';
         $("#form1 #HEADER").removeClass('@Css.Hidden');
         if (x == 'P') {
             $("#form1 #PRIORITY").removeClass('@Css.Hidden');
         } else if (x == 'I') {
             $("#form1 #ISSUE").removeClass('@Css.Hidden');
+            if(a == 'True'){
+                $("#ISSUE #ISSUE_TYPE").attr("disabled", "disabled");
+                $("#ISSUE #REMASK").attr("disabled", "disabled");
+            }
         }
     });
     function CLOSE_ALL() {

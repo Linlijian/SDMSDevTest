@@ -119,6 +119,7 @@ namespace WEBAPP.Areas.MST.Controllers
             SetStandardErrorLog(da.DTO);
             da.DTO.Execute.ExecuteType = MSTS03P001ExecuteType.GetByID;
             TempModel.PIT_ID =  da.DTO.Model.PIT_ID = model.PIT_ID;
+            SetStandardField(da.DTO.Model);
             da.SelectNoEF(da.DTO);
 
             localModel = da.DTO.Model;

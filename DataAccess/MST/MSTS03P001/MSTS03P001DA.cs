@@ -50,19 +50,51 @@ namespace DataAccess.MST
 
             return dto;
         }
+        //private MSTS03P001DTO GetByID(MSTS03P001DTO dto)
+        //{
+        //    string strSQL = @"SELECT * FROM [dbo].[VSMS_PIT_DATA] WHERE (1=1) AND PIT_ID = @PIT_ID";
+        //    var parameters = CreateParameter();
+
+        //    parameters.AddParameter("PIT_ID", dto.Model.PIT_ID);
+
+        //    var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+        //    if (result.Success(dto))
+        //    {
+        //        dto.Model = result.OutputDataSet.Tables[0].ToObject<MSTS03P001Model>();
+        //    }
+        //    return dto;
+        //}
         private MSTS03P001DTO GetByID(MSTS03P001DTO dto)
         {
-            string strSQL = @"SELECT * FROM [dbo].[VSMS_PIT_DATA] WHERE (1=1) AND PIT_ID = @PIT_ID";
             var parameters = CreateParameter();
-
+            parameters.AddParameter("error_code", null, ParameterDirection.Output);
+            parameters.AddParameter("code", null, ParameterDirection.Output);
             parameters.AddParameter("PIT_ID", dto.Model.PIT_ID);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
 
-            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_PIT_DATA_004]", parameters, CommandType.StoredProcedure);
 
-            if (result.Success(dto))
+            if (!result.Status)
             {
-                dto.Model = result.OutputDataSet.Tables[0].ToObject<MSTS03P001Model>();
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
             }
+            else
+            {
+                if (result.OutputData["error_code"].ToString().Trim() != "0")
+                {
+                    dto.Result.IsResult = false;
+                    dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
+                }
+                else
+                {
+                    dto.Model = result.OutputDataSet.Tables[0].ToObject<MSTS03P001Model>();
+                    if(result.OutputData["code"].ToString().Trim() == "0")
+                        dto.Model.IS_USED = true;
+                }
+            }
+         
             return dto;
         }
         #endregion
