@@ -64,12 +64,14 @@ namespace WEBAPP.Areas.MIS.Controllers
             var da = new MISS02P001DA();
             SetStandardErrorLog(da.DTO);
             da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.GetAll;
+            
             if (Request.GetRequest("page").IsNullOrEmpty())
             {
                 model.IsDefaultSearch = true;
                 TempSearch = model;
             }
             da.DTO.Model = TempSearch;
+            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }

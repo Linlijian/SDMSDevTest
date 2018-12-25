@@ -47,9 +47,10 @@ namespace DataAccess.MIS
                                       SUM(CASE TYPE_DAY WHEN 'I'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_IT,
                                       SUM(CASE TYPE_DAY WHEN 'D'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_DATE
                                 FROM [SDDB].[dbo].[VSMS_DEPLOY]
-                                WHERE (1=1) AND YEAR = @YEAR
+                                WHERE (1=1) AND YEAR = @YEAR AND COM_CODE = @COM_CODE
                                 GROUP BY YEAR";
                 parameters.AddParameter("YEAR", dto.Model.YEAR);
+                parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
             }
             else
             {
@@ -60,8 +61,9 @@ namespace DataAccess.MIS
                                       SUM(CASE TYPE_DAY WHEN 'I'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_IT,
                                       SUM(CASE TYPE_DAY WHEN 'D'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_DATE
                                 FROM [SDDB].[dbo].[VSMS_DEPLOY]
-                                WHERE (1=1)
+                                WHERE (1=1) AND COM_CODE = @COM_CODE
                                 GROUP BY YEAR";
+                parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
             }
 
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
