@@ -202,10 +202,27 @@ namespace WEBAPP.Helper
                 return Convert.ToString(HttpContext.Current.Session[SessionSystemName.SYS_ServerDBName]);
             }
         }
+
+        public static List<DataAccess.Users.AppModel> SYS_AppModel
+        {
+            get
+            {
+                if (HttpContext.Current.Session[SessionSystemName.SYS_APPS] == null || ((List<DataAccess.Users.AppModel>)HttpContext.Current.Session[SessionSystemName.SYS_APPS]).Count == 0)
+                {
+                    var da = new DataAccess.Users.UserDA();
+                    da.DTO.Execute.ExecuteType = DataAccess.Users.UserExecuteType.GetApp;
+                    da.DTO.Model.USER_ID = SessionHelper.SYS_USER_ID;
+                    da.SelectNoEF(da.DTO);
+                    HttpContext.Current.Session[SessionSystemName.SYS_APPS] = da.DTO.Apps;
+                }
+                return HttpContext.Current.Session[SessionSystemName.SYS_APPS] as List<DataAccess.Users.AppModel>;
+            }
+        }
     }
 
     public class SessionSystemName
     {
+        public const string SYS_APPS = "SYS_APPS";
         public const string SYS_COM_CODE = "SYS_COM_CODE";
         public const string SYS_USER_ID = "SYS_USER_ID";
         public const string SYS_USG_ID = "SYS_USG_ID";

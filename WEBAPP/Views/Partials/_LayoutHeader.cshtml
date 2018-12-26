@@ -35,7 +35,7 @@
             }
         }
         <a href="@urlHeader" class="navbar-header pull-left">
-            <img src="@Url.Content("~/Uploads/Image/logo/rsz_unnamed.png")" class="img-responsive pull-left" style="margin-top:2px;" />
+            <img src="@Url.Content("~/Uploads/Image/logo/logoFz_74x40.png")" class="img-responsive pull-left" style="margin-top:2px;" />
             <div class="navbar-brand">
                 <small>
                     @*<i class="fa fa-leaf"></i>*@
@@ -67,7 +67,7 @@
                         </a>
                     </li>*@
                 <li class="transparent">
-                    @{ 
+                    @{
                         var server = "";
                         if (SessionHelper.SYS_ServerDBName.IndexOf('_') > -1)
                         {
@@ -82,7 +82,7 @@
                 <li>
                     <a id="datetime" name="datetime"></a>
                 </li>
-                
+
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <img class="nav-user-photo" src="@Url.Content("~/Content/template/ace/assets/avatars/profile-icon.png")" alt="Jason's Photo" />
@@ -97,9 +97,9 @@
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 
                         <li>
-                            <a href="@Url.Action("Index", "Profile", new {Area = "Users"})">
-                                <i class="ace-icon fa fa-user"></i>
-                                @Translation.CenterLang.Center.UserInfo
+                            <a href="@Url.Action("Edit", "SEC006P001", new { Area = "SEC", USER_ID = SessionHelper.SYS_USER_ID })">
+                            <i class="ace-icon fa fa-user"></i>
+                            @Translation.CenterLang.Center.UserInfo
                             </a>
                         </li>
                         @*<li class="divider"></li>
@@ -129,31 +129,30 @@
                                     }
                                 </ul>
                             </li>*@
-                        @*@if (SessionHelper.SYS_AppModel.Count > 1)
-                            {
-                                <li class="divider"></li>
-                                    <li class="dropdown-hover dropup">
-                                        <a href="#" tabindex="-1" class="clearfix">
-                                            <span class="pull-left">@Translation.CenterLang.Center.System</span>
-                                            <i class="ace-icon fa fa-caret-left pull-right"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            @foreach (var item in SessionHelper.SYS_AppModel)
-                                            {
-                                                if (item.COM_CODE != SessionHelper.SYS_COM_CODE)
-                                                {
-                                                    <li>
-                                                        <a id="userTH" href="@Url.Action("SelectedApp","Account", new {Area = "Users", COM_CODE = item.COM_CODE })" tabindex="-1">
-                                                            <i class="ace-icon fa fa-flag"></i>
-                                                            @item.APP_NAME
-                                                        </a>
-                                                    </li>
-                                                }
-                                            }
-                                        </ul>
-                                    </li>
-                            }*@
-
+                        @if (SessionHelper.SYS_AppModel.Count > 1)
+                        {
+                            <li class="divider"></li>
+                            <li class="dropdown-hover dropup">
+                                <a href="#" tabindex="-1" class="clearfix">
+                                    <span class="pull-left">@Translation.CenterLang.Center.System</span>
+                                    <i class="ace-icon fa fa-caret-left pull-right"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    @foreach (var item in SessionHelper.SYS_AppModel)
+                                    {
+                                        if (item.COM_CODE != SessionHelper.SYS_COM_CODE)
+                                        {
+                                            <li>
+                                                <a id="userTH" href="@Url.Action("SelectedApp","Account", new {Area = "Users", COM_CODE = item.COM_CODE })" tabindex="-1">
+                                                    <i class="ace-icon fa fa-flag"></i>
+                                                    @item.COM_NAME
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                        }
                         <li class="divider"></li>
                         <li>
                             <a href="@Url.Action("SignOut", "Account", new { Area = "Users" } )" id="lnkSignOut">
@@ -167,4 +166,3 @@
         </div>
     </div><!-- /.navbar-container -->
 </div>
-

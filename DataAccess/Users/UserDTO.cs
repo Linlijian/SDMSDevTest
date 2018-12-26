@@ -14,6 +14,7 @@ namespace DataAccess.Users
         }
         public UserModel Model { get; set; }
         public List<ModuleModel> ConfigGerarals { get; set; }
+        public List<AppModel> Apps { get; set; }
 
     }
 
@@ -22,6 +23,7 @@ namespace DataAccess.Users
         public const string GetUser = "GetUser"; 
         public const string GetConfigGeraral = "GetConfigGeraral";
         public const string GetConfigSys = "GetConfigSys";
+        public const string GetApp = "GetApp";
     }
 
 

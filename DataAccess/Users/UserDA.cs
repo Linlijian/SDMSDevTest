@@ -30,7 +30,31 @@ namespace DataAccess.Users
                 case UserExecuteType.GetUser: return GetUser(dto);
                 case UserExecuteType.GetConfigGeraral: return GetConfigGeraral(dto);
                 case UserExecuteType.GetConfigSys: return GetConfigSys(dto);
+                case UserExecuteType.GetApp: return GetApp(dto);
             }
+            return dto;
+        }
+        private UserDTO GetApp(UserDTO dto)
+        {
+            string strSQL = @"  select t1.*
+		                                ,t2.COM_NAME_E as COM_NAME
+		                                ,t2.COM_NAME_E
+		                                ,t2.COM_NAME_T
+                                from VSMS_USERCOM t1
+		                                left join VSMS_COMPANY t2 on t1.COM_CODE = t2.COM_CODE
+                                where (1=1) and USER_ID = @USER_ID";
+
+            var parameters = CreateParameter();
+
+            parameters.AddParameter("USER_ID", dto.Model.USER_ID);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Apps = result.OutputDataSet.Tables[0].ToList<AppModel>();
+            }
+
             return dto;
         }
         private UserDTO GetUser(UserDTO dto)

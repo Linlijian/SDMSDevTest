@@ -246,6 +246,24 @@ namespace WEBAPP.Areas.Users.Controllers
             return RedirectToAction("SelectModule");
         }
 
+        [HttpGet]
+        [AuthAttribute]
+        public ActionResult SelectedApp(string COM_CODE)
+        {
+            if (SessionHelper.SYS_AppModel != null && SessionHelper.SYS_AppModel.Count > 0)
+            {
+                Session[SessionSystemName.SYS_MENU] = null;
+                var data = SessionHelper.SYS_AppModel.Where(m => m.COM_CODE == COM_CODE).FirstOrDefault();
+
+                Session[SessionSystemName.SYS_COM_CODE] = data.COM_CODE;
+                Session[SessionSystemName.SYS_USG_ID] = data.USG_ID;
+                Session[SessionSystemName.SYS_COM_NAME_TH] = data.COM_NAME_T;
+                Session[SessionSystemName.SYS_COM_NAME_EN] = data.COM_NAME_E;
+            }
+
+            return Redirect(Url.Action("SelectModule"));
+        }
+
         public ActionResult Error(string exception, string errorcode)
         {
             string ErrorPath = "";

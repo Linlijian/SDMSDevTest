@@ -23,4 +23,14 @@ namespace DataAccess.Users
         public string USG_LEVEL { get; set; }
     }
 
+    public class AppModel
+    {
+        public string COM_CODE { get; set; }
+        public string USER_ID { get; set; }
+        public int? USG_ID { get; set; }
+        public string COM_NAME { get; set; }
+        public string COM_NAME_E { get; set; }
+        public string COM_NAME_T { get; set; }
+    }
+
 }
