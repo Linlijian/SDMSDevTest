@@ -23,7 +23,7 @@
             {
                 using (row1.GridColumn(6).SetMdOffset(2).Begin())
                 {
-                   
+                    @form.InputFor(m => m.YEAR).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4)
                 }
             }
         }
@@ -35,4 +35,41 @@
     {
         @Html.Bootstrap().Table().SetId("GridSearch").SetStyle(TableStyle.TableStripedBorderedHover)
     }
+}
+
+@section scripts{
+    @Html.GridScript("Search",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("Search")),
+            DeleteConfig = new DefaultConfig(Url.Action("DeleteSearch")),
+            DefaultBinding = Model.IsDefaultSearch,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage
+        },
+        Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("YEAR"), new VSMParameter("COM_CODE"))),
+        new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+        new GridColumn("YEAR", Translation.MST.MSTS02P001.YEAR, 10, ColumnsTextAlign.Right).SetKey(),
+        new GridColumn("MANDAY_VAL", Translation.MST.MSTS02P001.MANDAY_VAL, 10, ColumnsType.NumberFormat, ColumnsTextAlign.Right),
+        new GridColumn("IS_USE", Translation.MST.MSTS02P001.IS_USE, 10,render: "RENDER_ISUSE").SetKey()
+
+        )
+
+    <script>
+
+        var RENDER_ISUSE = function (data, type, full, meta) {
+            var tag = '';
+
+           if (!isNullOrEmpty(data)) {
+                if (data == "F") {
+                    tag += '<center><i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-180 red"></i></center>';
+                } else if (data == "T") {
+                    tag += '<center><i class="ace-icon fa @FaIcons.FaCheckCircle align-top bigger-180 green"></i></center>'
+                }
+            }
+
+            return tag;
+        };
+
+    </script>
 }

@@ -68,6 +68,7 @@ namespace WEBAPP.Areas.MST.Controllers
                 TempSearch = model;
             }
             da.DTO.Model = TempSearch;
+            SetStandardField(da.DTO.Model);
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
@@ -102,6 +103,7 @@ namespace WEBAPP.Areas.MST.Controllers
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
             {
+                model.IS_USE = "F"; //defualt
                 var result = SaveData(StandardActionName.SaveCreate, model);
                 jsonResult = Success(result, StandardActionName.SaveCreate, Url.Action(StandardActionName.Index, new { page = 1 }));
             }
@@ -115,8 +117,16 @@ namespace WEBAPP.Areas.MST.Controllers
         [RuleSetForClientSideMessages("Edit")]
         public ActionResult Edit(MSTS02P001Model model)
         {
-            SetDefaulButton(StandardButtonMode.Modify);
+            var da = new MSTS02P001DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MSTS01P001ExecuteType.GetByID;
+            da.DTO.Model.YEAR = model.YEAR;
+            da.DTO.Model.COM_CODE = model.COM_CODE;
 
+            da.SelectNoEF(da.DTO);
+            localModel = da.DTO.Model;
+
+            SetDefaulButton(StandardButtonMode.Modify);
             SetDefaultData();   //set ค่า DDL
 
 

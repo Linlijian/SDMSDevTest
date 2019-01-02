@@ -10,17 +10,13 @@ namespace DataAccess.MST
     [Serializable]
     public class MSTS02P001Model : StandardModel
     {
-
-        [Display(Name = "ISSUE_TYPE", ResourceType = typeof(Translation.MST.MSTS02P001))]
-        public string ISSUE_TYPE { get; set; }
-        [Display(Name = "TYPE_RATE", ResourceType = typeof(Translation.MST.MSTS02P001))]
-        public string TYPE_RATE { get; set; }
-        [Display(Name = "MAN_PLM_SA", ResourceType = typeof(Translation.MST.MSTS02P001))]
-        public decimal? MAN_PLM_SA { get; set; }
-        [Display(Name = "MAN_PLM_QA", ResourceType = typeof(Translation.MST.MSTS02P001))]
-        public decimal? MAN_PLM_QA { get; set; }
-        [Display(Name = "MAN_PLM_PRG", ResourceType = typeof(Translation.MST.MSTS02P001))]
-        public decimal? MAN_PLM_PRG { get; set; }
+        [Display(Name = "YEAR", ResourceType = typeof(Translation.MST.MSTS02P001))]
+        public string YEAR { get; set; }
+        [Display(Name = "IS_USE", ResourceType = typeof(Translation.MST.MSTS02P001))]
+        public string IS_USE { get; set; }
+        [Display(Name = "MANDAY_VAL", ResourceType = typeof(Translation.MST.MSTS02P001))]
+        //public string MANDAY_VAL { get; set; }
+        public decimal? MANDAY_VAL { get; set; }
 
     }
     public class MSTS02P001Validator : AbstractValidator<MSTS02P001Model>
@@ -29,7 +25,9 @@ namespace DataAccess.MST
         {
             RuleSet("Add", () =>
             {
-                Valid();
+                RuleFor(m => m.COM_CODE).Store("CD_MSTS02P001_001", m => m.YEAR).NotEmpty();
+                RuleFor(m => m.YEAR).Store("CD_MSTS02P001_001", m => m.COM_CODE).NotEmpty();
+                Valid(); 
             });
             RuleSet("Edit", () =>
             {
@@ -39,7 +37,7 @@ namespace DataAccess.MST
 
         private void Valid()
         {
-            //RuleFor(t => t.TYPE_DAY).NotEmpty();
+            RuleFor(t => t.MANDAY_VAL).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
         }
     }
 }

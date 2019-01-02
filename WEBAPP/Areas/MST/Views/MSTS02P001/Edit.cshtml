@@ -9,22 +9,26 @@
     Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
 }
 
+
 @using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
 {
     @Html.AntiForgeryToken()
     using (var row1 = Html.Bootstrap().GridRow().Begin())
     {
-        using (row1.GridColumn(6).SetMdOffset(2).Begin())
+        using (row1.GridColumn(6).Begin())
         {
-
+            @form.InputFor(m => m.YEAR, isRequired: true, addValidateMessage: true).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4).SetReadonly()
         }
-    }
-
-    using (var row1 = Html.Bootstrap().GridRow().Begin())
-    {
-        using (row1.GridColumn(12).Begin())
+        using (row1.GridColumn(6).Begin())
         {
-
+            @form.InputNumberFor(m => m.MANDAY_VAL, digits: 1, isRequired: true)
         }
     }
 }
+
+<script>
+    var isUsed = '@Model.IS_USE';
+    if (isUsed != 'F') {
+        $("#MANDAY_VAL").attr("disabled", "disabled");
+    }
+</script>
