@@ -234,12 +234,15 @@ namespace WEBAPP.Areas.MIS.Controllers
             SetDefaulButton(StandardButtonMode.Other);
             if (ACTIVE_STEP == "1")
             {
-                AddButton(StandButtonType.ButtonComfirmAjax, "Process", "Process", iconCssClass: FaIcons.FaCogs, iconPosition: StandardIconPosition.AfterText, url: Url.Action("Process"));
+                SetDefaulButton(StandardButtonMode.Index);
             }
             else if (ACTIVE_STEP == "2")
             {
-                AddStandardButton(StandardButtonName.DownloadTemplate, url: "ZQA883P01");
-                AddStandardButton(StandardButtonName.LoadFile);
+                AddStandardButton(StandardButtonName.Search);
+            }
+            else if (ACTIVE_STEP == "3")
+            {
+                AddStandardButton(StandardButtonName.Search);
             }
         }
         #endregion

@@ -20,12 +20,31 @@
         {
             using (var row1 = Html.Bootstrap().GridRow().Begin())
             {
-                using (row1.GridColumn(8).SetMdOffset(1).Begin())
+                using (row1.GridColumn(6).Begin())
                 {
+                    @form.InputNumberFor(a => a.NO)
                 }
-                using (row1.GridColumn(8).SetMdOffset(1).Begin())
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
                 {
-                    //@form.TextAreaFor(m => m.NOTE, 4)
+                    @form.InputFor(a => a.STATUS)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(a => a.RESPONSE_BY)
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(a => a.ISSUE_DATE_PERIOD)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(a => a.PRIORITY_NAME)
                 }
             }
         }
