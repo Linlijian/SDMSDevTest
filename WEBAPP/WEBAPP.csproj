@@ -223,6 +223,7 @@
     <Compile Include="Areas\Admin\Models\DemoModelView.cs" />
     <Compile Include="Areas\Admin\Models\MasterDetailViewModel.cs" />
     <Compile Include="Areas\MIS\Controllers\MISBaseController.cs" />
+    <Compile Include="Areas\MIS\Controllers\MISS01P001Controller.cs" />
     <Compile Include="Areas\MIS\Controllers\MISS02P001Controller.cs" />
     <Compile Include="Areas\MIS\MISAreaRegistration.cs" />
     <Compile Include="Areas\MST\Controllers\MSTBaseController.cs" />
@@ -803,6 +804,9 @@
     <Content Include="Areas\MST\Views\MSTS02P001\Add.cshtml" />
     <Content Include="Areas\MST\Views\MSTS02P001\Edit.cshtml" />
     <Content Include="Areas\MST\Views\MSTS02P001\Index.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P001\Add.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P001\Edit.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P001\Index.cshtml" />
     <None Include="Properties\PublishProfiles\March.pubxml" />
     <None Include="Reports\DataSet\DemoReport.xsd">
       <Generator>MSDataSetGenerator</Generator>
