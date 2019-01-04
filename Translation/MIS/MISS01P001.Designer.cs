@@ -61,11 +61,263 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to test.
+        ///   Looks up a localized string similar to Close Date.
         /// </summary>
-        public static string test {
+        public static string CLOSE_DATE {
             get {
-                return ResourceManager.GetString("test", resourceCulture);
+                return ResourceManager.GetString("CLOSE_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Defect.
+        /// </summary>
+        public static string DEFECT {
+            get {
+                return ResourceManager.GetString("DEFECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deploy PD Date.
+        /// </summary>
+        public static string DEPLOY_PD {
+            get {
+                return ResourceManager.GetString("DEPLOY_PD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deploy QA Date.
+        /// </summary>
+        public static string DEPLOY_QA {
+            get {
+                return ResourceManager.GetString("DEPLOY_QA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detail.
+        /// </summary>
+        public static string DETAIL {
+            get {
+                return ResourceManager.GetString("DETAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effects.
+        /// </summary>
+        public static string EFFECTS {
+            get {
+                return ResourceManager.GetString("EFFECTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ESSR No.
+        /// </summary>
+        public static string ESSR_NO {
+            get {
+                return ResourceManager.GetString("ESSR_NO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Id.
+        /// </summary>
+        public static string FILE_ID {
+            get {
+                return ResourceManager.GetString("FILE_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload File.
+        /// </summary>
+        public static string FILE_NAME {
+            get {
+                return ResourceManager.GetString("FILE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue By.
+        /// </summary>
+        public static string ISSUE_BY {
+            get {
+                return ResourceManager.GetString("ISSUE_BY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Date.
+        /// </summary>
+        public static string ISSUE_DATE {
+            get {
+                return ResourceManager.GetString("ISSUE_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Date Period.
+        /// </summary>
+        public static string ISSUE_DATE_PERIOD {
+            get {
+                return ResourceManager.GetString("ISSUE_DATE_PERIOD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Type.
+        /// </summary>
+        public static string ISSUE_TYPE {
+            get {
+                return ResourceManager.GetString("ISSUE_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Programmer.
+        /// </summary>
+        public static string MAN_PLM_PRG {
+            get {
+                return ResourceManager.GetString("MAN_PLM_PRG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QA &amp; Support Desk.
+        /// </summary>
+        public static string MAN_PLM_QA {
+            get {
+                return ResourceManager.GetString("MAN_PLM_QA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SA &amp; Lead Support.
+        /// </summary>
+        public static string MAN_PLM_SA {
+            get {
+                return ResourceManager.GetString("MAN_PLM_SA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module Name.
+        /// </summary>
+        public static string MODULE {
+            get {
+                return ResourceManager.GetString("MODULE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue No..
+        /// </summary>
+        public static string NO {
+            get {
+                return ResourceManager.GetString("NO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prioriry .
+        /// </summary>
+        public static string PRIORITY_NAME {
+            get {
+                return ResourceManager.GetString("PRIORITY_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Program Name.
+        /// </summary>
+        public static string PROGRAM_NAME {
+            get {
+                return ResourceManager.GetString("PROGRAM_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Response By.
+        /// </summary>
+        public static string RESPONSE_BY {
+            get {
+                return ResourceManager.GetString("RESPONSE_BY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Response Date.
+        /// </summary>
+        public static string RESPONSE_DATE {
+            get {
+                return ResourceManager.GetString("RESPONSE_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Root Cause.
+        /// </summary>
+        public static string ROOT_CAUSE {
+            get {
+                return ResourceManager.GetString("ROOT_CAUSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solution.
+        /// </summary>
+        public static string SOLUTION {
+            get {
+                return ResourceManager.GetString("SOLUTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string STATUS {
+            get {
+                return ResourceManager.GetString("STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Information.
+        /// </summary>
+        public static string STEP_1 {
+            get {
+                return ResourceManager.GetString("STEP_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assignment Issue.
+        /// </summary>
+        public static string STEP_2 {
+            get {
+                return ResourceManager.GetString("STEP_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Status.
+        /// </summary>
+        public static string STEP_3 {
+            get {
+                return ResourceManager.GetString("STEP_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target Date.
+        /// </summary>
+        public static string TARGET_DATE {
+            get {
+                return ResourceManager.GetString("TARGET_DATE", resourceCulture);
             }
         }
     }

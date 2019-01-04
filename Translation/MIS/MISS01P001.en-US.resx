@@ -117,7 +117,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="test" xml:space="preserve">
-    <value>test</value>
+  <data name="CLOSE_DATE" xml:space="preserve">
+    <value>Close Date</value>
+  </data>
+  <data name="DEFECT" xml:space="preserve">
+    <value>Defect</value>
+  </data>
+  <data name="DEPLOY_PD" xml:space="preserve">
+    <value>Deploy PD Date</value>
+  </data>
+  <data name="DEPLOY_QA" xml:space="preserve">
+    <value>Deploy QA Date</value>
+  </data>
+  <data name="DETAIL" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="EFFECTS" xml:space="preserve">
+    <value>Effects</value>
+  </data>
+  <data name="ESSR_NO" xml:space="preserve">
+    <value>ESSR No</value>
+  </data>
+  <data name="FILE_ID" xml:space="preserve">
+    <value>File Id</value>
+  </data>
+  <data name="FILE_NAME" xml:space="preserve">
+    <value>Upload File</value>
+  </data>
+  <data name="ISSUE_BY" xml:space="preserve">
+    <value>Issue By</value>
+  </data>
+  <data name="ISSUE_DATE" xml:space="preserve">
+    <value>Issue Date</value>
+  </data>
+  <data name="ISSUE_DATE_PERIOD" xml:space="preserve">
+    <value>Issue Date Period</value>
+  </data>
+  <data name="ISSUE_TYPE" xml:space="preserve">
+    <value>Issue Type</value>
+  </data>
+  <data name="MAN_PLM_PRG" xml:space="preserve">
+    <value>Programmer</value>
+  </data>
+  <data name="MAN_PLM_QA" xml:space="preserve">
+    <value>QA &amp; Support Desk</value>
+  </data>
+  <data name="MAN_PLM_SA" xml:space="preserve">
+    <value>SA &amp; Lead Support</value>
+  </data>
+  <data name="MODULE" xml:space="preserve">
+    <value>Module Name</value>
+  </data>
+  <data name="NO" xml:space="preserve">
+    <value>Issue No.</value>
+  </data>
+  <data name="PRIORITY_NAME" xml:space="preserve">
+    <value>Prioriry </value>
+  </data>
+  <data name="PROGRAM_NAME" xml:space="preserve">
+    <value>Program Name</value>
+  </data>
+  <data name="RESPONSE_BY" xml:space="preserve">
+    <value>Response By</value>
+  </data>
+  <data name="RESPONSE_DATE" xml:space="preserve">
+    <value>Response Date</value>
+  </data>
+  <data name="ROOT_CAUSE" xml:space="preserve">
+    <value>Root Cause</value>
+  </data>
+  <data name="SOLUTION" xml:space="preserve">
+    <value>Solution</value>
+  </data>
+  <data name="STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="STEP_1" xml:space="preserve">
+    <value>Issue Information</value>
+  </data>
+  <data name="STEP_2" xml:space="preserve">
+    <value>Assignment Issue</value>
+  </data>
+  <data name="STEP_3" xml:space="preserve">
+    <value>Issue Status</value>
+  </data>
+  <data name="TARGET_DATE" xml:space="preserve">
+    <value>Target Date</value>
   </data>
 </root>

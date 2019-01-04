@@ -3,6 +3,7 @@ using DataAccess.MIS;
 using FluentValidation.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using UtilityLib;
 using WEBAPP.Helper;
@@ -47,10 +48,57 @@ namespace WEBAPP.Areas.MIS.Controllers
         #endregion
 
         #region Action 
-        public ActionResult Index()
+        [RuleSetForClientSideMessages("Wizard")]
+        public ActionResult Index(string ACTIVE_STEP = "1")
         {
-            
-            return View(StandardActionName.Index, localModel);
+            //ViewBag.UrlToClosePage = Url.Action(StandardActionName.Index, "Default", new { Area = "Admin" });
+            #region Set Close Page
+            var menu = SessionHelper.SYS_MenuModel;
+            if (menu != null)
+            {
+                var home = menu.Where(m => m.SYS_CODE.AsString().ToUpper() == "HOME").FirstOrDefault();
+                if (home != null && AppExtensions.ExistsAction(home.PRG_ACTION, home.PRG_CONTROLLER, home.PRG_AREA))
+                {
+                    ViewBag.UrlToClosePage = Url.Action(home.PRG_ACTION, home.PRG_CONTROLLER, new { Area = home.PRG_AREA, SYS_SYS_CODE = home.SYS_CODE, SYS_PRG_CODE = home.PRG_CODE });
+                }
+            }
+            #endregion
+
+            var view = string.Empty;
+            localModel.ACTIVE_STEP = "3"; //if set 2 then block step3 end
+            if (ACTIVE_STEP == "1")
+            {
+                view = "Step1";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Step1");
+
+            }
+            else if (ACTIVE_STEP == "2")
+            {
+                view = "Step2";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Step2");
+
+            }
+            else if (ACTIVE_STEP == "3")
+            {
+                view = "Step3";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Step3");
+
+            }
+
+            SetHeaderWizard(new WizardHelper.WizardHeaderConfig(
+                ACTIVE_STEP,
+                localModel.ACTIVE_STEP,
+                new WizardHelper.WizardHeader("", Url.Action("Index", new { ACTIVE_STEP = "1" }), iconCssClass: FaIcons.FaAreaChart, textStep: Translation.MIS.MISS01P001.STEP_1),
+                new WizardHelper.WizardHeader("", Url.Action("Index", new { ACTIVE_STEP = "2" }), iconCssClass: FaIcons.FaFile, textStep: Translation.MIS.MISS01P001.STEP_2),
+                new WizardHelper.WizardHeader("", Url.Action("Index", new { ACTIVE_STEP = "3" }), iconCssClass: FaIcons.FaFile, textStep: Translation.MIS.MISS01P001.STEP_3)));
+
+            return View(view, localModel);
         }
         public ActionResult Search(MISS01P001Model model)
         {
@@ -83,7 +131,6 @@ namespace WEBAPP.Areas.MIS.Controllers
             }
             return jsonResult;
         }
-        [RuleSetForClientSideMessages("Add")]
         public ActionResult Add()
         {
             SetDefaulButton(StandardButtonMode.Create);
@@ -109,7 +156,6 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return jsonResult;
         }
-        [RuleSetForClientSideMessages("Edit")]
         public ActionResult Edit(MISS01P001Model model)
         {
             
@@ -131,13 +177,6 @@ namespace WEBAPP.Areas.MIS.Controllers
             }
             return jsonResult;
         }
-        [RuleSetForClientSideMessages("Upload")]
-        public ActionResult Upload()
-        {
-            SetDefaulButton(StandardButtonMode.Other);
-            AddStandardButton(StandardButtonName.LoadFile);
-            return View(localModel);
-        }
        
         #endregion
 
@@ -147,12 +186,10 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             
         }
-
         private List<DDLCenterModel> BindTypeDate()
         {
             return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_TYPEDATE);
         }
-
         //----------------------------------------------//
         private DTOResult SaveData(string mode, object model)
         {
@@ -192,7 +229,19 @@ namespace WEBAPP.Areas.MIS.Controllers
            
             return da.DTO.Result;
         }
-
+        private void SetButton(string ACTIVE_STEP = "")
+        {
+            SetDefaulButton(StandardButtonMode.Other);
+            if (ACTIVE_STEP == "1")
+            {
+                AddButton(StandButtonType.ButtonComfirmAjax, "Process", "Process", iconCssClass: FaIcons.FaCogs, iconPosition: StandardIconPosition.AfterText, url: Url.Action("Process"));
+            }
+            else if (ACTIVE_STEP == "2")
+            {
+                AddStandardButton(StandardButtonName.DownloadTemplate, url: "ZQA883P01");
+                AddStandardButton(StandardButtonName.LoadFile);
+            }
+        }
         #endregion
     }
 }
