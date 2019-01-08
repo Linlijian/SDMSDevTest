@@ -61,11 +61,56 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actual Response Time.
+        /// </summary>
+        public static string ACTUAL_RESTIME {
+            get {
+                return ResourceManager.GetString("ACTUAL_RESTIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual Resolution Times (Close).
+        /// </summary>
+        public static string ACTUAL_RESTIME_CL {
+            get {
+                return ResourceManager.GetString("ACTUAL_RESTIME_CL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual Resolution Times (PD).
+        /// </summary>
+        public static string ACTUAL_RESTIME_PD {
+            get {
+                return ResourceManager.GetString("ACTUAL_RESTIME_PD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actual Resolution Times (QA).
+        /// </summary>
+        public static string ACTUAL_RESTIME_QA {
+            get {
+                return ResourceManager.GetString("ACTUAL_RESTIME_QA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close Date.
         /// </summary>
         public static string CLOSE_DATE {
             get {
                 return ResourceManager.GetString("CLOSE_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string COMMENT {
+            get {
+                return ResourceManager.GetString("COMMENT", resourceCulture);
             }
         }
         
@@ -151,6 +196,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Issue Calculate.
+        /// </summary>
+        public static string ISSUE_CALCULATE {
+            get {
+                return ResourceManager.GetString("ISSUE_CALCULATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Issue Date.
         /// </summary>
         public static string ISSUE_DATE {
@@ -178,7 +232,25 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Programmer.
+        ///   Looks up a localized string similar to DBA.
+        /// </summary>
+        public static string MAN_PLM_DBA {
+            get {
+                return ResourceManager.GetString("MAN_PLM_DBA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PL.
+        /// </summary>
+        public static string MAN_PLM_PL {
+            get {
+                return ResourceManager.GetString("MAN_PLM_PL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PRG.
         /// </summary>
         public static string MAN_PLM_PRG {
             get {
@@ -187,7 +259,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to QA &amp; Support Desk.
+        ///   Looks up a localized string similar to QA.
         /// </summary>
         public static string MAN_PLM_QA {
             get {
@@ -196,7 +268,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SA &amp; Lead Support.
+        ///   Looks up a localized string similar to SA.
         /// </summary>
         public static string MAN_PLM_SA {
             get {
@@ -225,9 +297,9 @@ namespace Translation.MIS {
         /// <summary>
         ///   Looks up a localized string similar to Prioriry .
         /// </summary>
-        public static string PRIORITY_NAME {
+        public static string PRIORITY {
             get {
-                return ResourceManager.GetString("PRIORITY_NAME", resourceCulture);
+                return ResourceManager.GetString("PRIORITY", resourceCulture);
             }
         }
         
@@ -237,6 +309,15 @@ namespace Translation.MIS {
         public static string PROGRAM_NAME {
             get {
                 return ResourceManager.GetString("PROGRAM_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolution Target.
+        /// </summary>
+        public static string RESOLUTION_TARGET {
+            get {
+                return ResourceManager.GetString("RESOLUTION_TARGET", resourceCulture);
             }
         }
         
@@ -255,6 +336,15 @@ namespace Translation.MIS {
         public static string RESPONSE_DATE {
             get {
                 return ResourceManager.GetString("RESPONSE_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Response Target.
+        /// </summary>
+        public static string RESPONSE_TARGET {
+            get {
+                return ResourceManager.GetString("RESPONSE_TARGET", resourceCulture);
             }
         }
         

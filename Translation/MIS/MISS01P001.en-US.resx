@@ -117,8 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ACTUAL_RESTIME" xml:space="preserve">
+    <value>Actual Response Time</value>
+  </data>
+  <data name="ACTUAL_RESTIME_CL" xml:space="preserve">
+    <value>Actual Resolution Times (Close)</value>
+  </data>
+  <data name="ACTUAL_RESTIME_PD" xml:space="preserve">
+    <value>Actual Resolution Times (PD)</value>
+  </data>
+  <data name="ACTUAL_RESTIME_QA" xml:space="preserve">
+    <value>Actual Resolution Times (QA)</value>
+  </data>
   <data name="CLOSE_DATE" xml:space="preserve">
     <value>Close Date</value>
+  </data>
+  <data name="COMMENT" xml:space="preserve">
+    <value>Comment</value>
   </data>
   <data name="DEFECT" xml:space="preserve">
     <value>Defect</value>
@@ -147,6 +162,9 @@
   <data name="ISSUE_BY" xml:space="preserve">
     <value>Issue By</value>
   </data>
+  <data name="ISSUE_CALCULATE" xml:space="preserve">
+    <value>Issue Calculate</value>
+  </data>
   <data name="ISSUE_DATE" xml:space="preserve">
     <value>Issue Date</value>
   </data>
@@ -156,14 +174,20 @@
   <data name="ISSUE_TYPE" xml:space="preserve">
     <value>Issue Type</value>
   </data>
+  <data name="MAN_PLM_DBA" xml:space="preserve">
+    <value>DBA</value>
+  </data>
+  <data name="MAN_PLM_PL" xml:space="preserve">
+    <value>PL</value>
+  </data>
   <data name="MAN_PLM_PRG" xml:space="preserve">
-    <value>Programmer</value>
+    <value>PRG</value>
   </data>
   <data name="MAN_PLM_QA" xml:space="preserve">
-    <value>QA &amp; Support Desk</value>
+    <value>QA</value>
   </data>
   <data name="MAN_PLM_SA" xml:space="preserve">
-    <value>SA &amp; Lead Support</value>
+    <value>SA</value>
   </data>
   <data name="MODULE" xml:space="preserve">
     <value>Module Name</value>
@@ -171,17 +195,23 @@
   <data name="NO" xml:space="preserve">
     <value>Issue No.</value>
   </data>
-  <data name="PRIORITY_NAME" xml:space="preserve">
+  <data name="PRIORITY" xml:space="preserve">
     <value>Prioriry </value>
   </data>
   <data name="PROGRAM_NAME" xml:space="preserve">
     <value>Program Name</value>
+  </data>
+  <data name="RESOLUTION_TARGET" xml:space="preserve">
+    <value>Resolution Target</value>
   </data>
   <data name="RESPONSE_BY" xml:space="preserve">
     <value>Response By</value>
   </data>
   <data name="RESPONSE_DATE" xml:space="preserve">
     <value>Response Date</value>
+  </data>
+  <data name="RESPONSE_TARGET" xml:space="preserve">
+    <value>Response Target</value>
   </data>
   <data name="ROOT_CAUSE" xml:space="preserve">
     <value>Root Cause</value>
