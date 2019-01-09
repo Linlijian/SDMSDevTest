@@ -184,11 +184,21 @@ namespace WEBAPP.Areas.MIS.Controllers
         //----------------------- DDL-----------------------
         private void SetDefaultData(string mode = "")
         {
-            
+            localModel.DEFECT_MODEL = BindDefect();
+            localModel.PRIORITY_MODEL = BindPriority();
+            localModel.ISSUE_TYPE_MODEL = BindIssueType();
         }
-        private List<DDLCenterModel> BindTypeDate()
+        private List<DDLCenterModel> BindIssueType()
         {
-            return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_TYPEDATE);
+            return GetDDLCenter(DDLCenterKey.DD_MISS01P001_001, new VSMParameter(SessionHelper.SYS_COM_CODE.Trim()));
+        }
+        private List<DDLCenterModel> BindDefect()
+        {
+            return GetDDLCenter(DDLCenterKey.DD_MISS01P001_002, new VSMParameter(SessionHelper.SYS_COM_CODE.Trim()));
+        }
+        private List<DDLCenterModel> BindPriority()
+        {
+            return GetDDLCenter(DDLCenterKey.DD_MISS01P001_003, new VSMParameter(SessionHelper.SYS_COM_CODE.Trim()));
         }
         //----------------------------------------------//
         private DTOResult SaveData(string mode, object model)

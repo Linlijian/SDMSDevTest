@@ -32,13 +32,14 @@ namespace DataAccess.MIS
         public string PROGRAM_NAME { get; set; }
         [Display(Name = "FILE_NAME", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string ISSUE_IMG { get; set; }
-        [Display(Name = "PRIORITY", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public string PRIORITY { get; set; }
         [Display(Name = "COMMENT", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string REMARK { get; set; }
         [Display(Name = "RESOLUTION_TARGET", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string RESOLUTION_TARGET { get; set; }
 
+        [Display(Name = "PRIORITY", ResourceType = typeof(Translation.MIS.MISS01P001))]
+        public string PRIORITY { get; set; }
+        public IEnumerable<DDLCenterModel> PRIORITY_MODEL { get; set; }
         [Display(Name = "ISSUE_TYPE", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string ISSUE_TYPE { get; set; }
         public IEnumerable<DDLCenterModel> ISSUE_TYPE_MODEL { get; set; }
