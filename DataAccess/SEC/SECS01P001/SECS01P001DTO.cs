@@ -15,10 +15,12 @@ namespace DataAccess.SEC
 
         public SECS01P001Model Model { get; set; }   //model
         public List<SECS01P001Model> Models { get; set; }  //list 
+        public List<SECS01P001DetailPModel> Details { get; set; }  //list 
     }
 
     public class SECS01P001ExecuteType : DTOExecuteType
     {
         public const string GetComLicenseID = "GetComLicenseID";
+        public const string GetDetailByID = "GetDetailByID"; 
     }
 }

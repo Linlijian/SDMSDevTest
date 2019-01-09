@@ -273,4 +273,10 @@
   <data name="COM_USE_LANGUAGE" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="MODULE" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="USER_ID" xml:space="preserve">
+    <value>Support Name</value>
+  </data>
 </root>

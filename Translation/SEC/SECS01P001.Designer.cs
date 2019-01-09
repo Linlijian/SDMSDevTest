@@ -527,5 +527,23 @@ namespace Translation.SEC {
                 return ResourceManager.GetString("COM_USE_LANGUAGE", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module.
+        /// </summary>
+        public static string MODULE {
+            get {
+                return ResourceManager.GetString("MODULE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support Name.
+        /// </summary>
+        public static string USER_ID {
+            get {
+                return ResourceManager.GetString("USER_ID", resourceCulture);
+            }
+        }
     }
 }

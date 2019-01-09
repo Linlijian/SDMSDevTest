@@ -25,6 +25,7 @@ namespace DataAccess.SEC
                 case SECS01P001ExecuteType.GetAll: return GetAll(dto);
                 case SECS01P001ExecuteType.GetByID: return GetByID(dto);
                 case SECS01P001ExecuteType.GetComLicenseID: return GetComLicenseID(dto);
+                case SECS01P001ExecuteType.GetDetailByID: return GetDetailByID(dto);
             }
             return dto;
         }
@@ -46,6 +47,21 @@ namespace DataAccess.SEC
                     COM_NAME_E = m.COM_NAME_E,
                     COM_NAME_T = m.COM_NAME_T,
                     COM_BRANCH_E = m.COM_BRANCH_E
+                }).ToList();
+
+            return dto;
+        }
+
+        private SECS01P001DTO GetDetailByID(SECS01P001DTO dto)
+        {
+            dto.Model.Details = _DBManger.VSMS_MOBULE
+                .Where((m => ((m.COM_CODE == dto.Model.COM_CODE))
+                ))
+                .Select(m => new SECS01P001DetailPModel
+                {
+                    COM_CODE = m.COM_CODE,
+                    MODULE = m.MODULE,
+                    USER_ID = m.USER_ID
                 }).ToList();
 
             return dto;
@@ -97,6 +113,27 @@ namespace DataAccess.SEC
             model.CRET_BY = model.CRET_BY.Trim();
             model.MNT_BY = model.MNT_BY.Trim();
             _DBManger.VSMS_COMPANY.Add(model);
+
+            InsertDetail(dto);
+
+            return dto;
+        }
+
+        private SECS01P001DTO InsertDetail(SECS01P001DTO dto)
+        {
+            if (dto.Model.Details.Count() > 0)
+            {
+                foreach (var item in dto.Model.Details)
+                {
+                    var m = item.ToNewObject(new VSMS_MOBULE());
+                    m.CRET_BY = dto.Model.CRET_BY;
+                    m.CRET_DATE = dto.Model.CRET_DATE;
+                    m.COM_CODE = dto.Model.COM_CODE;
+
+                    _DBManger.VSMS_MOBULE.Add(m);
+                }
+            }
+
             return dto;
         }
         #endregion
@@ -113,6 +150,22 @@ namespace DataAccess.SEC
             var COM_BRANCH = dto.Model.COM_BRANCH;
             var model = _DBManger.VSMS_COMPANY.First(m => m.COM_CODE == COM_CODE && m.COM_BRANCH == COM_BRANCH);
             model.MergeObject(dto.Model);
+
+            UpdateDetail(dto);
+
+            return dto;
+        }
+
+        private SECS01P001DTO UpdateDetail(SECS01P001DTO dto)
+        {
+            if (dto.Model.Details.Count() > 0)
+            {
+                var items = _DBManger.VSMS_MOBULE.Where(m => m.COM_CODE == dto.Model.COM_CODE);
+                _DBManger.VSMS_MOBULE.RemoveRange(items);
+
+                InsertDetail(dto);
+            }
+
             return dto;
         }
         #endregion

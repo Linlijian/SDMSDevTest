@@ -177,21 +177,23 @@ namespace WEBAPP.Areas.SEC.Controllers
             return jsonResult;
         }
 
-        [HttpGet]
-        //public ActionResult Info(decimal? TITLE_ID)
-        //{
-        //    SetDefaulButton(StandardButtonMode.View);
-        //    var da = new SECS01P001DA();
-        //    SetStandardErrorLog(da.DTO);
-        //    da.DTO.Execute.ExecuteType = DTOExecuteType.GetByID;
-        //    TempModel.TITLE_ID = da.DTO.Model.TITLE_ID = TITLE_ID;
-        //    da.Select(da.DTO);
-        //    if (da.DTO.Model != null)
-        //    {
-        //        localModel = da.DTO.Model;
-        //    }
-        //    return View(StandardActionName.Info, localModel);
-        //}
+        public ActionResult Bind_DetailAdd()
+        {
+            var da = new SECS01P001DA();
+            SetStandardErrorLog(da.DTO);
+
+            return JsonAllowGet(da.DTO.Model.Details);
+        }
+        public ActionResult Bind_Detail()
+        {
+            var da = new SECS01P001DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = SECS01P001ExecuteType.GetDetailByID;
+            da.DTO.Model.COM_CODE = TempModel.COM_CODE;
+
+            da.Select(da.DTO);
+            return JsonAllowGet(da.DTO.Model.Details);
+        }
 
         #endregion
 

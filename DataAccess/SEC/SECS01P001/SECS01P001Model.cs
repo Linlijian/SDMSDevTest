@@ -163,6 +163,12 @@ namespace DataAccess.SEC
         [Display(Name = "COM_USE_LANGUAGE", ResourceType = typeof(Translation.SEC.SECS01P001))]
         public string COM_USE_LANGUAGE { get; set; }
 
+        [Display(Name = "USER_ID", ResourceType = typeof(Translation.SEC.SECS01P001))]
+        public string USER_ID { get; set; }
+
+        [Display(Name = "MODULE", ResourceType = typeof(Translation.SEC.SECS01P001))]
+        public string MODULE { get; set; }
+
         //------DDL----//
         public IEnumerable<DDLCenterModel> COM_USE_LANGUAGE_MODEL { get; set; }
         public IEnumerable<DDLCenterModel> COM_PROVINCE_T_MODEL { get; set; }
@@ -170,6 +176,18 @@ namespace DataAccess.SEC
         public IEnumerable<DDLCenterModel> COM_FAC_PRV_T_MODEL { get; set; }
         public IEnumerable<DDLCenterModel> COM_FAC_PRV_E_MODEL { get; set; }
 
+        public List<SECS01P001DetailPModel> Details { get; set; }
+
+    }
+
+    public class SECS01P001DetailPModel
+    {
+        [Display(Name = "USER_ID", ResourceType = typeof(Translation.SEC.SECS01P001))]
+        public string USER_ID { get; set; }
+        [Display(Name = "MODULE", ResourceType = typeof(Translation.SEC.SECS01P001))]
+        public string MODULE { get; set; }
+
+        public string COM_CODE { get; set; }
     }
 
     public class SECS01P001Validator : AbstractValidator<SECS01P001Model>
@@ -180,7 +198,7 @@ namespace DataAccess.SEC
             RuleSet("Add", () =>
             {
                 Valid();
-
+                RuleFor(m => m.COM_CODE).Store("CD_SECS01P001_001").NotEmpty();
             });
 
             RuleSet("Edit", () =>
@@ -191,7 +209,6 @@ namespace DataAccess.SEC
 
         private void Valid()
         {
-            RuleFor(m => m.COM_CODE).NotEmpty();
             RuleFor(m => m.COM_BRANCH).NotEmpty().Length(1, 5);
             RuleFor(m => m.COM_NAME_T).NotEmpty();
             RuleFor(m => m.COM_NAME_E).NotEmpty();

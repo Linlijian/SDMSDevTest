@@ -12,8 +12,6 @@
 
 @using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
 {
-
-
     @Html.AntiForgeryToken()
     using (var row = Html.Bootstrap().GridRow().Begin())
     {
@@ -212,19 +210,75 @@
                     @Html.GetVSMWidgetsEnd()
                 }
             }
-
-
-
-
         }
-
-
+        using (var row1 = Html.Bootstrap().GridRow().Begin())
+        {
+            using (row1.GridColumn(12).Begin())
+            {
+                @Html.GetVSMDetailFor(m => m.Details, isRequired: true)
+                @Html.HiddenFor(m => m.COM_CODE, new { data_indexparameter = 0 })
+            }
+        }
     }
 }
+
 @section modals{
+    @Html.GetVSMModalDetailBeginFor(m => m.Details)
 
+    @using (var formPopup = Html.Bootstrap().Form().SetId("formDetails").SetHorizontal().Begin())
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.InputFor(t => t.COM_CODE, isRequired: true).SetReadonly()
+            }
+        }
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.InputFor(t => t.MODULE, isRequired: true).SetIndexParameter(3).SetMaxLength(50)
+            }
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.InputJAutocompleteFor(t => t.USER_ID, isRequired: true).JAutoKeySource("AC_SECS01P001_001").JAutoBindField("USER_ID").SetSelectOnly()//.JAutoSetExtraParamsByCtrl("COM_CODE")
+            }
+        }
+    }
+    @Html.GetVSMModalDetailEnd()
 }
+
 @section Scripts {
+    @Html.GetVSMDetailScriptFor(
+            t => t.Details,
+            new VSMDetailConfig
+            {
+                DefaultConfig = new DefaultConfig(Url.Action("Bind_DetailAdd")),
+                IsRequired = true,
+                Searching = true,
+                ScrollX = false,
+                OnBeforeAdd = "OnBeforeAddDetail",
+                WidthType = ColumnsWidthType.Pixel
+            },
 
+            new GridColumn("MODULE").SetNotVisible().SetKey(),
+            new GridColumn("USER_ID").SetNotVisible().SetKey(),
+            new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+
+            new GridColumn("COM_CODE", Translation.SEC.SECS01P001.COM_CODE, 20),
+            new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20),
+            new GridColumn("USER_ID", Translation.SEC.SECS01P001.USER_ID, 20)
+        )
+
+
+    <script>
+        function OnBeforeAddDetail(e) {
+           $("#formDetails #COM_CODE").val($("#form1 #COM_CODE").val());
+        }
+        $("#btnAddDetails").hide()
+        $("#formDetails").change(function () { $("#form1 #COM_CODE").prop("readonly", true); })
+        $("#form1 #COM_CODE").change(function () { $("#btnAddDetails").show() })
+    </script>
 }
-
