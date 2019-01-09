@@ -21,5 +21,9 @@ namespace DataAccess
         public const string DD_VSMS_FIX_TYPETIME = "DD_VSMS_FIX_TYPETIME";
         public const string DD_VSMS_ISSUETYPE = "DD_VSMS_ISSUETYPE";
         public const string DD_VSMS_FIX_TYPE_RATE = "DD_VSMS_FIX_TYPE_RATE";
+        public const string DD_MISS01P001_001 = "DD_MISS01P001_001";
+        public const string DD_MISS01P001_002 = "DD_MISS01P001_002";
+        public const string DD_MISS01P001_003 = "DD_MISS01P001_003";
+        
     }
 }
