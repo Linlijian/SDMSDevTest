@@ -137,6 +137,9 @@
     <Compile Include="VSMS_EXCEL_DETAIL.cs">
       <DependentUpon>ModelManger.tt</DependentUpon>
     </Compile>
+    <Compile Include="VSMS_MOBULE.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
     <Compile Include="VSMS_PROGRAM.cs">
       <DependentUpon>ModelManger.tt</DependentUpon>
     </Compile>

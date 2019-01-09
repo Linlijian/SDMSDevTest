@@ -20,6 +20,7 @@
         <EntityTypeShape EntityType="AATModel.VSMS_USERCOM" Width="1.5" PointX="7.375" PointY="8.75" />
         <EntityTypeShape EntityType="AATModel.VSMS_EXCEL" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="AATModel.VSMS_SYS_PGC" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AATModel.VSMS_MOBULE" Width="1.5" PointX="7.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
