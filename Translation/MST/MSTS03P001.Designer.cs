@@ -61,6 +61,15 @@ namespace Translation.MST {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No charge.
+        /// </summary>
+        public static string IS_FREE {
+            get {
+                return ResourceManager.GetString("IS_FREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Issue Type.
         /// </summary>
         public static string ISSUE_TYPE {

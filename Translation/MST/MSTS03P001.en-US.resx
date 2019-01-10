@@ -120,6 +120,9 @@
   <data name="ISSUE_TYPE" xml:space="preserve">
     <value>Issue Type</value>
   </data>
+  <data name="IS_FREE" xml:space="preserve">
+    <value>No charge</value>
+  </data>
   <data name="KEY_ID" xml:space="preserve">
     <value>Type</value>
   </data>

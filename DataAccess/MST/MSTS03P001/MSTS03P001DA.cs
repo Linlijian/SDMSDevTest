@@ -122,6 +122,7 @@ namespace DataAccess.MST
             parameters.AddParameter("T_RES_TYPE", dto.Model.T_RES_TYPE);
             parameters.AddParameter("RES_TIME", dto.Model.RES_TIME);
             parameters.AddParameter("T_RES_TIME", dto.Model.T_RES_TIME);
+            parameters.AddParameter("IS_FREE", dto.Model.IS_FREE);
             parameters.AddParameter("REMASK", dto.Model.REMASK);
             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
@@ -170,6 +171,7 @@ namespace DataAccess.MST
             parameters.AddParameter("T_RES_TYPE", dto.Model.T_RES_TYPE);
             parameters.AddParameter("RES_TIME", dto.Model.RES_TIME);
             parameters.AddParameter("T_RES_TIME", dto.Model.T_RES_TIME);
+            parameters.AddParameter("IS_FREE", dto.Model.IS_FREE);
             parameters.AddParameter("REMASK", dto.Model.REMASK);
             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);

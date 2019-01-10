@@ -20,6 +20,8 @@ namespace DataAccess.MST
         public decimal? T_RES_TIME { get; set; }
         [Display(Name = "REMASK", ResourceType = typeof(Translation.MST.MSTS03P001))]
         public string REMASK { get; set; }
+        [Display(Name = "IS_FREE", ResourceType = typeof(Translation.MST.MSTS03P001))]
+        public string IS_FREE { get; set; }
 
         [Display(Name = "KEY_ID", ResourceType = typeof(Translation.MST.MSTS03P001))]
         public string KEY_ID { get; set; }

@@ -63,6 +63,14 @@
                     {
                         using (r.GridColumn(6).Begin())
                         {
+                            @form.CheckBoxFor(m => m.IS_FREE)
+                            //@form.CheckBox("check", "Check me out")
+                        }
+                    }
+                    using (var r = Html.Bootstrap().GridRow().Begin())
+                    {
+                        using (r.GridColumn(6).Begin())
+                        {
                             @form.TextAreaFor(m => m.REMASK, 4).SetMaxLength(400)
                         }
                     }
