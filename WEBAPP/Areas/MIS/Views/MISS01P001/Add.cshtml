@@ -29,7 +29,7 @@
     {
         using (row1.GridColumn(6).Begin())
         {
-            @form.DatepickerFor(m => m.ISSUE_DATE)
+            @form.DatepickerFor(m => m.ISSUE_DATE, addValidateMessage:true)
         }
         using (row1.GridColumn(6).Begin())
         {
@@ -48,8 +48,20 @@
         }
         using (row1.GridColumn(6).Begin())
         {
-            @form.TextAreaFor(m => m.DETAIL, 4)
+            @form.InputFor(m => m.RESPONSE_BY).SetReadonly()
         }
+    }
+    using (var row1 = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row1.GridColumn(6).Begin())
+        {
+            @form.InputNumberFor(m => m.ESSR_NO)
+        }
+        using (row1.GridColumn(6).Begin())
+        {
+            @form.DatepickerFor(m => m.RESPONSE_DATE)
+        }
+
     }
     using (var row1 = Html.Bootstrap().GridRow().Begin())
     {
@@ -70,136 +82,152 @@
         }
         using (row1.GridColumn(6).Begin())
         {
-            @form.InputFor(m => m.RESPONSE_BY)
-        }
-    }
-    using (var row1 = Html.Bootstrap().GridRow().Begin())
-    {
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.DatepickerFor(m => m.TARGET_DATE)
-        }
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.DatepickerFor(m => m.RESPONSE_DATE)
-        }
-    }
-    using (var row1 = Html.Bootstrap().GridRow().Begin())
-    {
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.DatepickerFor(m => m.RESPONSE_TARGET)
-        }
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.DatepickerFor(m => m.ACTUAL_RESTIME_QA)
-        }
-    }
-    using (var row1 = Html.Bootstrap().GridRow().Begin())
-    {
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.DatepickerFor(m => m.ACTUAL_RESTIME_PD)
-        }
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.DatepickerFor(m => m.ACTUAL_RESTIME_CL)
-        }
-    }
-    using (var row1 = Html.Bootstrap().GridRow().Begin())
-    {
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.DatepickerFor(m => m.RESOLUTION_TARGET)
-        }
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.DatepickerFor(m => m.DEPLOY_QA)
-        }
-    }
-    using (var row1 = Html.Bootstrap().GridRow().Begin())
-    {
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.DatepickerFor(m => m.DEPLOY_PD)
-        }
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.InputFor(m => m.FILE_ID)
-        }
-    }
-    using (var row1 = Html.Bootstrap().GridRow().Begin())
-    {
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.InputNumberFor(m => m.ESSR_NO)
-        }
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.DatepickerFor(m => m.CLOSE_DATE)
-        }
-    }
-    using (var row1 = Html.Bootstrap().GridRow().Begin())
-    {
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), isRequired: true)
-        }
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.InputJAutocompleteFor(t => t.DEFECT, isRequired: true).JAutoKeySource("AC_MISS01P001_002").JAutoBindField("ISSUE_TYPE").JAutoSetExtraParamsByCtrl("COM_CODE").JAutoFieldToInput(new
-       {
-           MAN_PLM_SA = "MAN_PLM_SA",
-           MAN_PLM_QA = "MAN_PLM_QA",
-           MAN_PLM_PRG = "MAN_PLM_PRG"
-       }).SetSelectOnly()
-            // @form.SelectFor(t => t.DEFECT, Model.DEFECT_MODEL.ToSelectList("Value", "Text", Model.DEFECT), isRequired: true)
-        }
-    }
-    using (var row1 = Html.Bootstrap().GridRow().Begin())
-    {
-        using (row1.GridColumn(6).Begin())
-        {
-            //autocomplete
-            @form.SelectFor(t => t.PRIORITY, Model.PRIORITY_MODEL.ToSelectList("Value", "Text", Model.PRIORITY), isRequired: true)
-        }
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.TextAreaFor(m => m.REMARK, 4)
-        }
-    }
-    using (var row1 = Html.Bootstrap().GridRow().Begin())
-    {
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.InputNumberFor(m => m.MAN_PLM_SA)
-        }
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.InputNumberFor(m => m.MAN_PLM_QA)
-        }
-    }
-    using (var row1 = Html.Bootstrap().GridRow().Begin())
-    {
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.InputNumberFor(m => m.MAN_PLM_PRG)
-        }
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.InputNumberFor(m => m.MAN_PLM_PL)
-        }
-    }
-    using (var row1 = Html.Bootstrap().GridRow().Begin())
-    {
-        using (row1.GridColumn(6).Begin())
-        {
-            @form.InputFor(m => m.MAN_PLM_DBA)
-        }
-        using (row1.GridColumn(6).Begin())
-        {
-           @form.InputFileuploadFor(m => m.ISSUE_IMG, allowExt: "jpg,png")
+            @form.TextAreaFor(m => m.DETAIL, 4)
         }
     }
     @Html.GetVSMWidgetsEnd()
+    using (var row1 = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row1.GridColumn(6).Begin())
+        {
+            @Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P001.ISSUE_CALCULATE)
+            using (row1.GridColumn(12).Begin())
+            {
+                //autocomplete
+                @form.InputJAutocompleteFor(t => t.PRIORITY, isRequired: true).JAutoKeySource("AC_MISS01P001_003").JAutoBindField("PRIORITY").JAutoSetExtraParamsByCtrl("COM_CODE").JAutoFieldToInput(new
+                   {
+                       RESPONSE_TARGET = "RESPONSE_TARGET",
+                       RESOLUTION_TARGET = "RESOLUTION_TARGET"
+                   }).SetSelectOnly()
+                //@form.SelectFor(t => t.PRIORITY, Model.PRIORITY_MODEL.ToSelectList("Value", "Text", Model.PRIORITY), isRequired: true)
+
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+               @form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), isRequired: true)
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.InputFor(m => m.RESPONSE_TARGET, addValidateMessage: true)
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.InputFor(m => m.RESOLUTION_TARGET).SetReadonly()
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.InputJAutocompleteFor(t => t.DEFECT, isRequired: true).JAutoKeySource("AC_MISS01P001_002").JAutoBindField("ISSUE_TYPE").JAutoSetExtraParamsByCtrl("COM_CODE").JAutoFieldToInput(new
+                   {
+                       MAN_PLM_SA = "MAN_PLM_SA",
+                       MAN_PLM_QA = "MAN_PLM_QA",
+                       MAN_PLM_PRG = "MAN_PLM_PRG"
+                   }).SetSelectOnly()
+                // @form.SelectFor(t => t.DEFECT, Model.DEFECT_MODEL.ToSelectList("Value", "Text", Model.DEFECT), isRequired: true)
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.InputNumberFor(m => m.MAN_PLM_SA, digits: 1, isRequired: true)
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.InputNumberFor(m => m.MAN_PLM_QA, digits: 1, isRequired: true)
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.InputNumberFor(m => m.MAN_PLM_PRG, digits: 1, isRequired: true)
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.InputNumberFor(m => m.MAN_PLM_PL, digits: 1)
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.InputNumberFor(m => m.MAN_PLM_DBA, digits: 1)
+            }
+            @Html.GetVSMWidgetsEnd()
+        }
+        using (row1.GridColumn(6).Begin())
+        {
+            @Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P001.ISSUE_CALCULATE)
+            using (row1.GridColumn(12).Begin())
+            {
+                //@form.InputFor(m => m.STATUS)
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.DatepickerFor(m => m.TARGET_DATE).SetId("A")
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.DatepickerFor(m => m.CLOSE_DATE)
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.DatepickerFor(m => m.DEPLOY_PD)
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.DatepickerFor(m => m.DEPLOY_QA)
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+               // @form.TextAreaFor(m => m.FILE_ID, 2)
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                //@form.InputFileuploadFor(m => m.ISSUE_IMG, allowExt: "jpg,png")
+            }
+            using (row1.GridColumn(12).Begin())
+            {
+                @form.TextAreaFor(m => m.REMARK, 4)
+            }
+            @Html.GetVSMWidgetsEnd()
+        }
+    }
+}
+
+@section Scripts {
+<script>
+        $(document).ready(function () {
+            $("#ISSUE_DATE").change(function () {
+                var date = $("#ISSUE_DATE").val()
+                var arr = date.split('/');
+                $("#ISSUE_DATE_PERIOD").val(arr[2] + '-' + arr[1])
+            })
+
+            $("#ISSUE_DATE").BetweenDate({
+                from_ctrl: 'ISSUE_DATE',
+                to_ctrl: 'RESPONSE_DATE',
+            });
+
+            $("#TARGET_DATE").BetweenDate({
+                from_ctrl: 'RESPONSE_DATE',
+                to_ctrl: 'TARGET_DATE',
+            });
+
+            $("#CLOSE_DATE").BetweenDate({
+                from_ctrl: 'RESPONSE_DATE',
+                to_ctrl: 'CLOSE_DATE',
+            });
+
+            $("#DEPLOY_PD").BetweenDate({
+                from_ctrl: 'RESPONSE_DATE',
+                to_ctrl: 'DEPLOY_PD',
+            });
+
+            $("#DEPLOY_QA").BetweenDate({
+                from_ctrl: 'RESPONSE_DATE',
+                to_ctrl: 'DEPLOY_QA',
+            });
+
+        })
+</script>
+<script type="text/javascript">
+  $(function() {
+      $('#A').datetimepicker({
+      language: 'en',
+      pick12HourFormat: true
+    });
+  });
+</script>
 }

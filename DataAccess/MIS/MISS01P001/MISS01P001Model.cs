@@ -3,6 +3,7 @@ using FluentValidation.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace DataAccess.MIS
 {
@@ -32,10 +33,16 @@ namespace DataAccess.MIS
         public string PROGRAM_NAME { get; set; }
         [Display(Name = "FILE_NAME", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string ISSUE_IMG { get; set; }
+        //[Display(Name = "FILE_NAME", ResourceType = typeof(Translation.MIS.MISS01P001))]
+        //public HttpPostedFileBase ISSUE_IMG { get; set; }
         [Display(Name = "COMMENT", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string REMARK { get; set; }
         [Display(Name = "RESOLUTION_TARGET", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string RESOLUTION_TARGET { get; set; }
+        [Display(Name = "RESPONSE_TARGET", ResourceType = typeof(Translation.MIS.MISS01P001))]
+        public string RESPONSE_TARGET { get; set; }
+        [Display(Name = "ISSUE_DATE_PERIOD", ResourceType = typeof(Translation.MIS.MISS01P001))]
+        public string ISSUE_DATE_PERIOD { get; set; }
 
         [Display(Name = "PRIORITY", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string PRIORITY { get; set; }
@@ -69,47 +76,39 @@ namespace DataAccess.MIS
         [Display(Name = "ISSUE_DATE", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public DateTime? ISSUE_DATE { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "ISSUE_DATE_PERIOD", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public DateTime? ISSUE_DATE_PERIOD { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "TARGET_DATE", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public DateTime? TARGET_DATE { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "RESPONSE_DATE", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public DateTime? RESPONSE_DATE { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "CLOSE_DATE", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public DateTime? CLOSE_DATE { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "DEPLOY_QA", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public DateTime? DEPLOY_QA { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "DEPLOY_PD", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public DateTime? DEPLOY_PD { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "ACTUAL_RESTIME", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public DateTime? ACTUAL_RESTIME { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "RESPONSE_TARGET", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public DateTime? RESPONSE_TARGET { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "ACTUAL_RESTIME_QA", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public DateTime? ACTUAL_RESTIME_QA { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "ACTUAL_RESTIME_PD", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public DateTime? ACTUAL_RESTIME_PD { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "ACTUAL_RESTIME_CL", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public DateTime? ACTUAL_RESTIME_CL { get; set; }
     }

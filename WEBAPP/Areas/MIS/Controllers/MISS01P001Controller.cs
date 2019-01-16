@@ -4,9 +4,13 @@ using FluentValidation.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.IO;
 using System.Web.Mvc;
 using UtilityLib;
 using WEBAPP.Helper;
+using System.Text;
+using System.Web;
 
 namespace WEBAPP.Areas.MIS.Controllers
 {
@@ -137,6 +141,12 @@ namespace WEBAPP.Areas.MIS.Controllers
             SetDefaultData();
             localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
 
+            localModel.MAN_PLM_DBA = 0;
+            localModel.MAN_PLM_PL = 0;
+            localModel.MAN_PLM_PRG = 0;
+            localModel.MAN_PLM_QA = 0;
+            localModel.MAN_PLM_SA = 0;
+
             return View(StandardActionName.Add, localModel);
         }
         [HttpPost]
@@ -147,6 +157,15 @@ namespace WEBAPP.Areas.MIS.Controllers
             if (ModelState.IsValid)
             {
                 var result = SaveData(StandardActionName.SaveCreate, model);
+                if(result.ResultMsg != null)
+                {
+                    string msg = string.Format("Issue no. {0}" + Environment.NewLine +
+                             "FROM {1}" + Environment.NewLine +
+                             "TO " + "@" + "{2}" + Environment.NewLine +
+                             "Detail {3}", model.NO, model.ISSUE_BY, model.SOLUTION, model.REMARK);
+
+                    lineNotify(msg);
+                }
                 jsonResult = Success(result, StandardActionName.SaveCreate, Url.Action(StandardActionName.Index, new { page = 1 }));
             }
             else
@@ -177,7 +196,29 @@ namespace WEBAPP.Areas.MIS.Controllers
             }
             return jsonResult;
         }
-       
+        private void lineNotify(string msg)
+        {
+            string token = "RdPADiB93gXjdR2l2QylH3Xh3f9bRmmIR8ijihQqMkV";
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create("https://notify-api.line.me/api/notify");
+                var postData = string.Format("message={0}", msg);
+                var data = Encoding.UTF8.GetBytes(postData);
+
+                request.Method = "POST";
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = data.Length;
+                request.Headers.Add("Authorization", "Bearer " + token);
+
+                using (var stream = request.GetRequestStream()) stream.Write(data, 0, data.Length);
+                var response = (HttpWebResponse)request.GetResponse();
+                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
         #endregion
 
         #region Mehtod  
