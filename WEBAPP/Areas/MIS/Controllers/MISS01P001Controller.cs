@@ -141,11 +141,21 @@ namespace WEBAPP.Areas.MIS.Controllers
             SetDefaultData();
             localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
 
+            #region set default 
             localModel.MAN_PLM_DBA = 0;
             localModel.MAN_PLM_PL = 0;
             localModel.MAN_PLM_PRG = 0;
             localModel.MAN_PLM_QA = 0;
             localModel.MAN_PLM_SA = 0;
+            #endregion
+
+            #region set running number 
+            var da = new MISS01P001DA();
+            da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetNo;
+            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            da.SelectNoEF(da.DTO);
+            localModel.NO = da.DTO.Model.NO + 1;
+            #endregion
 
             return View(StandardActionName.Add, localModel);
         }
