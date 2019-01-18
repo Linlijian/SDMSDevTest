@@ -156,16 +156,17 @@ namespace WEBAPP.Areas.MIS.Controllers
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
             {
+                model = SetModelDateTime(model);
                 var result = SaveData(StandardActionName.SaveCreate, model);
-                if(result.ResultMsg != null)
-                {
-                    string msg = string.Format("Issue no. {0}" + Environment.NewLine +
-                             "FROM {1}" + Environment.NewLine +
-                             "TO " + "@" + "{2}" + Environment.NewLine +
-                             "Detail {3}", model.NO, model.ISSUE_BY, model.SOLUTION, model.REMARK);
+                //if(result.ResultMsg != null)
+                //{
+                //    string msg = string.Format("Issue no. {0}" + Environment.NewLine +
+                //             "FROM {1}" + Environment.NewLine +
+                //             "TO " + "@" + "{2}" + Environment.NewLine +
+                //             "Detail {3}", model.NO, model.ISSUE_BY, model.SOLUTION, model.REMARK);
 
-                    lineNotify(msg);
-                }
+                //    lineNotify(msg);
+                //}
                 jsonResult = Success(result, StandardActionName.SaveCreate, Url.Action(StandardActionName.Index, new { page = 1 }));
             }
             else
@@ -228,6 +229,22 @@ namespace WEBAPP.Areas.MIS.Controllers
             localModel.DEFECT_MODEL = BindDefect();
             localModel.PRIORITY_MODEL = BindPriority();
             localModel.ISSUE_TYPE_MODEL = BindIssueType();
+        }
+        private MISS01P001Model SetModelDateTime(MISS01P001Model model)
+        {
+            if (!model.STR_CLOSE_DATE.IsNullOrEmpty())
+                model.CLOSE_DATE = model.STR_CLOSE_DATE.AsDateTimes();
+            if (!model.STR_DEPLOY_QA.IsNullOrEmpty())
+                model.DEPLOY_QA = model.STR_DEPLOY_QA.AsDateTimes();
+            if (!model.STR_RDEPLOY_PD.IsNullOrEmpty())
+                model.DEPLOY_PD = model.STR_RDEPLOY_PD.AsDateTimes();
+            if (!model.STR_ISSUE_DATE.IsNullOrEmpty())
+                model.ISSUE_DATE = model.STR_ISSUE_DATE.AsDateTimes();
+            if (!model.STR_RESPONSE_DATE.IsNullOrEmpty())
+                model.RESPONSE_DATE = model.STR_RESPONSE_DATE.AsDateTimes();
+            if (!model.STR_TARGET_DATE.IsNullOrEmpty())
+                model.TARGET_DATE = model.STR_TARGET_DATE.AsDateTimes();
+            return model;
         }
         private List<DDLCenterModel> BindIssueType()
         {
