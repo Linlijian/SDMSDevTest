@@ -138,7 +138,20 @@ namespace DataAccess.MIS
 
         private void Valid()
         {
-            //RuleFor(t => t.TYPE_DAY).NotEmpty();
+            RuleFor(t => t.ISSUE_BY).NotEmpty();
+            RuleFor(t => t.STR_ISSUE_DATE).NotEmpty().WithMessage(Translation.CenterLang.Validate.Issue_date);
+            RuleFor(t => t.MODULE).NotEmpty();
+            RuleFor(t => t.STR_RESPONSE_DATE).NotEmpty().WithMessage(Translation.CenterLang.Validate.Response_date);
+            RuleFor(t => t.PRIORITY).NotEmpty();
+            RuleFor(t => t.ISSUE_TYPE).NotEmpty();
+            RuleFor(t => t.DEFECT).NotEmpty();
+            RuleFor(t => t.STR_TARGET_DATE).NotEmpty().WithMessage(Translation.CenterLang.Validate.Traget_date);
+
+            RuleFor(t => t.MAN_PLM_PL).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
+            RuleFor(t => t.MAN_PLM_DBA).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
+            RuleFor(t => t.MAN_PLM_PRG).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
+            RuleFor(t => t.MAN_PLM_QA).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
+            RuleFor(t => t.MAN_PLM_SA).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
         }
     }
 }

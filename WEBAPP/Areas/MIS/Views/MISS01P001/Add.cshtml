@@ -18,18 +18,18 @@
     {
         using (row1.GridColumn(6).Begin())
         {
-            @form.InputNumberFor(m => m.NO)
+            @form.InputNumberFor(m => m.NO).SetReadonly()
         }
         using (row1.GridColumn(6).Begin())
         {
-            @form.InputFor(m => m.ISSUE_BY)
+            @form.InputFor(m => m.ISSUE_BY, isRequired: true, addValidateMessage: true)
         }
     }
     using (var row1 = Html.Bootstrap().GridRow().Begin())
     {
         using (row1.GridColumn(6).Begin())
         {
-            @form.InputFor(m => m.STR_ISSUE_DATE, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.ISSUE_DATE).AddCss("input-append")
+            @form.InputFor(m => m.STR_ISSUE_DATE, isRequired: true, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.ISSUE_DATE).AddCss("input-append")
             @form.HiddenFor(m => m.ISSUE_DATE)
         }
         using (row1.GridColumn(6).Begin())
@@ -41,7 +41,7 @@
     {
         using (row1.GridColumn(6).Begin())
         {
-            @form.InputJAutocompleteFor(t => t.MODULE, isRequired: true).JAutoKeySource("AC_MISS01P001_001").JAutoBindField("MODULE").JAutoSetExtraParamsByCtrl("COM_CODE").JAutoFieldToInput(new
+            @form.InputJAutocompleteFor(t => t.MODULE, isRequired: true, addValidateMessage: true).JAutoKeySource("AC_MISS01P001_001").JAutoBindField("MODULE").JAutoSetExtraParamsByCtrl("COM_CODE").JAutoFieldToInput(new
        {
            RESPONSE_BY = "RESPONSE_BY"
        }).SetSelectOnly()
@@ -60,7 +60,7 @@
         }
         using (row1.GridColumn(6).Begin())
         {
-            @form.InputFor(m => m.STR_RESPONSE_DATE, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.RESPONSE_DATE).AddCss("input-append")
+            @form.InputFor(m => m.STR_RESPONSE_DATE, isRequired: true, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.RESPONSE_DATE).AddCss("input-append")
             @form.HiddenFor(m => m.RESPONSE_DATE)
         }
 
@@ -96,7 +96,7 @@
             using (row1.GridColumn(12).Begin())
             {
                 //autocomplete
-                @form.InputJAutocompleteFor(t => t.PRIORITY, isRequired: true).JAutoKeySource("AC_MISS01P001_003").JAutoBindField("PRIORITY").JAutoSetExtraParamsByCtrl("COM_CODE").JAutoFieldToInput(new
+                @form.InputJAutocompleteFor(t => t.PRIORITY, isRequired: true, addValidateMessage: true).JAutoKeySource("AC_MISS01P001_003").JAutoBindField("PRIORITY").JAutoSetExtraParamsByCtrl("COM_CODE").JAutoFieldToInput(new
            {
                RESPONSE_TARGET = "RESPONSE_TARGET",
                RESOLUTION_TARGET = "RESOLUTION_TARGET"
@@ -106,11 +106,11 @@
             }
             using (row1.GridColumn(12).Begin())
             {
-                @form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), isRequired: true)
+                @form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), isRequired: true, addValidateMessage: true)
             }
             using (row1.GridColumn(12).Begin())
             {
-                @form.InputFor(m => m.RESPONSE_TARGET, addValidateMessage: true)
+                @form.InputFor(m => m.RESPONSE_TARGET).SetReadonly()
             }
             using (row1.GridColumn(12).Begin())
             {
@@ -118,7 +118,7 @@
             }
             using (row1.GridColumn(12).Begin())
             {
-                @form.InputJAutocompleteFor(t => t.DEFECT, isRequired: true).JAutoKeySource("AC_MISS01P001_002").JAutoBindField("ISSUE_TYPE").JAutoSetExtraParamsByCtrl("COM_CODE").JAutoFieldToInput(new
+                @form.InputJAutocompleteFor(t => t.DEFECT, isRequired: true, addValidateMessage: true).JAutoKeySource("AC_MISS01P001_002").JAutoBindField("ISSUE_TYPE").JAutoSetExtraParamsByCtrl("COM_CODE").JAutoFieldToInput(new
            {
                MAN_PLM_SA = "MAN_PLM_SA",
                MAN_PLM_QA = "MAN_PLM_QA",
@@ -128,23 +128,23 @@
             }
             using (row1.GridColumn(12).Begin())
             {
-                @form.InputNumberFor(m => m.MAN_PLM_SA, digits: 1, isRequired: true)
+                @form.InputNumberFor(m => m.MAN_PLM_SA, digits: 1, isRequired: true, addValidateMessage: true)
             }
             using (row1.GridColumn(12).Begin())
             {
-                @form.InputNumberFor(m => m.MAN_PLM_QA, digits: 1, isRequired: true)
+                @form.InputNumberFor(m => m.MAN_PLM_QA, digits: 1, isRequired: true, addValidateMessage: true)
             }
             using (row1.GridColumn(12).Begin())
             {
-                @form.InputNumberFor(m => m.MAN_PLM_PRG, digits: 1, isRequired: true)
+                @form.InputNumberFor(m => m.MAN_PLM_PRG, digits: 1, isRequired: true, addValidateMessage: true)
             }
             using (row1.GridColumn(12).Begin())
             {
-                @form.InputNumberFor(m => m.MAN_PLM_PL, digits: 1)
+                @form.InputNumberFor(m => m.MAN_PLM_PL, digits: 1, isRequired: true, addValidateMessage: true)
             }
             using (row1.GridColumn(12).Begin())
             {
-                @form.InputNumberFor(m => m.MAN_PLM_DBA, digits: 1)
+                @form.InputNumberFor(m => m.MAN_PLM_DBA, digits: 1, isRequired: true, addValidateMessage: true)
             }
             @Html.GetVSMWidgetsEnd()
         }
@@ -157,7 +157,7 @@
             }
             using (row1.GridColumn(12).Begin())
             {
-                @form.InputFor(m => m.STR_TARGET_DATE, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.TARGET_DATE).AddCss("input-append")
+                @form.InputFor(m => m.STR_TARGET_DATE, isRequired: true, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.TARGET_DATE).AddCss("input-append")
                 @form.HiddenFor(m => m.TARGET_DATE)
             }
             using (row1.GridColumn(12).Begin())
@@ -286,7 +286,7 @@
 //    $('#STR_RESPONSE_DATE').datetimepicker('setStartDate', $("#STR_ISSUE_DATE").val())});
 
         $("#STR_ISSUE_DATE").change(function () {
-            $('#ISSUE_DATE').val($('#STR_CLOSE_DATE').val())
+            $('#ISSUE_DATE').val($('#STR_ISSUE_DATE').val())
         })
         //=========================END============================//
 

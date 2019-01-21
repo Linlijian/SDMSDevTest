@@ -93,7 +93,22 @@ namespace DataAccess.MIS
         }
         private MISS01P001DTO GetByID(MISS01P001DTO dto)
         {
+            string strSQL = @"	SELECT *
+	                            FROM VSMS_ISSUE
+	                            WHERE (1=1)
+	                            AND COM_CODE = @COM_CODE
+                                AND NO = @NO";
 
+            var parameters = CreateParameter();
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("NO", dto.Model.NO);
+            
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model = result.OutputDataSet.Tables[0].ToObject<MISS01P001Model>();
+            }
             return dto;
         }
         #endregion

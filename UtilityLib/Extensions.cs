@@ -63,6 +63,48 @@ namespace UtilityLib
             }
             return newValue;
         }
+
+        public static string AsStringDate(this object data, string defaultValue = "", bool isDateTHFormat = false)
+        {
+            string newValue = string.Empty;
+
+            if (!IsNullOrEmpty(data))
+            {
+                if (data.GetType() == typeof(DateTime))
+                {
+                    if (IsNullOrEmpty(defaultValue))
+                    {
+                        defaultValue = "dd/MM/yyyy HH:mm:ss";
+                    }
+                    if (!isDateTHFormat)
+                    {
+                        newValue = string.Format("{0:" + defaultValue + "}", data, defaultValue);
+                    }
+                    else
+                    {
+                        var cultureinfo = CultureInfo.CreateSpecificCulture("th-TH");
+                        var culture = Thread.CurrentThread.CurrentCulture;
+                        Thread.CurrentThread.CurrentCulture = cultureinfo;
+
+                        DateTime date = Convert.ToDateTime(data);
+
+                        newValue = string.Format("{0:" + defaultValue + "}", date, defaultValue);
+
+                        Thread.CurrentThread.CurrentCulture = culture;
+                    }
+                }
+                else
+                {
+                    newValue = Convert.ToString(data).Trim();
+                }
+            }
+            else
+            {
+                newValue = IsNullOrEmpty(defaultValue) ? string.Empty : Convert.ToString(defaultValue).Trim();
+            }
+            return newValue;
+        }
+
         public static string AsChar(this object data, int length)
         {
             string newValue = string.Empty;

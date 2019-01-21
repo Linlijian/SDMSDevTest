@@ -135,6 +135,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             }
             return jsonResult;
         }
+        [RuleSetForClientSideMessages("Add")]
         public ActionResult Add()
         {
             SetDefaulButton(StandardButtonMode.Create);
@@ -188,6 +189,14 @@ namespace WEBAPP.Areas.MIS.Controllers
         }
         public ActionResult Edit(MISS01P001Model model)
         {
+            var da = new MISS01P001DA();
+            da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetByID;
+            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            da.DTO.Model.NO = model.NO;
+            da.SelectNoEF(da.DTO);
+            localModel = da.DTO.Model;
+
+            SetDateToString(da.DTO.Model);
 
             return View(StandardActionName.Edit, localModel);
         }
@@ -239,6 +248,21 @@ namespace WEBAPP.Areas.MIS.Controllers
             localModel.DEFECT_MODEL = BindDefect();
             localModel.PRIORITY_MODEL = BindPriority();
             localModel.ISSUE_TYPE_MODEL = BindIssueType();
+        }
+        private void SetDateToString(MISS01P001Model model)
+        {
+            if (!model.CLOSE_DATE.IsNullOrEmpty())
+                localModel.STR_CLOSE_DATE = model.CLOSE_DATE.AsStringDate();
+            if (!model.DEPLOY_QA.IsNullOrEmpty())
+                localModel.STR_DEPLOY_QA = model.DEPLOY_QA.AsStringDate();
+            if (!model.DEPLOY_PD.IsNullOrEmpty())
+                localModel.STR_RDEPLOY_PD = model.DEPLOY_PD.AsStringDate();
+            if (!model.ISSUE_DATE.IsNullOrEmpty())
+                localModel.STR_ISSUE_DATE = model.ISSUE_DATE.AsStringDate();
+            if (!model.RESPONSE_DATE.IsNullOrEmpty())
+                localModel.STR_RESPONSE_DATE = model.RESPONSE_DATE.AsStringDate();
+            if (!model.TARGET_DATE.IsNullOrEmpty())
+                localModel.STR_TARGET_DATE = model.TARGET_DATE.AsStringDate();
         }
         private MISS01P001Model SetModelDateTime(MISS01P001Model model)
         {
