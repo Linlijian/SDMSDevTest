@@ -19,7 +19,7 @@ namespace DataAccess.MIS
 
     public class MISS01P001ExecuteType : DTOExecuteType
     {
-        public const string GetDetailByID = "GetDetailByID";
+        public const string GetNo = "GetNo";
         public const string Insert = "Insert";
         public const string CallSPInsertExcel = "CallSPInsertExcel";
         public const string Confirm = "Confirm";

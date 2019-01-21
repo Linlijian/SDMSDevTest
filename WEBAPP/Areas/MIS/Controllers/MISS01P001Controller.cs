@@ -109,7 +109,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             var da = new MISS01P001DA();
             SetStandardErrorLog(da.DTO);
             da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetAll;
-            
+
             if (Request.GetRequest("page").IsNullOrEmpty())
             {
                 model.IsDefaultSearch = true;
@@ -141,11 +141,21 @@ namespace WEBAPP.Areas.MIS.Controllers
             SetDefaultData();
             localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
 
+            #region set default 
             localModel.MAN_PLM_DBA = 0;
             localModel.MAN_PLM_PL = 0;
             localModel.MAN_PLM_PRG = 0;
             localModel.MAN_PLM_QA = 0;
             localModel.MAN_PLM_SA = 0;
+            #endregion
+
+            #region set running number 
+            var da = new MISS01P001DA();
+            da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetNo;
+            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            da.SelectNoEF(da.DTO);
+            localModel.NO = da.DTO.Model.NO + 1;
+            #endregion
 
             return View(StandardActionName.Add, localModel);
         }
@@ -156,16 +166,17 @@ namespace WEBAPP.Areas.MIS.Controllers
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
             {
+                model = SetModelDateTime(model);
                 var result = SaveData(StandardActionName.SaveCreate, model);
-                if(result.ResultMsg != null)
-                {
-                    string msg = string.Format("Issue no. {0}" + Environment.NewLine +
-                             "FROM {1}" + Environment.NewLine +
-                             "TO " + "@" + "{2}" + Environment.NewLine +
-                             "Detail {3}", model.NO, model.ISSUE_BY, model.SOLUTION, model.REMARK);
+                //if(result.ResultMsg != null)
+                //{
+                //    string msg = string.Format("Issue no. {0}" + Environment.NewLine +
+                //             "FROM {1}" + Environment.NewLine +
+                //             "TO " + "@" + "{2}" + Environment.NewLine +
+                //             "Detail {3}", model.NO, model.ISSUE_BY, model.SOLUTION, model.REMARK);
 
-                    lineNotify(msg);
-                }
+                //    lineNotify(msg);
+                //}
                 jsonResult = Success(result, StandardActionName.SaveCreate, Url.Action(StandardActionName.Index, new { page = 1 }));
             }
             else
@@ -177,7 +188,7 @@ namespace WEBAPP.Areas.MIS.Controllers
         }
         public ActionResult Edit(MISS01P001Model model)
         {
-            
+
             return View(StandardActionName.Edit, localModel);
         }
         [HttpPost]
@@ -229,6 +240,22 @@ namespace WEBAPP.Areas.MIS.Controllers
             localModel.PRIORITY_MODEL = BindPriority();
             localModel.ISSUE_TYPE_MODEL = BindIssueType();
         }
+        private MISS01P001Model SetModelDateTime(MISS01P001Model model)
+        {
+            if (!model.STR_CLOSE_DATE.IsNullOrEmpty())
+                model.CLOSE_DATE = model.STR_CLOSE_DATE.AsDateTimes();
+            if (!model.STR_DEPLOY_QA.IsNullOrEmpty())
+                model.DEPLOY_QA = model.STR_DEPLOY_QA.AsDateTimes();
+            if (!model.STR_RDEPLOY_PD.IsNullOrEmpty())
+                model.DEPLOY_PD = model.STR_RDEPLOY_PD.AsDateTimes();
+            if (!model.STR_ISSUE_DATE.IsNullOrEmpty())
+                model.ISSUE_DATE = model.STR_ISSUE_DATE.AsDateTimes();
+            if (!model.STR_RESPONSE_DATE.IsNullOrEmpty())
+                model.RESPONSE_DATE = model.STR_RESPONSE_DATE.AsDateTimes();
+            if (!model.STR_TARGET_DATE.IsNullOrEmpty())
+                model.TARGET_DATE = model.STR_TARGET_DATE.AsDateTimes();
+            return model;
+        }
         private List<DDLCenterModel> BindIssueType()
         {
             return GetDDLCenter(DDLCenterKey.DD_MISS01P001_001, new VSMParameter(SessionHelper.SYS_COM_CODE.Trim()));
@@ -277,7 +304,7 @@ namespace WEBAPP.Areas.MIS.Controllers
                 da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
                 da.DeleteNoEF(da.DTO);
             }
-           
+
             return da.DTO.Result;
         }
         private void SetButton(string ACTIVE_STEP = "")

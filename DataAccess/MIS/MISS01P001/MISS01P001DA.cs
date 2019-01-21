@@ -26,8 +26,25 @@ namespace DataAccess.MIS
             {
                 case MISS01P001ExecuteType.GetAll: return GetAll(dto);
                 case MISS01P001ExecuteType.GetByID: return GetByID(dto);
-
+                case MISS01P001ExecuteType.GetNo: return GetNo(dto);
             }
+            return dto;
+        }
+        private MISS01P001DTO GetNo(MISS01P001DTO dto)
+        {
+            string strSQL = @"	SELECT  COUNT(NO) A
+                                FROM VSMS_ISSUE
+                                WHERE COM_CODE = @COM_CODE";
+            var parameters = CreateParameter();
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model.NO = result.OutputDataSet.Tables[0].Rows[0][0].AsInt();
+            }
+
             return dto;
         }
         private MISS01P001DTO GetAll(MISS01P001DTO dto)

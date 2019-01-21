@@ -55,6 +55,12 @@ namespace DataAccess.MIS
         public IEnumerable<DDLCenterModel> DEFECT_MODEL { get; set; }
 
         public string ACTIVE_STEP { get; set; }
+        public string STR_ISSUE_DATE { get; set; }
+        public string STR_RESPONSE_DATE { get; set; }
+        public string STR_TARGET_DATE { get; set; }
+        public string STR_CLOSE_DATE { get; set; }
+        public string STR_RDEPLOY_PD { get; set; }
+        public string STR_DEPLOY_QA { get; set; }
 
         [Display(Name = "NO", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public decimal? NO { get; set; }
@@ -72,45 +78,45 @@ namespace DataAccess.MIS
         public decimal? MAN_PLM_DBA { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "ISSUE_DATE", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public DateTime? ISSUE_DATE { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> ISSUE_DATE { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "TARGET_DATE", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public DateTime? TARGET_DATE { get; set; }
+        public Nullable<System.DateTime> TARGET_DATE { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "RESPONSE_DATE", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public DateTime? RESPONSE_DATE { get; set; }
+        public Nullable<System.DateTime> RESPONSE_DATE { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "CLOSE_DATE", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public DateTime? CLOSE_DATE { get; set; }
+        public Nullable<System.DateTime> CLOSE_DATE { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "DEPLOY_QA", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public DateTime? DEPLOY_QA { get; set; }
+        public Nullable<System.DateTime> DEPLOY_QA { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "DEPLOY_PD", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public DateTime? DEPLOY_PD { get; set; }
+        public Nullable<System.DateTime> DEPLOY_PD { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "ACTUAL_RESTIME", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public DateTime? ACTUAL_RESTIME { get; set; }
+        public Nullable<System.DateTime> ACTUAL_RESTIME { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "ACTUAL_RESTIME_QA", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public DateTime? ACTUAL_RESTIME_QA { get; set; }
+        public Nullable<System.DateTime> ACTUAL_RESTIME_QA { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "ACTUAL_RESTIME_PD", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public DateTime? ACTUAL_RESTIME_PD { get; set; }
+        public Nullable<System.DateTime> ACTUAL_RESTIME_PD { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "ACTUAL_RESTIME_CL", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public DateTime? ACTUAL_RESTIME_CL { get; set; }
+        public Nullable<System.DateTime> ACTUAL_RESTIME_CL { get; set; }
     }
     public class MISS01P001Validator : AbstractValidator<MISS01P001Model>
     {
@@ -126,7 +132,7 @@ namespace DataAccess.MIS
             });
             RuleSet("Upload", () =>
             {
-                
+
             });
         }
 
