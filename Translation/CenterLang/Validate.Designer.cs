@@ -61,11 +61,38 @@ namespace Translation.CenterLang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;Issue Date&apos; should not be empty..
+        /// </summary>
+        public static string Issue_date {
+            get {
+                return ResourceManager.GetString("Issue_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to กรุณากรอกตัวเลขระหว่าง 1 - 99.9.
         /// </summary>
         public static string OneNumber2Digit1 {
             get {
                 return ResourceManager.GetString("OneNumber2Digit1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;Response Date&apos; should not be empty..
+        /// </summary>
+        public static string Response_date {
+            get {
+                return ResourceManager.GetString("Response_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;Traget Date&apos; should not be empty..
+        /// </summary>
+        public static string Traget_date {
+            get {
+                return ResourceManager.GetString("Traget_date", resourceCulture);
             }
         }
     }
