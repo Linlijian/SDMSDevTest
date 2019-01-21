@@ -452,7 +452,6 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\datepicker-project.css" />
-    <Content Include="Content\datetimepicker.min.css" />
     <Content Include="Content\font-awesome-animation.min.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fontawesome-iconpicker.min.css" />
@@ -685,7 +684,6 @@
     <Content Include="Content\bootstrap-datepicker3.min.css.map" />
     <Content Include="Content\bootstrap-datepicker.min.css.map" />
     <Content Include="Scripts\DataTables\datatables.extend.js" />
-    <Content Include="Scripts\datetimepicker.min.js" />
     <Content Include="Scripts\fontawesome-iconpicker.min.js" />
     <Content Include="Scripts\plugin\bootstrap-multiselect.min.js" />
     <Content Include="Scripts\plugin\bootstrap-select\css\bootstrap-select.min.css" />
