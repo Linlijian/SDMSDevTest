@@ -21,7 +21,7 @@ namespace DataAccess.MIS
     {
         public const string GetNo = "GetNo";
         public const string Insert = "Insert";
-        public const string CallSPInsertExcel = "CallSPInsertExcel";
+        public const string GetAllAssign = "GetAllAssign";
         public const string Confirm = "Confirm";
         public const string Update = "Update";
         public const string ValidateExl = "ValidateExl";

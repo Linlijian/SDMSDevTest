@@ -120,6 +120,22 @@ namespace WEBAPP.Areas.MIS.Controllers
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
+        public ActionResult SearchAssign(MISS01P001Model model)
+        {
+            var da = new MISS01P001DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetAllAssign;
+
+            if (Request.GetRequest("page").IsNullOrEmpty())
+            {
+                model.IsDefaultSearch = true;
+                TempSearch = model;
+            }
+            da.DTO.Model = TempSearch;
+            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            da.SelectNoEF(da.DTO);
+            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
+        }
         [HttpPost]
         public ActionResult DeleteSearch(List<MISS01P001Model> data)
         {

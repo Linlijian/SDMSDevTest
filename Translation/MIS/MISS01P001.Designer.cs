@@ -97,6 +97,24 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assign user.
+        /// </summary>
+        public static string ASSIGN {
+            get {
+                return ResourceManager.GetString("ASSIGN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assignment.
+        /// </summary>
+        public static string ASSIGN_USER {
+            get {
+                return ResourceManager.GetString("ASSIGN_USER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close Date.
         /// </summary>
         public static string CLOSE_DATE {

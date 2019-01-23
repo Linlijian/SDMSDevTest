@@ -13,6 +13,8 @@ namespace DataAccess.MIS
     {
         [Display(Name = "MODULE", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string MODULE { get; set; }
+        [Display(Name = "ASSIGN_USER", ResourceType = typeof(Translation.MIS.MISS01P001))]
+        public string ASSIGN_USER { get; set; }
         [Display(Name = "DETAIL", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string DETAIL { get; set; }
         [Display(Name = "ROOT_CAUSE", ResourceType = typeof(Translation.MIS.MISS01P001))]

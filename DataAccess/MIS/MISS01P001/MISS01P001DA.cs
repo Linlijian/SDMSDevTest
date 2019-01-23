@@ -27,7 +27,52 @@ namespace DataAccess.MIS
                 case MISS01P001ExecuteType.GetAll: return GetAll(dto);
                 case MISS01P001ExecuteType.GetByID: return GetByID(dto);
                 case MISS01P001ExecuteType.GetNo: return GetNo(dto);
+                case MISS01P001ExecuteType.GetAllAssign: return GetAllAssign(dto);
             }
+            return dto;
+        }
+        private MISS01P001DTO GetAllAssign(MISS01P001DTO dto)
+        {
+            string strSQL = @"	SELECT NO,
+                                ISSUE_DATE,
+                                RESPONSE_BY,
+                                case ASSIGN_USER 
+                                when  NULL then 'No assignment' 
+                                when ' ' then 'No assignment' 
+                                else ASSIGN_USER end ASSIGN_USER,
+                                STATUS
+                                FROM VSMS_ISSUE
+                                WHERE COM_CODE = @COM_CODE";
+            var parameters = CreateParameter();
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+
+            if (!dto.Model.NO.IsNullOrEmpty())
+            {
+                strSQL += " AND NO  >= @NO";
+                parameters.AddParameter("NO", dto.Model.NO);
+            }
+            if (!dto.Model.RESPONSE_DATE.IsNullOrEmpty())
+            {
+                strSQL += " AND RESPONSE_DATE >= @RESPONSE_DATE";
+                parameters.AddParameter("RESPONSE_DATE", dto.Model.RESPONSE_DATE);
+            }
+            if (!dto.Model.RESPONSE_BY.IsNullOrEmpty())
+            {
+                strSQL += " AND RESPONSE_BY like @RESPONSE_BY";
+                parameters.AddParameter("RESPONSE_BY", dto.Model.RESPONSE_BY);
+            }
+            if (!dto.Model.ASSIGN_USER.IsNullOrEmpty())
+            {
+                strSQL += " AND ASSIGN_USER like  @ASSIGN_USER";
+                parameters.AddParameter("ASSIGN_USER", dto.Model.ASSIGN_USER);
+            }
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Models = result.OutputDataSet.Tables[0].ToList<MISS01P001Model>();
+            }
+
             return dto;
         }
         private MISS01P001DTO GetNo(MISS01P001DTO dto)
