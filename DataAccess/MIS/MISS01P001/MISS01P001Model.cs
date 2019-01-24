@@ -132,9 +132,13 @@ namespace DataAccess.MIS
             {
                 Valid();
             });
-            RuleSet("Upload", () =>
+            RuleSet("FilePacket", () =>
             {
-
+                RuleFor(t => t.FILE_ID).NotEmpty();
+            });
+            RuleSet("Assignment", () =>
+            {
+                RuleFor(t => t.ASSIGN_USER).NotEmpty();
             });
         }
 

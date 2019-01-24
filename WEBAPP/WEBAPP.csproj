@@ -810,6 +810,7 @@
     <Content Include="Areas\MIS\Views\MISS01P001\Step2.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P001\Step3.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P001\Assignment.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P001\FilePacket.cshtml" />
     <None Include="Properties\PublishProfiles\March.pubxml" />
     <None Include="Reports\DataSet\DemoReport.xsd">
       <Generator>MSDataSetGenerator</Generator>

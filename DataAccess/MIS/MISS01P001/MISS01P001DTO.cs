@@ -24,7 +24,8 @@ namespace DataAccess.MIS
         public const string GetAllAssign = "GetAllAssign";
         public const string GetAssignment = "GetAssignment";
         public const string Update = "Update";
-        public const string ValidateExl = "ValidateExl";
+        public const string UpdateFilePacket = "UpdateFilePacket";
+        public const string GetFilePacket = "GetFilePacket";
         public const string UpdateAssignment = "UpdateAssignment";
 
 

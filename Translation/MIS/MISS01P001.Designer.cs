@@ -214,6 +214,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File Packet.
+        /// </summary>
+        public static string FILEPACKET {
+            get {
+                return ResourceManager.GetString("FILEPACKET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Issue By.
         /// </summary>
         public static string ISSUE_BY {

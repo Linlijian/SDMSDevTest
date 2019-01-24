@@ -22,3 +22,7 @@ ERROR 2018-11-09 11:09:06,832 BaseController.OnException -
 Path : Users/Account/SignIn
 Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
 
+ERROR 2019-01-24 15:34:16,932 BaseController.OnException - 
+Path : MIS/MISS01P001/SaveFilePacket
+Error Messages: This SqlTransaction has completed; it is no longer usable.
+
