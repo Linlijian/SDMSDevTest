@@ -132,6 +132,9 @@
   <data name="ASSIGN" xml:space="preserve">
     <value>Assign user</value>
   </data>
+  <data name="ASSIGNMENT_CALCULATE" xml:space="preserve">
+    <value>Assignment Calculate</value>
+  </data>
   <data name="ASSIGN_USER" xml:space="preserve">
     <value>Assignment</value>
   </data>
@@ -174,8 +177,14 @@
   <data name="ISSUE_DATE" xml:space="preserve">
     <value>Issue Date</value>
   </data>
+  <data name="ISSUE_DATETIME" xml:space="preserve">
+    <value>Issue Datetime</value>
+  </data>
   <data name="ISSUE_DATE_PERIOD" xml:space="preserve">
     <value>Issue Date Period</value>
+  </data>
+  <data name="ISSUE_PROPERTY" xml:space="preserve">
+    <value>Issue Property</value>
   </data>
   <data name="ISSUE_TYPE" xml:space="preserve">
     <value>Issue Type</value>
@@ -201,6 +210,9 @@
   <data name="NO" xml:space="preserve">
     <value>Issue No.</value>
   </data>
+  <data name="OWNER" xml:space="preserve">
+    <value>Owner Issue</value>
+  </data>
   <data name="PRIORITY" xml:space="preserve">
     <value>Prioriry </value>
   </data>
@@ -221,6 +233,9 @@
   </data>
   <data name="ROOT_CAUSE" xml:space="preserve">
     <value>Root Cause</value>
+  </data>
+  <data name="SAVEASSIGN" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="SOLUTION" xml:space="preserve">
     <value>Solution</value>

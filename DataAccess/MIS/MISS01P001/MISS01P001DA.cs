@@ -28,6 +28,7 @@ namespace DataAccess.MIS
                 case MISS01P001ExecuteType.GetByID: return GetByID(dto);
                 case MISS01P001ExecuteType.GetNo: return GetNo(dto);
                 case MISS01P001ExecuteType.GetAllAssign: return GetAllAssign(dto);
+                case MISS01P001ExecuteType.GetAssignment: return GetAssignment(dto);
             }
             return dto;
         }
@@ -63,7 +64,7 @@ namespace DataAccess.MIS
             }
             if (!dto.Model.ASSIGN_USER.IsNullOrEmpty())
             {
-                strSQL += " AND ASSIGN_USER like  @ASSIGN_USER";
+                strSQL += " AND ASSIGN_USER =  @ASSIGN_USER";
                 parameters.AddParameter("ASSIGN_USER", dto.Model.ASSIGN_USER);
             }
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
@@ -71,6 +72,25 @@ namespace DataAccess.MIS
             if (result.Success(dto))
             {
                 dto.Models = result.OutputDataSet.Tables[0].ToList<MISS01P001Model>();
+            }
+
+            return dto;
+        }
+        private MISS01P001DTO GetAssignment(MISS01P001DTO dto)
+        {
+            string strSQL = @"	SELECT *
+                                FROM VSMS_ISSUE
+                                WHERE COM_CODE = @COM_CODE
+                                AND NO = @NO";
+            var parameters = CreateParameter();
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("NO", dto.Model.NO);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model = result.OutputDataSet.Tables[0].ToObject<MISS01P001Model>();
             }
 
             return dto;
@@ -229,6 +249,7 @@ namespace DataAccess.MIS
             switch (dto.Execute.ExecuteType)
             {
                 case MISS01P001ExecuteType.Update: return Update(dto);
+                case MISS01P001ExecuteType.UpdateAssignment: return UpdateAssignment(dto);
             }
             return dto;
         }
@@ -237,7 +258,35 @@ namespace DataAccess.MIS
             
             return dto;
         }
-       
+        private MISS01P001DTO UpdateAssignment(MISS01P001DTO dto)
+        {
+            var parameters = CreateParameter();
+
+            parameters.AddParameter("error_code", null, ParameterDirection.Output);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("ASSIGN_USER", dto.Model.ASSIGN_USER);
+            parameters.AddParameter("NO", dto.Model.NO);
+            parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
+            parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
+
+            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSUE_002]", parameters, CommandType.StoredProcedure);
+
+            if (!result.Status)
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+            }
+            else
+            {
+                if (result.OutputData["error_code"].ToString().Trim() != "0")
+                {
+                    dto.Result.IsResult = false;
+                    dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
+                }
+            }
+           
+            return dto;
+        }
         #endregion
 
         #region ====Delete==========

@@ -151,6 +151,47 @@ namespace WEBAPP.Areas.MIS.Controllers
             }
             return jsonResult;
         }
+        [RuleSetForClientSideMessages("Assignment")]
+        public ActionResult Assignment(MISS01P001Model model)
+        {
+            SetDefaulButton(StandardButtonMode.Create);
+            SetDefaultData();
+            SetButton("Assignment");
+
+            #region set default 
+            var view = string.Empty;
+            view = "Assignment";
+
+            var da = new MISS01P001DA();
+            da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetAssignment;
+            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            da.DTO.Model.NO = model.NO;
+            da.SelectNoEF(da.DTO);
+
+            localModel = da.DTO.Model;
+            //localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+            #endregion
+
+            return View(view, localModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveAssign(MISS01P001Model model)
+        {
+            var jsonResult = new JsonResult();
+            if (ModelState.IsValid)
+            {
+                model = SetModelDateTime(model);
+                var result = SaveData("SaveAssign", model);
+                jsonResult = Success(result, StandardActionName.SaveCreate, Url.Action(StandardActionName.Index, new { ACTIVE_STEP = 2 }));
+            }
+            else
+            {
+                jsonResult = ValidateError(ModelState, StandardActionName.SaveCreate);
+            }
+
+            return jsonResult;
+        }
         [RuleSetForClientSideMessages("Add")]
         public ActionResult Add()
         {
@@ -264,6 +305,18 @@ namespace WEBAPP.Areas.MIS.Controllers
             localModel.DEFECT_MODEL = BindDefect();
             localModel.PRIORITY_MODEL = BindPriority();
             localModel.ISSUE_TYPE_MODEL = BindIssueType();
+            if (mode == "1")
+            {
+                SetDefaulButton(StandardButtonMode.Index);
+            }
+            else if (mode == "2")
+            {
+                localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+            }
+            else if (mode == "3")
+            {
+                AddStandardButton(StandardButtonName.Search);
+            }
         }
         private void SetDateToString(MISS01P001Model model)
         {
@@ -344,6 +397,15 @@ namespace WEBAPP.Areas.MIS.Controllers
                 da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
                 da.DeleteNoEF(da.DTO);
             }
+            else if (mode == "SaveAssign")
+            {
+                SetStandardField(model);
+                da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.UpdateAssignment;
+                da.DTO.Model = (MISS01P001Model)model;
+
+                da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+                da.UpdateNoEF(da.DTO);
+            }
 
             return da.DTO.Result;
         }
@@ -361,6 +423,10 @@ namespace WEBAPP.Areas.MIS.Controllers
             else if (ACTIVE_STEP == "3")
             {
                 AddStandardButton(StandardButtonName.Search);
+            }
+            else if (ACTIVE_STEP == "Assignment")
+            {
+                AddButton(StandButtonType.ButtonComfirmAjax, "btnSAVEASSIGN", Translation.MIS.MISS01P001.SAVEASSIGN, iconCssClass: FaIcons.FaCopy, url: Url.Action("SaveAssign"));
             }
         }
         #endregion

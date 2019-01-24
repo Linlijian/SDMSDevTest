@@ -22,10 +22,10 @@ namespace DataAccess.MIS
         public const string GetNo = "GetNo";
         public const string Insert = "Insert";
         public const string GetAllAssign = "GetAllAssign";
-        public const string Confirm = "Confirm";
+        public const string GetAssignment = "GetAssignment";
         public const string Update = "Update";
         public const string ValidateExl = "ValidateExl";
-        public const string GetExl = "GetExl";
+        public const string UpdateAssignment = "UpdateAssignment";
 
 
     }

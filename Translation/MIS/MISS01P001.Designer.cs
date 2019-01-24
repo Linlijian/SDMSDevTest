@@ -115,6 +115,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assignment Calculate.
+        /// </summary>
+        public static string ASSIGNMENT_CALCULATE {
+            get {
+                return ResourceManager.GetString("ASSIGNMENT_CALCULATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close Date.
         /// </summary>
         public static string CLOSE_DATE {
@@ -241,6 +250,24 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Issue Datetime.
+        /// </summary>
+        public static string ISSUE_DATETIME {
+            get {
+                return ResourceManager.GetString("ISSUE_DATETIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Property.
+        /// </summary>
+        public static string ISSUE_PROPERTY {
+            get {
+                return ResourceManager.GetString("ISSUE_PROPERTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Issue Type.
         /// </summary>
         public static string ISSUE_TYPE {
@@ -313,6 +340,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Owner Issue.
+        /// </summary>
+        public static string OWNER {
+            get {
+                return ResourceManager.GetString("OWNER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prioriry .
         /// </summary>
         public static string PRIORITY {
@@ -372,6 +408,15 @@ namespace Translation.MIS {
         public static string ROOT_CAUSE {
             get {
                 return ResourceManager.GetString("ROOT_CAUSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SAVEASSIGN {
+            get {
+                return ResourceManager.GetString("SAVEASSIGN", resourceCulture);
             }
         }
         
