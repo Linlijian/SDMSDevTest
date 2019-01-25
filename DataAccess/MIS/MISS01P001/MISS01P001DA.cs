@@ -28,28 +28,10 @@ namespace DataAccess.MIS
                 case MISS01P001ExecuteType.GetByID: return GetByID(dto);
                 case MISS01P001ExecuteType.GetNo: return GetNo(dto);
                 case MISS01P001ExecuteType.GetAllAssign: return GetAllAssign(dto);
-                case MISS01P001ExecuteType.GetAssignment: return GetAssignment(dto);
+                case MISS01P001ExecuteType.GetAssignment: return GetFilePacket(dto);
                 case MISS01P001ExecuteType.GetFilePacket: return GetFilePacket(dto);
+                case MISS01P001ExecuteType.GetAllStatus: return GetAll(dto);
             }
-            return dto;
-        }
-        private MISS01P001DTO GetFilePacket(MISS01P001DTO dto)
-        {
-            string strSQL = @"	SELECT *
-                                FROM VSMS_ISSUE
-                                WHERE COM_CODE = @COM_CODE
-                                AND NO = @NO";
-            var parameters = CreateParameter();
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
-            parameters.AddParameter("NO", dto.Model.NO);
-
-            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
-
-            if (result.Success(dto))
-            {
-                dto.Model = result.OutputDataSet.Tables[0].ToObject<MISS01P001Model>();
-            }
-
             return dto;
         }
         private MISS01P001DTO GetAllAssign(MISS01P001DTO dto)
@@ -96,7 +78,7 @@ namespace DataAccess.MIS
 
             return dto;
         }
-        private MISS01P001DTO GetAssignment(MISS01P001DTO dto)
+        private MISS01P001DTO GetFilePacket(MISS01P001DTO dto)
         {
             string strSQL = @"	SELECT *
                                 FROM VSMS_ISSUE

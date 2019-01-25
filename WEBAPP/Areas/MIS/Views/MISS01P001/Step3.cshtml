@@ -31,3 +31,209 @@
         }
     }
 }
+
+@using (var row = Html.Bootstrap().GridRow().SetId("rowGridSearch").SetVisibility(Visibility.Hidden).Begin())
+{
+    using (row.GridColumn(12).Begin())
+    {
+        @Html.Bootstrap().Table().SetId("GridSearch").SetStyle(TableStyle.TableStripedBorderedHover)
+    }
+}
+
+@section scripts{
+    @Html.GridScript("Search",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("SearchStatus")),
+            //DeleteConfig = new DefaultConfig(Url.Action("DeleteSearch")),
+            DefaultBinding = true,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage
+        },
+   
+        new GridColumn("NO").SetNotVisible().SetKey(),
+        new GridColumn("NO", Translation.MIS.MISS01P001.NO, 10),
+        new GridColumn("ISSUE_BY", Translation.MIS.MISS01P001.ISSUE_BY, 10),
+        new GridColumn("RESPONSE_BY", Translation.MIS.MISS01P001.OWNER, 10),
+        new GridColumn("ASSIGN_USER", Translation.MIS.MISS01P001.ASSIGN_USER, 10),
+        new GridColumn("STATUS", Translation.MIS.MISS01P001.STATUS, 10),
+        new GridColumn(null, Translation.MIS.MISS01P001.GOLIVE, 10, ColumnsType.None, ColumnsTextAlign.Center, render: "RENDER_GOLIVE"),
+        new GridColumn(null, Translation.MIS.MISS01P001.CLOSE, 10, ColumnsType.None, ColumnsTextAlign.Center, render: "RENDER_CLOSE"),
+        new GridColumn(null, Translation.MIS.MISS01P001.RESTATUS, 10, ColumnsType.None, ColumnsTextAlign.Center, render: "RENDER_RESTATUS")
+        )
+
+
+<script type="text/javascript">
+    var RENDER_GOLIVE = function (data, type, full, meta) {
+        var tag = '';
+
+        if (!isNullOrEmpty(data)) {
+            @*tag += '<a href="javascript:void(0)" id="BTN_RENDER_GOLIVE" name="BTN_RENDER_GOLIVE" >';
+            tag += '<i class="ace-icon fa @FaIcons.FaCogs align-top bigger-180 style="color:#33FFC6;"></i>';
+            tag += ' <i class="fa fa-cog style="color:#33FFC6;"></i>';
+            tag += '</a>';*@
+            tag += '<a href="javascript:void(0)" id="BTN_RENDER_GOLIVE" name="BTN_RENDER_GOLIVE" >';
+            tag += '<i class="ace-icon fa @FaIcons.FaCogs align-top bigger-180 w3-yellow></i>';
+            tag += ' <i class="fa fa-cog style="color:#33FFC6;"></i>';
+            tag += '</a>';
+        }
+
+        return tag;
+    };
+
+    $(document).ready(function () {
+        $("#GridSearch tbody").on("click", "a[name='BTN_RENDER_GOLIVE']", function (e) {
+            $.confirm({
+                title: null,
+                content: "Are you sure to continue?",
+                columnClass: 'medium',
+                buttons: {
+                    confirm: {
+                        text: $("#hdSysOK").val(),
+                        btnClass: "btn-primary",
+                        action: function () {
+                            var idx = GridSearch.row($(this).parent()).index();
+                            var data = GridSearch.row(idx).data();
+                            waitingDialog.show();
+
+                            $.ajax({
+                                url: '@Url.Action("Change2GoLive")',
+                                type: 'post',
+                                data: data,
+                                success: function (result) {
+                                    if (result.Status) {
+                                        waitingDialog.hide();
+                                        GridSearch.ajax.reload();
+                                    }
+                                    else {
+                                        OnAjaxSuccess(result);
+                                    }
+                                },
+                                error: OnAjaxError
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: $("#hdSysCancel").val(),
+                        btnClass: "btn-primary"
+                    }
+                }
+            });
+        });
+    })
+    //========================================================================================
+    var RENDER_CLOSE = function (data, type, full, meta) {
+        var tag = '';
+
+        if (!isNullOrEmpty(data)) {
+            @*tag += '<a href="javascript:void(0)" id="BTN_RENDER_CLOSE" name="BTN_RENDER_CLOSE" >';
+            tag += '<i class="ace-icon fa @FaIcons.FaCogs align-top bigger-180 yallow"></i>';
+            //tag += ' Report Complete List';
+            tag += '</a>';*@
+            tag += '<a href="javascript:void(0)" id="BTN_RENDER_GOLIVE" name="BTN_RENDER_GOLIVE" >';
+            tag += '<i class="ace-icon fa @FaIcons.FaCogs align-top bigger-180 w3-yellow></i>';
+            tag += ' <i class="fa fa-cog style="color:#F80BFB;"></i>';
+            tag += '</a>';
+        }
+
+        return tag;
+    };
+
+    $(document).ready(function () {
+        $("#GridSearch tbody").on("click", "a[name='BTN_RENDER_CLOSE']", function (e) {
+            $.confirm({
+                title: null,
+                content: "Are you sure to continue?",
+                columnClass: 'medium',
+                buttons: {
+                    confirm: {
+                        text: $("#hdSysOK").val(),
+                        btnClass: "btn-primary",
+                        action: function () {
+                            var idx = GridSearch.row($(this).parent()).index();
+                            var data = GridSearch.row(idx).data();
+                            waitingDialog.show();
+
+                            $.ajax({
+                                url: '@Url.Action("Change2Close")',
+                                type: 'post',
+                                data: data,
+                                success: function (result) {
+                                    if (result.Status) {
+                                        waitingDialog.hide();
+                                        GridSearch.ajax.reload();
+                                    }
+                                    else {
+                                        OnAjaxSuccess(result);
+                                    }
+                                },
+                                error: OnAjaxError
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: $("#hdSysCancel").val(),
+                        btnClass: "btn-primary"
+                    }
+                }
+            });
+        });
+    })
+    //========================================================================================
+    var RENDER_RESTATUS = function (data, type, full, meta) {
+        var tag = '';
+
+        if (!isNullOrEmpty(data)) {
+            tag += '<a href="javascript:void(0)" id="BTN_RENDER_RESTATUS" name="BTN_RENDER_RESTATUS" >';
+            tag += '<i class="ace-icon fa @FaIcons.FaCogs align-top bigger-180 red"></i>';
+            //tag += ' Report Complete List';
+            tag += '</a>';
+        }
+
+        return tag;
+    };
+
+    $(document).ready(function () {
+        $("#GridSearch tbody").on("click", "a[name='BTN_RENDER_RESTATUS']", function (e) {
+            $.confirm({
+                title: null,
+                content: "Are you sure to continue?",
+                columnClass: 'medium',
+                buttons: {
+                    confirm: {
+                        text: $("#hdSysOK").val(),
+                        btnClass: "btn-primary",
+                        action: function () {
+                            var idx = GridSearch.row($(this).parent()).index();
+                            var data = GridSearch.row(idx).data();
+                            waitingDialog.show();
+
+                            $.ajax({
+                                url: '@Url.Action("Change2ReDo")',
+                                type: 'post',
+                                data: data,
+                                success: function (result) {
+                                    if (result.Status) {
+                                        waitingDialog.hide();
+                                        GridSearch.ajax.reload();
+                                    }
+                                    else {
+                                        OnAjaxSuccess(result);
+                                    }
+                                },
+                                error: OnAjaxError
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: $("#hdSysCancel").val(),
+                        btnClass: "btn-primary"
+                    }
+                }
+            });
+        });
+    })
+    //========================================================================================
+</script>
+
+}

@@ -27,7 +27,7 @@ namespace DataAccess.MIS
         public const string UpdateFilePacket = "UpdateFilePacket";
         public const string GetFilePacket = "GetFilePacket";
         public const string UpdateAssignment = "UpdateAssignment";
-
+        public const string GetAllStatus = "GetAllStatus";
 
     }
 }

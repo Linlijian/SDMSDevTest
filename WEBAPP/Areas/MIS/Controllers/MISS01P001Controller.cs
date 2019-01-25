@@ -136,6 +136,22 @@ namespace WEBAPP.Areas.MIS.Controllers
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
+        public ActionResult SearchStatus(MISS01P001Model model)
+        {
+            var da = new MISS01P001DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetAllStatus; //getall
+
+            if (Request.GetRequest("page").IsNullOrEmpty())
+            {
+                model.IsDefaultSearch = true;
+                TempSearch = model;
+            }
+            da.DTO.Model = TempSearch;
+            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            da.SelectNoEF(da.DTO);
+            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
+        }
         [HttpPost]
         public ActionResult DeleteSearch(List<MISS01P001Model> data)
         {
@@ -334,6 +350,51 @@ namespace WEBAPP.Areas.MIS.Controllers
             {
                 Console.WriteLine(ex.ToString());
             }
+        }
+        public ActionResult Change2GoLive(MISS01P001Model model)
+        {
+            //localModel.PERIOD_OF = TempModel.PERIOD_OF;
+            var da = new MISS01P001DA();
+            //SetStandardErrorLog(da.DTO);
+            //da.DTO.Execute.ExecuteType = ZQA882P03ExecuteType.GetQuerySearch;
+            //da.DTO.Model.PERIOD_OF = TempModel.PERIOD_OF;
+            //var result = setCancelPeriod(ZQA882P03ExecuteType.setCancelPeriod, model);
+
+            var jsonResult = new JsonResult();
+
+            jsonResult = Success(da.DTO.Result, new ResultOptions { Mode = "Process", ErrorMessage = "555 ไอโง่" });
+
+            return jsonResult;
+        }
+        public ActionResult Change2Close(MISS01P001Model model)
+        {
+            //localModel.PERIOD_OF = TempModel.PERIOD_OF;
+            var da = new MISS01P001DA();
+            //SetStandardErrorLog(da.DTO);
+            //da.DTO.Execute.ExecuteType = ZQA882P03ExecuteType.GetQuerySearch;
+            //da.DTO.Model.PERIOD_OF = TempModel.PERIOD_OF;
+            //var result = setCancelPeriod(ZQA882P03ExecuteType.setCancelPeriod, model);
+
+            var jsonResult = new JsonResult();
+
+            jsonResult = Success(da.DTO.Result, new ResultOptions { Mode = "Process", ErrorMessage = "555 ไอโง่" });
+
+            return jsonResult;
+        }
+        public ActionResult Change2ReDo(MISS01P001Model model)
+        {
+            //localModel.PERIOD_OF = TempModel.PERIOD_OF;
+            var da = new MISS01P001DA();
+            //SetStandardErrorLog(da.DTO);
+            //da.DTO.Execute.ExecuteType = ZQA882P03ExecuteType.GetQuerySearch;
+            //da.DTO.Model.PERIOD_OF = TempModel.PERIOD_OF;
+            //var result = setCancelPeriod(ZQA882P03ExecuteType.setCancelPeriod, model);
+
+            var jsonResult = new JsonResult();
+
+            jsonResult = Success(da.DTO.Result, new ResultOptions { Mode = "Process", ErrorMessage = "555 ไอโง่" });
+
+            return jsonResult;
         }
         #endregion
 

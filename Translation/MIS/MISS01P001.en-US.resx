@@ -138,6 +138,9 @@
   <data name="ASSIGN_USER" xml:space="preserve">
     <value>Assignment</value>
   </data>
+  <data name="CLOSE" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="CLOSE_DATE" xml:space="preserve">
     <value>Close Date</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="FILE_NAME" xml:space="preserve">
     <value>Upload File</value>
+  </data>
+  <data name="GOLIVE" xml:space="preserve">
+    <value>Go Live</value>
   </data>
   <data name="ISSUE_BY" xml:space="preserve">
     <value>Issue By</value>
@@ -233,6 +239,9 @@
   </data>
   <data name="RESPONSE_TARGET" xml:space="preserve">
     <value>Response Target</value>
+  </data>
+  <data name="RESTATUS" xml:space="preserve">
+    <value>Re Do</value>
   </data>
   <data name="ROOT_CAUSE" xml:space="preserve">
     <value>Root Cause</value>

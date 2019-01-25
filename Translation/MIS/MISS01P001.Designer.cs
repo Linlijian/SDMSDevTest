@@ -124,6 +124,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string CLOSE {
+            get {
+                return ResourceManager.GetString("CLOSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close Date.
         /// </summary>
         public static string CLOSE_DATE {
@@ -219,6 +228,15 @@ namespace Translation.MIS {
         public static string FILEPACKET {
             get {
                 return ResourceManager.GetString("FILEPACKET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go Live.
+        /// </summary>
+        public static string GOLIVE {
+            get {
+                return ResourceManager.GetString("GOLIVE", resourceCulture);
             }
         }
         
@@ -408,6 +426,15 @@ namespace Translation.MIS {
         public static string RESPONSE_TARGET {
             get {
                 return ResourceManager.GetString("RESPONSE_TARGET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Re Do.
+        /// </summary>
+        public static string RESTATUS {
+            get {
+                return ResourceManager.GetString("RESTATUS", resourceCulture);
             }
         }
         
