@@ -182,8 +182,6 @@ namespace DataAccess.SEC
 
     public class SECS01P001DetailPModel
     {
-        [Display(Name = "USER_ID", ResourceType = typeof(Translation.SEC.SECS01P001))]
-        public string USER_ID { get; set; }
         [Display(Name = "MODULE", ResourceType = typeof(Translation.SEC.SECS01P001))]
         public string MODULE { get; set; }
 

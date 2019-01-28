@@ -16,6 +16,7 @@ namespace DataAccess
     {
         public string COM_CODE { get; set; }
         public string MODULE { get; set; }
+        public string FLAG { get; set; }
         public string USER_ID { get; set; }
         public string CRET_BY { get; set; }
         public Nullable<System.DateTime> CRET_DATE { get; set; }

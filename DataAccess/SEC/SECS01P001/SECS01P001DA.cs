@@ -60,8 +60,7 @@ namespace DataAccess.SEC
                 .Select(m => new SECS01P001DetailPModel
                 {
                     COM_CODE = m.COM_CODE,
-                    MODULE = m.MODULE,
-                    USER_ID = m.USER_ID
+                    MODULE = m.MODULE
                 }).ToList();
 
             return dto;
@@ -114,7 +113,7 @@ namespace DataAccess.SEC
             model.MNT_BY = model.MNT_BY.Trim();
             _DBManger.VSMS_COMPANY.Add(model);
 
-            //InsertDetail(dto);
+            InsertDetail(dto);
 
             return dto;
         }
@@ -129,6 +128,7 @@ namespace DataAccess.SEC
                     m.CRET_BY = dto.Model.CRET_BY;
                     m.CRET_DATE = dto.Model.CRET_DATE;
                     m.COM_CODE = dto.Model.COM_CODE;
+                    m.FLAG = "M";
 
                     _DBManger.VSMS_MOBULE.Add(m);
                 }
@@ -151,7 +151,7 @@ namespace DataAccess.SEC
             var model = _DBManger.VSMS_COMPANY.First(m => m.COM_CODE == COM_CODE && m.COM_BRANCH == COM_BRANCH);
             model.MergeObject(dto.Model);
 
-            //UpdateDetail(dto);
+            UpdateDetail(dto);
 
             return dto;
         }
@@ -160,8 +160,11 @@ namespace DataAccess.SEC
         {
             if (dto.Model.Details.Count() > 0)
             {
-                var items = _DBManger.VSMS_MOBULE.Where(m => m.COM_CODE == dto.Model.COM_CODE);
-                _DBManger.VSMS_MOBULE.RemoveRange(items);
+                foreach (var item in dto.Model.Details)
+                {
+                    var items = _DBManger.VSMS_MOBULE.Where(m => m.COM_CODE == dto.Model.COM_CODE && m.FLAG == "M");
+                    _DBManger.VSMS_MOBULE.RemoveRange(items);
+                }
 
                 InsertDetail(dto);
             }
@@ -176,10 +179,19 @@ namespace DataAccess.SEC
             var dto = (SECS01P001DTO)baseDTO;
             foreach (var item in dto.Models)
             {
-
                 var items = _DBManger.VSMS_COMPANY.Where(m => m.COM_CODE == item.COM_CODE && m.COM_BRANCH == item.COM_BRANCH);
                 _DBManger.VSMS_COMPANY.RemoveRange(items);
             }
+
+            if (dto.Model.Details.Count() > 0)
+            {
+                foreach (var item in dto.Model.Details)
+                {
+                    var items = _DBManger.VSMS_MOBULE.Where(m => m.COM_CODE == dto.Model.COM_CODE && m.FLAG == "M");
+                    _DBManger.VSMS_MOBULE.RemoveRange(items);
+                }
+            }
+
             return dto;
         }
         #endregion
