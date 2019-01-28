@@ -114,7 +114,7 @@ namespace DataAccess.SEC
             model.MNT_BY = model.MNT_BY.Trim();
             _DBManger.VSMS_COMPANY.Add(model);
 
-            InsertDetail(dto);
+            //InsertDetail(dto);
 
             return dto;
         }
@@ -151,7 +151,7 @@ namespace DataAccess.SEC
             var model = _DBManger.VSMS_COMPANY.First(m => m.COM_CODE == COM_CODE && m.COM_BRANCH == COM_BRANCH);
             model.MergeObject(dto.Model);
 
-            UpdateDetail(dto);
+            //UpdateDetail(dto);
 
             return dto;
         }
