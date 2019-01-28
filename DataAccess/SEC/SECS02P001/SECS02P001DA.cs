@@ -189,8 +189,52 @@ namespace DataAccess.SEC
 
         private SECS02P001DTO InsertData(SECS02P001DTO dto)
         {
-            var model = dto.Model.ToNewObject(new VSMS_USRGROUP());
-            _DBManger.VSMS_USRGROUP.Add(model);
+            //var model = dto.Model.ToNewObject(new VSMS_USRGROUP());
+            //_DBManger.VSMS_USRGROUP.Add(model);
+            string sql = @"INSERT INTO [dbo].[VSMS_USRGROUP]
+                                       ([COM_CODE]
+                                        ,[USG_CODE]
+                                        ,[USG_NAME_TH]
+                                        ,[USG_NAME_EN]
+                                        ,[USG_STATUS]
+                                        ,[USG_LEVEL]
+                                        ,[CRET_BY]
+                                        ,[CRET_DATE]
+                                        ,[MNT_BY]
+                                        ,[MNT_DATE])
+                            VALUES
+                                        (@COM_CODE 
+                                        ,@USG_CODE 
+                                        ,@USG_NAME_TH 
+                                        ,@USG_NAME_EN 
+                                        ,@USG_STATUS
+                                        ,@USG_LEVEL 
+                                        ,@CRET_BY 
+                                        ,@CRET_DATE 
+                                        ,@MNT_BY
+                                        ,@MNT_DATE)";
+
+            var parameters1 = CreateParameter();
+
+            parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters1.AddParameter("USG_CODE", dto.Model.USG_CODE);
+            parameters1.AddParameter("USG_NAME_TH", dto.Model.USG_NAME_TH);
+            parameters1.AddParameter("USG_NAME_EN", dto.Model.USG_NAME_EN);
+            parameters1.AddParameter("USG_STATUS", dto.Model.USG_STATUS);
+            parameters1.AddParameter("USG_LEVEL", dto.Model.USG_LEVEL);
+            parameters1.AddParameter("CRET_BY", dto.Model.CRET_BY);
+            parameters1.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
+            parameters1.AddParameter("MNT_BY", dto.Model.MNT_BY);
+            parameters1.AddParameter("MNT_DATE", dto.Model.MNT_DATE);
+
+
+            var result = _DBMangerNoEF.ExecuteNonQuery(sql, parameters1, CommandType.Text);
+            if (!result.Success(dto))
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+            }
+
             return dto;
         }
         #endregion
@@ -216,8 +260,34 @@ namespace DataAccess.SEC
 
         private SECS02P001DTO UpdateData(SECS02P001DTO dto)
         {
-            var model = _DBManger.VSMS_USRGROUP.Where(m => m.COM_CODE == dto.Model.COM_CODE && m.USG_ID == dto.Model.USG_ID).FirstOrDefault();
-            model = model.MergeObject(dto.Model);
+            string sql = @"UPDATE [dbo].[VSMS_USRGROUP] SET 
+                                         USG_NAME_TH = @USG_NAME_TH
+                                        ,USG_NAME_EN = @USG_NAME_EN
+                                        ,USG_STATUS = @USG_STATUS
+                                        ,USG_LEVEL = @USG_LEVEL
+                                        ,MNT_BY = @MNT_BY
+                                        ,MNT_DATE = @MNT_DATE
+                                WHERE COM_CODE = @COM_CODE
+                                AND USG_ID = @USG_ID";
+
+            var parameters1 = CreateParameter();
+
+            parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters1.AddParameter("USG_ID", dto.Model.USG_ID);
+            parameters1.AddParameter("USG_NAME_TH", dto.Model.USG_NAME_TH);
+            parameters1.AddParameter("USG_NAME_EN", dto.Model.USG_NAME_EN);
+            parameters1.AddParameter("USG_STATUS", dto.Model.USG_STATUS);
+            parameters1.AddParameter("USG_LEVEL", dto.Model.USG_LEVEL);
+            parameters1.AddParameter("MNT_BY", dto.Model.CRET_BY);
+            parameters1.AddParameter("MNT_DATE", dto.Model.CRET_DATE);
+
+            var result = _DBMangerNoEF.ExecuteNonQuery(sql, parameters1, CommandType.Text);
+            if (!result.Success(dto))
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+            }
+
             return dto;
         }
         private SECS02P001DTO UpdateUsgPriv(SECS02P001DTO dto)

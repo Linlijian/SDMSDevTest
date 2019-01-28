@@ -92,6 +92,9 @@ namespace WEBAPP.Areas.SEC.Controllers
 
             localModel.USG_STATUS_MODEL = GetUsgStatus();
             localModel.USG_LEVEL_MODEL = GetUsgLevel();
+            Set(localModel, "USG_LEVEL_MODEL");
+            Set(localModel, "USG_STATUS_MODEL");
+
             return View(StandardActionName.Edit, localModel);
         }
 
@@ -364,14 +367,14 @@ namespace WEBAPP.Areas.SEC.Controllers
                 SetStandardField(model);
                 da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.InsertData;
                 da.DTO.Model = (SECS02P001Model)model;
-                da.Insert(da.DTO);
+                da.InsertNoEF(da.DTO);
             }
             else if (mode == StandardActionName.SaveModify)
             {
                 SetStandardField(model);
                 da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.UpdateData;
                 da.DTO.Model = (SECS02P001Model)model;
-                da.Update(da.DTO);
+                da.UpdateNoEF(da.DTO);
             }
             else if (mode == StandardActionName.Delete)
             {
@@ -421,6 +424,23 @@ namespace WEBAPP.Areas.SEC.Controllers
         private List<DDLCenterModel> GetUsgStatus()
         {
             return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_OPTIONDETAIL_002, new VSMParameter(FIXOptionID.FixOpt_99));
+        }
+        private void Set(SECS02P001Model model, string mode)
+        {
+            if(mode == "USG_STATUS_MODEL")
+            {
+                foreach (var item in model.USG_STATUS_MODEL)
+                {
+                    item.Value = item.Value.Trim();
+                }
+            }
+            else if(mode == "USG_LEVEL_MODEL")
+            {
+                foreach (var item in model.USG_LEVEL_MODEL)
+                {
+                    item.Value = item.Value.Trim();
+                }
+            }
         }
         #endregion
     }
