@@ -61,6 +61,15 @@ namespace Translation.CenterLang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;Add Application&apos; should not be empty..
+        /// </summary>
+        public static string APP_CODE {
+            get {
+                return ResourceManager.GetString("APP_CODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;Issue Date&apos; should not be empty..
         /// </summary>
         public static string Issue_date {
