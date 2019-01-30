@@ -133,6 +133,15 @@ namespace Translation.SEC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Module.
+        /// </summary>
+        public static string MODULE {
+            get {
+                return ResourceManager.GetString("MODULE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Permission.
         /// </summary>
         public static string PERMISSION {
@@ -165,6 +174,15 @@ namespace Translation.SEC {
         public static string STATUS_ENABLE {
             get {
                 return ResourceManager.GetString("STATUS_ENABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support Name.
+        /// </summary>
+        public static string SUPPORT {
+            get {
+                return ResourceManager.GetString("SUPPORT", resourceCulture);
             }
         }
         

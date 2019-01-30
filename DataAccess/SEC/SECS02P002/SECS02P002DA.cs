@@ -24,16 +24,33 @@ namespace DataAccess.SEC
             {
                 case SECS02P002ExecuteType.GetAll: return GetAll(dto);
                 case SECS02P002ExecuteType.GetByID: return GetByID(dto);
-                case SECS02P002ExecuteType.GetQuerySearchAll:
-                    return GetQuerySearchAll(dto);
-                case SECS02P002ExecuteType.GetQueryCheckUserAdmin:
-                    return GetQueryCheckUserAdmin(dto);
-                //case SECS02P002ExecuteType.GetUserCOM:
-                   // return GetUserCOM(dto);
+                case SECS02P002ExecuteType.GetQuerySearchAll:return GetQuerySearchAll(dto);
+                case SECS02P002ExecuteType.GetQueryCheckUserAdmin:return GetQueryCheckUserAdmin(dto);
+                case SECS02P002ExecuteType.GetDetailByID: return GetDetailByID(dto);
             }
             return dto;
         }
+        private SECS02P002DTO GetDetailByID(SECS02P002DTO dto)
+        {
+            string sql = @"SELECT COM_CODE,
+                                MODULE,
+                                USER_ID,
+                                USG_ID = (SELECT USG_ID FROM VSMS_USER WHERE USER_ID = @USER_ID)
+                          FROM VSMS_MOBULE
+                          WHERE USER_ID = @USER_ID";
 
+            var parameters = CreateParameter();
+            parameters.AddParameter("USER_ID", dto.Model.USER_ID);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(sql, parameters, CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model.Details = result.OutputDataSet.Tables[0].ToList<SECS02P002ModuleAndSystemDetail>();
+            }
+
+            return dto;
+        }
         private SECS02P002DTO GetAll(SECS02P002DTO dto)
         {
             dto.Models = _DBManger.VSMS_USER
@@ -232,7 +249,7 @@ namespace DataAccess.SEC
                                         ,@MNT_DATE)";
 
             var parameters1 = CreateParameter();
-            parameters1.AddParameter("COM_CODE", dto.Model.APP_CODE);
+            parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
             parameters1.AddParameter("TITLE_ID", dto.Model.TITLE_NAME_TH);
             parameters1.AddParameter("USER_ID", dto.Model.USER_ID);
             parameters1.AddParameter("USER_FNAME_TH", dto.Model.USER_FNAME_TH);
@@ -292,70 +309,54 @@ namespace DataAccess.SEC
 
         private SECS02P002DTO INSERT_USERCOM(SECS02P002DTO dto)
         {
-            string strSQL;
-            var parameters = CreateParameter();
-
-            DELETE_USERCOM(dto);
-            if (dto.Result.IsResult)
+            if(dto.Model.Details.Count > 0)
             {
-                if (CHECK_DUP(dto))
+                var UDG_ID = dto.Model.USG_ID;
+                DELETE_USERCOM(dto);
+                DELETE_MODUlE(dto);
+
+                foreach (var item in dto.Model.Details)
                 {
-                    strSQL = @"update dbo.vsms_usercom set
-                                  user_id = @puser_id,
-                                  usg_id = @pusg_id,
-                                  cret_by = @pcret_by,
-                                  cret_date = @pcret_date
-                               where com_code = @pcom_code
-                                  and user_id = @puser_id 
-                                  and usg_id = @pusg_id";
+                    var parameters1 = CreateParameter();
 
-                    parameters = CreateParameter();
-                    parameters.AddParameter("puser_id", dto.Model.USG_ID);
-                    parameters.AddParameter("pusg_id", dto.Model.USG_ID);
-                    parameters.AddParameter("pcret_by", dto.Model.CRET_BY);
-                    parameters.AddParameter("pcom_code", dto.Model.APP_CODE);
-                    parameters.AddParameter("pcret_date", dto.Model.CRET_DATE);
+                    parameters1.AddParameter("error_code", null, ParameterDirection.Output);
+                    parameters1.AddParameter("COM_CODE", item.COM_CODE);
+                    parameters1.AddParameter("USER_ID", item.USER_ID);
+                    parameters1.AddParameter("USG_ID", UDG_ID);
+                    parameters1.AddParameter("MODULE", item.MODULE);
+                    parameters1.AddParameter("CRET_BY", dto.Model.CRET_BY);
+                    parameters1.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
 
-                }
-                else
-                {
-                    strSQL = @"INSERT INTO  VSMS_USERCOM(
-                                            COM_CODE,
-                                            USER_ID,
-                                            USG_ID,
-                                            CRET_BY,	
-                                            CRET_DATE,
-                                            MNT_BY,	
-                                            MNT_DATE
-                                )VALUES(
-                                            @COM_CODE,
-                                            @USER_ID,
-                                            @USG_ID,
-                                            @CRET_BY,	
-                                            @CRET_DATE,
-                                            @MNT_BY,	
-                                            @MNT_DATE)";
+                    var result = _DBMangerNoEF.ExecuteNonQuery("[bond].[SP_SECS02P002_001]", parameters1);
 
-                    parameters = CreateParameter();
-                    parameters.AddParameter("COM_CODE", dto.Model.APP_CODE);
-                    parameters.AddParameter("USER_ID", dto.Model.USER_ID);
-                    parameters.AddParameter("USG_ID", dto.Model.USG_ID);
-                    parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
-                    parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
-                    parameters.AddParameter("MNT_BY", dto.Model.MNT_BY);
-                    parameters.AddParameter("MNT_DATE", dto.Model.MNT_DATE);
-                }
-
-                var result = _DBMangerNoEF.ExecuteNonQuery(strSQL, parameters, CommandType.Text);
-                if (result.Status == false)
-                {
-                    dto.Result.ResultMsg = result.ErrorMessage;
-                    dto.Result.IsResult = false;
+                    if (result.OutputData["error_code"] != "0")
+                    {
+                        dto.Result.IsResult = false;
+                        dto.Result.ResultMsg = result.OutputData["error_code"].Trim();
+                        break;
+                    }
                 }
             }
             return dto;
         }
+        private SECS02P002DTO DELETE_MODUlE(SECS02P002DTO dto)
+        {
+            string strSQL = @" delete from dbo.VSMS_MOBULE
+                               where  user_id = @puser_id and flag = 'C'";
 
+            var parameters = CreateParameter();
+            parameters.AddParameter("puser_id", dto.Model.USER_ID);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, CommandType.Text);
+
+            if (!result.Success(dto))
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+            }
+
+            return dto;
+        }
         private SECS02P002DTO DELETE_USERCOM(SECS02P002DTO dto)
         {
             string strSQL = @" delete from dbo.vsms_usercom
@@ -393,7 +394,7 @@ namespace DataAccess.SEC
                                     ,IS_DISABLED = @IS_DISABLED
                                     ,MNT_BY = @MNT_DATE
                                     ,MNT_DATE = @MNT_DATE
-                                    ,COM_CODE = @APP_CODE
+                                    ,COM_CODE = @COM_CODE
                               WHERE COM_CODE = @COM_CODE
                                     AND USER_ID = @USER_ID ";
 
@@ -402,7 +403,7 @@ namespace DataAccess.SEC
             parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
             parameters1.AddParameter("USER_ID", dto.Model.USER_ID);
 
-            parameters1.AddParameter("APP_CODE", dto.Model.APP_CODE);
+           // parameters1.AddParameter("APP_CODE", dto.Model.APP_CODE);
             parameters1.AddParameter("TITLE_ID", dto.Model.TITLE_NAME_TH);
             parameters1.AddParameter("USER_FNAME_TH", dto.Model.USER_FNAME_TH);
             parameters1.AddParameter("USER_LNAME_TH", dto.Model.USER_LNAME_TH);
@@ -443,6 +444,12 @@ namespace DataAccess.SEC
                 _DBMangerNoEF.ExecuteNonQuery(strSQL, parameters, CommandType.Text);
 
                 strSQL = @" DELETE FROM [dbo].[VSMS_USERCOM]
+                                   WHERE USER_ID = @USER_ID  ";
+                parameters = CreateParameter();
+                parameters.AddParameter("USER_ID", USER_ID);
+                _DBMangerNoEF.ExecuteNonQuery(strSQL, parameters, CommandType.Text);
+
+                strSQL = @" DELETE FROM [dbo].[VSMS_MOBULE]
                                    WHERE USER_ID = @USER_ID  ";
                 parameters = CreateParameter();
                 parameters.AddParameter("USER_ID", USER_ID);

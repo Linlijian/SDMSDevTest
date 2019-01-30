@@ -21,6 +21,7 @@ namespace DataAccess.SEC
     {
         public const string GetQuerySearchAll = "GetQuerySearchAll";
         public const string GetQueryCheckUserAdmin = "GetQueryCheckUserAdmin";
+        public const string GetDetailByID = "GetDetailByID";
         public const string GetUserCOM = "GetUserCOM";
     }
 }

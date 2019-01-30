@@ -189,4 +189,10 @@
   <data name="TITLE_NAME_TH" xml:space="preserve">
     <value>Title Name</value>
   </data>
+  <data name="MODULE" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="SUPPORT" xml:space="preserve">
+    <value>Support Name</value>
+  </data>
 </root>

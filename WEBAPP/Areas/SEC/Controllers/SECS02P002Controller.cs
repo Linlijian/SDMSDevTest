@@ -203,6 +203,25 @@ namespace WEBAPP.Areas.SEC.Controllers
             string ReportName = "J03FWL007R01";
             return Content("http://" + AppConfigHelper.ReportServerName + "/ReportServer?/" + AppConfigHelper.ReportFolderName + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + "&company_name=AutoAlliance%20(Thailand)%20Co.,Ltd.&user_id=vsmadmin&DateFromHead=21+%e0%b8%98%e0%b8%b1%e0%b8%99%e0%b8%a7%e0%b8%b2%e0%b8%84%e0%b8%a1+2558&DateToHead=25+%e0%b8%98%e0%b8%b1%e0%b8%99%e0%b8%a7%e0%b8%b2%e0%b8%84%e0%b8%a1+2558&error_code=0&WARE_HOUSE_FT=AAT&PE_HID=25&PE_NAME=2015-DEC%20PERIOD%204%20TO%20AAT&PE_START_DATE=2015-12-21&PE_END_DATE=2015-12-25");
         }
+
+        public ActionResult BindDetailAdd()
+        {
+            var da = new SECS02P002DA();
+            SetStandardErrorLog(da.DTO);
+
+            return JsonAllowGet(da.DTO.Model.Details);
+        }
+        public ActionResult BindDetail()
+        {
+            var da = new SECS02P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.GetDetailByID;
+            da.DTO.Model.USER_ID = TempModel.USER_ID;
+            
+
+            da.SelectNoEF(da.DTO);
+            return JsonAllowGet(da.DTO.Model.Details);
+        }
         #endregion
 
         #region ====Private Mehtod====

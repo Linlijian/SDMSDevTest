@@ -62,8 +62,27 @@ namespace DataAccess.SEC
         [Display(Name = "APP_CODE", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string APP_CODE { get; set; }
         public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
+
+        [Display(Name = "MODULE", ResourceType = typeof(Translation.SEC.SECS02P002))]
+        public string MODULE { get; set; }
+
+        public List<SECS02P002ModuleAndSystemDetail> Details { get; set; }
+
     }
-    
+
+    public class SECS02P002ModuleAndSystemDetail
+    {
+        [Display(Name = "MODULE", ResourceType = typeof(Translation.SEC.SECS02P002))]
+        public string MODULE { get; set; }
+        [Display(Name = "USER_ID", ResourceType = typeof(Translation.SEC.SECS02P002))]
+        public string USER_ID { get; set; }
+
+        [Display(Name = "APP_CODE", ResourceType = typeof(Translation.SEC.SECS02P002))]
+        public string COM_CODE { get; set; }
+
+        public string USG_ID { get; set; }
+    }
+
     public class SECS02P002Validator : AbstractValidator<SECS02P002Model>
     {
         public SECS02P002Validator()
@@ -71,7 +90,7 @@ namespace DataAccess.SEC
             RuleSet("Add", () =>
             {
                 Valid();
-                //RuleFor(m => m.USER_ID).NotEmpty();
+                RuleFor(m => m.USER_ID).Store("CD_SECS02P002_001").NotEmpty();
             });
 
             RuleSet("Edit", () =>
@@ -86,6 +105,9 @@ namespace DataAccess.SEC
             RuleFor(m => m.USER_FNAME_EN).NotEmpty();
             RuleFor(m => m.TITLE_ID).NotEmpty();
             RuleFor(m => m.USER_STATUS).NotEmpty();
+            RuleFor(m => m.USG_ID).NotEmpty();
+            RuleFor(m => m.COM_CODE).NotEmpty().WithMessage(Translation.CenterLang.Validate.APP_CODE); ;
+            RuleFor(m => m.MODULE).NotEmpty();
         }
     }
 }
