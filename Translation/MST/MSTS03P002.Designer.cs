@@ -70,6 +70,15 @@ namespace Translation.MST {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Issue Criteria.
+        /// </summary>
+        public static string ISSUE_CRITERIA {
+            get {
+                return ResourceManager.GetString("ISSUE_CRITERIA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Issue Type.
         /// </summary>
         public static string ISSUE_TYPE {
@@ -84,15 +93,6 @@ namespace Translation.MST {
         public static string KEY_ID {
             get {
                 return ResourceManager.GetString("KEY_ID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Priority Criteria.
-        /// </summary>
-        public static string PRIORITY_CRITERIA {
-            get {
-                return ResourceManager.GetString("PRIORITY_CRITERIA", resourceCulture);
             }
         }
         
