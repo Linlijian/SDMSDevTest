@@ -214,8 +214,9 @@ namespace DataAccess.MIS
         private bool Check_Dup(MISS02P001DTO dto)
         {
             string strSQL1 = @"SELECT COUNT(YEAR) AS YEAR
-                                        WHERE YEAR = @YEAR,
-                                            AND COM_CODE = @COM_CODE";
+                                        FROM VSMS_DEPLOY
+                                        WHERE YEAR = @YEAR
+                                        AND COM_CODE = @COM_CODE";
 
             var parameters1 = CreateParameter();
 
