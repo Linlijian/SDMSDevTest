@@ -36,6 +36,10 @@
                     {
                         @form.InputFor(m => m.ISSUE_TYPE, isRequired: true).SetIndexParameter(1)
                     }
+                    using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    {
+                        @form.CheckBoxFor(m => m.IS_FREE)
+                    }
                 }
                 using (var r = Html.Bootstrap().GridRow().Begin())
                 {
@@ -59,6 +63,7 @@
     if (a == 'True') {
         $("#HEADER #ISSUE_TYPE").attr("disabled", "disabled");
         $("#HEADER #REMASK").attr("disabled", "disabled");
+        $("#HEADER #IS_FREE").attr("disabled", "disabled");
     }
     
 </script>
