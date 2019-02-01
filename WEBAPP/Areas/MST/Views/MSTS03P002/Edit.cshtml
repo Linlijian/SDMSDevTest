@@ -54,49 +54,11 @@
 <script type="text/javascript">
     //$("#btnFinish").removeAttr("disabled");
     // $("#formDetailModels #P_NO").attr("disabled", "disabled");
-    $(document).ready(function () {
-        CLOSE_ALL();
-        var x = '@Model.KEY_ID';
-        var a = '@Model.IS_USED';
-        $("#form1 #HEADER").removeClass('@Css.Hidden');
-        if (x == 'P') {
-            $("#form1 #PRIORITY").removeClass('@Css.Hidden');
-        } else if (x == 'I') {
-            $("#form1 #HEADER").removeClass('@Css.Hidden');
-            if(a == 'True'){
-                $("#HEADER #ISSUE_TYPE").attr("disabled", "disabled");
-                $("#HEADER #REMASK").attr("disabled", "disabled");
-            }
-        }
-    });
-    function CLOSE_ALL() {
-        $("#form1 #PRIORITY").addClass('@Css.Hidden');
-        $("#form1 #ISSUE").addClass('@Css.Hidden');
+    $("#form1 #HEADER").removeClass('@Css.Hidden');
+    var a = '@Model.IS_USED';
+    if (a == 'True') {
+        $("#HEADER #ISSUE_TYPE").attr("disabled", "disabled");
+        $("#HEADER #REMASK").attr("disabled", "disabled");
     }
-
-    $(document).ready(function () {
-        $("#RES_TYPE").change(function () {
-            var a = $('#RES_TYPE').val()
-            RESET()
-            if (a == 'D') {
-                $("#T_RES_TYPE option[value='H']").hide();
-            } else if (a == 'B') {
-                $("#T_RES_TYPE option[value='H']").hide();
-                $("#T_RES_TYPE option[value='D']").hide();
-            } else if (a == 'W') {
-                $("#T_RES_TYPE option[value='H']").hide();
-                $("#T_RES_TYPE option[value='D']").hide();
-                $("#T_RES_TYPE option[value='B']").hide();
-            }
-        })
-
-        function RESET() {
-            $("#T_RES_TYPE option:selected").prop("selected", false)
-            $("#T_RES_TYPE option[value='H']").show();
-            $("#T_RES_TYPE option[value='D']").show();
-            $("#T_RES_TYPE option[value='B']").show();
-            $("#T_RES_TYPE option[value='W']").show();
-        }
-    })
-
+    
 </script>
