@@ -32,13 +32,13 @@ namespace DataAccess.MST
 
         private MSTS03P001DTO GetAll(MSTS03P001DTO dto)
         {
-            string strSQL = @"SELECT * FROM [dbo].[VSMS_PIT_DATA] WHERE (1=1)";
+            string strSQL = @"SELECT * FROM [dbo].[VSMS_PIT_DATA] WHERE (1=1) AND KEY_ID = 'P' ";
             var parameters = CreateParameter();
 
-            if (!dto.Model.KEY_ID.IsNullOrEmpty())
+            if (!dto.Model.PRIORITY_NAME.IsNullOrEmpty())
             {
-                strSQL += "AND KEY_ID = @KEY_ID";
-                parameters.AddParameter("KEY_ID", dto.Model.KEY_ID);
+                strSQL += "AND PRIORITY_NAME >= @PRIORITY_NAME";
+                parameters.AddParameter("PRIORITY_NAME", dto.Model.PRIORITY_NAME);
             }
             
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
@@ -115,7 +115,7 @@ namespace DataAccess.MST
 
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
             parameters.AddParameter("COM_CODE ", dto.Model.COM_CODE);
-            parameters.AddParameter("KEY_ID", dto.Model.KEY_ID);
+            parameters.AddParameter("KEY_ID", "P");
             parameters.AddParameter("PRIORITY_NAME", dto.Model.PRIORITY_NAME);
             parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
             parameters.AddParameter("RES_TYPE", dto.Model.RES_TYPE);
@@ -163,7 +163,7 @@ namespace DataAccess.MST
 
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
             parameters.AddParameter("COM_CODE ", dto.Model.COM_CODE);
-            parameters.AddParameter("KEY_ID", dto.Model.KEY_ID);
+            parameters.AddParameter("KEY_ID", "P");
             parameters.AddParameter("PIT_ID", dto.Model.PIT_ID);
             parameters.AddParameter("PRIORITY_NAME", dto.Model.PRIORITY_NAME);
             parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
