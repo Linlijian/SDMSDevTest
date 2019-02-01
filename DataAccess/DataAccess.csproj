@@ -92,6 +92,9 @@
     <Compile Include="MST\MSTS03P001\MSTS03P001DA.cs" />
     <Compile Include="MST\MSTS03P001\MSTS03P001DTO.cs" />
     <Compile Include="MST\MSTS03P001\MSTS03P001Model.cs" />
+    <Compile Include="MST\MSTS03P002\MSTS03P002DA.cs" />
+    <Compile Include="MST\MSTS03P002\MSTS03P002DTO.cs" />
+    <Compile Include="MST\MSTS03P002\MSTS03P002Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SEC\SECS01P001\SECS01P001DA.cs" />
     <Compile Include="SEC\SECS01P001\SECS01P001DTO.cs" />
