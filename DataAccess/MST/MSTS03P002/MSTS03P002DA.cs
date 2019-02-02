@@ -37,7 +37,7 @@ namespace DataAccess.MST
 
             if (!dto.Model.ISSUE_TYPE.IsNullOrEmpty())
             {
-                strSQL += "AND ISSUE_TYPE >= @ISSUE_TYPE";
+                strSQL += "AND ISSUE_TYPE like @ISSUE_TYPE";
                 parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
             }
             
