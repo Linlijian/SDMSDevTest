@@ -52,10 +52,23 @@
         new GridColumn("PIT_ID").SetNotVisible().SetKey(),
         new GridColumn("COM_CODE").SetNotVisible().SetKey(),
         new GridColumn("ISSUE_TYPE", Translation.MST.MSTS03P001.ISSUE_TYPE, 10).SetKey(),
-        new GridColumn("REMASK", Translation.MST.MSTS03P001.REMASK, 90)
+        new GridColumn("REMASK", Translation.MST.MSTS03P001.REMASK, 90),
+        new GridColumn("IS_FREE", Translation.MST.MSTS03P001.IS_FREE, 10, render: "RENDER_ISUSE")
         )
 
     <script>
-       
+        var RENDER_ISUSE = function (data, type, full, meta) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                if (data == "N") {
+                    tag += '<center><i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-180 red"></i></center>';
+                } else if (data == "Y") {
+                    tag += '<center><i class="ace-icon fa @FaIcons.FaCheckCircle align-top bigger-180 green"></i></center>'
+                }
+            }
+
+            return tag;
+        };
     </script>
 }
