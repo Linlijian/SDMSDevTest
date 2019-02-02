@@ -37,7 +37,7 @@ namespace DataAccess.MST
 
             if (!dto.Model.PRIORITY_NAME.IsNullOrEmpty())
             {
-                strSQL += "AND PRIORITY_NAME >= @PRIORITY_NAME";
+                strSQL += "AND PRIORITY_NAME like @PRIORITY_NAME";
                 parameters.AddParameter("PRIORITY_NAME", dto.Model.PRIORITY_NAME);
             }
             
