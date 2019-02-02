@@ -40,29 +40,37 @@ namespace DataAccess.MIS
 
             if (dto.Model.YEAR != null)
             {
-                 strSQL = @"  SELECT YEAR, 
-                                      SUM(CASE TYPE_DAY WHEN 'W'      THEN 1 ELSE 0 END) as ALL_SATURDAY_W ,
-                                      SUM(CASE TYPE_DAY WHEN 'H'      THEN 1 ELSE 0 END) as ALL_HOLIDAY,
-                                      SUM(CASE TYPE_DAY WHEN 'S'      THEN 1 ELSE 0 END) as ALL_SPP,
-                                      SUM(CASE TYPE_DAY WHEN 'I'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_IT,
-                                      SUM(CASE TYPE_DAY WHEN 'D'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_DATE
+                //strSQL = @"  SELECT YEAR, 
+                //                     SUM(CASE TYPE_DAY WHEN 'W'      THEN 1 ELSE 0 END) as ALL_SATURDAY_W ,
+                //                     SUM(CASE TYPE_DAY WHEN 'H'      THEN 1 ELSE 0 END) as ALL_HOLIDAY,
+                //                     SUM(CASE TYPE_DAY WHEN 'S'      THEN 1 ELSE 0 END) as ALL_SPP,
+                //                     SUM(CASE TYPE_DAY WHEN 'I'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_IT,
+                //                     SUM(CASE TYPE_DAY WHEN 'D'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_DATE
+                //               FROM [SDDB].[dbo].[VSMS_DEPLOY]
+                //               WHERE (1=1) AND YEAR = @YEAR AND COM_CODE = @COM_CODE
+                //               GROUP BY YEAR";
+                strSQL = @"  SELECT *
                                 FROM [SDDB].[dbo].[VSMS_DEPLOY]
                                 WHERE (1=1) AND YEAR = @YEAR AND COM_CODE = @COM_CODE
-                                GROUP BY YEAR";
+                              ";
                 parameters.AddParameter("YEAR", dto.Model.YEAR);
                 parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
             }
             else
             {
-                strSQL = @"  SELECT YEAR, 
-                                      SUM(CASE TYPE_DAY WHEN 'W'      THEN 1 ELSE 0 END) as ALL_SATURDAY_W ,
-                                      SUM(CASE TYPE_DAY WHEN 'H'      THEN 1 ELSE 0 END) as ALL_HOLIDAY,
-                                      SUM(CASE TYPE_DAY WHEN 'S'      THEN 1 ELSE 0 END) as ALL_SPP,
-                                      SUM(CASE TYPE_DAY WHEN 'I'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_IT,
-                                      SUM(CASE TYPE_DAY WHEN 'D'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_DATE
+                //strSQL = @"  SELECT YEAR, 
+                //                      SUM(CASE TYPE_DAY WHEN 'W'      THEN 1 ELSE 0 END) as ALL_SATURDAY_W ,
+                //                      SUM(CASE TYPE_DAY WHEN 'H'      THEN 1 ELSE 0 END) as ALL_HOLIDAY,
+                //                      SUM(CASE TYPE_DAY WHEN 'S'      THEN 1 ELSE 0 END) as ALL_SPP,
+                //                      SUM(CASE TYPE_DAY WHEN 'I'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_IT,
+                //                      SUM(CASE TYPE_DAY WHEN 'D'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_DATE
+                //                FROM [SDDB].[dbo].[VSMS_DEPLOY]
+                //                WHERE (1=1) AND COM_CODE = @COM_CODE
+                //                GROUP BY YEAR";
+                strSQL = @"  SELECT *
                                 FROM [SDDB].[dbo].[VSMS_DEPLOY]
                                 WHERE (1=1) AND COM_CODE = @COM_CODE
-                                GROUP BY YEAR";
+                                ";
                 parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
             }
 
@@ -94,7 +102,7 @@ namespace DataAccess.MIS
             string strSQL = @"SELECT * FROM [dbo].[VSMS_DEPLOY] WHERE (1=1)
                                             AND YEAR = @YEAR
                                             AND COM_CODE = @COM_CODE
-                                       ORDER BY DAY ,MONTH,YEAR,TYPE_DAY DESC";
+                                       ORDER BY DAY ,MONTH,YEAR DESC";
             var parameters = CreateParameter();
 
             parameters.AddParameter("YEAR", dto.Model.YEAR);
@@ -157,7 +165,8 @@ namespace DataAccess.MIS
                                        ,[MONTH]
                                        ,[YEAR]
                                        ,[DEPLOYMENT_DATE]
-                                       ,[TYPE_DAY]
+                                       ,[DEPLOY_PRG]
+                                       ,[DEPLOY_USER]
                                        ,[CRET_BY]
                                        ,[CRET_DATE]
                                        ,[MNT_BY]
@@ -168,7 +177,8 @@ namespace DataAccess.MIS
                                         ,@MONTH 
                                         ,@YEAR 
                                         ,@DEPLOYMENT_DATE 
-                                        ,@TYPE_DAY
+                                        ,@DEPLOY_PRG
+                                        ,@DEPLOY_USER
                                         ,@CRET_BY 
                                         ,@CRET_DATE 
                                         ,@MNT_BY 
@@ -181,7 +191,8 @@ namespace DataAccess.MIS
                         parameters1.AddParameter("MONTH", item.MONTH);
                         parameters1.AddParameter("YEAR", item.YEAR);
                         parameters1.AddParameter("DEPLOYMENT_DATE", item.DEPLOYMENT_DATE);
-                        parameters1.AddParameter("TYPE_DAY", item.TYPE_DAY);
+                        parameters1.AddParameter("DEPLOY_PRG", item.DEPLOY_PRG);
+                        parameters1.AddParameter("DEPLOY_USER", item.DEPLOY_USER);
                         parameters1.AddParameter("CRET_BY", dto.Model.CRET_BY);
                         parameters1.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
                         parameters1.AddParameter("MNT_BY", dto.Model.MNT_BY);
@@ -224,12 +235,12 @@ namespace DataAccess.MIS
             parameters1.AddParameter("YEAR", dto.Model.YEAR);
 
 
-            var result = _DBMangerNoEF.ExecuteNonQuery(strSQL1, parameters1, CommandType.Text);
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL1, parameters1, commandType: CommandType.Text);
             bool IsDup = false;
             if (result.Success(dto))
             {
                 string a = result.OutputDataSet.Tables[0].Rows[0][0].ToString();               
-                if (a != "0")
+                if (a == "0")
                     IsDup = true;
                 else
                     IsDup = false;
@@ -317,7 +328,8 @@ namespace DataAccess.MIS
                         parameters.AddParameter("YEAR", YEAR);
                         parameters.AddParameter("YEAR_EXL ", item.YEAR);
                         parameters.AddParameter("DEPLOYMENT_DATE ", item.DEPLOYMENT_DATE);
-                        parameters.AddParameter("TYPE_DAY ", item.TYPE_DAY);
+                        parameters.AddParameter("DEPLOY_PRG", item.DEPLOY_PRG);
+                        parameters.AddParameter("DEPLOY_USER", item.DEPLOY_USER);
 
                         var result = _DBMangerNoEF.ExecuteDataSet("[dbo].[SP_VSMS_DEPLOY_002]", parameters, CommandType.StoredProcedure);
                         dto.Model.ERROR_CODE = result.OutputData["error_code"].ToString().Trim();
@@ -508,7 +520,8 @@ namespace DataAccess.MIS
                                                        ,[MONTH]
                                                        ,[YEAR]
                                                        ,[DEPLOYMENT_DATE]
-                                                       ,[TYPE_DAY]
+                                                       ,[DEPLOY_PRG]
+                                                       ,[DEPLOY_USER]
                                                        ,[CRET_BY]
                                                        ,[CRET_DATE]
                                                        ,[MNT_BY]
@@ -519,7 +532,8 @@ namespace DataAccess.MIS
                                                         ,@MONTH 
                                                         ,@YEAR 
                                                         ,@DEPLOYMENT_DATE 
-                                                        ,@TYPE_DAY
+                                                        ,@DEPLOY_PRG
+                                                        ,@DEPLOY_USER
                                                         ,@CRET_BY 
                                                         ,@CRET_DATE 
                                                         ,@MNT_BY 
@@ -532,7 +546,8 @@ namespace DataAccess.MIS
                             parameters.AddParameter("MONTH", item.MONTH);
                             parameters.AddParameter("YEAR", item.YEAR);
                             parameters.AddParameter("DEPLOYMENT_DATE", item.DEPLOYMENT_DATE);
-                            parameters.AddParameter("TYPE_DAY", item.TYPE_DAY);
+                            parameters.AddParameter("DEPLOY_PRG", item.DEPLOY_PRG);
+                            parameters.AddParameter("DEPLOY_USER", item.DEPLOY_USER);
                             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
                             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
                             parameters.AddParameter("MNT_BY", dto.Model.MNT_BY);
@@ -559,7 +574,8 @@ namespace DataAccess.MIS
                             parameters1.AddParameter("MONTH", item.MONTH);
                             parameters1.AddParameter("YEAR", item.YEAR);
                             parameters1.AddParameter("DEPLOYMENT_DATE", item.DEPLOYMENT_DATE);
-                            parameters1.AddParameter("TYPE_DAY", item.TYPE_DAY);
+                            parameters1.AddParameter("DEPLOY_PRG", item.DEPLOY_PRG);
+                            parameters1.AddParameter("DEPLOY_USER", item.DEPLOY_USER);
                             parameters1.AddParameter("MNT_BY", dto.Model.CRET_BY);
                             parameters1.AddParameter("MNT_DATE", dto.Model.CRET_DATE);
 

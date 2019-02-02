@@ -124,6 +124,24 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deploy Program.
+        /// </summary>
+        public static string DEPLOY_PRG {
+            get {
+                return ResourceManager.GetString("DEPLOY_PRG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deplot For User.
+        /// </summary>
+        public static string DEPLOY_USER {
+            get {
+                return ResourceManager.GetString("DEPLOY_USER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to V-Smart infrom issue no deployment on next Monday.
         /// </summary>
         public static string DEPLOYMENT_DATE {

@@ -19,6 +19,10 @@ namespace DataAccess.MIS
 
         [Display(Name = "DEPLOYMENT_DATE", ResourceType = typeof(Translation.MIS.MISS02P001))]
         public string DEPLOYMENT_DATE { get; set; }
+        [Display(Name = "DEPLOY_PRG", ResourceType = typeof(Translation.MIS.MISS02P001))]
+        public string DEPLOY_PRG { get; set; }
+        [Display(Name = "DEPLOY_USER", ResourceType = typeof(Translation.MIS.MISS02P001))]
+        public string DEPLOY_USER { get; set; }
 
         [Display(Name = "TYPE_DAY", ResourceType = typeof(Translation.MIS.MISS02P001))]
         public string TYPE_DAY { get; set; }
@@ -60,6 +64,11 @@ namespace DataAccess.MIS
 
         [Display(Name = "DEPLOYMENT_DATE", ResourceType = typeof(Translation.MIS.MISS02P001))]
         public string DEPLOYMENT_DATE { get; set; }
+
+        [Display(Name = "DEPLOY_PRG", ResourceType = typeof(Translation.MIS.MISS02P001))]
+        public string DEPLOY_PRG { get; set; }
+        [Display(Name = "DEPLOY_USER", ResourceType = typeof(Translation.MIS.MISS02P001))]
+        public string DEPLOY_USER { get; set; }
 
         public string COM_CODE { get; set; }
     }
