@@ -40,37 +40,31 @@ namespace DataAccess.MIS
 
             if (dto.Model.YEAR != null)
             {
-                //strSQL = @"  SELECT YEAR, 
-                //                     SUM(CASE TYPE_DAY WHEN 'W'      THEN 1 ELSE 0 END) as ALL_SATURDAY_W ,
-                //                     SUM(CASE TYPE_DAY WHEN 'H'      THEN 1 ELSE 0 END) as ALL_HOLIDAY,
-                //                     SUM(CASE TYPE_DAY WHEN 'S'      THEN 1 ELSE 0 END) as ALL_SPP,
-                //                     SUM(CASE TYPE_DAY WHEN 'I'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_IT,
-                //                     SUM(CASE TYPE_DAY WHEN 'D'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_DATE
-                //               FROM [SDDB].[dbo].[VSMS_DEPLOY]
-                //               WHERE (1=1) AND YEAR = @YEAR AND COM_CODE = @COM_CODE
-                //               GROUP BY YEAR";
-                strSQL = @"  SELECT *
-                                FROM [SDDB].[dbo].[VSMS_DEPLOY]
-                                WHERE (1=1) AND YEAR = @YEAR AND COM_CODE = @COM_CODE
-                              ";
+                strSQL = @"  SELECT YEAR, 
+                                     SUM(CASE TYPE_DAY WHEN 'W'      THEN 1 ELSE 0 END) as ALL_SATURDAY_W ,
+                                     SUM(CASE TYPE_DAY WHEN 'H'      THEN 1 ELSE 0 END) as ALL_HOLIDAY,
+                                     SUM(CASE TYPE_DAY WHEN 'S'      THEN 1 ELSE 0 END) as ALL_SPP,
+                                     SUM(CASE TYPE_DAY WHEN 'I'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_IT,
+                                     SUM(CASE TYPE_DAY WHEN 'D'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_DATE
+                               FROM [SDDB].[dbo].[VSMS_DEPLOY]
+                               WHERE (1=1) AND YEAR = @YEAR AND COM_CODE = @COM_CODE
+                               GROUP BY YEAR";
+
                 parameters.AddParameter("YEAR", dto.Model.YEAR);
                 parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
             }
             else
             {
-                //strSQL = @"  SELECT YEAR, 
-                //                      SUM(CASE TYPE_DAY WHEN 'W'      THEN 1 ELSE 0 END) as ALL_SATURDAY_W ,
-                //                      SUM(CASE TYPE_DAY WHEN 'H'      THEN 1 ELSE 0 END) as ALL_HOLIDAY,
-                //                      SUM(CASE TYPE_DAY WHEN 'S'      THEN 1 ELSE 0 END) as ALL_SPP,
-                //                      SUM(CASE TYPE_DAY WHEN 'I'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_IT,
-                //                      SUM(CASE TYPE_DAY WHEN 'D'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_DATE
-                //                FROM [SDDB].[dbo].[VSMS_DEPLOY]
-                //                WHERE (1=1) AND COM_CODE = @COM_CODE
-                //                GROUP BY YEAR";
-                strSQL = @"  SELECT *
+                strSQL = @"  SELECT YEAR, 
+                                      SUM(CASE TYPE_DAY WHEN 'W'      THEN 1 ELSE 0 END) as ALL_SATURDAY_W ,
+                                      SUM(CASE TYPE_DAY WHEN 'H'      THEN 1 ELSE 0 END) as ALL_HOLIDAY,
+                                      SUM(CASE TYPE_DAY WHEN 'S'      THEN 1 ELSE 0 END) as ALL_SPP,
+                                      SUM(CASE TYPE_DAY WHEN 'I'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_IT,
+                                      SUM(CASE TYPE_DAY WHEN 'D'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_DATE
                                 FROM [SDDB].[dbo].[VSMS_DEPLOY]
                                 WHERE (1=1) AND COM_CODE = @COM_CODE
-                                ";
+                                GROUP BY YEAR";
+
                 parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
             }
 
@@ -164,6 +158,7 @@ namespace DataAccess.MIS
                                        ,[DAY]
                                        ,[MONTH]
                                        ,[YEAR]
+                                       ,[TYPE_DAY]
                                        ,[DEPLOYMENT_DATE]
                                        ,[DEPLOY_PRG]
                                        ,[DEPLOY_USER]
@@ -175,7 +170,8 @@ namespace DataAccess.MIS
                                         (@COM_CODE 
                                         ,@DAY 
                                         ,@MONTH 
-                                        ,@YEAR 
+                                        ,@YEAR
+                                        ,@TYPE_DAY 
                                         ,@DEPLOYMENT_DATE 
                                         ,@DEPLOY_PRG
                                         ,@DEPLOY_USER
@@ -190,6 +186,7 @@ namespace DataAccess.MIS
                         parameters1.AddParameter("DAY", item.DAY);
                         parameters1.AddParameter("MONTH", item.MONTH);
                         parameters1.AddParameter("YEAR", item.YEAR);
+                        parameters1.AddParameter("TYPE_DAY", item.TYPE_DAY);
                         parameters1.AddParameter("DEPLOYMENT_DATE", item.DEPLOYMENT_DATE);
                         parameters1.AddParameter("DEPLOY_PRG", item.DEPLOY_PRG);
                         parameters1.AddParameter("DEPLOY_USER", item.DEPLOY_USER);
@@ -327,6 +324,7 @@ namespace DataAccess.MIS
                         parameters.AddParameter("YYYY ", item.YYYY);
                         parameters.AddParameter("YEAR", YEAR);
                         parameters.AddParameter("YEAR_EXL ", item.YEAR);
+                        parameters.AddParameter("TYPE_DAY ", item.TYPE_DAY);
                         parameters.AddParameter("DEPLOYMENT_DATE ", item.DEPLOYMENT_DATE);
                         parameters.AddParameter("DEPLOY_PRG", item.DEPLOY_PRG);
                         parameters.AddParameter("DEPLOY_USER", item.DEPLOY_USER);
@@ -519,6 +517,7 @@ namespace DataAccess.MIS
                                                        ,[DAY]
                                                        ,[MONTH]
                                                        ,[YEAR]
+                                                       ,[TYPE_DAY]
                                                        ,[DEPLOYMENT_DATE]
                                                        ,[DEPLOY_PRG]
                                                        ,[DEPLOY_USER]
@@ -531,6 +530,7 @@ namespace DataAccess.MIS
                                                         ,@DAY 
                                                         ,@MONTH 
                                                         ,@YEAR 
+                                                        ,@TYPE_DAY
                                                         ,@DEPLOYMENT_DATE 
                                                         ,@DEPLOY_PRG
                                                         ,@DEPLOY_USER
@@ -545,6 +545,7 @@ namespace DataAccess.MIS
                             parameters.AddParameter("DAY", item.DAY);
                             parameters.AddParameter("MONTH", item.MONTH);
                             parameters.AddParameter("YEAR", item.YEAR);
+                            parameters.AddParameter("TYPE_DAY", item.TYPE_DAY);
                             parameters.AddParameter("DEPLOYMENT_DATE", item.DEPLOYMENT_DATE);
                             parameters.AddParameter("DEPLOY_PRG", item.DEPLOY_PRG);
                             parameters.AddParameter("DEPLOY_USER", item.DEPLOY_USER);
@@ -573,6 +574,7 @@ namespace DataAccess.MIS
                             parameters1.AddParameter("DAY", item.DAY);
                             parameters1.AddParameter("MONTH", item.MONTH);
                             parameters1.AddParameter("YEAR", item.YEAR);
+                            parameters1.AddParameter("TYPE_DAY", item.TYPE_DAY);
                             parameters1.AddParameter("DEPLOYMENT_DATE", item.DEPLOYMENT_DATE);
                             parameters1.AddParameter("DEPLOY_PRG", item.DEPLOY_PRG);
                             parameters1.AddParameter("DEPLOY_USER", item.DEPLOY_USER);

@@ -41,6 +41,14 @@
         {
             using (rowInfo.GridColumn(6).SetXs(6).Begin())
             {
+                //@formPopup.InputFor(t => t.DEPLOY_PRG)
+                @formPopup.SelectFor(t => t.TYPE_DAY, Model.TYPE_DAY_MODEL.ToSelectList("Value", "Text"), isRequired: true)
+            }
+        }
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).SetXs(6).Begin())
+            {
                 @formPopup.InputFor(t => t.DEPLOY_PRG)
                 //@formPopup.SelectFor(t => t.TYPE_DAY, Model.TYPE_DAY_MODEL.ToSelectList("Value", "Text"), isRequired: true)
             }
@@ -91,7 +99,8 @@
             new GridColumn("MONTH").SetNotVisible().SetKey(),
             new GridColumn("COM_CODE").SetNotVisible().SetKey(),
 
-
+            new GridColumn("YEAR", Translation.MIS.MISS02P001.YEAR, 20),
+            new GridColumn("TYPE_DAY", Translation.MIS.MISS02P001.TYPE_DAY, 10, render: "RENDER_TYPEDAY"),
             new GridColumn("DEPLOYMENT_DATE", Translation.MIS.MISS02P001.DEPLOYMENT_DATE, 10,ColumnsTextAlign.Center),
             new GridColumn("DEPLOY_PRG", Translation.MIS.MISS02P001.DEPLOY_PRG, 20),
             new GridColumn("DEPLOY_USER", Translation.MIS.MISS02P001.DEPLOY_USER, 20)
