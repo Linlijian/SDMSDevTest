@@ -78,21 +78,6 @@ namespace WEBAPP.Areas.MIS.Controllers
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
-        [HttpPost]
-        public ActionResult DeleteSearch(List<MISS01P001Model> data)
-        {
-            var jsonResult = new JsonResult();
-            if (data != null && data.Count > 0)
-            {
-                var result = SaveData(StandardActionName.Delete, data);
-                jsonResult = Success(result, StandardActionName.Delete);
-            }
-            else
-            {
-                jsonResult = ValidateError(StandardActionName.Delete, new ValidationError("", Translation.CenterLang.Center.DataNotFound));
-            }
-            return jsonResult;
-        }
         [RuleSetForClientSideMessages("Add")]
         public ActionResult Add()
         {
@@ -285,14 +270,7 @@ namespace WEBAPP.Areas.MIS.Controllers
                 da.DTO.Model = (MISS01P001Model)model;
 
                 da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-                //da.DTO.Model.COM_BRANCH = TempModel.COM_BRANCH.TrimEnd();
                 da.UpdateNoEF(da.DTO);
-            }
-            else if (mode == StandardActionName.Delete)
-            {
-                da.DTO.Models = (List<MISS01P001Model>)model;
-                da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-                da.DeleteNoEF(da.DTO);
             }
 
             return da.DTO.Result;

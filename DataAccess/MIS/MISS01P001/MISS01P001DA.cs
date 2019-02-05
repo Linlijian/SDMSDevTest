@@ -194,21 +194,5 @@ namespace DataAccess.MIS
             return dto;
         }
         #endregion
-
-        #region ====Delete==========
-        protected override BaseDTO DoDelete(BaseDTO baseDTO)
-        {
-            var dto = (MISS01P001DTO)baseDTO;
-            if (dto.Models.Count() > 0)
-            {
-                foreach (var item in dto.Models)
-                {
-                    
-                }
-            }
-
-            return dto;
-        }
-        #endregion
     }
 }
