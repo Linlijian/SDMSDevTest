@@ -77,6 +77,9 @@
     <Compile Include="Admin\Dashboard\DashboardDTO.cs" />
     <Compile Include="Admin\Dashboard\DashboardModel.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="MIS\MISS01P002\MISS01P002DA.cs" />
+    <Compile Include="MIS\MISS01P002\MISS01P002DTO.cs" />
+    <Compile Include="MIS\MISS01P002\MISS01P002Model.cs" />
     <Compile Include="MIS\MISS01P001\MISS01P001DA.cs" />
     <Compile Include="MIS\MISS01P001\MISS01P001DTO.cs" />
     <Compile Include="MIS\MISS01P001\MISS01P001Model.cs" />

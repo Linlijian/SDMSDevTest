@@ -70,6 +70,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MISS01P001.resx</DependentUpon>
     </Compile>
+    <Compile Include="MIS\MISS01P002.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MISS01P002.resx</DependentUpon>
+    </Compile>
     <Compile Include="MIS\MISS02P001.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -174,6 +179,11 @@
     <EmbeddedResource Include="MIS\MISS01P001.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MISS01P001.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MIS\MISS01P002.en-US.resx" />
+    <EmbeddedResource Include="MIS\MISS01P002.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MISS01P002.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="MIS\MISS02P001.en-US.resx" />
     <EmbeddedResource Include="MIS\MISS02P001.resx">
