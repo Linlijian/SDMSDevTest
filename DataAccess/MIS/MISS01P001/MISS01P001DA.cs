@@ -174,6 +174,7 @@ namespace DataAccess.MIS
                     dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
                 }
             }
+
             return dto;
         }
         #endregion
@@ -190,7 +191,52 @@ namespace DataAccess.MIS
         }
         private MISS01P001DTO Update(MISS01P001DTO dto)
         {
-            
+            var parameters = CreateParameter();
+
+            parameters.AddParameter("error_code", null, ParameterDirection.Output);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("NO", dto.Model.NO);
+            parameters.AddParameter("ISSUE_DATE", dto.Model.ISSUE_DATE);
+            parameters.AddParameter("ISSUE_DATE_PERIOD", dto.Model.ISSUE_DATE_PERIOD);
+            parameters.AddParameter("MODULE", dto.Model.MODULE);
+            parameters.AddParameter("DETAIL", dto.Model.DETAIL);
+            parameters.AddParameter("ROOT_CAUSE", dto.Model.ROOT_CAUSE);
+            parameters.AddParameter("SOLUTION", dto.Model.SOLUTION);
+            parameters.AddParameter("EFFECTS", dto.Model.EFFECTS);
+            parameters.AddParameter("ISSUE_BY", dto.Model.ISSUE_BY);
+            parameters.AddParameter("RESPONSE_BY", dto.Model.RESPONSE_BY);
+            parameters.AddParameter("RESPONSE_DATE", dto.Model.RESPONSE_DATE);
+            parameters.AddParameter("RESPONSE_TARGET", dto.Model.RESPONSE_TARGET);
+            parameters.AddParameter("RESOLUTION_TARGET", dto.Model.RESOLUTION_TARGET);
+            parameters.AddParameter("ESSR_NO", dto.Model.ESSR_NO);
+            parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
+            parameters.AddParameter("DEFECT", dto.Model.DEFECT);
+            parameters.AddParameter("PRIORITY", dto.Model.PRIORITY);
+            parameters.AddParameter("REMARK", dto.Model.REMARK);
+            parameters.AddParameter("MAN_PLM_SA", dto.Model.MAN_PLM_SA);
+            parameters.AddParameter("MAN_PLM_QA", dto.Model.MAN_PLM_QA);
+            parameters.AddParameter("MAN_PLM_PRG", dto.Model.MAN_PLM_PRG);
+            parameters.AddParameter("MAN_PLM_PL", dto.Model.MAN_PLM_PL);
+            parameters.AddParameter("MAN_PLM_DBA", dto.Model.MAN_PLM_DBA);
+            parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
+            parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
+
+            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSUE_004]", parameters, CommandType.StoredProcedure);
+
+            if (!result.Status)
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+            }
+            else
+            {
+                if (result.OutputData["error_code"].ToString().Trim() != "0")
+                {
+                    dto.Result.IsResult = false;
+                    dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
+                }
+            }
+
             return dto;
         }
         #endregion
