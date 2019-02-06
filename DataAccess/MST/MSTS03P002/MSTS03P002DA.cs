@@ -220,7 +220,7 @@ namespace DataAccess.MST
                     else
                     {
                         dto.Result.IsResult = false;
-                        dto.Result.ResultMsg = "Delete not complete, Priority or Issue type is used!";
+                        dto.Result.ResultMsg = "Issue type is used!";
                         break;
                     }
                 }
