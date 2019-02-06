@@ -177,29 +177,66 @@ namespace DataAccess.MST
             var dto = (MSTS01P001DTO)baseDTO;
             if (dto.Models.Count() > 0)
             {
-                foreach (var item in dto.Models)
+                if (CheckUse(dto))
                 {
-                    string strSQL = @" DELETE FROM VSMS_MANDAY 
+                    foreach (var item in dto.Models)
+                    {
+                        string strSQL = @" DELETE FROM VSMS_MANDAY 
                                                 WHERE COM_CODE = @COM_CODE 
                                                 AND ISSUE_TYPE = @ISSUE_TYPE 
                                                 AND TYPE_RATE = @TYPE_RATE";
 
-                    var parameters = CreateParameter();
-                    parameters.AddParameter("COM_CODE", item.COM_CODE);
-                    parameters.AddParameter("ISSUE_TYPE", item.ISSUE_TYPE);
-                    parameters.AddParameter("TYPE_RATE", item.TYPE_RATE);
+                        var parameters = CreateParameter();
+                        parameters.AddParameter("COM_CODE", item.COM_CODE);
+                        parameters.AddParameter("ISSUE_TYPE", item.ISSUE_TYPE);
+                        parameters.AddParameter("TYPE_RATE", item.TYPE_RATE);
 
-                    var result = _DBMangerNoEF.ExecuteNonQuery(strSQL, parameters, CommandType.Text);
-                    if (!result.Status)
-                    {
-                        dto.Result.IsResult = false;
-                        dto.Result.ResultMsg = result.ErrorMessage;
-                        break;
+                        var result = _DBMangerNoEF.ExecuteNonQuery(strSQL, parameters, CommandType.Text);
+                        if (!result.Status)
+                        {
+                            dto.Result.IsResult = false;
+                            dto.Result.ResultMsg = result.ErrorMessage;
+                            break;
+                        }
                     }
+                }
+                else
+                {
+                    dto.Result.IsResult = false;
+                    dto.Result.ResultMsg = "Standard Rate of MA Waranty is used";
                 }
             }
 
             return dto;
+        }
+        private bool CheckUse(MSTS01P001DTO dto)
+        {
+            string strSQL = @" SELECT COUNT(*)
+                                FROM VSMS_ISSUE A JOIN VSMS_MANDAY S
+                                ON A.COM_CODE = S.COM_CODE
+                                AND A.DEFECT = S.ISSUE_TYPE 
+                                WHERE A.COM_CODE = @COM_CODE
+                                AND A.DEFECT = @DEFECT";
+
+            var parameters = CreateParameter();
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("DEFECT", dto.Model.ISSUE_TYPE);
+
+            var result = _DBMangerNoEF.ExecuteNonQuery(strSQL, parameters, CommandType.Text);
+
+            bool isUse;
+            int AA = 0;
+            if (result.Status)
+            {
+                 AA = result.OutputDataSet.Tables[0].Rows[0][0].AsInt();
+            }
+
+            if (AA == 0)
+                isUse = false;
+            else
+                isUse = true;
+
+            return isUse;
         }
         #endregion
     }
