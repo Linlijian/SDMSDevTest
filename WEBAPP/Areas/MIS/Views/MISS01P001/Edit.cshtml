@@ -91,7 +91,7 @@
     {
         using (row1.GridColumn(6).Begin())
         {
-            @Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P001.ISSUE_CALCULATE)
+            @Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P001.ISSUE_PROPERTY)
             using (row1.GridColumn(12).Begin())
             {
                 //autocomplete
@@ -149,7 +149,7 @@
         }
         using (row1.GridColumn(6).Begin())
         {
-            @Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P001.ISSUE_CALCULATE)
+            @Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P001.ISSUE_DATETIME)
             using (row1.GridColumn(12).Begin())
             {
                 //@form.InputFor(m => m.STATUS)
@@ -161,18 +161,18 @@
             }
             using (row1.GridColumn(12).Begin())
             {
-                @form.InputFor(m => m.STR_CLOSE_DATE, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.CLOSE_DATE).AddCss("input-append")
-                @form.HiddenFor(m => m.CLOSE_DATE)
+                //@form.InputFor(m => m.STR_CLOSE_DATE, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.CLOSE_DATE).AddCss("input-append")
+                //@form.HiddenFor(m => m.CLOSE_DATE)
             }
             using (row1.GridColumn(12).Begin())
             {
-                @form.InputFor(m => m.STR_RDEPLOY_PD, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.DEPLOY_PD).AddCss("input-append")
-                @form.HiddenFor(m => m.DEPLOY_PD)
+               // @form.InputFor(m => m.STR_RDEPLOY_PD, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.DEPLOY_PD).AddCss("input-append")
+               // @form.HiddenFor(m => m.DEPLOY_PD)
             }
             using (row1.GridColumn(12).Begin())
             {
-                @form.InputFor(m => m.STR_DEPLOY_QA, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.DEPLOY_QA).AddCss("input-append")
-                @form.HiddenFor(m => m.DEPLOY_QA)
+                //@form.InputFor(m => m.STR_DEPLOY_QA, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.DEPLOY_QA).AddCss("input-append")
+               // @form.HiddenFor(m => m.DEPLOY_QA)
             }
             using (row1.GridColumn(12).Begin())
             {
