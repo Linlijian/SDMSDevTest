@@ -82,7 +82,13 @@
     $("#HEADER #PRIORITY").removeClass('@Css.Hidden');
     var a = '@Model.IS_USED';
     if (a == 'True') {
-        $("#ISSUE #ISSUE_TYPE").attr("disabled", "disabled");
-        $("#ISSUE #REMASK").attr("disabled", "disabled");
+        $("#PRIORITY #PRIORITY_NAME").attr("disabled", "disabled");
+        $("#PRIORITY #RES_TIME").attr("disabled", "disabled");
+        $("#PRIORITY #RES_TYPE").attr("disabled", "disabled");
+        $("#PRIORITY #T_RES_TIME").attr("disabled", "disabled");
+        $("#PRIORITY #T_RES_TYPE").attr("disabled", "disabled");
+        $("#PRIORITY #REMASK").attr("disabled", "disabled");
     }
+
+   
 </script>

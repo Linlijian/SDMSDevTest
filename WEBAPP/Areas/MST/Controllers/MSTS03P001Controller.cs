@@ -123,9 +123,12 @@ namespace WEBAPP.Areas.MST.Controllers
             da.SelectNoEF(da.DTO);
 
             localModel = da.DTO.Model;
-            
 
-            SetDefaulButton(StandardButtonMode.Modify);
+            if (localModel.IS_USED)
+                RemoveStandardButton("SaveModify");
+            else
+                SetDefaulButton(StandardButtonMode.Modify);
+
             SetDefaultData(StandardActionName.Edit);   //set ค่า DDL
 
             return View(StandardActionName.Edit, localModel);
@@ -137,7 +140,7 @@ namespace WEBAPP.Areas.MST.Controllers
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
             {
-                //model.PIT_ID = TempModel.PIT_ID;
+                model.PIT_ID = TempModel.PIT_ID;
                 var result = SaveData(StandardActionName.SaveModify, model);
                 jsonResult = Success(result, StandardActionName.SaveModify, Url.Action(StandardActionName.Index, new { page = 1 }));
             }

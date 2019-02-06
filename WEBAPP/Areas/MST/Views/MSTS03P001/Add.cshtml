@@ -77,4 +77,29 @@
 <script type="text/javascript">
     $("#form1 #HEADER").removeClass('@Css.Hidden');
     $("#HEADER #PRIORITY").removeClass('@Css.Hidden');
+
+    $(document).ready(function () {
+        $("#RES_TYPE").change(function () {
+            var a = $('#RES_TYPE').val()
+            RESET()
+            if (a == 'D') {
+                $("#T_RES_TYPE option[value='H']").hide();
+            } else if (a == 'B') {
+                $("#T_RES_TYPE option[value='H']").hide();
+                $("#T_RES_TYPE option[value='D']").hide();
+            } else if (a == 'W') {
+                $("#T_RES_TYPE option[value='H']").hide();
+                $("#T_RES_TYPE option[value='D']").hide();
+                $("#T_RES_TYPE option[value='B']").hide();
+            }
+        })
+
+        function RESET() {
+            $("#T_RES_TYPE option:selected").prop("selected", false)
+            $("#T_RES_TYPE option[value='H']").show();
+            $("#T_RES_TYPE option[value='D']").show();
+            $("#T_RES_TYPE option[value='B']").show();
+            $("#T_RES_TYPE option[value='W']").show();
+        }
+    })
 </script>
