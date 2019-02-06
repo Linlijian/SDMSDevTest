@@ -159,37 +159,32 @@ namespace DataAccess.MST
         }
         private MSTS03P002DTO Update(MSTS03P002DTO dto)
         {
+            string SQL = @"UPDATE VSMS_PIT_DATA SET
+			                    [ISSUE_TYPE] = @ISSUE_TYPE
+			                    ,[REMASK] = @REMASK
+			                    ,[IS_FREE] = @IS_FREE
+			                    ,[MNT_BY] = @CRET_BY
+			                    ,[MNT_DATE] = @CRET_DATE
+			                WHERE PIT_ID = @PIT_ID
+			                AND COM_CODE = @COM_CODE";
+
             var parameters = CreateParameter();
 
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
             parameters.AddParameter("COM_CODE ", dto.Model.COM_CODE);
-            parameters.AddParameter("KEY_ID", "I");
             parameters.AddParameter("PIT_ID", dto.Model.PIT_ID);
-            parameters.AddParameter("PRIORITY_NAME", dto.Model.PRIORITY_NAME);
             parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
-            parameters.AddParameter("RES_TYPE", dto.Model.RES_TYPE);
-            parameters.AddParameter("T_RES_TYPE", dto.Model.T_RES_TYPE);
-            parameters.AddParameter("RES_TIME", dto.Model.RES_TIME);
-            parameters.AddParameter("T_RES_TIME", dto.Model.T_RES_TIME);
             parameters.AddParameter("IS_FREE", dto.Model.IS_FREE);
             parameters.AddParameter("REMASK", dto.Model.REMASK);
             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
 
-            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_PIT_DATA_002]", parameters, CommandType.StoredProcedure);
+            var result = _DBMangerNoEF.ExecuteDataSet(SQL, parameters, commandType: CommandType.Text);
 
             if (!result.Status)
             {
                 dto.Result.IsResult = false;
                 dto.Result.ResultMsg = result.ErrorMessage;
-            }
-            else
-            {
-                if (result.OutputData["error_code"].ToString().Trim() != "0")
-                {
-                    dto.Result.IsResult = false;
-                    dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
-                }
             }
             return dto;
         }

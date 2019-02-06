@@ -123,9 +123,12 @@ namespace WEBAPP.Areas.MST.Controllers
             da.SelectNoEF(da.DTO);
 
             localModel = da.DTO.Model;
-            
 
-            SetDefaulButton(StandardButtonMode.Modify);
+            if (localModel.IS_USED)
+                RemoveStandardButton("SaveModify");
+            else
+                SetDefaulButton(StandardButtonMode.Modify);
+           
             SetDefaultData(StandardActionName.Edit);   //set ค่า DDL
 
             return View(StandardActionName.Edit, localModel);
