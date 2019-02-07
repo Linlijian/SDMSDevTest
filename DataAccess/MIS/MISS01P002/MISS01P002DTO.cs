@@ -19,9 +19,13 @@ namespace DataAccess.MIS
 
     public class MISS01P002ExecuteType : DTOExecuteType
     {
-        
-        public const string Insert = "Insert";
-        public const string Update = "Update";
 
+        public const string UpdateAssignment = "UpdateAssignment";
+        public const string UpdateFilePacket = "UpdateFilePacket";
+        public const string GetAllAssign = "GetAllAssign";
+        public const string GetFilePacket = "GetFilePacket";
+        public const string Update = "Update";
+        public const string Insert = "Insert";
+        public const string GetAssignment = "GetAssignment";
     }
 }

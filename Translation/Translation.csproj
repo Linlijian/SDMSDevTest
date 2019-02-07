@@ -182,7 +182,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MIS\MISS01P002.en-US.resx" />
     <EmbeddedResource Include="MIS\MISS01P002.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MISS01P002.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="MIS\MISS02P001.en-US.resx" />

@@ -62,11 +62,11 @@ namespace WEBAPP.Areas.MIS.Controllers
             }
             return View(StandardActionName.Index, localModel);
         }
-        public ActionResult Search(MISS01P002Model model)
+        public ActionResult SearchAssign(MISS01P002Model model)
         {
             var da = new MISS01P002DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAll;
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAllAssign;
 
             if (Request.GetRequest("page").IsNullOrEmpty())
             {
@@ -78,36 +78,38 @@ namespace WEBAPP.Areas.MIS.Controllers
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
-        [RuleSetForClientSideMessages("Add")]
-        public ActionResult Add()
+        [RuleSetForClientSideMessages("Assignment")]
+        public ActionResult Assignment(MISS01P002Model model)
         {
             SetDefaulButton(StandardButtonMode.Create);
-            SetDefaultData(StandardActionName.Add);
-            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+            SetDefaultData();
+            SetButton("Assignment");
 
-           
+            #region set default 
+            var view = string.Empty;
+            view = "Assignment";
 
-            return View(StandardActionName.Add, localModel);
+            var da = new MISS01P002DA();
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAssignment;
+            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            da.DTO.Model.NO = model.NO;
+            da.SelectNoEF(da.DTO);
+
+            localModel = da.DTO.Model;
+            //localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+            #endregion
+
+            return View(view, localModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveCreate(MISS01P002Model model)
+        public ActionResult SaveAssign(MISS01P002Model model)
         {
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
             {
-               
-                var result = SaveData(StandardActionName.SaveCreate, model);
-                //if(result.ResultMsg != null)
-                //{
-                //    string msg = string.Format("Issue no. {0}" + Environment.NewLine +
-                //             "FROM {1}" + Environment.NewLine +
-                //             "TO " + "@" + "{2}" + Environment.NewLine +
-                //             "Detail {3}", model.NO, model.ISSUE_BY, model.SOLUTION, model.REMARK);
-
-                //    lineNotify(msg);
-                //}
-                jsonResult = Success(result, StandardActionName.SaveCreate, Url.Action(StandardActionName.Index, new { page = 1 }));
+                var result = SaveData("SaveAssign", model);
+                jsonResult = Success(result, StandardActionName.SaveCreate, Url.Action(StandardActionName.Index, new { ACTIVE_STEP = 2 }));
             }
             else
             {
@@ -116,42 +118,51 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return jsonResult;
         }
-        public ActionResult Edit(MISS01P002Model model)
+        [RuleSetForClientSideMessages("FilePacket")]
+        public ActionResult FilePacket(MISS01P002Model model)
         {
+            SetDefaulButton(StandardButtonMode.Create);
+            SetDefaultData();
+            SetButton("FilePacket");
+
+            #region set default 
+            var view = string.Empty;
+            view = "FilePacket";
+
             var da = new MISS01P002DA();
-            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetByID;
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetFilePacket;
             da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-           
+            da.DTO.Model.NO = model.NO;
             da.SelectNoEF(da.DTO);
+
             localModel = da.DTO.Model;
+            //localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+            #endregion
 
-            SetDefaultData(StandardActionName.Edit);
-            SetDefaulButton(StandardButtonMode.Modify);
-
-            return View(StandardActionName.Edit, localModel);
+            return View(view, localModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveModify(MISS01P002Model model)
+        public ActionResult SaveFilePacket(MISS01P002Model model)
         {
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
             {
-                var result = SaveData(StandardActionName.SaveModify, model);
-                jsonResult = Success(result, StandardActionName.SaveModify, Url.Action(StandardActionName.Index, new { page = 1 }));
+                var result = SaveData("FilePacket", model);
+                jsonResult = Success(result, StandardActionName.SaveCreate, Url.Action(StandardActionName.Index, new { ACTIVE_STEP = 2 }));
             }
             else
             {
-                jsonResult = ValidateError(ModelState, StandardActionName.SaveModify);
+                jsonResult = ValidateError(ModelState, StandardActionName.SaveCreate);
             }
+
             return jsonResult;
         }
-        
         #endregion
 
         #region Mehtod  
         //----------------------- DDL-----------------------
-       
+
         private void SetDefaultData(string mode = "")
         {
             if (mode == "Add")
@@ -163,7 +174,18 @@ namespace WEBAPP.Areas.MIS.Controllers
                 
             }
         }
-      
+        private void SetButton(string ACTIVE_STEP = "")
+        {
+            SetDefaulButton(StandardButtonMode.Other);
+            if (ACTIVE_STEP == "Assignment")
+            {
+                AddButton(StandButtonType.ButtonComfirmAjax, "btnSAVEASSIGN", Translation.MIS.MISS01P001.SAVEASSIGN, iconCssClass: FaIcons.FaCopy, url: Url.Action("SaveAssign"), isValidate: true);
+            }
+            else if (ACTIVE_STEP == "FilePacket")
+            {
+                AddButton(StandButtonType.ButtonComfirmAjax, "btnSAVEFILEPACKET", Translation.MIS.MISS01P001.SAVEASSIGN, iconCssClass: FaIcons.FaCopy, url: Url.Action("SaveFilePacket"), isValidate: true);
+            }
+        }
         //private List<DDLCenterModel> BindIssueType()
         //{
         //    return GetDDLCenter(DDLCenterKey.DD_MISS01P002_001, new VSMParameter(SessionHelper.SYS_COM_CODE.Trim()));
