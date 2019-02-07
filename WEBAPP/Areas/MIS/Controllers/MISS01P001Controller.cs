@@ -66,6 +66,20 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return View(StandardActionName.Index, localModel);
         }
+        public ActionResult Info(MISS01P001Model model)
+        {
+            var da = new MISS01P001DA();
+            da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetByID;
+            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            da.DTO.Model.NO = model.NO;
+            da.SelectNoEF(da.DTO);
+            localModel = da.DTO.Model;
+
+            SetDateToString(da.DTO.Model);
+            SetDefaulButton(StandardButtonMode.Other);
+
+            return View(StandardActionName.Info, localModel);
+        }
         public ActionResult Search(MISS01P001Model model)
         {
             var da = new MISS01P001DA();
