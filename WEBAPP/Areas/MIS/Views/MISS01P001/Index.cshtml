@@ -29,22 +29,23 @@
             {
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.InputFor(a => a.STATUS)
+                   @form.SelectFor(t => t.STATUS, Model.STATUS_MODEL.ToSelectList("Value", "Text", Model.STATUS), IsSearch: true)
                 }
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.InputFor(a => a.RESPONSE_BY)
+                   @form.InputJAutocompleteFor(t => t.RESPONSE_BY).JAutoKeySource("AC_MISS01P001_006").JAutoBindField("ID").JAutoSetExtraParamsByCtrl("COM_CODE")
                 }
             }
             using (var row1 = Html.Bootstrap().GridRow().Begin())
             {
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.InputFor(a => a.ISSUE_DATE_PERIOD)
+                     @form.HiddenFor(m => m.COM_CODE)
+                     @form.InputJAutocompleteFor(t => t.MODULE).JAutoKeySource("AC_MISS01P001_005").JAutoBindField("MODULE").JAutoSetExtraParamsByCtrl("COM_CODE")
                 }
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.InputFor(a => a.PRIORITY)
+                   @form.InputJAutocompleteFor(t => t.PRIORITY).JAutoKeySource("AC_MISS01P001_003").JAutoBindField("PRIORITY").JAutoSetExtraParamsByCtrl("COM_CODE")
                 }
             }
         }

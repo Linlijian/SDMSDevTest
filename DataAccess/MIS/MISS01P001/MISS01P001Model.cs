@@ -29,8 +29,6 @@ namespace DataAccess.MIS
         public string RESPONSE_BY { get; set; }
         [Display(Name = "FILE_ID", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string FILE_ID { get; set; }
-        [Display(Name = "STATUS", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public string STATUS { get; set; }
         [Display(Name = "PROGRAM_NAME", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string PROGRAM_NAME { get; set; }
         [Display(Name = "FILE_NAME", ResourceType = typeof(Translation.MIS.MISS01P001))]
@@ -55,6 +53,9 @@ namespace DataAccess.MIS
         [Display(Name = "DEFECT", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string DEFECT { get; set; }
         public IEnumerable<DDLCenterModel> DEFECT_MODEL { get; set; }
+        [Display(Name = "STATUS", ResourceType = typeof(Translation.MIS.MISS01P001))]
+        public string STATUS { get; set; }
+        public IEnumerable<DDLCenterModel> STATUS_MODEL { get; set; }
 
         public string ACTIVE_STEP { get; set; }
         public string STR_ISSUE_DATE { get; set; }

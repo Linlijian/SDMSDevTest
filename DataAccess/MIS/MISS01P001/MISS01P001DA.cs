@@ -62,10 +62,10 @@ namespace DataAccess.MIS
                 strSQL += " AND NO = @NO";
                 parameters.AddParameter("NO", dto.Model.NO);
             }
-            if (!dto.Model.ISSUE_DATE_PERIOD.IsNullOrEmpty())
+            if (!dto.Model.MODULE.IsNullOrEmpty())
             {
-                strSQL += " AND ISSUE_DATE_PERIOD = @ISSUE_DATE_PERIOD";
-                parameters.AddParameter("ISSUE_DATE_PERIOD", dto.Model.ISSUE_DATE_PERIOD);
+                strSQL += " AND MODULE = @MODULE";
+                parameters.AddParameter("MODULE", dto.Model.MODULE);
             }
             if (!dto.Model.STATUS.IsNullOrEmpty())
             {

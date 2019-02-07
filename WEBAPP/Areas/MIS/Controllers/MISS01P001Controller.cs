@@ -60,6 +60,10 @@ namespace WEBAPP.Areas.MIS.Controllers
             {
                 localModel = TempSearch.CloneObject();
             }
+
+            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+            SetDefaultData(StandardActionName.Index);
+
             return View(StandardActionName.Index, localModel);
         }
         public ActionResult Search(MISS01P001Model model)
@@ -199,6 +203,10 @@ namespace WEBAPP.Areas.MIS.Controllers
             {
                 localModel.ISSUE_TYPE_MODEL = BindIssueType();
             }
+            else if (mode == "Index")
+            {
+                localModel.STATUS_MODEL = BindStatus();
+            }
         }
         private void SetDateToString(MISS01P001Model model)
         {
@@ -242,6 +250,10 @@ namespace WEBAPP.Areas.MIS.Controllers
         private List<DDLCenterModel> BindPriority()
         {
             return GetDDLCenter(DDLCenterKey.DD_MISS01P001_003, new VSMParameter(SessionHelper.SYS_COM_CODE.Trim()));
+        }
+        private List<DDLCenterModel> BindStatus()
+        {
+            return GetDDLCenter(DDLCenterKey.DD_MISS01P001_004);
         }
         //----------------------------------------------//
         private DTOResult SaveData(string mode, object model)
