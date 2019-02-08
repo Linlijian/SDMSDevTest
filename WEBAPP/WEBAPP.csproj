@@ -812,10 +812,10 @@
     <Content Include="Areas\MST\Views\MSTS03P002\Add.cshtml" />
     <Content Include="Areas\MST\Views\MSTS03P002\Edit.cshtml" />
     <Content Include="Areas\MST\Views\MSTS03P002\Index.cshtml" />
-    <Content Include="Areas\MIS\Views\MISS01P002\Add.cshtml" />
-    <Content Include="Areas\MIS\Views\MISS01P002\Edit.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P002\Index.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P001\Info.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P002\Assignment.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P002\FilePacket.cshtml" />
     <None Include="Properties\PublishProfiles\A.pubxml" />
     <None Include="Properties\PublishProfiles\March.pubxml" />
     <None Include="Reports\DataSet\DemoReport.xsd">

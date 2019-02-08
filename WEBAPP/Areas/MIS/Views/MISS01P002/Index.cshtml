@@ -6,10 +6,9 @@
 @model MISS01P002Model
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+    ViewBag.Title = Translation.MIS.MISS01P002.INDEX;
+    Layout = "~/Views/Shared/_LayoutChildPageWizard.cshtml";
 }
-
 
 @using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
 {
@@ -21,9 +20,25 @@
         {
             using (var row1 = Html.Bootstrap().GridRow().Begin())
             {
-                using (row1.GridColumn(6).SetMdOffset(2).Begin())
+                using (row1.GridColumn(6).Begin())
                 {
-                    //@form.InputFor(m => m.YEAR, isRequired: true).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4)
+                    @form.InputNumberFor(a => a.NO)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.DatepickerFor(a => a.ISSUE_DATE)
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(a => a.RESPONSE_BY).SetControlLabel(Translation.MIS.MISS01P002.OWNER)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputJAutocompleteFor(t => t.ASSIGN_USER).JAutoKeySource("AC_MISS01P002_004").JAutoBindField("USER_ID").JAutoSetExtraParamsByCtrl("COM_CODE").SetControlLabel(Translation.MIS.MISS01P002.ASSIGN)
+                    @form.HiddenFor(m => m.COM_CODE)
                 }
             }
         }
@@ -35,4 +50,28 @@
     {
         @Html.Bootstrap().Table().SetId("GridSearch").SetStyle(TableStyle.TableStripedBorderedHover)
     }
+}
+
+@section scripts{
+    @Html.GridScript("Search",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("SearchAssign")),
+            //DeleteConfig = new DefaultConfig(Url.Action("DeleteSearch")),
+            DefaultBinding = true,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage
+        },
+        Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.MIS.MISS01P002.ASSIGN, Url.Action("Assignment"), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("NO"))),
+        Html.GridColumnCommand(Html.GridCommand(Translation.MIS.MISS01P002.FILEPACKET, Translation.MIS.MISS01P002.FILEPACKET, Url.Action("FilePacket"), FaIcons.FaArchive, TextColor.orange, new VSMParameter("NO"))),
+        new GridColumn("NO").SetNotVisible().SetKey(),
+        new GridColumn("NO", Translation.MIS.MISS01P002.NO, 10),
+        new GridColumn("ISSUE_DATE", Translation.MIS.MISS01P002.ISSUE_DATE, 10, ColumnsType.DateTime),
+        new GridColumn("RESPONSE_BY", Translation.MIS.MISS01P002.OWNER, 10),
+        new GridColumn("ASSIGN_USER", Translation.MIS.MISS01P002.ASSIGN_USER, 10),
+        new GridColumn("STATUS", Translation.MIS.MISS01P002.STATUS, 10)
+
+        )
+
+
 }

@@ -23,8 +23,8 @@ namespace DataAccess.MIS
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
-        [Display(Name = "RESPONSE_DATE", ResourceType = typeof(Translation.MIS.MISS01P002))]
-        public Nullable<System.DateTime> RESPONSE_DATE { get; set; }
+        [Display(Name = "ISSUE_DATE", ResourceType = typeof(Translation.MIS.MISS01P002))]
+        public Nullable<System.DateTime> ISSUE_DATE { get; set; }
 
         [Display(Name = "STATUS", ResourceType = typeof(Translation.MIS.MISS01P002))]
         public string STATUS { get; set; }

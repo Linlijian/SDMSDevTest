@@ -61,6 +61,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assign user.
+        /// </summary>
+        public static string ASSIGN {
+            get {
+                return ResourceManager.GetString("ASSIGN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assignment.
         /// </summary>
         public static string ASSIGN_USER {
@@ -70,11 +79,38 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assignment Calculate.
+        /// </summary>
+        public static string ASSIGNMENT_CALCULATE {
+            get {
+                return ResourceManager.GetString("ASSIGNMENT_CALCULATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File Id.
         /// </summary>
         public static string FILE_ID {
             get {
                 return ResourceManager.GetString("FILE_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Packet.
+        /// </summary>
+        public static string FILEPACKET {
+            get {
+                return ResourceManager.GetString("FILEPACKET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assignment Issue.
+        /// </summary>
+        public static string INDEX {
+            get {
+                return ResourceManager.GetString("INDEX", resourceCulture);
             }
         }
         
@@ -111,6 +147,15 @@ namespace Translation.MIS {
         public static string RESPONSE_BY {
             get {
                 return ResourceManager.GetString("RESPONSE_BY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Response Date.
+        /// </summary>
+        public static string RESPONSE_DATE {
+            get {
+                return ResourceManager.GetString("RESPONSE_DATE", resourceCulture);
             }
         }
         

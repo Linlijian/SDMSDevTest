@@ -50,10 +50,10 @@ namespace DataAccess.MIS
                 strSQL += " AND NO  >= @NO";
                 parameters.AddParameter("NO", dto.Model.NO);
             }
-            if (!dto.Model.RESPONSE_DATE.IsNullOrEmpty())
+            if (!dto.Model.ISSUE_DATE.IsNullOrEmpty())
             {
-                strSQL += " AND RESPONSE_DATE >= @RESPONSE_DATE";
-                parameters.AddParameter("RESPONSE_DATE", dto.Model.RESPONSE_DATE);
+                strSQL += " AND ISSUE_DATE >= @ISSUE_DATE";
+                parameters.AddParameter("ISSUE_DATE", dto.Model.ISSUE_DATE);
             }
             if (!dto.Model.RESPONSE_BY.IsNullOrEmpty())
             {

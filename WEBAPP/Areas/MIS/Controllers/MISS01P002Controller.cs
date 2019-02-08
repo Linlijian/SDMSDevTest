@@ -56,6 +56,7 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             SetDefaulButton(StandardButtonMode.Index);
             RemoveStandardButton("DeleteSearch");
+            RemoveStandardButton(StandardActionName.Add);
             if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
             {
                 localModel = TempSearch.CloneObject();

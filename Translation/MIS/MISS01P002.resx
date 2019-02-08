@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ASSIGN" xml:space="preserve">
+    <value>Assign user</value>
+  </data>
+  <data name="ASSIGNMENT_CALCULATE" xml:space="preserve">
+    <value>Assignment Calculate</value>
+  </data>
   <data name="ASSIGN_USER" xml:space="preserve">
     <value>Assignment</value>
   </data>
+  <data name="FILEPACKET" xml:space="preserve">
+    <value>File Packet</value>
+  </data>
   <data name="FILE_ID" xml:space="preserve">
     <value>File Id</value>
+  </data>
+  <data name="INDEX" xml:space="preserve">
+    <value>Assignment Issue</value>
   </data>
   <data name="ISSUE_DATE" xml:space="preserve">
     <value>Issue Date</value>
@@ -134,6 +146,9 @@
   </data>
   <data name="RESPONSE_BY" xml:space="preserve">
     <value>Response By</value>
+  </data>
+  <data name="RESPONSE_DATE" xml:space="preserve">
+    <value>Response Date</value>
   </data>
   <data name="STATUS" xml:space="preserve">
     <value>Status</value>
