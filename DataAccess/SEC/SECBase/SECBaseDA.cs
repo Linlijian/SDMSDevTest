@@ -31,7 +31,7 @@ namespace DataAccess.SEC
                          join t2 in _DBManger.VSMS_CONFIG_GENERAL on new { t1.COM_CODE, t1.SYS_CODE } equals new { t2.COM_CODE, t2.SYS_CODE }
                          join t3 in _DBManger.VSMS_SYSTEM on new { t1.COM_CODE, t1.SYS_CODE } equals new { t3.COM_CODE, t3.SYS_CODE }
                          join t4 in _DBManger.VSMS_PROGRAM on new { t1.COM_CODE, t1.PRG_CODE } equals new { t4.COM_CODE, t4.PRG_CODE }
-                         where t1.ROLE_SEARCH == "T" && t1.USG_ID == dto.Menu.USG_ID && t1.COM_CODE == dto.Menu.COM_CODE && t2.NAME == dto.Menu.SYS_GROUP_NAME
+                         where t1.ROLE_SEARCH == "T" && t1.USG_LEVEL == dto.Menu.USG_LEVEL && t1.COM_CODE == dto.Menu.COM_CODE && t2.NAME == dto.Menu.SYS_GROUP_NAME
                          orderby t1.SYS_SEQ, t1.PRG_SEQ
                          select new MenuModel
                          {

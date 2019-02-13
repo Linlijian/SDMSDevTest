@@ -9,6 +9,7 @@ namespace DataAccess.SEC
     public partial class MenuModel : StandardModel
     {
         public string USER_ID { get; set; }
+        public string USG_LEVEL { get; set; }
         public Nullable<decimal> USG_ID { get; set; }
         public string SYS_GROUP_NAME { get; set; }
         public string SYS_CODE { get; set; }

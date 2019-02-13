@@ -32,7 +32,6 @@ namespace DataAccess
     
         public virtual DbSet<VSMS_EXCEL_DETAIL> VSMS_EXCEL_DETAIL { get; set; }
         public virtual DbSet<VSMS_PROGRAM> VSMS_PROGRAM { get; set; }
-        public virtual DbSet<VSMS_USRGRPPRIV> VSMS_USRGRPPRIV { get; set; }
         public virtual DbSet<VSMS_CONFIG_GENERAL> VSMS_CONFIG_GENERAL { get; set; }
         public virtual DbSet<VSMS_SYSTEM> VSMS_SYSTEM { get; set; }
         public virtual DbSet<VSMS_CTRLLOG> VSMS_CTRLLOG { get; set; }
@@ -45,6 +44,7 @@ namespace DataAccess
         public virtual DbSet<VSMS_USERCOM> VSMS_USERCOM { get; set; }
         public virtual DbSet<VSMS_EXCEL> VSMS_EXCEL { get; set; }
         public virtual DbSet<VSMS_SYS_PGC> VSMS_SYS_PGC { get; set; }
+        public virtual DbSet<VSMS_USRGRPPRIV> VSMS_USRGRPPRIV { get; set; }
         public virtual DbSet<VSMS_MOBULE> VSMS_MOBULE { get; set; }
     }
 }

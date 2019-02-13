@@ -16,7 +16,7 @@ namespace DataAccess
     {
         public string COM_CODE { get; set; }
         public decimal USRGRPPRIV_ID { get; set; }
-        public decimal USG_ID { get; set; }
+        public string USG_LEVEL { get; set; }
         public string SYS_CODE { get; set; }
         public string PRG_CODE { get; set; }
         public Nullable<decimal> SYS_SEQ { get; set; }

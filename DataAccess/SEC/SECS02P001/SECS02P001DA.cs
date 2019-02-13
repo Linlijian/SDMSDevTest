@@ -297,7 +297,7 @@ namespace DataAccess.SEC
             {
                 var del = _DBManger.VSMS_USRGRPPRIV.Where(m =>
                                             m.COM_CODE == dto.Model.COM_CODE &&
-                                            m.USG_ID == dto.Model.USG_ID &&
+                                            m.USG_LEVEL == dto.Model.USG_LEVEL &&
                                             m.SYS_CODE == dto.Model.SYS_CODE &&
                                             dels.Contains(m.USRGRPPRIV_ID));
                 _DBManger.VSMS_USRGRPPRIV.RemoveRange(del);
@@ -307,7 +307,7 @@ namespace DataAccess.SEC
             {
                 foreach (var item in update)
                 {
-                    var model = _DBManger.VSMS_USRGRPPRIV.Where(m => m.COM_CODE == dto.Model.COM_CODE && m.USG_ID == dto.Model.USG_ID && m.SYS_CODE == dto.Model.SYS_CODE && m.USRGRPPRIV_ID == item.USRGRPPRIV_ID).FirstOrDefault();
+                    var model = _DBManger.VSMS_USRGRPPRIV.Where(m => m.COM_CODE == dto.Model.COM_CODE && m.USG_LEVEL == dto.Model.USG_LEVEL && m.SYS_CODE == dto.Model.SYS_CODE && m.USRGRPPRIV_ID == item.USRGRPPRIV_ID).FirstOrDefault();
                     if (model != null)
                     {
                         model = model.MergeObject(item);
@@ -327,7 +327,7 @@ namespace DataAccess.SEC
         {
             var update = from t1 in _DBManger.VSMS_USRGRPPRIV
                          join t2 in _DBManger.VSMS_CONFIG_GENERAL on new { t1.COM_CODE, t1.SYS_CODE } equals new { t2.COM_CODE, t2.SYS_CODE }
-                         where t1.COM_CODE == dto.Model.COM_CODE && t1.USG_ID == dto.Model.USG_ID && t2.NAME == dto.Model.SYS_GROUP_NAME
+                         where t1.COM_CODE == dto.Model.COM_CODE && t1.USG_LEVEL == dto.Model.USG_LEVEL && t2.NAME == dto.Model.SYS_GROUP_NAME
                          select t1;
             if (update != null && update.Any())
             {
@@ -349,7 +349,7 @@ namespace DataAccess.SEC
         {
             var update = from t1 in _DBManger.VSMS_USRGRPPRIV
                          join t2 in _DBManger.VSMS_CONFIG_GENERAL on new { t1.COM_CODE, t1.SYS_CODE } equals new { t2.COM_CODE, t2.SYS_CODE }
-                         where t1.COM_CODE == dto.Model.COM_CODE && t1.USG_ID == dto.Model.USG_ID && t1.SYS_CODE == dto.Model.SYS_CODE && t2.NAME == dto.Model.SYS_GROUP_NAME
+                         where t1.COM_CODE == dto.Model.COM_CODE && t1.USG_LEVEL == dto.Model.USG_LEVEL && t1.SYS_CODE == dto.Model.SYS_CODE && t2.NAME == dto.Model.SYS_GROUP_NAME
                          select t1;
             if (update != null && update.Any())
             {

@@ -15,6 +15,7 @@ namespace DataAccess
     public partial class VSMS_MOBULE
     {
         public string COM_CODE { get; set; }
+        public decimal M_ID { get; set; }
         public string MODULE { get; set; }
         public string FLAG { get; set; }
         public string USER_ID { get; set; }
