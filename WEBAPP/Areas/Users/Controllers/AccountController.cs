@@ -190,7 +190,7 @@ namespace WEBAPP.Areas.Users.Controllers
             var da = new UserDA();
             da.DTO.Execute.ExecuteType = UserExecuteType.GetConfigGeraral;
             da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-            da.DTO.Model.USG_ID = SessionHelper.SYS_USG_ID;
+            da.DTO.Model.USG_LEVEL = SessionHelper.SYS_USG_LEVEL;
 
             //da.DTO.Model.SYS_GROUP_NAME = SessionHelper.SYS_SYS_GROUP_NAME;
             //da.DTO.Model.SYS_GROUP_NAME = "SEC01";
@@ -210,7 +210,7 @@ namespace WEBAPP.Areas.Users.Controllers
             var da = new SECBaseDA();
             da.DTO.Execute.ExecuteType = SECBaseExecuteType.GetMenu;
             da.DTO.Menu.COM_CODE = SessionHelper.SYS_COM_CODE;
-            da.DTO.Menu.USG_ID = SessionHelper.SYS_USG_ID;
+            da.DTO.Menu.USG_LEVEL = SessionHelper.SYS_USG_LEVEL;
             da.DTO.Menu.SYS_GROUP_NAME = NAME;
             da.Select(da.DTO);
             Session[SessionSystemName.SYS_MENU] = da.DTO.Menus;
