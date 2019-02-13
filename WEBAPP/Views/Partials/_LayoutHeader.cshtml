@@ -66,17 +66,38 @@
                             @Translation.CenterLang.Center.FAQ
                         </a>
                     </li>*@
-                <li class="transparent">
-                    @{
-                        var server = "";
-                        if (SessionHelper.SYS_ServerDBName.IndexOf('_') > -1)
+                @*จุดเริ่ม*@
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <span class="user-info">
+                            <i class="ace-icon fa fa-bell"></i>
+                        </span>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a id="userTH" href="#" tabindex="-1">
+                                แจ้งเตือน
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        @foreach (var item in SessionHelper.SYS_AppModel)
                         {
-                            server = SessionHelper.SYS_ServerDBName.Split('_')[1];
+                            if (item.COM_CODE != SessionHelper.SYS_COM_CODE)
+                            {
+
+                                <li>
+                                    <a id="userTH" href="@Url.Action("SelectedApp","Account", new {Area = "Users", COM_CODE = item.COM_CODE })" tabindex="-1">
+                                        <i class="ace-icon fa fa-bell"></i>
+                                        @item.COM_NAME
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                            }
                         }
-                    }
-                    <a class="db-site">@server</a>
-                </li>
-                <li class="transparent">
+                    </ul>
+                    @*จุดจบ*@
+<li class="transparent">
                     <a class="db-server">@SessionHelper.SYS_ServerDBName</a>
                 </li>
                 <li>
