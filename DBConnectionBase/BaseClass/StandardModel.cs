@@ -7,6 +7,8 @@ namespace DataAccess
 {
     public class StandardModel
     {
+        [Display(Name = "APP_CODE", ResourceType = typeof(Translation.CenterLang.Center))]
+        public string APP_CODE { get; set; }
         [Display(Name = "COM_CODE", ResourceType = typeof(Translation.CenterLang.Center))]
         public string COM_CODE { get; set; }
 
