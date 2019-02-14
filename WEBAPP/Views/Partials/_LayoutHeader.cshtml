@@ -150,7 +150,7 @@
                                     }
                                 </ul>
                             </li>*@
-                        @if (SessionHelper.SYS_AppModel.Count > 1)
+                        @*@if (SessionHelper.SYS_AppModel.Count > 1)
                         {
                             <li class="divider"></li>
                             <li class="dropdown-hover dropup">
@@ -173,7 +173,7 @@
                                     }
                                 </ul>
                             </li>
-                        }
+                        }*@
                         <li class="divider"></li>
                         <li>
                             <a href="@Url.Action("SignOut", "Account", new { Area = "Users" } )" id="lnkSignOut">
