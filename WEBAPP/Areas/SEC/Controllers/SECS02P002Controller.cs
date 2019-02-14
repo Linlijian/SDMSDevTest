@@ -222,6 +222,21 @@ namespace WEBAPP.Areas.SEC.Controllers
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Model.Details);
         }
+        public ActionResult CheckAdmin(SECS02P002Model model)
+        {
+            var jsonResult = new JsonResult();
+
+            var da = new SECS02P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.CheckAdmin;
+            da.DTO.Model.USG_ID = model.USG_ID;
+            da.SelectNoEF(da.DTO);
+
+            jsonResult = Success(da.DTO.Result, StandardActionName.Add);
+
+            return JsonAllowGet(da.DTO.Model);
+            //return jsonResult;
+        }
         #endregion
 
         #region ====Private Mehtod====

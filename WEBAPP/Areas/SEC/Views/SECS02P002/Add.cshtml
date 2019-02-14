@@ -92,18 +92,19 @@
                     }
                     using (r.GridColumn(6).Begin())
                     {
+                       @form.HiddenFor(t => t.IS_ADMIN)
                       //  @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
                     }
                 }
 
             </fieldset>
         }
-        using (var row1 = Html.Bootstrap().GridRow().Begin())
+        using (var row1 = Html.Bootstrap().GridRow().SetId("ModuleOwnerDetail").Begin())
         {
             using (row1.GridColumn(12).Begin())
             {
-                @Html.GetVSMDetailFor(m => m.Details, isRequired: true)
-               // @Html.HiddenFor(m => m.COM_CODE, new { data_indexparameter = 0 })
+                @Html.GetVSMDetailFor(m => m.Details)
+                // @Html.HiddenFor(m => m.COM_CODE, new { data_indexparameter = 0 })
             }
         }
     }
@@ -144,7 +145,6 @@
             {
                 DefaultConfig = new DefaultConfig(Url.Action("BindDetailAdd")),
                 IsRequired = true,
-                Searching = true,
                 ScrollX = false,
                 OnBeforeAdd = "OnBeforeAddDetail",
                 WidthType = ColumnsWidthType.Pixel
@@ -163,8 +163,41 @@
         function OnBeforeAddDetail(e) {
             $("#formDetails #USER_ID").val($("#form1 #USER_ID").val());
         }
+
         $("#btnAddDetails").hide()
-        $("#formDetails").change(function () { $("#form1 #USER_ID").prop("readonly", true); })
+        
+        //$("#formDetails").change(function () { $("#form1 #USER_ID").prop("readonly", true); })
         $("#form1 #USER_ID").change(function () { $("#btnAddDetails").show() })
+
+        $("#form1 #USG_ID").change(function (){
+            var data = $("#form1 #USER_ID").val()
+            var formData = $("#form1").serializeFormData();
+            $.ajax({
+                url: '@Url.Action("CheckAdmin")',
+                type: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response != null && response != isNullOrEmpty && response.data.IS_ADMIN != null) {
+                        $('#IS_ADMIN').val(response.data.IS_ADMIN)
+                        if (response.data.IS_ADMIN == 'S' || response.data.IS_ADMIN == 'A') {
+                            $("#ModuleOwnerDetail").addClass('@Css.Hidden');
+                        } else {
+                            $("#ModuleOwnerDetail").removeClass('@Css.Hidden');
+                            if (data == isNullOrEmpty || data == "") {
+                                $("#btnAddDetails").hide()
+                            } else {
+                                $("#btnAddDetails").show()
+                                $("#form1 #USER_ID").prop("readonly", true);
+                            }
+                        }
+                    }
+                },
+                error: OnAjaxError
+            });
+        })
+
+       
     </script>
 }

@@ -27,7 +27,26 @@ namespace DataAccess.SEC
                 case SECS02P002ExecuteType.GetQuerySearchAll:return GetQuerySearchAll(dto);
                 case SECS02P002ExecuteType.GetQueryCheckUserAdmin:return GetQueryCheckUserAdmin(dto);
                 case SECS02P002ExecuteType.GetDetailByID: return GetDetailByID(dto);
+                case SECS02P002ExecuteType.CheckAdmin: return CheckAdmin(dto);
             }
+            return dto;
+        }
+        private SECS02P002DTO CheckAdmin(SECS02P002DTO dto)
+        {
+            string sql = @"SELECT USG_LEVEL
+                            FROM VSMS_USRGROUP
+                            WHERE USG_ID = @USG_ID";
+
+            var parameters = CreateParameter();
+            parameters.AddParameter("USG_ID", dto.Model.USG_ID);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(sql, parameters, CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model.IS_ADMIN = result.OutputDataSet.Tables[0].Rows[0][0].ToString();
+            }
+
             return dto;
         }
         private SECS02P002DTO GetDetailByID(SECS02P002DTO dto)
@@ -309,31 +328,34 @@ namespace DataAccess.SEC
 
         private SECS02P002DTO INSERT_USERCOM(SECS02P002DTO dto)
         {
-            if(dto.Model.Details.Count > 0)
+           if(dto.Model.IS_ADMIN != "S" && dto.Model.IS_ADMIN != "A" && !dto.Model.IS_ADMIN.IsNullOrEmpty())
             {
-                var UDG_ID = dto.Model.USG_ID;
-                DELETE_USERCOM(dto);
-                DELETE_MODUlE(dto);
-
-                foreach (var item in dto.Model.Details)
+                if (!dto.Model.Details.IsNullOrEmpty())
                 {
-                    var parameters1 = CreateParameter();
+                    var UDG_ID = dto.Model.USG_ID;
+                    DELETE_USERCOM(dto);
+                    DELETE_MODUlE(dto);
 
-                    parameters1.AddParameter("error_code", null, ParameterDirection.Output);
-                    parameters1.AddParameter("COM_CODE", item.COM_CODE);
-                    parameters1.AddParameter("USER_ID", item.USER_ID);
-                    parameters1.AddParameter("USG_ID", UDG_ID);
-                    parameters1.AddParameter("MODULE", item.MODULE);
-                    parameters1.AddParameter("CRET_BY", dto.Model.CRET_BY);
-                    parameters1.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
-
-                    var result = _DBMangerNoEF.ExecuteNonQuery("[bond].[SP_SECS02P002_001]", parameters1);
-
-                    if (result.OutputData["error_code"] != "0")
+                    foreach (var item in dto.Model.Details)
                     {
-                        dto.Result.IsResult = false;
-                        dto.Result.ResultMsg = result.OutputData["error_code"].Trim();
-                        break;
+                        var parameters1 = CreateParameter();
+
+                        parameters1.AddParameter("error_code", null, ParameterDirection.Output);
+                        parameters1.AddParameter("COM_CODE", item.COM_CODE);
+                        parameters1.AddParameter("USER_ID", item.USER_ID);
+                        parameters1.AddParameter("USG_ID", UDG_ID);
+                        parameters1.AddParameter("MODULE", item.MODULE);
+                        parameters1.AddParameter("CRET_BY", dto.Model.CRET_BY);
+                        parameters1.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
+
+                        var result = _DBMangerNoEF.ExecuteNonQuery("[bond].[SP_SECS02P002_001]", parameters1);
+
+                        if (result.OutputData["error_code"] != "0")
+                        {
+                            dto.Result.IsResult = false;
+                            dto.Result.ResultMsg = result.OutputData["error_code"].Trim();
+                            break;
+                        }
                     }
                 }
             }

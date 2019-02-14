@@ -58,9 +58,8 @@ namespace DataAccess.SEC
         public DateTime? LAST_LOGIN_DATE { get; set; }
 
         public int IS_DUP { get; set; }
+        public string IS_ADMIN { get; set; }
 
-        [Display(Name = "APP_CODE", ResourceType = typeof(Translation.SEC.SECS02P002))]
-        public string APP_CODE { get; set; }
         public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
 
         [Display(Name = "MODULE", ResourceType = typeof(Translation.SEC.SECS02P002))]
