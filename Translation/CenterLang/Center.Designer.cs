@@ -88,6 +88,15 @@ namespace Translation.CenterLang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to รหัสแอพพลิเคชั่น.
+        /// </summary>
+        public static string APP_CODE {
+            get {
+                return ResourceManager.GetString("APP_CODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to จำนวนไฟล์แนบเกินกว่าที่ระบบกำหนด.
         /// </summary>
         public static string AttachFileMaximumLimit {

@@ -581,4 +581,7 @@
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="APP_CODE" xml:space="preserve">
+    <value>Application Code</value>
+  </data>
 </root>
