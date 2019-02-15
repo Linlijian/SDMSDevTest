@@ -79,6 +79,15 @@ namespace Translation.MST {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Standard Rate of MA Waranty Criteria.
+        /// </summary>
+        public static string MA_CRITERIA {
+            get {
+                return ResourceManager.GetString("MA_CRITERIA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Programmer.
         /// </summary>
         public static string MAN_PLM_PRG {

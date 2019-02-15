@@ -132,6 +132,9 @@
   <data name="MAN_PLM_SA" xml:space="preserve">
     <value>SA &amp; Lead Support</value>
   </data>
+  <data name="MA_CRITERIA" xml:space="preserve">
+    <value>Standard Rate of MA Waranty Criteria</value>
+  </data>
   <data name="TYPE_RATE" xml:space="preserve">
     <value>Type Rate</value>
   </data>

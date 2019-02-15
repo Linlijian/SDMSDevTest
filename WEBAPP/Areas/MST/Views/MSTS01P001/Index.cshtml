@@ -23,7 +23,16 @@
             {
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), IsSearch: true)
+                    // @form.HiddenFor(m => m.CRET_BY)
+                    @form.InputJAutocompleteFor(t => t.APP_CODE).JAutoKeySource("AC_APPLICATION_CODE").JAutoBindField("COM_CODE")//.JAutoSetExtraParamsByCtrl("CRET_BY")
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputJAutocompleteFor(t => t.ISSUE_TYPE, isRequired: true).JAutoKeySource("AC_MSTS01P001_001").JAutoBindField("ISSUE_TYPE").JAutoSetExtraParamsByCtrl("APP_CODE")
+                    //@form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), IsSearch: true)
                 }
                 using (row1.GridColumn(6).Begin())
                 {
@@ -57,6 +66,7 @@
                 new VSMParameter("ISSUE_TYPE"), 
                 new VSMParameter("TYPE_RATE"))),
         new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+        new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10),
         new GridColumn("ISSUE_TYPE", Translation.MST.MSTS01P001.ISSUE_TYPE, 10).SetKey(),
         new GridColumn("TYPE_RATE", Translation.MST.MSTS01P001.TYPE_RATE, 10, render: "RENDER_TYPERATE").SetKey(),
         new GridColumn("MAN_PLM_SA", Translation.MST.MSTS01P001.MAN_PLM_SA, 10, ColumnsType.Number, ColumnsTextAlign.Right),

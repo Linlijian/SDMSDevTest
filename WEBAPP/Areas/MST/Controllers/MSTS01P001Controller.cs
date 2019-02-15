@@ -92,7 +92,6 @@ namespace WEBAPP.Areas.MST.Controllers
         {
             SetDefaulButton(StandardButtonMode.Create);
             SetDefaultData();   //set ค่า DDL
-            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
 
             return View(StandardActionName.Add, localModel);
         }
@@ -154,7 +153,7 @@ namespace WEBAPP.Areas.MST.Controllers
         private void SetDefaultData(string mode = "")
         {
             localModel.TYPE_RATE_MODEL = BindTyprRate();
-            localModel.ISSUE_TYPE_MODEL = BindIssueType();
+            //localModel.ISSUE_TYPE_MODEL = BindIssueType();
         }
         private List<DDLCenterModel> BindIssueType()
         {

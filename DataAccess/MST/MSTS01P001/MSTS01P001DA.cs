@@ -34,11 +34,15 @@ namespace DataAccess.MST
         {
             string strSQL = @"      SELECT *
                                     FROM [dbo].[VSMS_MANDAY]
-                                    WHERE (1=1) AND COM_CODE = @COM_CODE";
+                                    WHERE (1=1) ";
 
             var parameters = CreateParameter();
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
 
+            if (!dto.Model.APP_CODE.IsNullOrEmpty()) //checked
+            {
+                strSQL += " AND COM_CODE = @COM_CODE";
+                parameters.AddParameter("COM_CODE", dto.Model.APP_CODE);
+            }
             if (!dto.Model.ISSUE_TYPE.IsNullOrEmpty())
             {
                 strSQL += " AND ISSUE_TYPE = @ISSUE_TYPE";
@@ -69,13 +73,14 @@ namespace DataAccess.MST
             var parameters = CreateParameter();
             parameters.AddParameter("TYPE_RATE", dto.Model.TYPE_RATE);
             parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE); //checked
 
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
 
             if (result.Success(dto))
             {
                 dto.Model = result.OutputDataSet.Tables[0].ToObject<MSTS01P001Model>();
+                dto.Model.APP_CODE = dto.Model.COM_CODE; //checked
             }
 
             return dto;
@@ -111,7 +116,7 @@ namespace DataAccess.MST
                                         ,@MNT_DATE)";
 
             var parameters1 = CreateParameter();
-            parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters1.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
             parameters1.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
             parameters1.AddParameter("TYPE_RATE", dto.Model.TYPE_RATE);
             parameters1.AddParameter("MAN_PLM_SA", dto.Model.MAN_PLM_SA);
@@ -142,7 +147,7 @@ namespace DataAccess.MST
             var parameters = CreateParameter();
 
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
             parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
             parameters.AddParameter("TYPE_RATE", dto.Model.TYPE_RATE);
             parameters.AddParameter("MAN_PLM_SA", dto.Model.MAN_PLM_SA);
@@ -177,17 +182,17 @@ namespace DataAccess.MST
             var dto = (MSTS01P001DTO)baseDTO;
             if (dto.Models.Count() > 0)
             {
-                if (CheckUse(dto))
+                foreach (var item in dto.Models)
                 {
-                    foreach (var item in dto.Models)
+                    if (!CheckUse(item))
                     {
                         string strSQL = @" DELETE FROM VSMS_MANDAY 
-                                                WHERE COM_CODE = @COM_CODE 
-                                                AND ISSUE_TYPE = @ISSUE_TYPE 
-                                                AND TYPE_RATE = @TYPE_RATE";
+                                                    WHERE COM_CODE = @COM_CODE 
+                                                    AND ISSUE_TYPE = @ISSUE_TYPE 
+                                                    AND TYPE_RATE = @TYPE_RATE";
 
                         var parameters = CreateParameter();
-                        parameters.AddParameter("COM_CODE", item.COM_CODE);
+                        parameters.AddParameter("COM_CODE", item.COM_CODE); //checked
                         parameters.AddParameter("ISSUE_TYPE", item.ISSUE_TYPE);
                         parameters.AddParameter("TYPE_RATE", item.TYPE_RATE);
 
@@ -199,17 +204,17 @@ namespace DataAccess.MST
                             break;
                         }
                     }
-                }
-                else
-                {
-                    dto.Result.IsResult = false;
-                    dto.Result.ResultMsg = "Standard Rate of MA Waranty is used";
-                }
-            }
+                    else
+                    {
+                        dto.Result.IsResult = false;
+                        dto.Result.ResultMsg = "Standard Rate of MA Waranty is used";
+                    }
 
+                }
+            }        
             return dto;
         }
-        private bool CheckUse(MSTS01P001DTO dto)
+        private bool CheckUse(MSTS01P001Model dto)
         {
             string strSQL = @" SELECT COUNT(*)
                                 FROM VSMS_ISSUE A JOIN VSMS_MANDAY S
@@ -219,19 +224,20 @@ namespace DataAccess.MST
                                 AND A.DEFECT = @DEFECT";
 
             var parameters = CreateParameter();
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
-            parameters.AddParameter("DEFECT", dto.Model.ISSUE_TYPE);
+            parameters.AddParameter("COM_CODE", dto.COM_CODE); //checked
+            parameters.AddParameter("DEFECT", dto.ISSUE_TYPE);
 
-            var result = _DBMangerNoEF.ExecuteNonQuery(strSQL, parameters, CommandType.Text);
+           // var result = _DBMangerNoEF.ExecuteNonQuery(strSQL, parameters, CommandType.Text);
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
 
             bool isUse;
-            int AA = 0;
+            string AA = string.Empty;
             if (result.Status)
             {
-                 AA = result.OutputDataSet.Tables[0].Rows[0][0].AsInt();
+                 AA = result.OutputDataSet.Tables[0].Rows[0][0].AsString();
             }
 
-            if (AA == 0)
+            if (AA == "0")
                 isUse = false;
             else
                 isUse = true;
