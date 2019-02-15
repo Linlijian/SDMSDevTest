@@ -31,6 +31,14 @@
                 {
                     using (r.GridColumn(8).SetMdOffset(1).Begin())
                     {
+                        // @form.HiddenFor(m => m.CRET_BY)
+                        @form.InputJAutocompleteFor(t => t.APP_CODE, isRequired: true).JAutoKeySource("AC_APPLICATION_CODE").JAutoBindField("COM_CODE").SetSelectOnly()//.JAutoSetExtraParamsByCtrl("CRET_BY")
+                    }
+                }
+                using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    {
                         @form.InputFor(m => m.ISSUE_TYPE, isRequired: true).SetIndexParameter(1)
                     }
                     using (r.GridColumn(8).SetMdOffset(1).Begin())
