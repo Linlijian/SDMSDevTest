@@ -64,6 +64,7 @@ namespace DataAccess.MIS
         public string STR_CLOSE_DATE { get; set; }
         public string STR_RDEPLOY_PD { get; set; }
         public string STR_DEPLOY_QA { get; set; }
+        public string USER_ID { get; set; }
 
         [Display(Name = "NO", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public decimal? NO { get; set; }

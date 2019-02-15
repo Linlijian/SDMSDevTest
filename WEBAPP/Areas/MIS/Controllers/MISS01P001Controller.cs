@@ -61,7 +61,7 @@ namespace WEBAPP.Areas.MIS.Controllers
                 localModel = TempSearch.CloneObject();
             }
 
-            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+            localModel.USER_ID = SessionHelper.SYS_USER_ID;
             SetDefaultData(StandardActionName.Index);
 
             return View(StandardActionName.Index, localModel);
@@ -101,7 +101,7 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             SetDefaulButton(StandardButtonMode.Create);
             SetDefaultData(StandardActionName.Add);
-            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+            localModel.USER_ID = SessionHelper.SYS_USER_ID;
 
             #region set default 
             localModel.MAN_PLM_DBA = 0;

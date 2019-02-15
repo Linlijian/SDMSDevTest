@@ -129,6 +129,9 @@
   <data name="ACTUAL_RESTIME_QA" xml:space="preserve">
     <value>Actual Resolution Times (QA)</value>
   </data>
+  <data name="APP_CODE" xml:space="preserve">
+    <value>Application Code</value>
+  </data>
   <data name="ASSIGN" xml:space="preserve">
     <value>Assign user</value>
   </data>
