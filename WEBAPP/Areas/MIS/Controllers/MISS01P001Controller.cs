@@ -111,15 +111,22 @@ namespace WEBAPP.Areas.MIS.Controllers
             localModel.MAN_PLM_SA = 0;
             #endregion
 
-            #region set running number 
+            return View(StandardActionName.Add, localModel);
+        }
+        public ActionResult GetNo(MISS01P001Model model)
+        {
+            var jsonResult = new JsonResult();
+
             var da = new MISS01P001DA();
             da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetNo;
-            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            da.DTO.Model.COM_CODE = model.APP_CODE;
             da.SelectNoEF(da.DTO);
-            localModel.NO = da.DTO.Model.NO + 1;
-            #endregion
+            da.DTO.Model.NO = da.DTO.Model.NO + 1;
 
-            return View(StandardActionName.Add, localModel);
+            //jsonResult = Success(da.DTO.Result, StandardActionName.Add);
+
+            return JsonAllowGet(da.DTO.Model);
+            //return jsonResult;
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -22,8 +22,9 @@
             {
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.HiddenFor(m => m.USER_ID)
-                    @form.InputJAutocompleteFor(t => t.APP_CODE).JAutoKeySource("AC_MISS01P001_007").JAutoBindField("COM_CODE").JAutoSetExtraParamsByCtrl("USER_ID")
+                    @*@form.HiddenFor(m => m.USER_ID)
+                    @form.InputJAutocompleteFor(t => t.APP_CODE).JAutoKeySource("AC_MISS01P001_007").JAutoBindField("COM_CODE").JAutoSetExtraParamsByCtrl("USER_ID")*@
+                    @form.InputJAutocompleteFor(t => t.APP_CODE).JAutoKeySource("AC_APPLICATION_CODE").JAutoBindField("COM_CODE")//.JAutoSetExtraParamsByCtrl("CRET_BY")
                 }
                 using (row1.GridColumn(6).Begin())
                 {

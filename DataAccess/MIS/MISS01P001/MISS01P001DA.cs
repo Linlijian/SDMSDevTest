@@ -52,11 +52,14 @@ namespace DataAccess.MIS
         {
             string strSQL = @"	SELECT *
 	                            FROM VSMS_ISSUE
-	                            WHERE (1=1)
-	                            AND COM_CODE = @COM_CODE";
-            var parameters = CreateParameter();
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+	                            WHERE (1=1) ";
+            var parameters = CreateParameter();            
 
+            if (!dto.Model.APP_CODE.IsNullOrEmpty()) //checked
+            {
+                strSQL += " AND COM_CODE = @APP_CODE";
+                parameters.AddParameter("APP_CODE", dto.Model.APP_CODE);
+            }
             if (!dto.Model.NO.IsNullOrEmpty())
             {
                 strSQL += " AND NO = @NO";
@@ -129,7 +132,7 @@ namespace DataAccess.MIS
             var parameters = CreateParameter();
 
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
             parameters.AddParameter("NO", dto.Model.NO);
             parameters.AddParameter("ISSUE_DATE", dto.Model.ISSUE_DATE);
             parameters.AddParameter("ISSUE_DATE_PERIOD", dto.Model.ISSUE_DATE_PERIOD);
