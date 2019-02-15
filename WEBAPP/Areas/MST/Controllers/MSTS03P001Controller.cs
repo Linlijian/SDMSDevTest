@@ -56,9 +56,6 @@ namespace WEBAPP.Areas.MST.Controllers
             }
             SetDefaultData(StandardActionName.Index);
 
-            //set cret_by for key ac
-            SetStandardField(localModel);
-
             return View(StandardActionName.Index, localModel);
         }
         public ActionResult Search(MSTS03P001Model model)
