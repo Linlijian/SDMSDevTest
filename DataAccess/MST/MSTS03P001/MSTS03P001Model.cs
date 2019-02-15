@@ -59,6 +59,7 @@ namespace DataAccess.MST
             RuleFor(t => t.T_RES_TIME).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
             RuleFor(t => t.T_RES_TYPE).NotEmpty();
             RuleFor(t => t.RES_TYPE).NotEmpty();
+            RuleFor(t => t.APP_CODE).NotEmpty();
         }
     }
 }

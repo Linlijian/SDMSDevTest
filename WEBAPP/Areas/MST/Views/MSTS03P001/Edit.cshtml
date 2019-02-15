@@ -27,6 +27,11 @@
                     {
                         using (r.GridColumn(6).Begin())
                         {
+                            // @form.HiddenFor(m => m.CRET_BY)
+                            @form.InputJAutocompleteFor(t => t.APP_CODE, isRequired: true).JAutoKeySource("AC_APPLICATION_CODE").JAutoBindField("COM_CODE").SetSelectOnly().SetReadonly()//.JAutoSetExtraParamsByCtrl("CRET_BY")
+                        }
+                        using (r.GridColumn(6).Begin())
+                        {
                             @form.InputFor(m => m.PRIORITY_NAME, isRequired: true).SetMaxLength(50).SetIndexParameter(0)
                         }
                     }

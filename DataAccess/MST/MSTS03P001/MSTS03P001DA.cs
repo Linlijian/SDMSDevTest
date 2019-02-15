@@ -32,15 +32,23 @@ namespace DataAccess.MST
 
         private MSTS03P001DTO GetAll(MSTS03P001DTO dto)
         {
-            string strSQL = @"SELECT * FROM [dbo].[VSMS_PIT_DATA] WHERE (1=1) AND KEY_ID = 'P' ";
+            string strSQL = @"SELECT * FROM [dbo].[VSMS_PIT_DATA] 
+                                WHERE (1=1)
+                                AND KEY_ID = 'P' ";
             var parameters = CreateParameter();
 
             if (!dto.Model.PRIORITY_NAME.IsNullOrEmpty())
             {
-                strSQL += "AND PRIORITY_NAME like @PRIORITY_NAME";
+                strSQL += " AND PRIORITY_NAME like @PRIORITY_NAME";
                 parameters.AddParameter("PRIORITY_NAME", dto.Model.PRIORITY_NAME);
             }
-            
+
+            if (!dto.Model.APP_CODE.IsNullOrEmpty())
+            {
+                strSQL += " AND COM_CODE = @APP_CODE";
+                parameters.AddParameter("APP_CODE", dto.Model.APP_CODE);
+            }
+
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
 
             if (result.Success(dto))
@@ -50,21 +58,6 @@ namespace DataAccess.MST
 
             return dto;
         }
-        //private MSTS03P001DTO GetByID(MSTS03P001DTO dto)
-        //{
-        //    string strSQL = @"SELECT * FROM [dbo].[VSMS_PIT_DATA] WHERE (1=1) AND PIT_ID = @PIT_ID";
-        //    var parameters = CreateParameter();
-
-        //    parameters.AddParameter("PIT_ID", dto.Model.PIT_ID);
-
-        //    var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
-
-        //    if (result.Success(dto))
-        //    {
-        //        dto.Model = result.OutputDataSet.Tables[0].ToObject<MSTS03P001Model>();
-        //    }
-        //    return dto;
-        //}
         private MSTS03P001DTO GetByID(MSTS03P001DTO dto)
         {
             var parameters = CreateParameter();
@@ -90,6 +83,7 @@ namespace DataAccess.MST
                 else
                 {
                     dto.Model = result.OutputDataSet.Tables[0].ToObject<MSTS03P001Model>();
+                    dto.Model.APP_CODE = dto.Model.COM_CODE;
                     if(result.OutputData["code"].ToString().Trim() == "0")
                         dto.Model.IS_USED = true;
                 }
@@ -114,7 +108,7 @@ namespace DataAccess.MST
             var parameters = CreateParameter();
 
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
-            parameters.AddParameter("COM_CODE ", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE ", dto.Model.APP_CODE);
             parameters.AddParameter("KEY_ID", "P");
             parameters.AddParameter("PRIORITY_NAME", dto.Model.PRIORITY_NAME);
             parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
@@ -174,7 +168,7 @@ namespace DataAccess.MST
             var parameters = CreateParameter();
 
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
-            parameters.AddParameter("COM_CODE ", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE ", dto.Model.APP_CODE);
             parameters.AddParameter("PIT_ID", dto.Model.PIT_ID);
             parameters.AddParameter("PRIORITY_NAME", dto.Model.PRIORITY_NAME);
             parameters.AddParameter("RES_TIME", dto.Model.RES_TIME);
@@ -212,7 +206,7 @@ namespace DataAccess.MST
 
                         var parameters1 = CreateParameter();
 
-                        parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
+                        parameters1.AddParameter("COM_CODE", item.COM_CODE); //checked
                         parameters1.AddParameter("PIT_ID", item.PIT_ID);
 
                         var result = _DBMangerNoEF.ExecuteNonQuery(strSQL1, parameters1, CommandType.Text);
@@ -239,7 +233,7 @@ namespace DataAccess.MST
             var parameters = CreateParameter();
 
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
-            parameters.AddParameter("COM_CODE ", dto.COM_CODE);
+            parameters.AddParameter("COM_CODE ", dto.COM_CODE); //checked
             parameters.AddParameter("PRIORITY_NAME", dto.PRIORITY_NAME);
             parameters.AddParameter("ISSUE_TYPE", dto.ISSUE_TYPE);
 

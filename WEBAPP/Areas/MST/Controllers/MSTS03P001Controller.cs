@@ -55,6 +55,10 @@ namespace WEBAPP.Areas.MST.Controllers
                 localModel = TempSearch.CloneObject();
             }
             SetDefaultData(StandardActionName.Index);
+
+            //set cret_by for key ac
+            SetStandardField(localModel);
+
             return View(StandardActionName.Index, localModel);
         }
         public ActionResult Search(MSTS03P001Model model)
@@ -91,7 +95,6 @@ namespace WEBAPP.Areas.MST.Controllers
         {
             SetDefaulButton(StandardButtonMode.Create);
             SetDefaultData(StandardActionName.Add);
-            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
 
             return View(StandardActionName.Add, localModel);
         }
