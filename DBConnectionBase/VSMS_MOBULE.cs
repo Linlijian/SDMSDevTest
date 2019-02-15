@@ -21,5 +21,8 @@ namespace DataAccess
         public string USER_ID { get; set; }
         public string CRET_BY { get; set; }
         public Nullable<System.DateTime> CRET_DATE { get; set; }
+        public string MENU { get; set; }
+        public string PRG_NAME { get; set; }
+        public string ISSUE_BY { get; set; }
     }
 }
