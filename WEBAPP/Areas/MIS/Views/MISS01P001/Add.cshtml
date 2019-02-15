@@ -383,9 +383,9 @@
         });
     };
 
-    $("#NO").attr("placeholder", "Waitting select Application . ... ...")
+    $("#NO").attr("placeholder", "Waitting select Application. . .")
     $("#APP_CODE").click(function () {
-        $("#NO").attr("placeholder", "Loading . ... .....")
+        $("#NO").attr("placeholder", "Loading. . .")
     })
 
     $(document).ready(function () {
@@ -402,7 +402,7 @@
                         $("#NO").val(response.data.NO)
                     }
                     else {
-                        $("#NO").attr("placeholder", "Loading . ... .....")
+                        $("#NO").attr("placeholder", "Loading. . .")
                     }
                 },
                 error: OnAjaxError
@@ -422,7 +422,7 @@
                         $("#NO").val(response.data.NO)
                     }
                     else {
-                        $("#NO").attr("placeholder", "Loading . ... .....")
+                        $("#NO").attr("placeholder", "Loading. . .")
                     }
                 },
                 error: OnAjaxError
