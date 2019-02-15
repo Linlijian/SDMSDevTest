@@ -56,6 +56,7 @@
         Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("PIT_ID"))),
         new GridColumn("PIT_ID").SetNotVisible().SetKey(),
         new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+        new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10),
         new GridColumn("PRIORITY_NAME", Translation.MST.MSTS03P001.PRIORITY_NAME, 10).SetKey(),
         new GridColumn("RES_TIME", Translation.MST.MSTS03P001.RES_TIME, 10, ColumnsTextAlign.Right),
         new GridColumn("RES_TYPE", Translation.MST.MSTS03P001.RES_TYPE, 10, render: "RENDER_TYPETIME"),
