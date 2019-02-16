@@ -457,6 +457,7 @@
     <Content Include="Content\font-awesome-animation.min.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fontawesome-iconpicker.min.css" />
+    <Content Include="Content\master-datetimepicker.min.css" />
     <Content Include="Content\open-sans.css" />
     <Content Include="Content\StyleSheet.css" />
     <Content Include="Content\template\ace\assets\avatars\avatar.png" />
@@ -687,6 +688,7 @@
     <Content Include="Content\bootstrap-datepicker.min.css.map" />
     <Content Include="Scripts\DataTables\datatables.extend.js" />
     <Content Include="Scripts\fontawesome-iconpicker.min.js" />
+    <Content Include="Scripts\master-datetimepicker.min.js" />
     <Content Include="Scripts\plugin\bootstrap-multiselect.min.js" />
     <Content Include="Scripts\plugin\bootstrap-select\css\bootstrap-select.min.css" />
     <Content Include="Scripts\plugin\bootstrap-select\js\bootstrap-select.min.js" />
@@ -719,6 +721,7 @@
     <Content Include="Uploads\Image\bootstrap-colorpicker\hue.png" />
     <Content Include="Uploads\Image\bootstrap-colorpicker\saturation.png" />
     <Content Include="Uploads\Image\logo\logoFz_74x40.png" />
+    <Content Include="Uploads\Image\logo\rsz_unnamed.png" />
     <Content Include="Uploads\Image\pagenotfound.png" />
     <Content Include="Views\Partials\_StandardOperateData.cshtml" />
     <Content Include="Reports\MasterPage\ReportMasterLayout.Master" />

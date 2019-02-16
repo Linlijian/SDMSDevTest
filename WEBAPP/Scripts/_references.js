@@ -100,6 +100,7 @@
 /// <reference path="jquery-1.12.4.js" />
 /// <reference path="jquery-1.12.4.min.js" />
 /// <reference path="jquery-2.2.4.js" />
+/// <reference path="master-datetimepicker.min.js" />
 /// <reference path="modernizr-2.8.3.js" />
 /// <reference path="plugin/bootstrap-multiselect.min.js" />
 /// <reference path="plugin/bootstrap-select/js/bootstrap-select.min.js" />
