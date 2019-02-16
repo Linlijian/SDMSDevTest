@@ -342,6 +342,7 @@
 
     })
 
+    //=========================DATE BETWEEN============================//
     $.fn.BetweenDateTime = function (options) {
         var val_more = $("[name=" + options.from_ctrl + "]").val();
         var val_less = $("[name=" + options.to_ctrl + "]").val();
@@ -382,13 +383,34 @@
             $(this).prev().focus();
         });
     };
+    //=========================END============================//
 
-    $("#NO").attr("placeholder", "Waitting select Application. . .")
-    $("#APP_CODE").click(function () {
-        $("#NO").attr("placeholder", "Loading. . .")
-    })
+    //=========================CONTROL GET NO============================//
+    function OnDisabledTrue() {
+        $("#ISSUE_BY").attr("disabled", true)
+        $("#ISSUE_TYPE").attr("disabled", true)
+        $("#STR_ISSUE_DATE").attr("disabled", true)
+        $("#MODULE").attr("disabled", true)
+        $("#STR_RESPONSE_DATE").attr("disabled", true)
+    }
+
+    function OnDisabledFlase() {
+        $("#ISSUE_TYPE").removeAttr("disabled", true)
+        $("#STR_ISSUE_DATE").removeAttr("disabled", true)
+        $("#MODULE").removeAttr("disabled", true)
+        $("#STR_RESPONSE_DATE").removeAttr("disabled", true)
+    }
 
     $(document).ready(function () {
+        $("#NO").attr("placeholder", "Waitting Application Typing. . .")
+        OnDisabledTrue()
+
+        $("#APP_CODE").change(function () {
+            $("#NO").attr("placeholder", "Waitting  Issue By Typing. . .")
+            $("#ISSUE_BY").removeAttr("disabled", true)
+            //OnCallAjax()
+        })
+
         $("#ISSUE_BY").change(function () {
             var formData = $("#form1").serializeFormData();
             $.ajax({
@@ -399,36 +421,23 @@
                 processData: false,
                 success: function (response) {
                     if (response != null && response != isNullOrEmpty && response.data.NO != null) {
-                        $("#NO").val(response.data.NO)
+                        if ($("#APP_CODE").val() != '') {
+                            $("#NO").val(response.data.NO)
+                            $("#APP_CODE").attr("disabled", true)
+                            OnDisabledFlase()
+                        } else {
+                            $("#NO").attr("placeholder", "Application Typing Again...")
+                        }
                     }
                     else {
-                        $("#NO").attr("placeholder", "Loading. . .")
+                        $("#NO").attr("placeholder", "Check Application Typing. . .")
                     }
                 },
                 error: OnAjaxError
             });
         })
-
-        function OnCallAjax() {
-            var formData = $("#form1").serializeFormData();
-            $.ajax({
-                url: '@Url.Action("GetNo")',
-                type: 'post',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    if (response != null && response != isNullOrEmpty && response.data.NO != null) {
-                        $("#NO").val(response.data.NO)
-                    }
-                    else {
-                        $("#NO").attr("placeholder", "Loading. . .")
-                    }
-                },
-                error: OnAjaxError
-            });
-        }
     })
+    //=========================END============================//
     </script>
 
 }
