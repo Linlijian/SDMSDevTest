@@ -358,6 +358,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Menu.
+        /// </summary>
+        public static string MENU {
+            get {
+                return ResourceManager.GetString("MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Module Name.
         /// </summary>
         public static string MODULE {
@@ -381,6 +390,15 @@ namespace Translation.MIS {
         public static string OWNER {
             get {
                 return ResourceManager.GetString("OWNER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Program Name.
+        /// </summary>
+        public static string PRG_NAME {
+            get {
+                return ResourceManager.GetString("PRG_NAME", resourceCulture);
             }
         }
         

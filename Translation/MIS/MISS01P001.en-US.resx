@@ -216,6 +216,9 @@
   <data name="MAN_PLM_SA" xml:space="preserve">
     <value>SA</value>
   </data>
+  <data name="MENU" xml:space="preserve">
+    <value>Menu</value>
+  </data>
   <data name="MODULE" xml:space="preserve">
     <value>Module Name</value>
   </data>
@@ -224,6 +227,9 @@
   </data>
   <data name="OWNER" xml:space="preserve">
     <value>Owner Issue</value>
+  </data>
+  <data name="PRG_NAME" xml:space="preserve">
+    <value>Program Name</value>
   </data>
   <data name="PRIORITY" xml:space="preserve">
     <value>Prioriry </value>

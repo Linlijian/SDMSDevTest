@@ -43,6 +43,10 @@ namespace DataAccess.MIS
         public string RESPONSE_TARGET { get; set; }
         [Display(Name = "ISSUE_DATE_PERIOD", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string ISSUE_DATE_PERIOD { get; set; }
+        [Display(Name = "MENU", ResourceType = typeof(Translation.MIS.MISS01P001))]
+        public string MENU { get; set; }
+        [Display(Name = "PRG_NAME", ResourceType = typeof(Translation.MIS.MISS01P001))]
+        public string PRG_NAME { get; set; }
 
         [Display(Name = "PRIORITY", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string PRIORITY { get; set; }

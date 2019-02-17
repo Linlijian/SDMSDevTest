@@ -161,6 +161,8 @@ namespace DataAccess.MIS
             parameters.AddParameter("ISSUE_IMG", dto.Model.ISSUE_IMG);
             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
+            parameters.AddParameter("MENU", dto.Model.MENU);
+            parameters.AddParameter("PRG_NAME", dto.Model.PRG_NAME);
 
             var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSUE_001]", parameters, CommandType.StoredProcedure);
 
