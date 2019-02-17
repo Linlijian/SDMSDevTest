@@ -136,6 +136,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             if (ModelState.IsValid)
             {
                 model = SetModelDateTime(model);
+                model = RemoveSpace(model);
                 var result = SaveData(StandardActionName.SaveCreate, model);
                 //if(result.ResultMsg != null)
                 //{
@@ -159,10 +160,16 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             var da = new MISS01P001DA();
             da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetByID;
-            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
             da.DTO.Model.NO = model.NO;
+            da.DTO.Model.APP_CODE = model.COM_CODE;
             da.SelectNoEF(da.DTO);
             localModel = da.DTO.Model;
+
+            #region set default 
+            var MenuPrgName = GetMenuPrgName(da.DTO.Model);
+            localModel.MENU = MenuPrgName.MENU;
+            localModel.PRG_NAME = MenuPrgName.PRG_NAME;
+            #endregion
 
             SetDefaultData(StandardActionName.Edit);
             SetDateToString(da.DTO.Model);
@@ -177,6 +184,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
             {
+                model = RemoveSpace(model);
                 var result = SaveData(StandardActionName.SaveModify, model);
                 jsonResult = Success(result, StandardActionName.SaveModify, Url.Action(StandardActionName.Index, new { page = 1 }));
             }
@@ -243,6 +251,26 @@ namespace WEBAPP.Areas.MIS.Controllers
                 localModel.STR_RESPONSE_DATE = model.RESPONSE_DATE.AsStringDate();
             if (!model.TARGET_DATE.IsNullOrEmpty())
                 localModel.STR_TARGET_DATE = model.TARGET_DATE.AsStringDate();
+        }
+        private MISS01P001Model RemoveSpace(MISS01P001Model model)
+        {
+            if(!model.MENU.IsNullOrEmpty())
+                model.MENU = model.MENU.Trim();
+            if(!model.PRG_NAME.IsNullOrEmpty())
+                model.PRG_NAME = model.PRG_NAME.Trim();
+
+            return model;
+        }
+        private MISS01P001Model GetMenuPrgName(MISS01P001Model model)
+        {
+            var da = new MISS01P001DA();
+            da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetMenuPrgName;
+            da.DTO.Model.NO = model.NO;
+            da.DTO.Model.APP_CODE = model.APP_CODE;
+            da.DTO.Model.ISSUE_BY = model.ISSUE_BY;
+            da.SelectNoEF(da.DTO);
+
+            return da.DTO.Model;
         }
         private MISS01P001Model SetModelDateTime(MISS01P001Model model)
         {

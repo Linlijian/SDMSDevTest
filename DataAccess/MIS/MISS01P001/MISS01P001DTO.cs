@@ -28,6 +28,8 @@ namespace DataAccess.MIS
         public const string GetFilePacket = "GetFilePacket";
         public const string UpdateAssignment = "UpdateAssignment";
         public const string GetAllStatus = "GetAllStatus";
+        public const string GetMenuPrgName = "GetMenuPrgName";
+        
 
     }
 }

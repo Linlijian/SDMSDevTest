@@ -28,7 +28,29 @@ namespace DataAccess.MIS
                 case MISS01P001ExecuteType.GetByID: return GetByID(dto);
                 case MISS01P001ExecuteType.GetNo: return GetNo(dto);
                 case MISS01P001ExecuteType.GetAllStatus: return GetAll(dto);
+                case MISS01P001ExecuteType.GetMenuPrgName: return GetMenuPrgName(dto);
             }
+            return dto;
+        }
+        private MISS01P001DTO GetMenuPrgName(MISS01P001DTO dto)
+        {
+            string strSQL = @"	SELECT *
+                                FROM VSMS_MOBULE
+                                WHERE NO = @NO
+                                AND COM_CODE = @APP_CODE
+                                AND FLAG  ='P'
+                                ";
+            var parameters = CreateParameter();
+            parameters.AddParameter("APP_CODE", dto.Model.APP_CODE); //checked
+            parameters.AddParameter("NO", dto.Model.NO);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model = result.OutputDataSet.Tables[0].ToObject<MISS01P001Model>();
+            }
+
             return dto;
         }
         private MISS01P001DTO GetNo(MISS01P001DTO dto)
@@ -104,7 +126,7 @@ namespace DataAccess.MIS
                                 AND NO = @NO";
 
             var parameters = CreateParameter();
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
             parameters.AddParameter("NO", dto.Model.NO);
             
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
@@ -112,6 +134,7 @@ namespace DataAccess.MIS
             if (result.Success(dto))
             {
                 dto.Model = result.OutputDataSet.Tables[0].ToObject<MISS01P001Model>();
+                dto.Model.APP_CODE = dto.Model.COM_CODE; //checked
             }
             return dto;
         }
@@ -199,7 +222,7 @@ namespace DataAccess.MIS
             var parameters = CreateParameter();
 
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
             parameters.AddParameter("NO", dto.Model.NO);
             parameters.AddParameter("ISSUE_DATE", dto.Model.ISSUE_DATE);
             parameters.AddParameter("ISSUE_DATE_PERIOD", dto.Model.ISSUE_DATE_PERIOD);
@@ -225,6 +248,8 @@ namespace DataAccess.MIS
             parameters.AddParameter("MAN_PLM_DBA", dto.Model.MAN_PLM_DBA);
             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
+            parameters.AddParameter("MENU", dto.Model.MENU);
+            parameters.AddParameter("PRG_NAME", dto.Model.PRG_NAME);
 
             var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSUE_004]", parameters, CommandType.StoredProcedure);
 
