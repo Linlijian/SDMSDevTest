@@ -24,5 +24,6 @@ namespace DataAccess
         public string MENU { get; set; }
         public string PRG_NAME { get; set; }
         public string ISSUE_BY { get; set; }
+        public Nullable<decimal> NO { get; set; }
     }
 }

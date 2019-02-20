@@ -140,6 +140,9 @@
     <Compile Include="VSMS_MOBULE.cs">
       <DependentUpon>ModelManger.tt</DependentUpon>
     </Compile>
+    <Compile Include="VSMS_NOTIFICATION.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
     <Compile Include="VSMS_PROGRAM.cs">
       <DependentUpon>ModelManger.tt</DependentUpon>
     </Compile>

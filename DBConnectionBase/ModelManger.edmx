@@ -163,10 +163,24 @@
           <Property Name="MENU" Type="varchar" MaxLength="50" />
           <Property Name="PRG_NAME" Type="varchar" MaxLength="50" />
           <Property Name="ISSUE_BY" Type="varchar" MaxLength="50" />
+          <Property Name="NO" Type="decimal" Precision="18" Scale="0" />
           <Property Name="FLAG" Type="varchar" MaxLength="1" />
           <Property Name="USER_ID" Type="char" MaxLength="16" />
           <Property Name="CRET_BY" Type="char" MaxLength="16" />
           <Property Name="CRET_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VSMS_NOTIFICATION">
+          <Key>
+            <PropertyRef Name="NTF_KEY" />
+          </Key>
+          <Property Name="COM_CODE" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="NTF_KEY" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USER_ID" Type="char" MaxLength="16" />
+          <Property Name="DETAIL" Type="char" MaxLength="200" />
+          <Property Name="FLAG" Type="char" MaxLength="1" />
+          <Property Name="ACTIVE" Type="char" MaxLength="1" />
+          <Property Name="CRET_DATE" Type="datetime" />
+          <Property Name="MNT_DATE" Type="datetime" />
         </EntityType>
         <EntityType Name="VSMS_PROGRAM">
           <Key>
@@ -324,6 +338,7 @@
           <EntitySet Name="VSMS_EXCEL" EntityType="Self.VSMS_EXCEL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VSMS_EXCEL_DETAIL" EntityType="Self.VSMS_EXCEL_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VSMS_MOBULE" EntityType="Self.VSMS_MOBULE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VSMS_NOTIFICATION" EntityType="Self.VSMS_NOTIFICATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VSMS_PROGRAM" EntityType="Self.VSMS_PROGRAM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VSMS_SYS_PGC" EntityType="Self.VSMS_SYS_PGC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VSMS_SYSTEM" EntityType="Self.VSMS_SYSTEM" Schema="dbo" store:Type="Tables" />
@@ -354,6 +369,7 @@
           <EntitySet Name="VSMS_SYS_PGC" EntityType="AATModel.VSMS_SYS_PGC" />
           <EntitySet Name="VSMS_USRGRPPRIV" EntityType="AATModel.VSMS_USRGRPPRIV" />
           <EntitySet Name="VSMS_MOBULE" EntityType="AATModel.VSMS_MOBULE" />
+          <EntitySet Name="VSMS_NOTIFICATION" EntityType="AATModel.VSMS_NOTIFICATION" />
         </EntityContainer>
         <EntityType Name="VSMS_EXCEL_DETAIL">
           <Key>
@@ -664,6 +680,20 @@
           <Property Name="MENU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PRG_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ISSUE_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NO" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="VSMS_NOTIFICATION">
+          <Key>
+            <PropertyRef Name="NTF_KEY" />
+          </Key>
+          <Property Name="COM_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="NTF_KEY" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ID" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+          <Property Name="DETAIL" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
+          <Property Name="FLAG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ACTIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CRET_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MNT_DATE" Type="DateTime" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -969,6 +999,7 @@
           <EntitySetMapping Name="VSMS_MOBULE">
             <EntityTypeMapping TypeName="AATModel.VSMS_MOBULE">
               <MappingFragment StoreEntitySet="VSMS_MOBULE">
+                <ScalarProperty Name="NO" ColumnName="NO" />
                 <ScalarProperty Name="ISSUE_BY" ColumnName="ISSUE_BY" />
                 <ScalarProperty Name="PRG_NAME" ColumnName="PRG_NAME" />
                 <ScalarProperty Name="MENU" ColumnName="MENU" />
@@ -978,6 +1009,20 @@
                 <ScalarProperty Name="FLAG" ColumnName="FLAG" />
                 <ScalarProperty Name="MODULE" ColumnName="MODULE" />
                 <ScalarProperty Name="M_ID" ColumnName="M_ID" />
+                <ScalarProperty Name="COM_CODE" ColumnName="COM_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSMS_NOTIFICATION">
+            <EntityTypeMapping TypeName="AATModel.VSMS_NOTIFICATION">
+              <MappingFragment StoreEntitySet="VSMS_NOTIFICATION">
+                <ScalarProperty Name="MNT_DATE" ColumnName="MNT_DATE" />
+                <ScalarProperty Name="CRET_DATE" ColumnName="CRET_DATE" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="FLAG" ColumnName="FLAG" />
+                <ScalarProperty Name="DETAIL" ColumnName="DETAIL" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="NTF_KEY" ColumnName="NTF_KEY" />
                 <ScalarProperty Name="COM_CODE" ColumnName="COM_CODE" />
               </MappingFragment>
             </EntityTypeMapping>
