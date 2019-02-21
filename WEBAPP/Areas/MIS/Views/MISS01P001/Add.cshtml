@@ -416,13 +416,13 @@
         $("#NO").attr("placeholder", "Waitting Application Typing. . .")
         OnDisabledTrue()
 
-        $("#APP_CODE").change(function () {
+        $("#APP_CODE").on('change', function () {
             $("#NO").attr("placeholder", "Waitting  Issue By Typing. . .")
             $("#ISSUE_BY").removeAttr("disabled", true)
             //OnCallAjax()
         })
 
-        $("#ISSUE_BY").change(function () {
+        $("#ISSUE_BY").on('change',function () {
             var formData = $("#form1").serializeFormData();
             $.ajax({
                 url: '@Url.Action("GetNo")',
