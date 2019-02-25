@@ -11,12 +11,13 @@ namespace DataAccess.Users
         public UserDTO()
         {
             Model = new UserModel();
+            Notification = new NotificationModel();
         }
         public UserModel Model { get; set; }
         public List<ModuleModel> ConfigGerarals { get; set; }
         public List<AppModel> Apps { get; set; }
-        public List<NotificationModel> Notification { get; set; }
-
+        public List<NotificationModel> Notifications { get; set; }
+        public NotificationModel Notification { get; set; }
     }
 
     public class UserExecuteType : DTOExecuteType
@@ -26,6 +27,9 @@ namespace DataAccess.Users
         public const string GetConfigSys = "GetConfigSys";
         public const string GetApp = "GetApp";
         public const string GetNotification = "GetNotification";
+        public const string GetNotificationCount = "GetNotificationCount";
+        public const string UpdateFlag = "UpdateFlag";
+        
     }
 
     

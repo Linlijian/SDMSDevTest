@@ -67,11 +67,11 @@
                         </a>
                     </li>*@
                 @*จุดเริ่ม*@
-                <li class="light-blue">
+                <li class="light-blue" id="ntf">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <span class="user-info">
                             <i class="ace-icon fa fa-bell bigger-120">
-                                <span style="background-color:red" id="count-ntf">@SessionHelper.Notification.Count()</span>
+                                <span style="background-color:red" id="count-ntf">@SessionHelper.CountNoti</span>
                             </i>
                         </span>
                     </a>
@@ -89,8 +89,9 @@
                             foreach (var item in SessionHelper.Notification)
                             {
                                 <li>
-                                    <a id="userTH" href="@Url.Action("SelectedApp","Account", new {Area = "Users", COM_CODE = item.COM_CODE })" tabindex="-1">
+                                    <a id="userTH" href="@Url.Action("Info","MISS01P001", new {Area = "MIS", NO = item.NO })" tabindex="-1">
                                         <i class="ace-icon fa fa-bell"></i>
+                                        <p hidden id="item-KEY">@item.NTF_KEY</p>
                                         @item.DETAIL
                                     </a>
                                 </li>

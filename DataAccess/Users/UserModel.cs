@@ -36,7 +36,8 @@ namespace DataAccess.Users
     public class NotificationModel
     {
         public string COM_CODE { get; set; }
-        public decimal NTF_KEY { get; set; }
+        public string NO { get; set; }
+        public string NTF_KEY { get; set; }
         public string USER_ID { get; set; }
         public string DETAIL { get; set; }
         public string FLAG { get; set; }

@@ -32,7 +32,27 @@ namespace DataAccess.Users
                 case UserExecuteType.GetConfigSys: return GetConfigSys(dto);
                 case UserExecuteType.GetApp: return GetApp(dto);
                 case UserExecuteType.GetNotification: return GetNotification(dto);
+                case UserExecuteType.GetNotificationCount: return GetNotificationCount(dto);
             }
+            return dto;
+        }
+        private UserDTO GetNotificationCount(UserDTO dto)
+        {
+            string strSQL = @"  SELECT COUNT(*)
+                                  FROM [SDDB].[dbo].[VSMS_NOTIFICATION]
+                                  WHERE USER_ID = @USER_ID AND FLAG = 'T'";
+
+            var parameters = CreateParameter();
+
+            parameters.AddParameter("USER_ID", dto.Model.USER_ID);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Notification.NO = result.OutputDataSet.Tables[0].Rows[0][0].ToString();
+            }
+
             return dto;
         }
         private UserDTO GetNotification(UserDTO dto)
@@ -49,7 +69,7 @@ namespace DataAccess.Users
 
             if (result.Success(dto))
             {
-                dto.Notification = result.OutputDataSet.Tables[0].ToList<NotificationModel>();
+                dto.Notifications = result.OutputDataSet.Tables[0].ToList<NotificationModel>();
             }
 
             return dto;
@@ -343,58 +363,34 @@ namespace DataAccess.Users
 
         #region Update
 
-        protected override BaseDTO DoUpdate(BaseDTO DTO)
+        protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
-            var status = 0;
-            var sErrorMsg = string.Empty;
-            UserDTO dto = (UserDTO)DTO;
-            //if (dto.Execute.ExecuteType == UserExecuteType.GetUpdateUserPWD)
-            //{
-            //    var parameters = CreateParameter();
-
-            //    parameters.AddParameter("RecordCount", status, ParameterDirection.Output);
-            //    parameters.AddParameter("sERROR_MSG", sErrorMsg, ParameterDirection.Output);
-            //    parameters.AddParameter("pUSER_ID", dto.ParameterGet("pUSER_ID"));
-            //    parameters.AddParameter("pUSER_PWD", dto.ParameterGet("pUSER_PWD"));
-            //    parameters.AddParameter("pUPDATE_USER", dto.ParameterGet("pUPDATE_USER"));
-            //    parameters.AddParameter("pUPDATE_DT", dto.ParameterGet("pUPDATE_DT"));
-
-            //    var result = _DBManger.ExecuteNonQuery("PKG_SECMBASE.SP_UPDATE_USER_PWD", parameters);
-            //    if (result.Success(dto))
-            //    {
-            //        dto.Result.ActionResult = result.OutputData["RecordCount"].AsInt();
-            //        dto.Result.ResultMsg = result.OutputData["sERROR_MSG"].AsString();
-            //    }
-            //}
-            //else
-            //{
-            //    var parameters = CreateParameter();
-
-            //    parameters.AddParameter("RecordCount", status, ParameterDirection.Output);
-            //    parameters.AddParameter("sERROR_MSG", sErrorMsg, ParameterDirection.Output);
-            //    parameters.AddParameter("pUSER_ID", dto.User.USER_ID);
-            //    parameters.AddParameter("pAPPROVE_STATUS", "10040002");
-            //    parameters.AddParameter("pREASON_REJECT", "");
-            //    parameters.AddParameter("pMS_CORP_ID", dto.User.MS_CORP_ID);
-            //    parameters.AddParameter("pUPDATE_USER", dto.User.CREATE_USER);
-
-            //    parameters.AddParameter("pUSER_EFF_DATE", null);
-            //    parameters.AddParameter("pUSER_EXP_DATE", null);
-            //    parameters.AddParameter("pPWD_EXP_DATE", null);
-            //    parameters.AddParameter("pWNING_USER_DATE", null);
-            //    parameters.AddParameter("pWNING_PWD_DATE", null);
-
-            //    var result = _DBManger.ExecuteNonQuery("PKG_SEC_SECM00500.SP_UPDATE_APRV", parameters);
-            //    if (result.Success(dto))
-            //    {
-            //        dto.Result.ActionResult = result.OutputData["RecordCount"].AsInt();
-            //        dto.Result.ResultMsg = result.OutputData["sERROR_MSG"].AsString();
-
-            //    }
-            //}
+            UserDTO dto = (UserDTO)baseDTO;
+            switch (dto.Execute.ExecuteType)
+            {
+                case UserExecuteType.UpdateFlag: return UpdateFlag(dto);
+            }
             return dto;
         }
+        private UserDTO UpdateFlag(UserDTO dto)
+        {
+            string strSQL = @"   UPDATE VSMS_NOTIFICATION SET 
+                                  FLAG = 'F'
+                                  WHERE FLAG = 'T'";
 
+            var parameters = CreateParameter();
+
+            //parameters.AddParameter("NTF_KEY", dto.Notification.NTF_KEY);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                
+            }
+
+            return dto;
+        }
         #endregion
     }
 }

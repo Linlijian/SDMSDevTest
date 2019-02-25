@@ -322,7 +322,15 @@ namespace WEBAPP.Areas.Users.Controllers
             Session[SessionSystemName.SYS_CurrentCulture] = lang;
             return Redirect(Request.UrlReferrer.ToString());
         }
+        public ActionResult RemoveCountNTF()
+        {
+            var da = new UserDA();
+            da.DTO.Execute.ExecuteType = DataAccess.Users.UserExecuteType.UpdateFlag;
+            //da.DTO.Notification.NTF_KEY = NTF_KEY;
+            da.UpdateNoEF(da.DTO);
 
+            return JsonAllowGet(da);
+        }
 
         [HttpPost]
         public JsonResult SignOutOnClose()

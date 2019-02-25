@@ -245,6 +245,36 @@
                 waitingDialog.hide();
             }, 500);
         });
+        $(document).ready(function () {
+            //remove 0 
+            if ($('#count-ntf').text() == '0')
+                $('#count-ntf').text('')
+
+            //remove count notification
+            $('#ntf').click(function () {
+                $('#count-ntf').text('')
+                //get data tag p
+                //var A = $('#item-KEY').text();
+                //call ajax for change flag = F
+                $.ajax({
+                    url: '@Url.Action("RemoveCountNTF", "Account", new { Area = "Users"})',
+                    type: 'post',
+                    success: null,
+                    error: OnAjaxError
+                });
+            });
+
+            //after click notification detail
+            $('#').click(function () {
+                //call ajax for change flag = F
+                //change css after click notification detail
+            });
+
+            //call ajax every 5s
+            $('#').click(function () {
+                
+            });
+        });
         </script>
 </body>
 </html>

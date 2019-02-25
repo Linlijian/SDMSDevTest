@@ -203,14 +203,6 @@ namespace WEBAPP.Helper
             }
         }
 
-        public static string CountNoti
-        {
-            get
-            {
-                return Convert.ToString(HttpContext.Current.Session[SessionSystemName.CountNoti]);
-            }
-        }
-
         public static List<DataAccess.Users.AppModel> SYS_AppModel
         {
             get
@@ -231,15 +223,33 @@ namespace WEBAPP.Helper
         {
             get
             {
-                if (HttpContext.Current.Session[SessionSystemName.Notification] == null || ((List<DataAccess.Users.NotificationModel>)HttpContext.Current.Session[SessionSystemName.Notification]).Count == 0)
-                {
-                    var da = new DataAccess.Users.UserDA();
-                    da.DTO.Execute.ExecuteType = DataAccess.Users.UserExecuteType.GetNotification;
-                    da.DTO.Model.USER_ID = SessionHelper.SYS_USER_ID;
-                    da.SelectNoEF(da.DTO);
-                    HttpContext.Current.Session[SessionSystemName.Notification] = da.DTO.Notification;
-                }
+                //if (HttpContext.Current.Session[SessionSystemName.Notification] == null || ((List<DataAccess.Users.NotificationModel>)HttpContext.Current.Session[SessionSystemName.Notification]).Count == 0)
+                //{
+                //    var da = new DataAccess.Users.UserDA();
+                //    da.DTO.Execute.ExecuteType = DataAccess.Users.UserExecuteType.GetNotification;
+                //    da.DTO.Model.USER_ID = SessionHelper.SYS_USER_ID;
+                //    da.SelectNoEF(da.DTO);
+                //    HttpContext.Current.Session[SessionSystemName.Notification] = da.DTO.Notification;
+                //}
+                var da = new DataAccess.Users.UserDA();
+                da.DTO.Execute.ExecuteType = DataAccess.Users.UserExecuteType.GetNotification;
+                da.DTO.Model.USER_ID = SessionHelper.SYS_USER_ID;
+                da.SelectNoEF(da.DTO);
+                HttpContext.Current.Session[SessionSystemName.Notification] = da.DTO.Notifications;
                 return HttpContext.Current.Session[SessionSystemName.Notification] as List<DataAccess.Users.NotificationModel>;
+            }
+        }
+
+        public static string CountNoti
+        {
+            get
+            {
+                var da = new DataAccess.Users.UserDA();
+                da.DTO.Execute.ExecuteType = DataAccess.Users.UserExecuteType.GetNotificationCount;
+                da.DTO.Model.USER_ID = SessionHelper.SYS_USER_ID;
+                da.SelectNoEF(da.DTO);
+                HttpContext.Current.Session[SessionSystemName.CountNoti] = da.DTO.Notification.NO;
+                return Convert.ToString(HttpContext.Current.Session[SessionSystemName.CountNoti]);
             }
         }
     }
