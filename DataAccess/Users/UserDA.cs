@@ -31,7 +31,27 @@ namespace DataAccess.Users
                 case UserExecuteType.GetConfigGeraral: return GetConfigGeraral(dto);
                 case UserExecuteType.GetConfigSys: return GetConfigSys(dto);
                 case UserExecuteType.GetApp: return GetApp(dto);
+                case UserExecuteType.GetNotification: return GetNotification(dto);
             }
+            return dto;
+        }
+        private UserDTO GetNotification(UserDTO dto)
+        {
+            string strSQL = @"  SELECT *
+                                  FROM [SDDB].[dbo].[VSMS_NOTIFICATION]
+                                  WHERE CRET_DATE < GETDATE() AND USER_ID = @USER_ID";
+
+            var parameters = CreateParameter();
+
+            parameters.AddParameter("USER_ID", dto.Model.USER_ID);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Notification = result.OutputDataSet.Tables[0].ToList<NotificationModel>();
+            }
+
             return dto;
         }
         private UserDTO GetApp(UserDTO dto)

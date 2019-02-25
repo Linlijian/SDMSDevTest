@@ -203,6 +203,14 @@ namespace WEBAPP.Helper
             }
         }
 
+        public static string CountNoti
+        {
+            get
+            {
+                return Convert.ToString(HttpContext.Current.Session[SessionSystemName.CountNoti]);
+            }
+        }
+
         public static List<DataAccess.Users.AppModel> SYS_AppModel
         {
             get
@@ -218,10 +226,29 @@ namespace WEBAPP.Helper
                 return HttpContext.Current.Session[SessionSystemName.SYS_APPS] as List<DataAccess.Users.AppModel>;
             }
         }
+
+        public static List<DataAccess.Users.NotificationModel> Notification
+        {
+            get
+            {
+                if (HttpContext.Current.Session[SessionSystemName.Notification] == null || ((List<DataAccess.Users.NotificationModel>)HttpContext.Current.Session[SessionSystemName.Notification]).Count == 0)
+                {
+                    var da = new DataAccess.Users.UserDA();
+                    da.DTO.Execute.ExecuteType = DataAccess.Users.UserExecuteType.GetNotification;
+                    da.DTO.Model.USER_ID = SessionHelper.SYS_USER_ID;
+                    da.SelectNoEF(da.DTO);
+                    HttpContext.Current.Session[SessionSystemName.Notification] = da.DTO.Notification;
+                }
+                return HttpContext.Current.Session[SessionSystemName.Notification] as List<DataAccess.Users.NotificationModel>;
+            }
+        }
     }
 
     public class SessionSystemName
     {
+        public const string Notification = "Notification";
+        public const string CountNoti = "CountNoti";
+
         public const string SYS_APPS = "SYS_APPS";
         public const string SYS_COM_CODE = "SYS_COM_CODE";
         public const string SYS_USER_ID = "SYS_USER_ID";

@@ -70,7 +70,9 @@
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <span class="user-info">
-                            <i class="ace-icon fa fa-bell"></i>
+                            <i class="ace-icon fa fa-bell bigger-120">
+                                <span style="background-color:red" id="count-ntf">@SessionHelper.Notification.Count()</span>
+                            </i>
                         </span>
                     </a>
 
@@ -81,20 +83,32 @@
                             </a>
                         </li>
                         <li class="divider"></li>
-                        @foreach (var item in SessionHelper.SYS_AppModel)
-                        {
-                            if (item.COM_CODE != SessionHelper.SYS_COM_CODE)
-                            {
 
+                        @if (SessionHelper.Notification.Count != 0)
+                        {
+                            foreach (var item in SessionHelper.Notification)
+                            {
                                 <li>
                                     <a id="userTH" href="@Url.Action("SelectedApp","Account", new {Area = "Users", COM_CODE = item.COM_CODE })" tabindex="-1">
                                         <i class="ace-icon fa fa-bell"></i>
-                                        @item.COM_NAME
+                                        @item.DETAIL
                                     </a>
                                 </li>
-                                <li class="divider"></li>
+                                    <li class="divider"></li>
                             }
                         }
+                        else
+                        {
+                            <li>
+                                <a id="userTH" href="#" tabindex="-1">
+                                    <i class="ace-icon fa "></i>
+                                    ไม่มีอะไรให้เลย~
+                                </a>
+                            </li>
+                                <li class="divider"></li>
+                        }
+                         
+
                     </ul>
                     @*จุดจบ*@
 <li class="transparent">

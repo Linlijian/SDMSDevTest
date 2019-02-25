@@ -33,4 +33,16 @@ namespace DataAccess.Users
         public string COM_NAME_T { get; set; }
     }
 
+    public class NotificationModel
+    {
+        public string COM_CODE { get; set; }
+        public decimal NTF_KEY { get; set; }
+        public string USER_ID { get; set; }
+        public string DETAIL { get; set; }
+        public string FLAG { get; set; }
+        public string ACTIVE { get; set; }
+        public DateTime CRET_DATE { get; set; }
+        public DateTime MNT_DATE { get; set; }
+    }
+
 }
