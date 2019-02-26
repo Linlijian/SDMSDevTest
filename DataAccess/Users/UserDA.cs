@@ -58,9 +58,10 @@ namespace DataAccess.Users
         }
         private UserDTO GetNotification(UserDTO dto)
         {
-            string strSQL = @"  SELECT TOP 10 *
+            string strSQL = @"  SELECT TOP 6 *
                                   FROM [SDDB].[dbo].[VSMS_NOTIFICATION]
-                                  WHERE CRET_DATE < GETDATE() AND USER_ID = @USER_ID";
+                                  WHERE CRET_DATE < GETDATE() AND USER_ID = @USER_ID
+                                  ORDER BY CRET_DATE DESC";
 
             var parameters = CreateParameter();
 
@@ -77,9 +78,10 @@ namespace DataAccess.Users
         }
         private UserDTO FatchNotification(UserDTO dto)
         {
-            string strSQL = @"  SELECT TOP 10 *
+            string strSQL = @"  SELECT TOP 6 *
                                   FROM [SDDB].[dbo].[VSMS_NOTIFICATION]
-                                  WHERE CRET_DATE < GETDATE() AND USER_ID = @USER_ID";
+                                  WHERE CRET_DATE < GETDATE() AND USER_ID = @USER_ID
+                                  ORDER BY CRET_DATE DESC";
 
             var parameters = CreateParameter();
 
