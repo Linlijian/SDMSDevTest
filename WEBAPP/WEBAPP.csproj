@@ -1058,6 +1058,7 @@
     <Content Include="Views\Shared\_LayoutChildPageWizardCircle.cshtml" />
     <Content Include="Views\Partials\_ButtonHeaderWizardCircle.cshtml" />
     <Content Include="Uploads\Template\MIS\MISS02TP001.xlsx" />
+    <Content Include="Views\Partials\_LayoutNotification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\AdminBase\" />

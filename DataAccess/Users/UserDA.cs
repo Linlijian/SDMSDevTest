@@ -33,6 +33,7 @@ namespace DataAccess.Users
                 case UserExecuteType.GetApp: return GetApp(dto);
                 case UserExecuteType.GetNotification: return GetNotification(dto);
                 case UserExecuteType.GetNotificationCount: return GetNotificationCount(dto);
+                case UserExecuteType.FatchNotification: return FatchNotification(dto);
             }
             return dto;
         }
@@ -57,7 +58,26 @@ namespace DataAccess.Users
         }
         private UserDTO GetNotification(UserDTO dto)
         {
-            string strSQL = @"  SELECT *
+            string strSQL = @"  SELECT TOP 10 *
+                                  FROM [SDDB].[dbo].[VSMS_NOTIFICATION]
+                                  WHERE CRET_DATE < GETDATE() AND USER_ID = @USER_ID";
+
+            var parameters = CreateParameter();
+
+            parameters.AddParameter("USER_ID", dto.Model.USER_ID);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Notifications = result.OutputDataSet.Tables[0].ToList<NotificationModel>();
+            }
+
+            return dto;
+        }
+        private UserDTO FatchNotification(UserDTO dto)
+        {
+            string strSQL = @"  SELECT TOP 10 *
                                   FROM [SDDB].[dbo].[VSMS_NOTIFICATION]
                                   WHERE CRET_DATE < GETDATE() AND USER_ID = @USER_ID";
 

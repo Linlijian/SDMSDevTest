@@ -28,6 +28,7 @@ namespace DataAccess.Users
         public const string GetApp = "GetApp";
         public const string GetNotification = "GetNotification";
         public const string GetNotificationCount = "GetNotificationCount";
+        public const string FatchNotification = "FatchNotification";
         public const string UpdateFlag = "UpdateFlag";
         
     }

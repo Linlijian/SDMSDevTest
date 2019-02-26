@@ -331,7 +331,27 @@ namespace WEBAPP.Areas.Users.Controllers
 
             return JsonAllowGet(da);
         }
+        public ActionResult FatchNotification()
+        {
+            var da = new UserDA();
+            da.DTO.Execute.ExecuteType = DataAccess.Users.UserExecuteType.FatchNotification;
+            da.DTO.Model.USER_ID = SessionHelper.SYS_USER_ID;
+            da.SelectNoEF(da.DTO);
+            SessionHelper.Notification = da.DTO.Notifications;
 
+            da.DTO.Execute.ExecuteType = DataAccess.Users.UserExecuteType.GetNotificationCount;
+            da.SelectNoEF(da.DTO);
+
+
+
+            return JsonAllowGet(da.DTO.Notification);
+            //return PartialView("_LayoutNotification", JsonAllowGet(da.DTO.Notification));
+        }
+        public ActionResult ReloadNotification()
+        {
+            // return PartialView("_LayoutNotification");
+            return PartialView("_LayoutNotification");
+        }
         [HttpPost]
         public JsonResult SignOutOnClose()
         {

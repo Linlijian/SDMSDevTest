@@ -238,6 +238,7 @@ namespace WEBAPP.Helper
                 HttpContext.Current.Session[SessionSystemName.Notification] = da.DTO.Notifications;
                 return HttpContext.Current.Session[SessionSystemName.Notification] as List<DataAccess.Users.NotificationModel>;
             }
+            set { }
         }
 
         public static string CountNoti
