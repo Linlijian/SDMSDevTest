@@ -267,10 +267,53 @@
                 waitingDialog.hide();
             }, 500);
         });
+        
         $(document).ready(function () {
+            //remove 0
+            if ($('#count-ntf').text() == '0')
+                $('#count-ntf').text('')
+
+            //remove count notification
             $('#ntf').click(function () {
                 $('#count-ntf').text('')
+                //call ajax for change flag = F
+                $.ajax({
+                    url: '@Url.Action("RemoveCountNTF", "Account", new { Area = "Users"})',
+                    type: 'post',
+                    success: null,
+                    error: OnAjaxError
+                });
             });
+
+            //after click notification detail
+            $('#a').click(function () {
+                //call ajax for change active = T
+                //change css after click notification detail
+            });
+
+            //call ajax every 5s
+            var interval = setInterval(function () {
+                $.ajax({
+                    url: '@Url.Action("FatchNotification", "Account", new { Area = "Users"})',
+                    type: 'post',
+                    success: function (resultTimer) {
+                        waitingDialog.hide();
+                        //remove 0
+                        if ($('#count-ntf').text() == '0') {
+                            $('#count-ntf').text('')
+                        }
+                        if (resultTimer.data.NO != 0 || resultTimer.data.NO != "0") {
+                            //set count-ntf
+                            $("#count-ntf").text(resultTimer.data.NO);
+                            //reload item-list
+                            $('#item-list').load('@Url.Action("ReloadNotification", "Account", new { Area = "Users"})');
+                        }
+                    },
+                    error: function (request, status, error) {
+                    }
+                });
+            }, 3000);
+
         });
     </script>
 </body>
