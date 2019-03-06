@@ -52,118 +52,80 @@ namespace WEBAPP.Areas.MIS.Controllers
         #endregion
 
         #region Action 
-        public ActionResult Index()
+        #region Action 
+        public ActionResult Index(string ACTIVE_STEP = "1")
         {
-            SetDefaulButton(StandardButtonMode.Index);
-            RemoveStandardButton("DeleteSearch");
-            RemoveStandardButton(StandardActionName.Add);
-            if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
+            //ViewBag.UrlToClosePage = Url.Action(StandardActionName.Index, "Default", new { Area = "Admin" });
+            #region Set Close Page
+            var menu = SessionHelper.SYS_MenuModel;
+            if (menu != null)
             {
-                localModel = TempSearch.CloneObject();
+                var home = menu.Where(m => m.SYS_CODE.AsString().ToUpper() == "HOME").FirstOrDefault();
+                if (home != null && AppExtensions.ExistsAction(home.PRG_ACTION, home.PRG_CONTROLLER, home.PRG_AREA))
+                {
+                    ViewBag.UrlToClosePage = Url.Action(home.PRG_ACTION, home.PRG_CONTROLLER, new { Area = home.PRG_AREA, SYS_SYS_CODE = home.SYS_CODE, SYS_PRG_CODE = home.PRG_CODE });
+                }
             }
-            return View(StandardActionName.Index, localModel);
-        }
-        public ActionResult SearchAssign(MISS01P002Model model)
-        {
-            var da = new MISS01P002DA();
-            SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAllAssign;
-
-            if (Request.GetRequest("page").IsNullOrEmpty())
-            {
-                model.IsDefaultSearch = true;
-                TempSearch = model;
-            }
-            da.DTO.Model = TempSearch;
-            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-            da.SelectNoEF(da.DTO);
-            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
-        }
-        [RuleSetForClientSideMessages("Assignment")]
-        public ActionResult Assignment(MISS01P002Model model)
-        {
-            SetDefaulButton(StandardButtonMode.Create);
-            SetDefaultData();
-            SetButton("Assignment");
-
-            #region set default 
-            var view = string.Empty;
-            view = "Assignment";
-
-            var da = new MISS01P002DA();
-            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAssignment;
-            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-            da.DTO.Model.NO = model.NO;
-            da.SelectNoEF(da.DTO);
-
-            localModel = da.DTO.Model;
-            //localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
             #endregion
 
-            return View(view, localModel);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SaveAssign(MISS01P002Model model)
-        {
-            var jsonResult = new JsonResult();
-            if (ModelState.IsValid)
-            {
-                var result = SaveData("SaveAssign", model);
-                jsonResult = Success(result, StandardActionName.SaveCreate, Url.Action(StandardActionName.Index, new { ACTIVE_STEP = 2 }));
-            }
-            else
-            {
-                jsonResult = ValidateError(ModelState, StandardActionName.SaveCreate);
-            }
-
-            return jsonResult;
-        }
-        [RuleSetForClientSideMessages("FilePacket")]
-        public ActionResult FilePacket(MISS01P002Model model)
-        {
-            SetDefaulButton(StandardButtonMode.Create);
-            SetDefaultData();
-            SetButton("FilePacket");
-
-            #region set default 
             var view = string.Empty;
-            view = "FilePacket";
+            localModel.ACTIVE_STEP = "5"; //if set 2 then block step3 end
+            if (ACTIVE_STEP == "1")
+            {
+                view = "Status1Open";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Status1Open");
 
-            var da = new MISS01P002DA();
-            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetFilePacket;
-            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-            da.DTO.Model.NO = model.NO;
-            da.SelectNoEF(da.DTO);
+            }
+            else if (ACTIVE_STEP == "2")
+            {
+                view = "Status2Onprocess";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Status2Onprocess");
 
-            localModel = da.DTO.Model;
-            //localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
-            #endregion
+            }
+            else if (ACTIVE_STEP == "3")
+            {
+                view = "Status3Followup";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Status3Followup");
+
+            }
+            else if (ACTIVE_STEP == "4")
+            {
+                view = "Status4xxx";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Status4xxx");
+
+            }
+            else if (ACTIVE_STEP == "5")
+            {
+                view = "Status5xxx";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Status5xxx");
+
+            }
+
+            SetHeaderWizard(new WizardHelper.WizardHeaderConfig(
+                ACTIVE_STEP,
+                localModel.ACTIVE_STEP,
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P001.STEP_1, Url.Action("Index", new { ACTIVE_STEP = "1" }), iconCssClass: FaIcons.FaAreaChart),
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P001.STEP_2, Url.Action("Index", new { ACTIVE_STEP = "2" }), iconCssClass: FaIcons.FaFile),
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P001.STEP_3, Url.Action("Index", new { ACTIVE_STEP = "3" }), iconCssClass: FaIcons.FaFile),
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P001.STEP_4, Url.Action("Index", new { ACTIVE_STEP = "4" }), iconCssClass: FaIcons.FaFile),
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P001.STEP_5, Url.Action("Index", new { ACTIVE_STEP = "5" }), iconCssClass: FaIcons.FaFile)));
 
             return View(view, localModel);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SaveFilePacket(MISS01P002Model model)
-        {
-            var jsonResult = new JsonResult();
-            if (ModelState.IsValid)
-            {
-                var result = SaveData("FilePacket", model);
-                jsonResult = Success(result, StandardActionName.SaveCreate, Url.Action(StandardActionName.Index, new { ACTIVE_STEP = 2 }));
-            }
-            else
-            {
-                jsonResult = ValidateError(ModelState, StandardActionName.SaveCreate);
-            }
-
-            return jsonResult;
         }
         #endregion
 
         #region Mehtod  
         //----------------------- DDL-----------------------
-
         private void SetDefaultData(string mode = "")
         {
             if (mode == "Add")
@@ -187,19 +149,6 @@ namespace WEBAPP.Areas.MIS.Controllers
                 AddButton(StandButtonType.ButtonComfirmAjax, "btnSAVEFILEPACKET", Translation.MIS.MISS01P001.SAVEASSIGN, iconCssClass: FaIcons.FaCopy, url: Url.Action("SaveFilePacket"), isValidate: true);
             }
         }
-        //private List<DDLCenterModel> BindIssueType()
-        //{
-        //    return GetDDLCenter(DDLCenterKey.DD_MISS01P002_001, new VSMParameter(SessionHelper.SYS_COM_CODE.Trim()));
-        //}
-        //private List<DDLCenterModel> BindDefect()
-        //{
-        //    return GetDDLCenter(DDLCenterKey.DD_MISS01P002_002, new VSMParameter(SessionHelper.SYS_COM_CODE.Trim()));
-        //}
-        //private List<DDLCenterModel> BindPriority()
-        //{
-        //    return GetDDLCenter(DDLCenterKey.DD_MISS01P002_003, new VSMParameter(SessionHelper.SYS_COM_CODE.Trim()));
-        //}
-        //----------------------------------------------//
         private DTOResult SaveData(string mode, object model)
         {
             var da = new MISS01P002DA();
