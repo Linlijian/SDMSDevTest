@@ -26,3 +26,98 @@ ERROR 2019-01-24 15:34:16,932 BaseController.OnException -
 Path : MIS/MISS01P001/SaveFilePacket
 Error Messages: This SqlTransaction has completed; it is no longer usable.
 
+ERROR 2019-02-25 16:32:18,137 BaseController.OnException - 
+Path : Users/Account/AAAA
+Error Messages: The parameters dictionary contains a null entry for parameter 'a' of non-nullable type 'System.Decimal' for method 'System.Web.Mvc.ActionResult AAAA(System.Decimal)' in 'WEBAPP.Areas.Users.Controllers.AccountController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+
+ERROR 2019-02-25 16:33:06,973 BaseController.OnException - 
+Path : Users/Account/AAAA
+Error Messages: The parameters dictionary contains a null entry for parameter 'a' of non-nullable type 'System.Decimal' for method 'System.Web.Mvc.ActionResult AAAA(System.Decimal)' in 'WEBAPP.Areas.Users.Controllers.AccountController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+
+ERROR 2019-02-25 16:33:14,265 BaseController.OnException - 
+Path : Users/Account/AAAA
+Error Messages: The parameters dictionary contains a null entry for parameter 'a' of non-nullable type 'System.Decimal' for method 'System.Web.Mvc.ActionResult AAAA(System.Decimal)' in 'WEBAPP.Areas.Users.Controllers.AccountController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+
+ERROR 2019-02-25 16:33:35,925 BaseController.OnException - 
+Path : Users/Account/AAAA
+Error Messages: The parameters dictionary contains a null entry for parameter 'a' of non-nullable type 'System.Decimal' for method 'System.Web.Mvc.ActionResult AAAA(System.Decimal)' in 'WEBAPP.Areas.Users.Controllers.AccountController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+
+ERROR 2019-02-25 17:07:32,954 BaseController.OnException - 
+Path : Users/Account/RemoveCountNTF
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-02-25 17:08:04,921 BaseController.OnException - 
+Path : Users/Account/RemoveCountNTF
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-02-25 17:09:47,881 BaseController.OnException - 
+Path : Users/Account/RemoveCountNTF
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-02-26 11:19:28,168 BaseController.OnException - 
+Path : Users/Account/SelectModule
+Error Messages: The partial view 'GetData' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Users/Views/Account/GetData.aspx
+~/Areas/Users/Views/Account/GetData.ascx
+~/Areas/Users/Views/Shared/GetData.aspx
+~/Areas/Users/Views/Shared/GetData.ascx
+~/Views/Account/GetData.aspx
+~/Views/Account/GetData.ascx
+~/Views/Shared/GetData.aspx
+~/Views/Shared/GetData.ascx
+~/Areas/Users/Views/Account/GetData.cshtml
+~/Areas/Users/Views/Account/GetData.vbhtml
+~/Areas/Users/Views/Shared/GetData.cshtml
+~/Areas/Users/Views/Shared/GetData.vbhtml
+~/Views/Account/GetData.cshtml
+~/Views/Account/GetData.vbhtml
+~/Views/Shared/GetData.cshtml
+~/Views/Shared/GetData.vbhtml
+~/Views/Account/Partials/GetData.cshtml
+~/Views/Shared/Partials/GetData.cshtml
+~/Views/Partials/GetData.cshtml
+
+ERROR 2019-03-16 09:59:38,233 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: The view 'Status1Open' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/MIS/Views/MISS01P002/Status1Open.aspx
+~/Areas/MIS/Views/MISS01P002/Status1Open.ascx
+~/Areas/MIS/Views/Shared/Status1Open.aspx
+~/Areas/MIS/Views/Shared/Status1Open.ascx
+~/Views/MISS01P002/Status1Open.aspx
+~/Views/MISS01P002/Status1Open.ascx
+~/Views/Shared/Status1Open.aspx
+~/Views/Shared/Status1Open.ascx
+~/Areas/MIS/Views/MISS01P002/Status1Open.cshtml
+~/Areas/MIS/Views/MISS01P002/Status1Open.vbhtml
+~/Areas/MIS/Views/Shared/Status1Open.cshtml
+~/Areas/MIS/Views/Shared/Status1Open.vbhtml
+~/Views/MISS01P002/Status1Open.cshtml
+~/Views/MISS01P002/Status1Open.vbhtml
+~/Views/Shared/Status1Open.cshtml
+~/Views/Shared/Status1Open.vbhtml
+
+ERROR 2019-03-16 10:00:55,553 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: The view 'Status2Onprocess' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/MIS/Views/MISS01P002/Status2Onprocess.aspx
+~/Areas/MIS/Views/MISS01P002/Status2Onprocess.ascx
+~/Areas/MIS/Views/Shared/Status2Onprocess.aspx
+~/Areas/MIS/Views/Shared/Status2Onprocess.ascx
+~/Views/MISS01P002/Status2Onprocess.aspx
+~/Views/MISS01P002/Status2Onprocess.ascx
+~/Views/Shared/Status2Onprocess.aspx
+~/Views/Shared/Status2Onprocess.ascx
+~/Areas/MIS/Views/MISS01P002/Status2Onprocess.cshtml
+~/Areas/MIS/Views/MISS01P002/Status2Onprocess.vbhtml
+~/Areas/MIS/Views/Shared/Status2Onprocess.cshtml
+~/Areas/MIS/Views/Shared/Status2Onprocess.vbhtml
+~/Views/MISS01P002/Status2Onprocess.cshtml
+~/Views/MISS01P002/Status2Onprocess.vbhtml
+~/Views/Shared/Status2Onprocess.cshtml
+~/Views/Shared/Status2Onprocess.vbhtml
+

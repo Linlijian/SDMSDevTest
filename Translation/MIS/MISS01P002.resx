@@ -123,8 +123,14 @@
   <data name="ASSIGNMENT_CALCULATE" xml:space="preserve">
     <value>Assignment Calculate</value>
   </data>
+  <data name="ASSIGN_STATUS" xml:space="preserve">
+    <value>Fix Status</value>
+  </data>
   <data name="ASSIGN_USER" xml:space="preserve">
     <value>Assignment</value>
+  </data>
+  <data name="COMPLETE" xml:space="preserve">
+    <value>Fixed Complete</value>
   </data>
   <data name="FILEPACKET" xml:space="preserve">
     <value>File Packet</value>
@@ -132,11 +138,29 @@
   <data name="FILE_ID" xml:space="preserve">
     <value>File Id</value>
   </data>
+  <data name="FIXED_RESULT" xml:space="preserve">
+    <value>Fixed Result</value>
+  </data>
+  <data name="INCOMPLETE" xml:space="preserve">
+    <value>Fixed In Complete</value>
+  </data>
   <data name="INDEX" xml:space="preserve">
     <value>Assignment Issue</value>
   </data>
+  <data name="ISE_DATE_OPENING" xml:space="preserve">
+    <value>Issue Date</value>
+  </data>
+  <data name="ISE_STATUS" xml:space="preserve">
+    <value>Issue Status</value>
+  </data>
   <data name="ISSUE_DATE" xml:space="preserve">
     <value>Issue Date</value>
+  </data>
+  <data name="ISSUE_DATE_F" xml:space="preserve">
+    <value>Issue Date From</value>
+  </data>
+  <data name="ISSUE_DATE_T" xml:space="preserve">
+    <value>To</value>
   </data>
   <data name="NO" xml:space="preserve">
     <value>Issue No.</value>
@@ -152,5 +176,26 @@
   </data>
   <data name="STATUS" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="STEP_1" xml:space="preserve">
+    <value>Issue Information</value>
+  </data>
+  <data name="STEP_2" xml:space="preserve">
+    <value>Assignment Issue</value>
+  </data>
+  <data name="STEP_3" xml:space="preserve">
+    <value>Issue Status</value>
+  </data>
+  <data name="STEP_4" xml:space="preserve">
+    <value>Status4Golive</value>
+  </data>
+  <data name="STEP_5" xml:space="preserve">
+    <value>Status5Close</value>
+  </data>
+  <data name="TARGET_DATE" xml:space="preserve">
+    <value>Target Date</value>
+  </data>
+  <data name="TOTAL" xml:space="preserve">
+    <value>Fixed Total</value>
   </data>
 </root>

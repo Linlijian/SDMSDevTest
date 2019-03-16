@@ -72,7 +72,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             localModel.ACTIVE_STEP = "5"; //if set 2 then block step3 end
             if (ACTIVE_STEP == "1")
             {
-                view = "Status1Open";
+                view = "Index";
                 SetButton(ACTIVE_STEP);
                 SetDefaultData(ACTIVE_STEP);
                 SetClientSideRuleSet("Status1Open");
@@ -96,29 +96,29 @@ namespace WEBAPP.Areas.MIS.Controllers
             }
             else if (ACTIVE_STEP == "4")
             {
-                view = "Status4xxx";
+                view = "Status4Golive";
                 SetButton(ACTIVE_STEP);
                 SetDefaultData(ACTIVE_STEP);
-                SetClientSideRuleSet("Status4xxx");
+                SetClientSideRuleSet("Status4Golive");
 
             }
             else if (ACTIVE_STEP == "5")
             {
-                view = "Status5xxx";
+                view = "Status5Close";
                 SetButton(ACTIVE_STEP);
                 SetDefaultData(ACTIVE_STEP);
-                SetClientSideRuleSet("Status5xxx");
+                SetClientSideRuleSet("Status5Close");
 
             }
 
             SetHeaderWizard(new WizardHelper.WizardHeaderConfig(
                 ACTIVE_STEP,
                 localModel.ACTIVE_STEP,
-                new WizardHelper.WizardHeader(Translation.MIS.MISS01P001.STEP_1, Url.Action("Index", new { ACTIVE_STEP = "1" }), iconCssClass: FaIcons.FaAreaChart),
-                new WizardHelper.WizardHeader(Translation.MIS.MISS01P001.STEP_2, Url.Action("Index", new { ACTIVE_STEP = "2" }), iconCssClass: FaIcons.FaFile),
-                new WizardHelper.WizardHeader(Translation.MIS.MISS01P001.STEP_3, Url.Action("Index", new { ACTIVE_STEP = "3" }), iconCssClass: FaIcons.FaFile),
-                new WizardHelper.WizardHeader(Translation.MIS.MISS01P001.STEP_4, Url.Action("Index", new { ACTIVE_STEP = "4" }), iconCssClass: FaIcons.FaFile),
-                new WizardHelper.WizardHeader(Translation.MIS.MISS01P001.STEP_5, Url.Action("Index", new { ACTIVE_STEP = "5" }), iconCssClass: FaIcons.FaFile)));
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_1, Url.Action("Index", new { ACTIVE_STEP = "1" }), iconCssClass: FaIcons.FaAreaChart),
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_2, Url.Action("Index", new { ACTIVE_STEP = "2" }), iconCssClass: FaIcons.FaFile),
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_3, Url.Action("Index", new { ACTIVE_STEP = "3" }), iconCssClass: FaIcons.FaFile),
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_4, Url.Action("Index", new { ACTIVE_STEP = "4" }), iconCssClass: FaIcons.FaFile),
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_5, Url.Action("Index", new { ACTIVE_STEP = "5" }), iconCssClass: FaIcons.FaFile)));
 
             return View(view, localModel);
         }
@@ -189,3 +189,4 @@ namespace WEBAPP.Areas.MIS.Controllers
         #endregion
     }
 }
+#endregion

@@ -29,6 +29,8 @@ namespace DataAccess.MIS
         [Display(Name = "STATUS", ResourceType = typeof(Translation.MIS.MISS01P002))]
         public string STATUS { get; set; }
         public IEnumerable<DDLCenterModel> STATUS_MODEL { get; set; }
+
+        public string ACTIVE_STEP { get; set; }
     }
     public class MISS01P002Validator : AbstractValidator<MISS01P002Model>
     {

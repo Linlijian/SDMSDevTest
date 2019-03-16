@@ -70,6 +70,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fix Status.
+        /// </summary>
+        public static string ASSIGN_STATUS {
+            get {
+                return ResourceManager.GetString("ASSIGN_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assignment.
         /// </summary>
         public static string ASSIGN_USER {
@@ -84,6 +93,15 @@ namespace Translation.MIS {
         public static string ASSIGNMENT_CALCULATE {
             get {
                 return ResourceManager.GetString("ASSIGNMENT_CALCULATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fixed Complete.
+        /// </summary>
+        public static string COMPLETE {
+            get {
+                return ResourceManager.GetString("COMPLETE", resourceCulture);
             }
         }
         
@@ -106,6 +124,24 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fixed Result.
+        /// </summary>
+        public static string FIXED_RESULT {
+            get {
+                return ResourceManager.GetString("FIXED_RESULT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fixed In Complete.
+        /// </summary>
+        public static string INCOMPLETE {
+            get {
+                return ResourceManager.GetString("INCOMPLETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assignment Issue.
         /// </summary>
         public static string INDEX {
@@ -117,9 +153,45 @@ namespace Translation.MIS {
         /// <summary>
         ///   Looks up a localized string similar to Issue Date.
         /// </summary>
+        public static string ISE_DATE_OPENING {
+            get {
+                return ResourceManager.GetString("ISE_DATE_OPENING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Status.
+        /// </summary>
+        public static string ISE_STATUS {
+            get {
+                return ResourceManager.GetString("ISE_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Date.
+        /// </summary>
         public static string ISSUE_DATE {
             get {
                 return ResourceManager.GetString("ISSUE_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Date From.
+        /// </summary>
+        public static string ISSUE_DATE_F {
+            get {
+                return ResourceManager.GetString("ISSUE_DATE_F", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string ISSUE_DATE_T {
+            get {
+                return ResourceManager.GetString("ISSUE_DATE_T", resourceCulture);
             }
         }
         
@@ -165,6 +237,69 @@ namespace Translation.MIS {
         public static string STATUS {
             get {
                 return ResourceManager.GetString("STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Information.
+        /// </summary>
+        public static string STEP_1 {
+            get {
+                return ResourceManager.GetString("STEP_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assignment Issue.
+        /// </summary>
+        public static string STEP_2 {
+            get {
+                return ResourceManager.GetString("STEP_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Status.
+        /// </summary>
+        public static string STEP_3 {
+            get {
+                return ResourceManager.GetString("STEP_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status4Golive.
+        /// </summary>
+        public static string STEP_4 {
+            get {
+                return ResourceManager.GetString("STEP_4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status5Close.
+        /// </summary>
+        public static string STEP_5 {
+            get {
+                return ResourceManager.GetString("STEP_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target Date.
+        /// </summary>
+        public static string TARGET_DATE {
+            get {
+                return ResourceManager.GetString("TARGET_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fixed Total.
+        /// </summary>
+        public static string TOTAL {
+            get {
+                return ResourceManager.GetString("TOTAL", resourceCulture);
             }
         }
     }
