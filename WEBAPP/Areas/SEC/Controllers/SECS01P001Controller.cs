@@ -194,7 +194,56 @@ namespace WEBAPP.Areas.SEC.Controllers
             da.Select(da.DTO);
             return JsonAllowGet(da.DTO.Model.Details);
         }
+        public ActionResult ConfMod(string COM_CODE)
+        {
+            SetDefaulButton(StandardButtonMode.Other);
+            AddStandardButton(StandardButtonName.SaveModify, url: Url.Action("SaveConfMod"));
 
+            localModel.USER_ID_MODEL = BindUserId();
+            localModel.COM_CODE = TempModel.COM_CODE = COM_CODE;
+            
+            return View("ConfMod", localModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveConfMod(SECS01P001Model model)
+        {
+            var jsonResult = new JsonResult();
+            if (ModelState.IsValid)
+            {
+                var result = SaveData("SaveConfMod", model);
+                jsonResult = Success(result, StandardActionName.SaveModify, Url.Action(StandardActionName.Index, new { page = 1 }));
+            }
+            else
+            {
+                jsonResult = ValidateError(ModelState, StandardActionName.SaveModify);
+            }
+            return jsonResult;
+        }
+        [HttpPost]
+        public ActionResult DeleteDetails(List<SECS01P001Model> data)
+        {
+            var jsonResult = new JsonResult();
+            if (data != null && data.Count > 0)
+            {
+                var result = SaveData("DeleteDetails", data);
+                if (result.IsResult)
+                {
+                    jsonResult = Success(result, StandardActionName.Delete);
+                }
+                else
+                {
+                    jsonResult = ValidateError(StandardActionName.Delete, new ValidationError("", result.ResultMsg));
+                }
+
+                return JsonAllowGet(result);
+            }
+            else
+            {
+                jsonResult = ValidateError(StandardActionName.Delete, new ValidationError("", Translation.CenterLang.Center.DataNotFound));
+            }
+            return jsonResult;
+        }
         #endregion
 
         #region Mehtod  
@@ -224,7 +273,10 @@ namespace WEBAPP.Areas.SEC.Controllers
         {
             return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_PROVINCE_TH_001);
         }
-
+        private List<DDLCenterModel> BindUserId()
+        {
+            return GetDDLCenter(DDLCenterKey.DD_SECS01P001_001);
+        }
         private List<DDLCenterModel> BindFAC_PRV_E()
         {
             return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_PROVINCE_EN_001);
@@ -246,6 +298,7 @@ namespace WEBAPP.Areas.SEC.Controllers
                 SetStandardField(model);
                 da.DTO.Model = (SECS01P001Model)model;
                 da.DTO.Model.COM_CODE = TempModel.COM_CODE;
+                da.DTO.Execute.ExecuteType = SECS01P001ExecuteType.Insert;
 
                 da.Insert(da.DTO);
             }
@@ -260,10 +313,24 @@ namespace WEBAPP.Areas.SEC.Controllers
             }
             else if (mode == StandardActionName.Delete)
             {
-                //da.DTO.Model = new SECS01P001Model();
-                //SetStandardField(da.DTO.Model);
+                da.DTO.Execute.ExecuteType = SECS01P001ExecuteType.Delete;
                 da.DTO.Models = (List<SECS01P001Model>)model;
                 da.Delete(da.DTO);
+            }
+            else if (mode == "DeleteDetails")
+            {
+                da.DTO.Execute.ExecuteType = SECS01P001ExecuteType.DeleteDetail;
+                da.DTO.Models = (List<SECS01P001Model>)model;
+                da.Delete(da.DTO);
+            }
+            else if (mode == "SaveConfMod")
+            {
+                SetStandardField(model);
+                da.DTO.Model = (SECS01P001Model)model;
+                da.DTO.Model.COM_CODE = TempModel.COM_CODE;
+                da.DTO.Execute.ExecuteType = SECS01P001ExecuteType.InsertDetail;
+
+                da.Insert(da.DTO);
             }
             return da.DTO.Result;
         }

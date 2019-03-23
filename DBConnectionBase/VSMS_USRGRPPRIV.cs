@@ -32,5 +32,6 @@ namespace DataAccess
         public Nullable<System.DateTime> CRET_DATE { get; set; }
         public string MNT_BY { get; set; }
         public Nullable<System.DateTime> MNT_DATE { get; set; }
+        public Nullable<decimal> USG_ID { get; set; }
     }
 }

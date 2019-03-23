@@ -126,11 +126,11 @@
         {
             using (rowInfo.GridColumn(6).Begin())
             {
-                @formPopup.InputJAutocompleteFor(t => t.COM_CODE, isRequired: true, addValidateMessage: true).JAutoKeySource("AC_SECS02P002_002").JAutoBindField("COM_CODE").JAutoSetExtraParamsByCtrl("COM_CODE").SetSelectOnly().SetControlLabel(Translation.SEC.SECS02P002.APP_CODE)
+                @formPopup.SelectFor(t => t.COM_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
             }
             using (rowInfo.GridColumn(6).Begin())
             {
-                @formPopup.InputJAutocompleteFor(t => t.MODULE, isRequired: true, addValidateMessage: true).JAutoKeySource("AC_SECS02P002_001").JAutoBindField("MODULE").JAutoSetExtraParamsByCtrl("COM_CODE").SetSelectOnly()
+                @formPopup.InputFor(t => t.MODULE, isRequired: true)
             }
         }
     }
@@ -150,12 +150,13 @@
                 WidthType = ColumnsWidthType.Pixel
             },
 
-            new GridColumn("MODULE").SetNotVisible().SetKey(),
             new GridColumn("COM_CODE").SetNotVisible().SetKey(),
             new GridColumn("USER_ID").SetNotVisible().SetKey(),
+            new GridColumn("MODULE").SetNotVisible().SetKey(),
 
-            new GridColumn("COM_CODE", Translation.SEC.SECS02P002.APP_CODE, 20),
-            new GridColumn("MODULE", Translation.SEC.SECS02P002.MODULE, 20)
+            new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 20),
+            new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20),
+            new GridColumn("USER_ID", Translation.SEC.SECS01P001.USER_ID, 20)
         )
 
 
@@ -213,5 +214,90 @@
                 error: OnAjaxError
             });
         })
+
+        $("#btnDeleteDetails").prop('id', 'DeleteDetail');
+        $("#DeleteDetail").show()
+
+        $("#DeleteDetail").confirm({
+            title: null,
+            content: "<br/>Are you sure to continue?",
+            columnClass: 'medium',
+            buttons: {
+                confirm: {
+                    text: 'OK',
+                    btnClass: "btn-primary",
+                    action: DeleteDetail
+                },
+                cancel: {
+                    text: 'Cancel',
+                    btnClass: "btn-primary"
+                }
+            }
+        })
+
+        function DeleteDetail() {
+            var data = GridDetails.rows({ selected: true }).data();
+            if (data != undefined && data != null && data.length > 0) {
+                var nData = { data: [] };
+                $.each(data, function (i, item) {
+                    nData.data.push({
+                        COM_CODE: item.COM_CODE,
+                        USER_ID: item.USER_ID,
+                        MODULE: item.MODULE
+                    });
+                });
+                $.ajax({
+                    url: "@Url.Action("DeleteDetails")",
+                    type: "post",
+                data: nData,
+                success: function (result) {
+                    if (result != null && result != undefined) {
+                        if (result.data.IsResult) {
+                            GridDetails.rows({ selected: true }).remove().draw();
+                            OnAjaxSuccess
+                            $("#notification").hide()
+                        }
+                        else
+                        {
+                            alertErr()
+                        }
+
+                    }
+                    OnAjaxSuccess
+                },
+                error: OnAjaxError
+            });
+        }
+        else {
+                var result = {
+                    Mode: 'Delete',
+                    Status: false,
+                    Message: 'Please Specify Data',
+                    Style: 'danger'
+                };
+        OnAjaxSuccess(result);
+        }
+
+        // bindGridDetails({ page: 1 });
+        }
+
+        function alertErr() {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += 'พัง' + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        function alertSucs() {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'success' + ' alert-dismissable alert-' + 'success' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += 'ผ่าน ๆ' + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
     </script>
 }

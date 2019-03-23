@@ -175,6 +175,7 @@ namespace DataAccess.SEC
         public IEnumerable<DDLCenterModel> COM_PROVINCE_E_MODEL { get; set; }
         public IEnumerable<DDLCenterModel> COM_FAC_PRV_T_MODEL { get; set; }
         public IEnumerable<DDLCenterModel> COM_FAC_PRV_E_MODEL { get; set; }
+        public IEnumerable<DDLCenterModel> USER_ID_MODEL { get; set; }
 
         public List<SECS01P001DetailPModel> Details { get; set; }
 
@@ -184,8 +185,11 @@ namespace DataAccess.SEC
     {
         [Display(Name = "MODULE", ResourceType = typeof(Translation.SEC.SECS01P001))]
         public string MODULE { get; set; }
+        [Display(Name = "USER_ID", ResourceType = typeof(Translation.SEC.SECS01P001))]
+        public string USER_ID { get; set; }
 
         public string COM_CODE { get; set; }
+
     }
 
     public class SECS01P001Validator : AbstractValidator<SECS01P001Model>

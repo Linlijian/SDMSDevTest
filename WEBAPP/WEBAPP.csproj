@@ -231,6 +231,7 @@
     <Compile Include="Areas\Admin\Models\DemoModelView.cs" />
     <Compile Include="Areas\Admin\Models\MasterDetailViewModel.cs" />
     <Compile Include="Areas\MIS\Controllers\MISBaseController.cs" />
+    <Compile Include="Areas\MIS\Controllers\MISS01P003Controller.cs" />
     <Compile Include="Areas\MIS\Controllers\MISS01P002Controller.cs" />
     <Compile Include="Areas\MIS\Controllers\MISS01P001Controller.cs" />
     <Compile Include="Areas\MIS\Controllers\MISS02P001Controller.cs" />
@@ -465,6 +466,7 @@
     <Content Include="Content\font-awesome-animation.min.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fontawesome-iconpicker.min.css" />
+    <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\master-datetimepicker.min.css" />
     <Content Include="Content\open-sans.css" />
     <Content Include="Content\StyleSheet.css" />
@@ -612,6 +614,7 @@
     <Content Include="Content\template\ace\assets\js\spin.min.js" />
     <Content Include="Content\template\ace\assets\js\typeahead.jquery.min.js" />
     <Content Include="Content\template\ace\assets\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Content\template\fontawesome.min.css" />
     <Content Include="Content\wizard-withouthd.css" />
     <Content Include="Content\wizard.css" />
     <Content Include="favicon.ico" />
@@ -823,12 +826,20 @@
     <Content Include="Areas\MST\Views\MSTS03P002\Add.cshtml" />
     <Content Include="Areas\MST\Views\MSTS03P002\Edit.cshtml" />
     <Content Include="Areas\MST\Views\MSTS03P002\Index.cshtml" />
-    <Content Include="Areas\MIS\Views\MISS01P002\Index.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P002\Status1Open.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P001\Info.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P002\Status2Onprocess.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P002\Status3Followup.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P002\Status5Close.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P002\Status4Golive.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P003\Add.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P003\Edit.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P003\Index.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P002\Assignment.cshtml" />
-    <Content Include="Areas\MIS\Views\MISS01P002\FilePacket.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS01P001\ConfMod.cshtml" />
     <None Include="Properties\PublishProfiles\A.pubxml" />
     <None Include="Properties\PublishProfiles\March.pubxml" />
+    <None Include="Properties\PublishProfiles\Meiio.pubxml" />
     <None Include="Reports\DataSet\DemoReport.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DemoReport1.Designer.cs</LastGenOutput>
