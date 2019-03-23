@@ -25,6 +25,7 @@ namespace DataAccess
         public const string DD_MISS01P001_002 = "DD_MISS01P001_002";
         public const string DD_MISS01P001_003 = "DD_MISS01P001_003";
         public const string DD_MISS01P001_004 = "DD_MISS01P001_004";
+        public const string DD_MISS01P002_001 = "DD_MISS01P002_001";
 
     }
 }

@@ -154,12 +154,18 @@ namespace WEBAPP.Areas.MST.Controllers
         //----------------------- DDL-----------------------
         private void SetDefaultData(string mode = "")
         {
-
+          localModel.COM_CODE_MODEL = BindAppCode();
         }
 
         private List<DDLCenterModel> BindTypeDate()
         {
             return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_TYPEDATE);
+        }
+
+
+        private List<DDLCenterModel> BindAppCode()
+        {
+            return GetDDLCenter(DDLCenterKey.DD_MISS01P002_001);
         }
 
         //----------------------------------------------//
