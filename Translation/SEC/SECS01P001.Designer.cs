@@ -79,6 +79,15 @@ namespace Translation.SEC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Config Module.
+        /// </summary>
+        public static string COGF_MODULE {
+            get {
+                return ResourceManager.GetString("COGF_MODULE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address1 (Eng).
         /// </summary>
         public static string COM_ADDR1_E {

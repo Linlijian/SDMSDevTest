@@ -115,12 +115,13 @@ namespace WEBAPP.Areas.SEC.Controllers
             if (da.DTO.Model != null)
             {
                 localModel = da.DTO.Model;
+                TempModel.USG_LEVEL = da.DTO.Model.USG_LEVEL;
             }
 
-            localModel.SYS_CODE_MODEL = GetDDLCenter(DDLCenterKey.DD_VSMS_SYSTEM_001, new VSMParameter(COM_CODE));
+            localModel.SYS_CODE_MODEL = GetDDLCenter(DDLCenterKey.DD_VSMS_SYSTEM_002);
             return View("ConfPrg", localModel);
         }
-        public ActionResult ConfSysSeq(string COM_CODE, decimal? USG_ID)
+        public ActionResult ConfSysSeq(string COM_CODE, string USG_LEVEL, decimal? USG_ID)
         {
             SetDefaulButton(StandardButtonMode.Other);
             AddStandardButton(StandardButtonName.SaveModify, url: Url.Action("SaveConfSysSeq"));
@@ -131,6 +132,7 @@ namespace WEBAPP.Areas.SEC.Controllers
             TempModel = null;
             TempModel.COM_CODE = da.DTO.Model.COM_CODE = COM_CODE;
             TempModel.USG_ID = da.DTO.Model.USG_ID = USG_ID;
+            TempModel.USG_LEVEL = da.DTO.Model.USG_LEVEL = USG_LEVEL;
 
             da.Select(da.DTO);
 
@@ -138,10 +140,10 @@ namespace WEBAPP.Areas.SEC.Controllers
             {
                 localModel = da.DTO.Model;
             }
-            localModel.SYS_GROUP_NAME_MODEL = GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_003, new VSMParameter(COM_CODE), new VSMParameter(USG_ID));
+            localModel.SYS_GROUP_NAME_MODEL = GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_003, new VSMParameter(COM_CODE.Trim()), new VSMParameter(USG_LEVEL));
             return View("ConfSysSeq", localModel);
         }
-        public ActionResult ConfPrgSeq(string COM_CODE, decimal? USG_ID)
+        public ActionResult ConfPrgSeq(string COM_CODE, string USG_LEVEL, decimal? USG_ID)
         {
             SetDefaulButton(StandardButtonMode.Other);
             AddStandardButton(StandardButtonName.SaveModify, url: Url.Action("SaveConfPrgSeq"));
@@ -152,6 +154,7 @@ namespace WEBAPP.Areas.SEC.Controllers
             TempModel = null;
             TempModel.COM_CODE = da.DTO.Model.COM_CODE = COM_CODE;
             TempModel.USG_ID = da.DTO.Model.USG_ID = USG_ID;
+            TempModel.USG_LEVEL = da.DTO.Model.USG_LEVEL = USG_LEVEL;
 
             da.Select(da.DTO);
 
@@ -159,7 +162,8 @@ namespace WEBAPP.Areas.SEC.Controllers
             {
                 localModel = da.DTO.Model;
             }
-            localModel.SYS_GROUP_NAME_MODEL = GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_003, new VSMParameter(COM_CODE), new VSMParameter(USG_ID));
+            //localModel.SYS_CODE_MODEL = GetDDLCenter(DDLCenterKey.DD_VSMS_SYSTEM_002);
+            localModel.SYS_GROUP_NAME_MODEL = GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_003, new VSMParameter(COM_CODE.Trim()), new VSMParameter(USG_LEVEL));
             return View("ConfPrgSeq", localModel);
         }
         #endregion
@@ -245,6 +249,7 @@ namespace WEBAPP.Areas.SEC.Controllers
             da.DTO.Execute.ExecuteType = SECS02P001ExecuteType.GetUsgPriv;
             da.DTO.Model = TempModel.CloneObject();
             da.DTO.Model.SYS_CODE = SYS_CODE;
+            da.DTO.Model.USG_LEVEL = TempModel.USG_LEVEL;
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Model.PRIV_MODEL);
         }
@@ -256,6 +261,7 @@ namespace WEBAPP.Areas.SEC.Controllers
             if (ModelState.IsValid)
             {
                 model.COM_CODE = TempModel.COM_CODE;
+                model.USG_LEVEL = TempModel.USG_LEVEL;
                 model.USG_ID = TempModel.USG_ID;
                 var result = SaveData("SaveConfPrg", model);
                 if (result.IsResult && SessionHelper.SYS_USG_ID == TempModel.USG_ID)
@@ -347,7 +353,8 @@ namespace WEBAPP.Areas.SEC.Controllers
 
         public ActionResult BindSystemByName(string SYS_GROUP_NAME)
         {
-            var model = GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_004, new VSMParameter(TempModel.COM_CODE), new VSMParameter(TempModel.USG_ID), new VSMParameter(SYS_GROUP_NAME));
+            TempModel.COM_CODE = TempModel.COM_CODE.Trim();
+            var model = GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_004, new VSMParameter(TempModel.USG_LEVEL), new VSMParameter(SYS_GROUP_NAME));
             return JsonAllowGet(model);
         }
         #endregion

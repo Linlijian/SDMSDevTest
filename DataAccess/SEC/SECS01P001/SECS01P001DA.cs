@@ -54,13 +54,14 @@ namespace DataAccess.SEC
 
         private SECS01P001DTO GetDetailByID(SECS01P001DTO dto)
         {
-            dto.Model.Details = _DBManger.VSMS_MOBULE
+            dto.Model.Details = _DBManger.VSMS_MODULE
                 .Where((m => ((m.COM_CODE == dto.Model.COM_CODE))
                 ))
                 .Select(m => new SECS01P001DetailPModel
                 {
                     COM_CODE = m.COM_CODE,
-                    MODULE = m.MODULE
+                    MODULE = m.MODULE,
+                    USER_ID = m.USER_ID
                 }).ToList();
 
             return dto;
@@ -93,15 +94,22 @@ namespace DataAccess.SEC
         #region ====Insert==========
         protected override BaseDTO DoInsert(BaseDTO baseDTO)
         {
+
             var dto = (SECS01P001DTO)baseDTO;
-            if(dto.Model.COM_USE_LANGUAGE != null)
+            switch (dto.Execute.ExecuteType)
+            {
+                case SECS01P001ExecuteType.Insert: return Insert(dto);
+                case SECS01P001ExecuteType.InsertDetail: return InsertDetail(dto);
+            }           
+
+            return dto;
+        }
+        private SECS01P001DTO Insert(SECS01P001DTO dto)
+        {
+            if (dto.Model.COM_USE_LANGUAGE != null)
             {
                 dto.Model.COM_USE_LANGUAGE = dto.Model.COM_USE_LANGUAGE.Trim();
             }
-            
-
-            //var COM_CODE = _DBManger.VSMS_COMPANY.Max(m => m.COM_CODE).AsString() + 1;
-            //dto.Model.COM_CODE = COM_CODE;
 
             var model = dto.Model.ToNewObject(new VSMS_COMPANY());
             var COM_CODE = model.COM_CODE;
@@ -113,24 +121,23 @@ namespace DataAccess.SEC
             model.MNT_BY = model.MNT_BY.Trim();
             _DBManger.VSMS_COMPANY.Add(model);
 
-            InsertDetail(dto);
-
             return dto;
         }
-
         private SECS01P001DTO InsertDetail(SECS01P001DTO dto)
         {
+            var items = _DBManger.VSMS_MODULE.Where(m => m.COM_CODE == dto.Model.COM_CODE);
+            _DBManger.VSMS_MODULE.RemoveRange(items);
+
             if (dto.Model.Details.Count() > 0)
             {
                 foreach (var item in dto.Model.Details)
                 {
-                    var m = item.ToNewObject(new VSMS_MOBULE());
+                    var m = item.ToNewObject(new VSMS_MODULE());
                     m.CRET_BY = dto.Model.CRET_BY;
                     m.CRET_DATE = dto.Model.CRET_DATE;
                     m.COM_CODE = dto.Model.COM_CODE;
-                    m.FLAG = "M";
 
-                    _DBManger.VSMS_MOBULE.Add(m);
+                    _DBManger.VSMS_MODULE.Add(m);
                 }
             }
 
@@ -162,8 +169,8 @@ namespace DataAccess.SEC
             {
                 foreach (var item in dto.Model.Details)
                 {
-                    var items = _DBManger.VSMS_MOBULE.Where(m => m.COM_CODE == dto.Model.COM_CODE && m.FLAG == "M");
-                    _DBManger.VSMS_MOBULE.RemoveRange(items);
+                    var items = _DBManger.VSMS_MODULE.Where(m => m.COM_CODE == dto.Model.COM_CODE);
+                    _DBManger.VSMS_MODULE.RemoveRange(items);
                 }
 
                 InsertDetail(dto);
@@ -176,21 +183,49 @@ namespace DataAccess.SEC
         #region ====Delete==========
         protected override BaseDTO DoDelete(BaseDTO baseDTO)
         {
+
             var dto = (SECS01P001DTO)baseDTO;
+            switch (dto.Execute.ExecuteType)
+            {
+                case SECS01P001ExecuteType.Delete: return Delete(dto);
+                case SECS01P001ExecuteType.DeleteDetail: return DeleteDetail(dto);
+            }
+
+            return dto;
+        }
+        private SECS01P001DTO Delete(SECS01P001DTO dto)
+        {
             foreach (var item in dto.Models)
             {
                 var items = _DBManger.VSMS_COMPANY.Where(m => m.COM_CODE == item.COM_CODE && m.COM_BRANCH == item.COM_BRANCH);
                 _DBManger.VSMS_COMPANY.RemoveRange(items);
             }
 
-            if (dto.Model.Details.Count() > 0)
+            return dto;
+        }
+        private SECS01P001DTO DeleteDetail(SECS01P001DTO dto)
+        {
+            if (dto.Models.Count() > 0)
             {
-                foreach (var item in dto.Model.Details)
+                foreach (var item in dto.Models)
                 {
-                    var items = _DBManger.VSMS_MOBULE.Where(m => m.COM_CODE == dto.Model.COM_CODE && m.FLAG == "M");
-                    _DBManger.VSMS_MOBULE.RemoveRange(items);
+                    var items = _DBManger.VSMS_ISSUE.Where(m => m.COM_CODE == item.COM_CODE && m.MODULE == item.MODULE && m.RESPONSE_BY == item.USER_ID);
+
+                    if (items.Count() > 0)
+                    {
+                        dto.Result.IsResult = false;
+                        dto.Result.ResultMsg = "Data is useed!";
+                        break;
+                    }
+                    else
+                    {
+                        dto.Result.IsResult = true;
+                        //var del = _DBManger.VSMS_MODULE.Where(m => m.COM_CODE == item.COM_CODE && m.MODULE == item.MODULE && m.USER_ID == item.USER_ID);
+                        //_DBManger.VSMS_MODULE.RemoveRange(del);
+                    }
                 }
             }
+
 
             return dto;
         }

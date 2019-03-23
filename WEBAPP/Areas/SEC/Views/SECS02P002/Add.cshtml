@@ -127,11 +127,11 @@
         {
             using (rowInfo.GridColumn(6).Begin())
             {
-                @formPopup.InputJAutocompleteFor(t => t.COM_CODE, isRequired: true, addValidateMessage: true).JAutoKeySource("AC_SECS02P002_002").JAutoBindField("COM_CODE").JAutoSetExtraParamsByCtrl("COM_CODE").SetSelectOnly().SetControlLabel(Translation.SEC.SECS02P002.APP_CODE)
+                @formPopup.SelectFor(t => t.COM_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
             }
             using (rowInfo.GridColumn(6).Begin())
             {
-                @formPopup.InputJAutocompleteFor(t => t.MODULE, isRequired: true, addValidateMessage: true).JAutoKeySource("AC_SECS02P002_001").JAutoBindField("MODULE").JAutoSetExtraParamsByCtrl("COM_CODE").SetSelectOnly()
+                @formPopup.InputFor(t => t.MODULE, isRequired: true)
             }
         }
     }
@@ -150,12 +150,13 @@
                 WidthType = ColumnsWidthType.Pixel
             },
 
-            new GridColumn("MODULE").SetNotVisible().SetKey(),
             new GridColumn("COM_CODE").SetNotVisible().SetKey(),
             new GridColumn("USER_ID").SetNotVisible().SetKey(),
+            new GridColumn("MODULE").SetNotVisible().SetKey(),
 
-            new GridColumn("COM_CODE", Translation.SEC.SECS02P002.APP_CODE, 20),
-            new GridColumn("MODULE", Translation.SEC.SECS02P002.MODULE, 20)
+            new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 20),
+            new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20),
+            new GridColumn("USER_ID", Translation.SEC.SECS01P001.USER_ID, 20)
         )
 
 

@@ -53,7 +53,8 @@ namespace DataAccess.SEC
                               USG_CODE = t1.USG_CODE,
                               USG_NAME_TH = t1.USG_NAME_TH,
                               USG_NAME_EN = t1.USG_NAME_EN,
-                              USG_STATUS = t1.USG_STATUS
+                              USG_STATUS = t1.USG_STATUS,
+                              USG_LEVEL = t1.USG_LEVEL
                           }).ToList();
 
 
@@ -82,10 +83,11 @@ namespace DataAccess.SEC
                                ISNULL(t3.ROLE_EDIT,'F') ROLE_EDIT,
                                ISNULL(t3.ROLE_DEL,'F') ROLE_DEL,
                                ISNULL(t3.ROLE_PRINT,'F') ROLE_PRINT,
-                               t3.USRGRPPRIV_ID
+                               t3.USRGRPPRIV_ID,
+                               t3.USG_ID
                           from (select *
                                   from VSMS_SYS_PGC
-                                 where COM_CODE = @COM_CODE
+                                 where COM_CODE = 'VSM' --FIX
                                    and SYS_CODE = @SYS_CODE) t1
                          inner join VSMS_PROGRAM t2
                             on t1.PRG_CODE = t2.PRG_CODE
@@ -99,7 +101,7 @@ namespace DataAccess.SEC
                            order by t1.PRG_SEQ
                         ";
             var parameters = CreateParameter();
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+           // parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
             parameters.AddParameter("SYS_CODE", dto.Model.SYS_CODE);
             parameters.AddParameter("USG_ID", dto.Model.USG_ID);
 
@@ -297,7 +299,7 @@ namespace DataAccess.SEC
             {
                 var del = _DBManger.VSMS_USRGRPPRIV.Where(m =>
                                             m.COM_CODE == dto.Model.COM_CODE &&
-                                            m.USG_LEVEL == dto.Model.USG_LEVEL &&
+                                            m.USG_ID == dto.Model.USG_ID &&
                                             m.SYS_CODE == dto.Model.SYS_CODE &&
                                             dels.Contains(m.USRGRPPRIV_ID));
                 _DBManger.VSMS_USRGRPPRIV.RemoveRange(del);
@@ -307,7 +309,7 @@ namespace DataAccess.SEC
             {
                 foreach (var item in update)
                 {
-                    var model = _DBManger.VSMS_USRGRPPRIV.Where(m => m.COM_CODE == dto.Model.COM_CODE && m.USG_LEVEL == dto.Model.USG_LEVEL && m.SYS_CODE == dto.Model.SYS_CODE && m.USRGRPPRIV_ID == item.USRGRPPRIV_ID).FirstOrDefault();
+                    var model = _DBManger.VSMS_USRGRPPRIV.Where(m => m.COM_CODE == dto.Model.COM_CODE && m.USG_ID == dto.Model.USG_ID && m.SYS_CODE == dto.Model.SYS_CODE && m.USRGRPPRIV_ID == item.USRGRPPRIV_ID).FirstOrDefault();
                     if (model != null)
                     {
                         model = model.MergeObject(item);
@@ -316,6 +318,8 @@ namespace DataAccess.SEC
                     else
                     {
                         var newModel = item.ToNewObject(new VSMS_USRGRPPRIV());
+                        newModel.PRG_STATUS = "E";
+                        newModel.SYS_STATUS = "E";
                         newModel = newModel.MergeObject(dto.Model);
                         _DBManger.VSMS_USRGRPPRIV.Add(newModel);
                     }
@@ -327,7 +331,7 @@ namespace DataAccess.SEC
         {
             var update = from t1 in _DBManger.VSMS_USRGRPPRIV
                          join t2 in _DBManger.VSMS_CONFIG_GENERAL on new { t1.COM_CODE, t1.SYS_CODE } equals new { t2.COM_CODE, t2.SYS_CODE }
-                         where t1.COM_CODE == dto.Model.COM_CODE && t1.USG_LEVEL == dto.Model.USG_LEVEL && t2.NAME == dto.Model.SYS_GROUP_NAME
+                         where t1.COM_CODE == dto.Model.COM_CODE && t1.USG_ID == dto.Model.USG_ID && t2.NAME == dto.Model.SYS_GROUP_NAME
                          select t1;
             if (update != null && update.Any())
             {
@@ -349,7 +353,7 @@ namespace DataAccess.SEC
         {
             var update = from t1 in _DBManger.VSMS_USRGRPPRIV
                          join t2 in _DBManger.VSMS_CONFIG_GENERAL on new { t1.COM_CODE, t1.SYS_CODE } equals new { t2.COM_CODE, t2.SYS_CODE }
-                         where t1.COM_CODE == dto.Model.COM_CODE && t1.USG_LEVEL == dto.Model.USG_LEVEL && t1.SYS_CODE == dto.Model.SYS_CODE && t2.NAME == dto.Model.SYS_GROUP_NAME
+                         where t1.COM_CODE == dto.Model.COM_CODE && t1.USG_ID == dto.Model.USG_ID && t1.SYS_CODE == dto.Model.SYS_CODE && t2.NAME == dto.Model.SYS_GROUP_NAME
                          select t1;
             if (update != null && update.Any())
             {
@@ -385,6 +389,9 @@ namespace DataAccess.SEC
             {
                 var model = _DBManger.VSMS_USRGROUP.Where(m => m.COM_CODE == item.COM_CODE && m.USG_ID == item.USG_ID);
                 _DBManger.VSMS_USRGROUP.RemoveRange(model);
+
+                var model2 = _DBManger.VSMS_USRGRPPRIV.Where(m => m.COM_CODE == item.COM_CODE && m.USG_ID == item.USG_ID);
+                _DBManger.VSMS_USRGRPPRIV.RemoveRange(model2);
             }
             return dto;
         }

@@ -20,8 +20,10 @@
         <EntityTypeShape EntityType="AATModel.VSMS_EXCEL" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="AATModel.VSMS_SYS_PGC" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="AATModel.VSMS_USRGRPPRIV" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="AATModel.VSMS_MOBULE" Width="1.5" PointX="7.375" PointY="12.75" />
         <EntityTypeShape EntityType="AATModel.VSMS_NOTIFICATION" Width="1.5" PointX="9.375" PointY="12.75" />
+        <EntityTypeShape EntityType="AATModel.VSMS_ISSUE" Width="1.5" PointX="11.375" PointY="12.75" />
+        <EntityTypeShape EntityType="AATModel.VSMS_MODULE" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AATModel.VSMS_PRGASYS" Width="1.5" PointX="13.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -47,7 +47,8 @@ namespace WEBAPP
             bundles.Add(new StyleBundle("~/bundlesContent/css").Include(
                     "~/Content/bootstrap.css",
                     "~/Content/bootstrap-datepicker3.min.css",  //update nuget
-                    "~/Content/font-awesome.min.css"//v4.7.0
+                     "~/Content/font-awesome.min.css"//v4.7.0
+                     //"~/Content/fontawesome.min.css"//v5.7.2
                     ));
 
             bundles.Add(new StyleBundle("~/bundlesContent/Wizard").Include(

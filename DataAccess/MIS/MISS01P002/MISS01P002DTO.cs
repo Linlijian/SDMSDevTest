@@ -19,13 +19,16 @@ namespace DataAccess.MIS
 
     public class MISS01P002ExecuteType : DTOExecuteType
     {
-
+        
+        public const string MoveToFollowUp = "MoveToFollowUp";
+        public const string ConfirmTest = "ConfirmTest";
+        public const string SearchOnProcess = "SearchOnProcess";
+        public const string GetAllOpening = "GetAllOpening";
+        public const string GetByIdOpening = "GetByIdOpening";
+        public const string GetFiexd = "GetFiexd";
+        public const string GetAllFixed = "GetAllFixed";
         public const string UpdateAssignment = "UpdateAssignment";
-        public const string UpdateFilePacket = "UpdateFilePacket";
-        public const string GetAllAssign = "GetAllAssign";
-        public const string GetFilePacket = "GetFilePacket";
-        public const string Update = "Update";
-        public const string Insert = "Insert";
-        public const string GetAssignment = "GetAssignment";
+        public const string GetAllOpening2 = "GetAllOpening2";
+        public const string GetAllOnProcess = "GetAllOnProcess";
     }
 }
