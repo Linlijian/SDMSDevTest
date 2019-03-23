@@ -115,7 +115,7 @@ namespace DataAccess.MST
                                 ,@MNT_DATE)";
 
             var parameters = CreateParameter();
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE); //COM_CODE
             parameters.AddParameter("YEAR", dto.Model.YEAR);
             parameters.AddParameter("MANDAY_VAL", dto.Model.MANDAY_VAL);
             parameters.AddParameter("IS_USE", dto.Model.IS_USE);

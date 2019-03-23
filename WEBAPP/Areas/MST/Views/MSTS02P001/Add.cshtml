@@ -30,9 +30,7 @@
     {
         using (row1.GridColumn(6).Begin())
         {
-
-
-            @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
+            @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
         }
 
     }
