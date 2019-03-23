@@ -96,8 +96,8 @@ namespace WEBAPP.Areas.MST.Controllers
         public ActionResult Add()
         {
             SetDefaulButton(StandardButtonMode.Create);
-            SetDefaultData();
-            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+            SetDefaultData(StandardActionName.Add);
+            //localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
 
             return View(StandardActionName.Add, localModel);
         }

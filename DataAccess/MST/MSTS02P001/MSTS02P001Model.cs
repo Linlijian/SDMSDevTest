@@ -31,14 +31,14 @@ namespace DataAccess.MST
         {
             RuleSet("Add", () =>
             {
-                RuleFor(m => m.APP_CODE).Store("CD_MSTS02P001_001", m => m.YEAR).NotEmpty();
-                RuleFor(m => m.YEAR).Store("CD_MSTS02P001_001", m => m.APP_CODE).NotEmpty();
-                RuleFor(m => m.APP_CODE).Store("CD_MSTS02P001_001", m => m.APP_CODE); 
+                RuleFor(m => m.COM_CODE).Store("CD_MSTS02P001_001", m => m.YEAR).NotEmpty();
+                RuleFor(m => m.YEAR).Store("CD_MSTS02P001_001", m => m.COM_CODE).NotEmpty();
+                RuleFor(m => m.APP_CODE).Store("CD_MSTS02P001_001", m => m.COM_CODE); 
                 Valid(); 
             });
             RuleSet("Edit", () =>
             {
-                RuleFor(m => m.APP_CODE).Store("CD_MSTS02P001_001", m => m.APP_CODE); 
+                RuleFor(m => m.APP_CODE).Store("CD_MSTS02P001_001", m => m.COM_CODE); 
                 Valid();
             });
         }
