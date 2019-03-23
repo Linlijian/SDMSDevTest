@@ -29,7 +29,7 @@
         using (row1.GridColumn(6).Begin())
         {
             @*@form.InputFor(m => m.YEAR).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4)*@
-            @form.SelectFor(t => t.COM_CODE, Model.COM_CODE_MODEL.ToSelectList("Value", "Text", Model.COM_CODE), IsSearch: true)
+            @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
         }
     }
 }

@@ -18,9 +18,11 @@ namespace DataAccess.MST
         //public string MANDAY_VAL { get; set; }
         public decimal? MANDAY_VAL { get; set; }
 
-        [Display(Name = "COM_CODE", ResourceType = typeof(Translation.MST.MSTS02P001))]
+        [Display(Name = "APP_CODE", ResourceType = typeof(Translation.MST.MSTS02P001))]
+        public string APP_CODE { get; set; }
+        public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
+
         public string COM_CODE { get; set; }
-        public IEnumerable<DDLCenterModel> COM_CODE_MODEL { get; set; }
 
     }
     public class MSTS02P001Validator : AbstractValidator<MSTS02P001Model>
@@ -29,14 +31,14 @@ namespace DataAccess.MST
         {
             RuleSet("Add", () =>
             {
-                RuleFor(m => m.COM_CODE).Store("CD_MSTS02P001_001", m => m.YEAR).NotEmpty();
-                RuleFor(m => m.YEAR).Store("CD_MSTS02P001_001", m => m.COM_CODE).NotEmpty();
-                RuleFor(m => m.COM_CODE).Store("CD_MSTS02P001_001", m => m.COM_CODE); 
+                RuleFor(m => m.APP_CODE).Store("CD_MSTS02P001_001", m => m.YEAR).NotEmpty();
+                RuleFor(m => m.YEAR).Store("CD_MSTS02P001_001", m => m.APP_CODE).NotEmpty();
+                RuleFor(m => m.APP_CODE).Store("CD_MSTS02P001_001", m => m.APP_CODE); 
                 Valid(); 
             });
             RuleSet("Edit", () =>
             {
-                RuleFor(m => m.COM_CODE).Store("CD_MSTS02P001_001", m => m.COM_CODE); 
+                RuleFor(m => m.APP_CODE).Store("CD_MSTS02P001_001", m => m.APP_CODE); 
                 Valid();
             });
         }

@@ -68,7 +68,12 @@ namespace WEBAPP.Areas.MST.Controllers
                 TempSearch = model;
             }
             da.DTO.Model = TempSearch;
+
+            
             SetStandardField(da.DTO.Model);
+
+            da.DTO.Model.COM_CODE = da.DTO.Model.APP_CODE;
+
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
@@ -154,7 +159,7 @@ namespace WEBAPP.Areas.MST.Controllers
         //----------------------- DDL-----------------------
         private void SetDefaultData(string mode = "")
         {
-          localModel.COM_CODE_MODEL = BindAppCode();
+          localModel.APP_CODE_MODEL = BindAppCode();
         }
 
         private List<DDLCenterModel> BindTypeDate()
