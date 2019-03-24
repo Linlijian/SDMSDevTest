@@ -106,6 +106,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File Id.
+        /// </summary>
+        public static string FILE_ID {
+            get {
+                return ResourceManager.GetString("FILE_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File Packet.
         /// </summary>
         public static string FILEPACKET {
@@ -138,15 +147,6 @@ namespace Translation.MIS {
         public static string INDEX {
             get {
                 return ResourceManager.GetString("INDEX", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fix Date.
-        /// </summary>
-        public static string ISE_DATE_ONPROCESS {
-            get {
-                return ResourceManager.GetString("ISE_DATE_ONPROCESS", resourceCulture);
             }
         }
         
@@ -295,29 +295,11 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Testing.
-        /// </summary>
-        public static string TESTING {
-            get {
-                return ResourceManager.GetString("TESTING", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Fixed Total.
         /// </summary>
         public static string TOTAL {
             get {
                 return ResourceManager.GetString("TOTAL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fix By.
-        /// </summary>
-        public static string USER_ID {
-            get {
-                return ResourceManager.GetString("USER_ID", resourceCulture);
             }
         }
     }

@@ -83,9 +83,6 @@
     <Compile Include="MIS\MISS01P001\MISS01P001DA.cs" />
     <Compile Include="MIS\MISS01P001\MISS01P001DTO.cs" />
     <Compile Include="MIS\MISS01P001\MISS01P001Model.cs" />
-    <Compile Include="MIS\MISS01P003\MISS01P003DA.cs" />
-    <Compile Include="MIS\MISS01P003\MISS01P003DTO.cs" />
-    <Compile Include="MIS\MISS01P003\MISS01P003Model.cs" />
     <Compile Include="MIS\MISS02P001\MISS02P001DA.cs" />
     <Compile Include="MIS\MISS02P001\MISS02P001DTO.cs" />
     <Compile Include="MIS\MISS02P001\MISS02P001Model.cs" />

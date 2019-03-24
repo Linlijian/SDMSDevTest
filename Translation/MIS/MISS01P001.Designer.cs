@@ -367,29 +367,11 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reference Menu.
-        /// </summary>
-        public static string MENU_R {
-            get {
-                return ResourceManager.GetString("MENU_R", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Module Name.
         /// </summary>
         public static string MODULE {
             get {
                 return ResourceManager.GetString("MODULE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reference Module Name.
-        /// </summary>
-        public static string MODULE_R {
-            get {
-                return ResourceManager.GetString("MODULE_R", resourceCulture);
             }
         }
         
@@ -435,33 +417,6 @@ namespace Translation.MIS {
         public static string PROGRAM_NAME {
             get {
                 return ResourceManager.GetString("PROGRAM_NAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reference Program Name.
-        /// </summary>
-        public static string PROGRAM_NAME_R {
-            get {
-                return ResourceManager.GetString("PROGRAM_NAME_R", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reference No.
-        /// </summary>
-        public static string REF_NO {
-            get {
-                return ResourceManager.GetString("REF_NO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reference No Criteria.
-        /// </summary>
-        public static string REF_NO_CRITERIA {
-            get {
-                return ResourceManager.GetString("REF_NO_CRITERIA", resourceCulture);
             }
         }
         
@@ -570,24 +525,6 @@ namespace Translation.MIS {
         public static string STEP_3 {
             get {
                 return ResourceManager.GetString("STEP_3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Status4Golive.
-        /// </summary>
-        public static string STEP_4 {
-            get {
-                return ResourceManager.GetString("STEP_4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Status5Close.
-        /// </summary>
-        public static string STEP_5 {
-            get {
-                return ResourceManager.GetString("STEP_5", resourceCulture);
             }
         }
         

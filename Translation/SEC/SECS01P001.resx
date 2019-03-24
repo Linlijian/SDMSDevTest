@@ -123,9 +123,6 @@
   <data name="Address_T" xml:space="preserve">
     <value>Address (Th)</value>
   </data>
-  <data name="COGF_MODULE" xml:space="preserve">
-    <value>Config Module</value>
-  </data>
   <data name="COM_ADDR1_E" xml:space="preserve">
     <value>Address1 (Eng)</value>
   </data>

@@ -20,11 +20,7 @@ namespace DataAccess.SEC
 
     public class SECS01P001ExecuteType : DTOExecuteType
     {
-        public const string Insert = "Insert";
-        public const string InsertDetail = "InsertDetail";
-        public const string Delete = "Delete";
-        public const string DeleteDetail = "DeleteDetail";
         public const string GetComLicenseID = "GetComLicenseID";
-        public const string GetDetailByID = "GetDetailByID";
+        public const string GetDetailByID = "GetDetailByID"; 
     }
 }

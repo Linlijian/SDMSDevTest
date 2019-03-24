@@ -12,45 +12,6 @@
 @using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
 {
     @Html.AntiForgeryToken()
-    using (Html.Bootstrap().Div().SetId("REFNO").SetVisibility(Visibility.Hidden).Begin())
-    {
-        @Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P001.REF_NO_CRITERIA)
-        using (var row = Html.Bootstrap().GridRow().Begin())
-        {
-            using (row.GridColumn(12).SetXs(12).Begin())
-            {
-                using (var r = Html.Bootstrap().GridRow().Begin())
-                {
-                    using (row.GridColumn(6).Begin())
-                    {
-                        @form.InputJAutocompleteFor(t => t.REF_NO).JAutoKeySource("AC_REF_NO").JAutoBindField("NO").JAutoSetExtraParamsByCtrl("APP_CODE").JAutoFieldToInput(new
-                   {
-                       MENU = "MENU_R",
-                       MODULE = "MODULE_R",
-                       PRG_NAME = "PROGRAM_NAME_R"
-                   }
-                                   ).SetSelectOnly()
-                    }
-                    using (row.GridColumn(6).Begin())
-                    {
-                        @form.InputFor(t => t.MENU_R).SetReadonly()
-                    }
-                }
-                using (var r = Html.Bootstrap().GridRow().Begin())
-                {
-                    using (row.GridColumn(6).Begin())
-                    {
-                        @form.InputFor(t => t.MODULE_R).SetReadonly()
-                    }
-                    using (row.GridColumn(6).Begin())
-                    {
-                        @form.InputFor(t => t.PROGRAM_NAME_R).SetReadonly()
-                    }
-                }
-            }
-        }
-        @Html.GetVSMWidgetsEnd()
-    }
     @Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P001.ISSUE_CALCULATE)
     using (var row1 = Html.Bootstrap().GridRow().Begin())
     {
@@ -268,238 +229,174 @@
     </script>
     <script>
 
-        $(document).ready(function () {
-            //=========================CLOSE_DATE============================//
-            $("#STR_CLOSE_DATE").JDatepicker();
-            $("#STR_CLOSE_DATE").datetimepicker({
-                format: "dd/mm/yyyy hh:ii:ss",
-                showmeridian: true,
-                autoclose: true,
-                todaybtn: true,
-                todayBtn: 1,
-            });
+    $(document).ready(function () {
+        //=========================CLOSE_DATE============================//
+        $("#STR_CLOSE_DATE").JDatepicker();
+        $("#STR_CLOSE_DATE").datetimepicker({
+            format: "dd/mm/yyyy hh:ii:ss",
+            showmeridian: true,
+            autoclose: true,
+            todaybtn: true,
+            todayBtn: 1,
+        });
 
-            $("#STR_CLOSE_DATE").change(function () {
-                $('#CLOSE_DATE').val($('#STR_CLOSE_DATE').val())
-            })
-            //=========================TARGET_DATE============================//
-            $("#STR_TARGET_DATE").JDatepicker();
-            $("#STR_TARGET_DATE").datetimepicker({
-                format: "dd/mm/yyyy hh:ii:ss",
-                showmeridian: true,
-                autoclose: true,
-                todaybtn: true,
-                todayBtn: 1,
-            });
+        $("#STR_CLOSE_DATE").change(function () {
+            $('#CLOSE_DATE').val($('#STR_CLOSE_DATE').val())
+        })
+        //=========================TARGET_DATE============================//
+        $("#STR_TARGET_DATE").JDatepicker();
+        $("#STR_TARGET_DATE").datetimepicker({
+            format: "dd/mm/yyyy hh:ii:ss",
+            showmeridian: true,
+            autoclose: true,
+            todaybtn: true,
+            todayBtn: 1,
+        });
 
-            $("#STR_TARGET_DATE").change(function () {
-                $('#TARGET_DATE').val($('#STR_CLOSE_DATE').val())
-            })
-            //=========================DEPLOY_PD============================//
-            $("#STR_DEPLOY_QA").JDatepicker();
-            $("#STR_DEPLOY_QA").datetimepicker({
-                format: "dd/mm/yyyy hh:ii:ss",
-                showmeridian: true,
-                autoclose: true,
-                todaybtn: true,
-                todayBtn: 1,
-            });
+        $("#STR_TARGET_DATE").change(function () {
+            $('#TARGET_DATE').val($('#STR_CLOSE_DATE').val())
+        })
+        //=========================DEPLOY_PD============================//
+        $("#STR_DEPLOY_QA").JDatepicker();
+        $("#STR_DEPLOY_QA").datetimepicker({
+            format: "dd/mm/yyyy hh:ii:ss",
+            showmeridian: true,
+            autoclose: true,
+            todaybtn: true,
+            todayBtn: 1,
+        });
 
-            $("#STR_DEPLOY_QA").change(function () {
-                $('#DEPLOY_PD').val($('#STR_CLOSE_DATE').val())
-            })
-            //=========================DEPLOY_QA============================//
-            $("#STR_RDEPLOY_PD").JDatepicker();
-            $("#STR_RDEPLOY_PD").datetimepicker({
-                format: "dd/mm/yyyy hh:ii:ss",
-                showmeridian: true,
-                autoclose: true,
-                todaybtn: true,
-                todayBtn: 1,
-            });
+        $("#STR_DEPLOY_QA").change(function () {
+            $('#DEPLOY_PD').val($('#STR_CLOSE_DATE').val())
+        })
+        //=========================DEPLOY_QA============================//
+        $("#STR_RDEPLOY_PD").JDatepicker();
+        $("#STR_RDEPLOY_PD").datetimepicker({
+            format: "dd/mm/yyyy hh:ii:ss",
+            showmeridian: true,
+            autoclose: true,
+            todaybtn: true,
+            todayBtn: 1,
+        });
 
-            $("#STR_RDEPLOY_PD").change(function () {
-                $('#DEPLOY_QA').val($('#STR_CLOSE_DATE').val())
-            })
-            //=========================RESPONSE_DATE============================//
-            $("#STR_RESPONSE_DATE").JDatepicker();
-            $("#STR_RESPONSE_DATE").datetimepicker({
-                format: "dd/mm/yyyy hh:ii:ss",
-                showmeridian: true,
-                autoclose: true,
-                todaybtn: true,
-                todayBtn: 1,
-            });
+        $("#STR_RDEPLOY_PD").change(function () {
+            $('#DEPLOY_QA').val($('#STR_CLOSE_DATE').val())
+        })
+        //=========================RESPONSE_DATE============================//
+        $("#STR_RESPONSE_DATE").JDatepicker();
+        $("#STR_RESPONSE_DATE").datetimepicker({
+            format: "dd/mm/yyyy hh:ii:ss",
+            showmeridian: true,
+            autoclose: true,
+            todaybtn: true,
+            todayBtn: 1,
+        });
 
-            $("#STR_RESPONSE_DATE").change(function () {
-                $('#RESPONSE_DATE').val($('#STR_CLOSE_DATE').val())
-            })
-            //=========================ISSUE_DATE============================//
-            $("#STR_ISSUE_DATE").JDatepicker();
-            $("#STR_ISSUE_DATE").datetimepicker({
-                format: "dd/mm/yyyy hh:ii:ss",
-                showmeridian: true,
-                autoclose: true,
-                todaybtn: true,
-                todayBtn: 1
-            });
-            //.on('changeDate', function (ev) {
-            //    $('#STR_RESPONSE_DATE').datetimepicker('setStartDate', $("#STR_ISSUE_DATE").val())});
+        $("#STR_RESPONSE_DATE").change(function () {
+            $('#RESPONSE_DATE').val($('#STR_CLOSE_DATE').val())
+        })
+        //=========================ISSUE_DATE============================//
+        $("#STR_ISSUE_DATE").JDatepicker();
+        $("#STR_ISSUE_DATE").datetimepicker({
+            format: "dd/mm/yyyy hh:ii:ss",
+            showmeridian: true,
+            autoclose: true,
+            todaybtn: true,
+            todayBtn: 1
+        });
+                //.on('changeDate', function (ev) {
+//    $('#STR_RESPONSE_DATE').datetimepicker('setStartDate', $("#STR_ISSUE_DATE").val())});
 
-            $("#STR_ISSUE_DATE").change(function () {
-                $('#ISSUE_DATE').val($('#STR_ISSUE_DATE').val())
-            })
-            //=========================END============================//
+        $("#STR_ISSUE_DATE").change(function () {
+            $('#ISSUE_DATE').val($('#STR_ISSUE_DATE').val())
+        })
+        //=========================END============================//
 
-            //set ISSUE_DATE
-            $("#STR_ISSUE_DATE").change(function () {
-                var date = $("#STR_ISSUE_DATE").val()
-                var arr = date.split('/');
-                var year = arr[2].split(' ')
-                $("#ISSUE_DATE_PERIOD").val(year[0] + '-' + arr[1])
-            })
-
-            $("#STR_ISSUE_DATE").BetweenDateTime({
-                from_ctrl: 'STR_ISSUE_DATE',
-                to_ctrl: 'STR_RESPONSE_DATE',
-            });
-
-            $("#STR_TARGET_DATE").BetweenDateTime({
-                from_ctrl: 'STR_RESPONSE_DATE',
-                to_ctrl: 'STR_TARGET_DATE',
-            });
-
-            $("#STR_CLOSE_DATE").BetweenDateTime({
-                from_ctrl: 'STR_RESPONSE_DATE',
-                to_ctrl: 'STR_CLOSE_DATE',
-            });
-
-            $("#STR_RDEPLOY_PD").BetweenDateTime({
-                from_ctrl: 'STR_RESPONSE_DATE',
-                to_ctrl: 'STR_RDEPLOY_PD',
-            });
-
-            $("#STR_DEPLOY_QA").BetweenDateTime({
-                from_ctrl: 'STR_RESPONSE_DATE',
-                to_ctrl: 'STR_DEPLOY_QA',
-            });
-
-            $("#STR_DEPLOY_QA").BetweenDateTime({
-                from_ctrl: 'STR_RESPONSE_DATE',
-                to_ctrl: 'STR_DEPLOY_QA',
-            });
-
+        //set ISSUE_DATE
+        $("#STR_ISSUE_DATE").change(function () {
+            var date = $("#STR_ISSUE_DATE").val()
+            var arr = date.split('/');
+            var year = arr[2].split(' ')
+            $("#ISSUE_DATE_PERIOD").val(year[0] + '-' + arr[1])
         })
 
-        $.fn.BetweenDateTime = function (options) {
-            var val_more = $("[name=" + options.from_ctrl + "]").val();
-            var val_less = $("[name=" + options.to_ctrl + "]").val();
+        $("#STR_ISSUE_DATE").BetweenDateTime({
+            from_ctrl: 'STR_ISSUE_DATE',
+            to_ctrl: 'STR_RESPONSE_DATE',
+        });
 
-            $("[name=" + options.from_ctrl + "]").datetimepicker({
-                format: "dd/mm/yyyy hh:ii:ss",
-                showmeridian: true,
-                autoclose: true,
-                todaybtn: true,
-                todayBtn: 1
-            }).on("hide", function (selected) {
-                var val = $(this).val();
-                if (val != undefined && val != null && val != "") {
-                    $("[name=" + options.to_ctrl + "]").datetimepicker("setStartDate", $.stringToDate(val));
-                }
-                else {
-                    $("[name=" + options.to_ctrl + "]").datetimepicker("setStartDate", -Infinity);
-                }
-            }).next().on(ace.click_event, function () {
-                $(this).prev().focus();
-            });
+        $("#STR_TARGET_DATE").BetweenDateTime({
+            from_ctrl: 'STR_RESPONSE_DATE',
+            to_ctrl: 'STR_TARGET_DATE',
+        });
 
-            $("[name=" + options.to_ctrl + "]").datetimepicker({
-                format: "dd/mm/yyyy hh:ii:ss",
-                showmeridian: true,
-                autoclose: true,
-                todaybtn: true,
-                todayBtn: 1
-            }).on("hide", function (selected) {
-                var val = $(this).val();
-                if (val != undefined && val != null && val != "") {
-                    $("[name=" + options.from_ctrl + "]").datetimepicker("setEndDate", $.stringToDate(val));
-                }
-                else {
-                    $("[name=" + options.from_ctrl + "]").datetimepicker("setEndDate", Infinity);
-                }
-            }).next().on(ace.click_event, function () {
-                $(this).prev().focus();
-            });
-        };
+        $("#STR_CLOSE_DATE").BetweenDateTime({
+            from_ctrl: 'STR_RESPONSE_DATE',
+            to_ctrl: 'STR_CLOSE_DATE',
+        });
+
+        $("#STR_RDEPLOY_PD").BetweenDateTime({
+            from_ctrl: 'STR_RESPONSE_DATE',
+            to_ctrl: 'STR_RDEPLOY_PD',
+        });
+
+        $("#STR_DEPLOY_QA").BetweenDateTime({
+            from_ctrl: 'STR_RESPONSE_DATE',
+            to_ctrl: 'STR_DEPLOY_QA',
+        });
+
+        $("#STR_DEPLOY_QA").BetweenDateTime({
+            from_ctrl: 'STR_RESPONSE_DATE',
+            to_ctrl: 'STR_DEPLOY_QA',
+        });
+
+    })
+
+    $.fn.BetweenDateTime = function (options) {
+        var val_more = $("[name=" + options.from_ctrl + "]").val();
+        var val_less = $("[name=" + options.to_ctrl + "]").val();
+
+        $("[name=" + options.from_ctrl + "]").datetimepicker({
+            format: "dd/mm/yyyy hh:ii:ss",
+            showmeridian: true,
+            autoclose: true,
+            todaybtn: true,
+            todayBtn: 1
+        }).on("hide", function (selected) {
+            var val = $(this).val();
+            if (val != undefined && val != null && val != "") {
+                $("[name=" + options.to_ctrl + "]").datetimepicker("setStartDate", $.stringToDate(val));
+            }
+            else {
+                $("[name=" + options.to_ctrl + "]").datetimepicker("setStartDate", -Infinity);
+            }
+        }).next().on(ace.click_event, function () {
+            $(this).prev().focus();
+        });
+
+        $("[name=" + options.to_ctrl + "]").datetimepicker({
+            format: "dd/mm/yyyy hh:ii:ss",
+            showmeridian: true,
+            autoclose: true,
+            todaybtn: true,
+            todayBtn: 1
+        }).on("hide", function (selected) {
+            var val = $(this).val();
+            if (val != undefined && val != null && val != "") {
+                $("[name=" + options.from_ctrl + "]").datetimepicker("setEndDate", $.stringToDate(val));
+            }
+            else {
+                $("[name=" + options.from_ctrl + "]").datetimepicker("setEndDate", Infinity);
+            }
+        }).next().on(ace.click_event, function () {
+            $(this).prev().focus();
+        });
+    };
 
         //===========================Control Readonly by status==============================
-        $(document).ready(function () {
-            $("#APP_CODE").change(function (e) {
-                var formData = $("#form1").serializeFormData();
-                $.ajax({
-                    url: '@Url.Action("GetNo")',
-                    type: 'post',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function (response) {
-                        if (response != null && response != isNullOrEmpty && response.data.NO != null) {
-                            if ($("#APP_CODE").val() != '') {
-                                $("#NO").val(response.data.NO)
-                                //$("#APP_CODE").attr("disabled", true)
-                                //OnDisabledFlase()
-                            }
-                        }
-                    },
-                    error: OnAjaxError
-                });
-            });
-        });
 
         //===================================================================================
-        //=========================GET REF_NO============================//
-        $("#GetRefNo").click(function () {
-            // waitingDialog.show();
-            $("#notification").hide()
-            var app = $("#APP_CODE").val()
 
-            if (app != undefined && app != null && app != "") {
-                $("#REFNO").removeClass("@Css.Hidden")
-            } else {
-                var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
-                content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
-                content += 'Select Application First!' + '</h2>';
-                content += '</div>';
-
-                $("#notification").html(content).fadeTo(2000, 500);
-            }
-
-
-            @*$.ajax({
-            url: '@Url.Action("GetRefNo")',
-            type: 'post',
-            success: function (result) {
-                if (result.data != undefined || result.data != null) {
-                    if (result.data.ERROR_CODE == '0') {
-                        $("#REF_NO").val(result.data.REF_NO);
-                        $("#PERIOD_FROM").val(jsonDateToFormat(result.data.PERIOD_FROM));
-                        $("#PERIOD_TO").val(jsonDateToFormat(result.data.PERIOD_TO));
-                    }
-                    else {
-                        var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
-                        content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
-                        content += 'Get Period Incomplete' + '</h2>';
-                        content += '</div>';
-
-                        $("#notification").html(content).fadeTo(2000, 500);
-                    }
-                }
-                waitingDialog.hide();
-            },
-            error: OnAjaxError
-        });*@
-        });
-        //=========================END============================//
     </script>
 
 }

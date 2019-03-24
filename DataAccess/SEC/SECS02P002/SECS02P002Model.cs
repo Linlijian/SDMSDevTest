@@ -12,7 +12,6 @@ namespace DataAccess.SEC
     {
         [Display(Name = "USER_ID", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string USER_ID { get; set; }
-        public IEnumerable<DDLCenterModel> USER_ID_MODEL { get; set; }
 
         [Display(Name = "USER_FNAME_TH", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string USER_FNAME_TH { get; set; }

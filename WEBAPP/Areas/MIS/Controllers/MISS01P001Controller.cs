@@ -100,7 +100,6 @@ namespace WEBAPP.Areas.MIS.Controllers
         public ActionResult Add()
         {
             SetDefaulButton(StandardButtonMode.Create);
-            AddButton(StandButtonType.ButtonAjax, "GetRefNo", "Reference No", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print");
             SetDefaultData(StandardActionName.Add);
             localModel.USER_ID = SessionHelper.SYS_USER_ID;
 
@@ -115,21 +114,6 @@ namespace WEBAPP.Areas.MIS.Controllers
             return View(StandardActionName.Add, localModel);
         }
         public ActionResult GetNo(MISS01P001Model model)
-        {
-            var jsonResult = new JsonResult();
-
-            var da = new MISS01P001DA();
-            da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetNo;
-            da.DTO.Model.COM_CODE = model.APP_CODE;
-            da.SelectNoEF(da.DTO);
-            da.DTO.Model.NO = da.DTO.Model.NO + 1;
-
-            //jsonResult = Success(da.DTO.Result, StandardActionName.Add);
-
-            return JsonAllowGet(da.DTO.Model);
-            //return jsonResult;
-        }
-        public ActionResult GetRefNo(MISS01P001Model model)
         {
             var jsonResult = new JsonResult();
 
@@ -190,7 +174,6 @@ namespace WEBAPP.Areas.MIS.Controllers
             SetDefaultData(StandardActionName.Edit);
             SetDateToString(da.DTO.Model);
             SetDefaulButton(StandardButtonMode.Modify);
-            AddButton(StandButtonType.ButtonAjax, "GetRefNo", "Reference No", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print");
 
             return View(StandardActionName.Edit, localModel);
         }
@@ -244,17 +227,14 @@ namespace WEBAPP.Areas.MIS.Controllers
             if (mode == "Add")
             {
                 localModel.ISSUE_TYPE_MODEL = BindIssueType();
-                localModel.APP_CODE_MODEL = BindAppCode();
             }
             else if (mode == "Edit")
             {
                 localModel.ISSUE_TYPE_MODEL = BindIssueType();
-                localModel.APP_CODE_MODEL = BindAppCode();
             }
             else if (mode == "Index")
             {
                 localModel.STATUS_MODEL = BindStatus();
-                localModel.APP_CODE_MODEL = BindAppCode();
             }
         }
         private void SetDateToString(MISS01P001Model model)
@@ -323,10 +303,6 @@ namespace WEBAPP.Areas.MIS.Controllers
         private List<DDLCenterModel> BindStatus()
         {
             return GetDDLCenter(DDLCenterKey.DD_MISS01P001_004);
-        }
-        private List<DDLCenterModel> BindAppCode()
-        {
-            return GetDDLCenter(DDLCenterKey.DD_APPLICATION);
         }
         //----------------------------------------------//
         private DTOResult SaveData(string mode, object model)

@@ -7,7 +7,7 @@
         foreach (var item in SessionHelper.Notification)
         {
         <li>
-            <a id="userTH @item.NTF_KEY" href="@Url.Action("index","MISS01P003", new {Area = "MIS"})" tabindex="-1">
+            <a id="userTH @item.NTF_KEY" href="@Url.Action("Info","MISS01P001", new {Area = "MIS", NO = item.NO })" tabindex="-1">
                 <i class="ace-icon fa fa-bell"></i>
                 <p hidden id="item-KEY">@item.NTF_KEY</p>
                 @item.DETAIL <br>

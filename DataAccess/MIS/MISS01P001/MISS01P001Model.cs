@@ -60,7 +60,6 @@ namespace DataAccess.MIS
         [Display(Name = "STATUS", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string STATUS { get; set; }
         public IEnumerable<DDLCenterModel> STATUS_MODEL { get; set; }
-        public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
 
         public string ACTIVE_STEP { get; set; }
         public string STR_ISSUE_DATE { get; set; }
@@ -73,8 +72,6 @@ namespace DataAccess.MIS
 
         [Display(Name = "NO", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public decimal? NO { get; set; }
-        [Display(Name = "REF_NO", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public decimal? REF_NO { get; set; }
         [Display(Name = "ESSR_NO", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public decimal? ESSR_NO { get; set; }
         [Display(Name = "MAN_PLM_SA", ResourceType = typeof(Translation.MIS.MISS01P001))]
@@ -128,15 +125,6 @@ namespace DataAccess.MIS
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "ACTUAL_RESTIME_CL", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public Nullable<System.DateTime> ACTUAL_RESTIME_CL { get; set; }
-
-        [Display(Name = "MENU_R", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public string MENU_R { get; set; }
-        [Display(Name = "PRG_NAME_R", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public string PRG_NAME_R { get; set; }
-        [Display(Name = "MODULE_R", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public string MODULE_R { get; set; }
-        [Display(Name = "PROGRAM_NAME_R", ResourceType = typeof(Translation.MIS.MISS01P001))]
-        public string PROGRAM_NAME_R { get; set; }
     }
     public class MISS01P001Validator : AbstractValidator<MISS01P001Model>
     {

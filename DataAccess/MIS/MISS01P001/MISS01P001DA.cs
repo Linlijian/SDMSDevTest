@@ -27,6 +27,7 @@ namespace DataAccess.MIS
                 case MISS01P001ExecuteType.GetAll: return GetAll(dto);
                 case MISS01P001ExecuteType.GetByID: return GetByID(dto);
                 case MISS01P001ExecuteType.GetNo: return GetNo(dto);
+                case MISS01P001ExecuteType.GetAllStatus: return GetAll(dto);
                 case MISS01P001ExecuteType.GetMenuPrgName: return GetMenuPrgName(dto);
             }
             return dto;
@@ -185,7 +186,6 @@ namespace DataAccess.MIS
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
             parameters.AddParameter("MENU", dto.Model.MENU);
             parameters.AddParameter("PRG_NAME", dto.Model.PRG_NAME);
-            parameters.AddParameter("REF_NO", dto.Model.REF_NO);
 
             var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSUE_001]", parameters, CommandType.StoredProcedure);
 
@@ -250,7 +250,6 @@ namespace DataAccess.MIS
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
             parameters.AddParameter("MENU", dto.Model.MENU);
             parameters.AddParameter("PRG_NAME", dto.Model.PRG_NAME);
-            parameters.AddParameter("REF_NO", dto.Model.REF_NO);
 
             var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSUE_004]", parameters, CommandType.StoredProcedure);
 

@@ -187,12 +187,6 @@ namespace WEBAPP.Areas.Users.Controllers
                 return RedirectToAction("SignIn");
             }
 
-            if (SessionHelper.SYS_USG_LEVEL != "A" && SessionHelper.SYS_USG_LEVEL != "S")
-            {
-                string name = "1 Manage Issue";
-                return RedirectToAction("SelectedModule" , new { NAME = name });
-            }
-
             var da = new UserDA();
             da.DTO.Execute.ExecuteType = UserExecuteType.GetConfigGeraral;
             da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;

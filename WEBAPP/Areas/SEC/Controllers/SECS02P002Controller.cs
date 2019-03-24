@@ -237,30 +237,6 @@ namespace WEBAPP.Areas.SEC.Controllers
             return JsonAllowGet(da.DTO.Model);
             //return jsonResult;
         }
-        [HttpPost]
-        public ActionResult DeleteDetails(List<SECS02P002Model> data)
-        {
-            var jsonResult = new JsonResult();
-            if (data != null && data.Count > 0)
-            {
-                var result = SaveData("DeleteDetails", data);
-                if (result.IsResult)
-                {
-                    jsonResult = Success(result, StandardActionName.Delete);
-                }
-                else
-                {
-                    jsonResult = ValidateError(StandardActionName.Delete, new ValidationError("", result.ResultMsg));
-                }
-
-                return JsonAllowGet(result);
-            }
-            else
-            {
-                jsonResult = ValidateError(StandardActionName.Delete, new ValidationError("", Translation.CenterLang.Center.DataNotFound));
-            }
-            return jsonResult;
-        }
         #endregion
 
         #region ====Private Mehtod====
@@ -290,19 +266,11 @@ namespace WEBAPP.Areas.SEC.Controllers
                 //SetStandardField(da.DTO.Model.ComUserModel);
                 da.UpdateNoEF(da.DTO);
             }
-            else if (mode == "DeleteDetails")
-            {
-                da.DTO.Model = new SECS02P002Model();
-                da.DTO.Models = (List<SECS02P002Model>)model;
-                da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.DeleteDetail;
-                da.Delete(da.DTO);
-            }
             else if (mode == StandardActionName.Delete)
             {
                 da.DTO.Model = new SECS02P002Model();
                 da.DTO.Models = (List<SECS02P002Model>)model;
-                da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.Delete;
-                da.DeleteNoEF(da.DTO);
+                da.Delete(da.DTO);
             }
             return da.DTO.Result;
         }
@@ -314,7 +282,6 @@ namespace WEBAPP.Areas.SEC.Controllers
                 localModel.IS_DISABLED_MODEL = BindIS_DISABLED_MODEL();
                 //localModel.DEPT_ID_MODEL = BindDEPT_ID_MODEL();
                 localModel.USG_ID_MODEL = BindUSG_ID_MODEL();
-
             }
             else if (mode == StandardActionName.Add || mode == StandardActionName.Edit)
             {
@@ -323,7 +290,6 @@ namespace WEBAPP.Areas.SEC.Controllers
                 localModel.USG_ID_MODEL = BindUSG_ID_MODEL_ADD();
                 localModel.TITLE_ID_MODEL = BindTITLE_ID_MODEL();
                 localModel.USER_STATUS_MODEL = BindUSER_STATUS_MODEL();
-                localModel.USER_ID_MODEL = BindUserId();
 
                 Set(localModel);
             }
@@ -370,10 +336,7 @@ namespace WEBAPP.Areas.SEC.Controllers
             //    return GetDDLCenter(DDLCenterKey.DD_VSMS_USRGROUP_002);
             //}
         }
-        private List<DDLCenterModel> BindUserId()
-        {
-            return GetDDLCenter(DDLCenterKey.DD_SECS01P001_001);
-        }
+
         private List<DDLCenterModel> BindTITLE_ID_MODEL()
         {
             //return GetDDLCenter(DDLCenterKey.DD_VSMS_TITLE_001, new VSMParameter(SessionHelper.SYS_COM_CODE));

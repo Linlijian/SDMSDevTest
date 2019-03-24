@@ -137,16 +137,10 @@
     <Compile Include="VSMS_EXCEL_DETAIL.cs">
       <DependentUpon>ModelManger.tt</DependentUpon>
     </Compile>
-    <Compile Include="VSMS_ISSUE.cs">
-      <DependentUpon>ModelManger.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VSMS_MODULE.cs">
+    <Compile Include="VSMS_MOBULE.cs">
       <DependentUpon>ModelManger.tt</DependentUpon>
     </Compile>
     <Compile Include="VSMS_NOTIFICATION.cs">
-      <DependentUpon>ModelManger.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VSMS_PRGASYS.cs">
       <DependentUpon>ModelManger.tt</DependentUpon>
     </Compile>
     <Compile Include="VSMS_PROGRAM.cs">

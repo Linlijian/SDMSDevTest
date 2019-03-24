@@ -135,6 +135,9 @@
   <data name="FILEPACKET" xml:space="preserve">
     <value>File Packet</value>
   </data>
+  <data name="FILE_ID" xml:space="preserve">
+    <value>File Id</value>
+  </data>
   <data name="FIXED_RESULT" xml:space="preserve">
     <value>Fixed Result</value>
   </data>
@@ -143,9 +146,6 @@
   </data>
   <data name="INDEX" xml:space="preserve">
     <value>Assignment Issue</value>
-  </data>
-  <data name="ISE_DATE_ONPROCESS" xml:space="preserve">
-    <value>Fix Date</value>
   </data>
   <data name="ISE_DATE_OPENING" xml:space="preserve">
     <value>Issue Date</value>
@@ -195,13 +195,7 @@
   <data name="TARGET_DATE" xml:space="preserve">
     <value>Target Date</value>
   </data>
-  <data name="TESTING" xml:space="preserve">
-    <value>Testing</value>
-  </data>
   <data name="TOTAL" xml:space="preserve">
     <value>Fixed Total</value>
-  </data>
-  <data name="USER_ID" xml:space="preserve">
-    <value>Fix By</value>
   </data>
 </root>
