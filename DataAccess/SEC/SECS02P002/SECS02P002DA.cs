@@ -55,7 +55,7 @@ namespace DataAccess.SEC
                                 MODULE,
                                 USER_ID,
                                 USG_ID = (SELECT USG_ID FROM VSMS_USER WHERE USER_ID = @USER_ID)
-                          FROM VSMS_MOBULE
+                          FROM VSMS_MODULE
                           WHERE USER_ID = @USER_ID";
 
             var parameters = CreateParameter();
@@ -363,8 +363,8 @@ namespace DataAccess.SEC
         }
         private SECS02P002DTO DELETE_MODUlE(SECS02P002DTO dto)
         {
-            string strSQL = @" delete from dbo.VSMS_MOBULE
-                               where  user_id = @puser_id and flag = 'C'";
+            string strSQL = @" delete from dbo.VSMS_MODULE
+                               where  user_id = @puser_id";
 
             var parameters = CreateParameter();
             parameters.AddParameter("puser_id", dto.Model.USER_ID);
@@ -453,7 +453,42 @@ namespace DataAccess.SEC
         protected override BaseDTO DoDelete(BaseDTO baseDTO)
         {
             var dto = (SECS02P002DTO)baseDTO;
+            switch (dto.Execute.ExecuteType)
+            {
+                case SECS02P002ExecuteType.Delete: return Delete(dto);
+                case SECS02P002ExecuteType.DeleteDetail: return DeleteDetail(dto);
+                
+            }
+            return dto;
+        }
+        private SECS02P002DTO DeleteDetail(SECS02P002DTO dto)
+        {
+            if (dto.Models.Count() > 0)
+            {
+                foreach (var item in dto.Models)
+                {
+                    var items = _DBManger.VSMS_ISSUE.Where(m => m.COM_CODE == item.COM_CODE && m.MODULE == item.MODULE && m.RESPONSE_BY == item.USER_ID);
 
+                    if (items.Count() > 0)
+                    {
+                        dto.Result.IsResult = false;
+                        dto.Result.ResultMsg = "Data is useed!";
+                        break;
+                    }
+                    else
+                    {
+                        dto.Result.IsResult = true;
+                        //var del = _DBManger.VSMS_MODULE.Where(m => m.COM_CODE == item.COM_CODE && m.MODULE == item.MODULE && m.USER_ID == item.USER_ID);
+                        //_DBManger.VSMS_MODULE.RemoveRange(del);
+                    }
+                }
+            }
+
+
+            return dto;
+        }
+        private SECS02P002DTO Delete(SECS02P002DTO dto)
+        {
             foreach (var item in dto.Models)
             {
                 var USER_ID = item.USER_ID.AsString();
@@ -471,7 +506,7 @@ namespace DataAccess.SEC
                 parameters.AddParameter("USER_ID", USER_ID);
                 _DBMangerNoEF.ExecuteNonQuery(strSQL, parameters, CommandType.Text);
 
-                strSQL = @" DELETE FROM [dbo].[VSMS_MOBULE]
+                strSQL = @" DELETE FROM [dbo].[VSMS_MODULE]
                                    WHERE USER_ID = @USER_ID  ";
                 parameters = CreateParameter();
                 parameters.AddParameter("USER_ID", USER_ID);

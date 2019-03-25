@@ -22,5 +22,6 @@ namespace DataAccess
         public string ACTIVE { get; set; }
         public Nullable<System.DateTime> CRET_DATE { get; set; }
         public Nullable<System.DateTime> MNT_DATE { get; set; }
+        public decimal NO { get; set; }
     }
 }

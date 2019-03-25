@@ -219,8 +219,14 @@
   <data name="MENU" xml:space="preserve">
     <value>Menu</value>
   </data>
+  <data name="MENU_R" xml:space="preserve">
+    <value>Reference Menu</value>
+  </data>
   <data name="MODULE" xml:space="preserve">
     <value>Module Name</value>
+  </data>
+  <data name="MODULE_R" xml:space="preserve">
+    <value>Reference Module Name</value>
   </data>
   <data name="NO" xml:space="preserve">
     <value>Issue No.</value>
@@ -236,6 +242,15 @@
   </data>
   <data name="PROGRAM_NAME" xml:space="preserve">
     <value>Program Name</value>
+  </data>
+  <data name="PROGRAM_NAME_R" xml:space="preserve">
+    <value>Reference Program Name</value>
+  </data>
+  <data name="REF_NO" xml:space="preserve">
+    <value>Reference No</value>
+  </data>
+  <data name="REF_NO_CRITERIA" xml:space="preserve">
+    <value>Reference No Criteria</value>
   </data>
   <data name="RESOLUTION_TARGET" xml:space="preserve">
     <value>Resolution Target</value>
@@ -272,6 +287,12 @@
   </data>
   <data name="STEP_3" xml:space="preserve">
     <value>Issue Status</value>
+  </data>
+  <data name="STEP_4" xml:space="preserve">
+    <value>Status4Golive</value>
+  </data>
+  <data name="STEP_5" xml:space="preserve">
+    <value>Status5Close</value>
   </data>
   <data name="TARGET_DATE" xml:space="preserve">
     <value>Target Date</value>

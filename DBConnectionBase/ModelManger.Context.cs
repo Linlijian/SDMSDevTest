@@ -45,7 +45,9 @@ namespace DataAccess
         public virtual DbSet<VSMS_EXCEL> VSMS_EXCEL { get; set; }
         public virtual DbSet<VSMS_SYS_PGC> VSMS_SYS_PGC { get; set; }
         public virtual DbSet<VSMS_USRGRPPRIV> VSMS_USRGRPPRIV { get; set; }
-        public virtual DbSet<VSMS_MOBULE> VSMS_MOBULE { get; set; }
         public virtual DbSet<VSMS_NOTIFICATION> VSMS_NOTIFICATION { get; set; }
+        public virtual DbSet<VSMS_ISSUE> VSMS_ISSUE { get; set; }
+        public virtual DbSet<VSMS_MODULE> VSMS_MODULE { get; set; }
+        public virtual DbSet<VSMS_PRGASYS> VSMS_PRGASYS { get; set; }
     }
 }
