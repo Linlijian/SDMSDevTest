@@ -55,7 +55,7 @@
         },
         Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("YEAR"), new VSMParameter("COM_CODE"))),
         //new GridColumn("COM_CODE").SetNotVisible().SetKey(),
-        new GridColumn("COM_CODE", Translation.MST.MSTS02P001.APP_CODE, 10, ColumnsTextAlign.Right).SetKey(),
+        new GridColumn("APP_CODE", Translation.MST.MSTS02P001.APP_CODE, 10, ColumnsTextAlign.Right).SetKey(),
         new GridColumn("YEAR", Translation.MST.MSTS02P001.YEAR, 10, ColumnsTextAlign.Right).SetKey(),
         new GridColumn("MANDAY_VAL", Translation.MST.MSTS02P001.MANDAY_VAL, 10, ColumnsType.NumberFormat, ColumnsTextAlign.Right),
         new GridColumn("IS_USE", Translation.MST.MSTS02P001.IS_USE, 10,render: "RENDER_ISUSE").SetKey()
