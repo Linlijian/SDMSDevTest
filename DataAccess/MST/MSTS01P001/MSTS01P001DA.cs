@@ -38,10 +38,10 @@ namespace DataAccess.MST
 
             var parameters = CreateParameter();
 
-            if (!dto.Model.APP_CODE.IsNullOrEmpty()) //checked
+            if (!dto.Model.COM_CODE.IsNullOrEmpty()) //checked
             {
                 strSQL += " AND COM_CODE = @COM_CODE";
-                parameters.AddParameter("COM_CODE", dto.Model.APP_CODE);
+                parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
             }
             if (!dto.Model.ISSUE_TYPE.IsNullOrEmpty())
             {

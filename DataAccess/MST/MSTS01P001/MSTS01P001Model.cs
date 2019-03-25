@@ -25,6 +25,10 @@ namespace DataAccess.MST
         [Display(Name = "MAN_PLM_PRG", ResourceType = typeof(Translation.MST.MSTS01P001))]
         public decimal? MAN_PLM_PRG { get; set; }
 
+        [Display(Name = "APP_CODE", ResourceType = typeof(Translation.MST.MSTS01P001))]
+        public string APP_CODE { get; set; }
+        public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
+
     }
     public class MSTS01P001Validator : AbstractValidator<MSTS01P001Model>
     {
@@ -33,16 +37,16 @@ namespace DataAccess.MST
             RuleSet("Add", () =>
             {
                 Valid();
-                RuleFor(m => m.COM_CODE).Store("CD_MSTS01P001_001", m => m.ISSUE_TYPE, m => m.TYPE_RATE).NotEmpty();
-                RuleFor(m => m.ISSUE_TYPE).Store("CD_MSTS01P001_001", m => m.COM_CODE, m => m.TYPE_RATE).NotEmpty();
-                RuleFor(m => m.TYPE_RATE).Store("CD_MSTS01P001_001", m => m.COM_CODE, m => m.ISSUE_TYPE).NotEmpty();
+                RuleFor(m => m.APP_CODE).Store("CD_MSTS01P001_001", m => m.ISSUE_TYPE, m => m.TYPE_RATE).NotEmpty();
+                RuleFor(m => m.ISSUE_TYPE).Store("CD_MSTS01P001_001", m => m.APP_CODE, m => m.TYPE_RATE).NotEmpty();
+                RuleFor(m => m.TYPE_RATE).Store("CD_MSTS01P001_001", m => m.APP_CODE, m => m.ISSUE_TYPE).NotEmpty();
             });
             RuleSet("Edit", () =>
             {
                 Valid();
-                RuleFor(m => m.COM_CODE).Store("CD_MSTS01P001_001", m => m.ISSUE_TYPE, m => m.TYPE_RATE).NotEmpty();
-                RuleFor(m => m.ISSUE_TYPE).Store("CD_MSTS01P001_001", m => m.COM_CODE, m => m.TYPE_RATE).NotEmpty();
-                RuleFor(m => m.TYPE_RATE).Store("CD_MSTS01P001_001", m => m.COM_CODE, m => m.ISSUE_TYPE).NotEmpty();
+                RuleFor(m => m.APP_CODE).Store("CD_MSTS01P001_001", m => m.ISSUE_TYPE, m => m.TYPE_RATE).NotEmpty();
+                RuleFor(m => m.ISSUE_TYPE).Store("CD_MSTS01P001_001", m => m.APP_CODE, m => m.TYPE_RATE).NotEmpty();
+                RuleFor(m => m.TYPE_RATE).Store("CD_MSTS01P001_001", m => m.APP_CODE, m => m.ISSUE_TYPE).NotEmpty();
             });
         }
 
