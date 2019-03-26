@@ -33,8 +33,13 @@ namespace DataAccess.MST
         public string RES_TYPE { get; set; }
         public IEnumerable<DDLCenterModel> RES_TYPE_MODEL { get; set; }
 
+        [Display(Name = "APP_CODE", ResourceType = typeof(Translation.MST.MSTS03P001))]
+        public string APP_CODE { get; set; }
+        public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
+
         public decimal? PIT_ID { get; set; }
         public bool IS_USED { get; set; }
+        public string IS_CONS { get; set; }
     }
     public class MSTS03P001Validator : AbstractValidator<MSTS03P001Model>
     {

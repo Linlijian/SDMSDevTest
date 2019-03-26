@@ -32,7 +32,8 @@
                     using (r.GridColumn(8).SetMdOffset(1).Begin())
                     {
                         // @form.HiddenFor(m => m.CRET_BY)
-                        @form.InputJAutocompleteFor(t => t.APP_CODE, isRequired: true).JAutoKeySource("AC_APPLICATION_CODE").JAutoBindField("COM_CODE").SetSelectOnly()//.JAutoSetExtraParamsByCtrl("CRET_BY")
+                        //@form.InputJAutocompleteFor(t => t.APP_CODE, isRequired: true).JAutoKeySource("AC_APPLICATION_CODE").JAutoBindField("COM_CODE").SetSelectOnly()//.JAutoSetExtraParamsByCtrl("CRET_BY")
+                        @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
                     }
                 }
                 using (var r = Html.Bootstrap().GridRow().Begin())

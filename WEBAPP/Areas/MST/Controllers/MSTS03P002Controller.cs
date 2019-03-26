@@ -68,6 +68,7 @@ namespace WEBAPP.Areas.MST.Controllers
                 TempSearch = model;
             }
             da.DTO.Model = TempSearch;
+            da.DTO.Model.COM_CODE = da.DTO.Model.APP_CODE;
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
@@ -155,7 +156,8 @@ namespace WEBAPP.Areas.MST.Controllers
         //----------------------- DDL-----------------------
         private void SetDefaultData(string mode = "")
         {
-            if(mode == "Index")
+            localModel.APP_CODE_MODEL = BindAppCode();
+            if (mode == "Index")
             {
                 localModel.KEY_ID_MODEL = BindKeyId();
             }
@@ -176,6 +178,10 @@ namespace WEBAPP.Areas.MST.Controllers
             return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_TYPETIME);
         }
 
+        private List<DDLCenterModel> BindAppCode()
+        {
+            return GetDDLCenter(DDLCenterKey.DD_MISS01P002_001);
+        }
         //----------------------------------------------//
         private DTOResult SaveData(string mode, object model)
         {

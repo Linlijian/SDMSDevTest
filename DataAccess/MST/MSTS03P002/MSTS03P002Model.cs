@@ -35,6 +35,11 @@ namespace DataAccess.MST
 
         public decimal? PIT_ID { get; set; }
         public bool IS_USED { get; set; }
+        public string IS_CONS { get; set; }
+
+        [Display(Name = "APP_CODE", ResourceType = typeof(Translation.MST.MSTS03P002))]
+        public string APP_CODE { get; set; }
+        public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
     }
     public class MSTS03P002Validator : AbstractValidator<MSTS03P002Model>
     {
