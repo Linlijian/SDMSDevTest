@@ -25,8 +25,6 @@ namespace DataAccess.MST
         [Display(Name = "MAN_PLM_PRG", ResourceType = typeof(Translation.MST.MSTS01P001))]
         public decimal? MAN_PLM_PRG { get; set; }
 
-        [Display(Name = "APP_CODE", ResourceType = typeof(Translation.MST.MSTS01P001))]
-        public string APP_CODE { get; set; }
         public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
 
     }

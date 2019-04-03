@@ -118,13 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="APP_CODE" xml:space="preserve">
-    <value>'Add Application' should not be empty.</value>
+    <value>'Application Code' should not be empty.</value>
   </data>
   <data name="Issue_date" xml:space="preserve">
     <value>'Issue Date' should not be empty.</value>
   </data>
   <data name="OneNumber2Digit1" xml:space="preserve">
     <value>Please enter the number between 1 - 99.9</value>
+  </data>
+  <data name="OneNumber3Digit1" xml:space="preserve">
+    <value>Please enter the number between 1 - 999.9</value>
   </data>
   <data name="Response_date" xml:space="preserve">
     <value>'Response Date' should not be empty.</value>

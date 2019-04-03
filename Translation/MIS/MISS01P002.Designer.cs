@@ -97,11 +97,47 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string CLOSE {
+            get {
+                return ResourceManager.GetString("CLOSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fixed Complete.
         /// </summary>
         public static string COMPLETE {
             get {
                 return ResourceManager.GetString("COMPLETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deploy PD Date.
+        /// </summary>
+        public static string DEPLOY_PD {
+            get {
+                return ResourceManager.GetString("DEPLOY_PD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deploy QA Date.
+        /// </summary>
+        public static string DEPLOY_QA {
+            get {
+                return ResourceManager.GetString("DEPLOY_QA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Packet.
+        /// </summary>
+        public static string FILE_ID {
+            get {
+                return ResourceManager.GetString("FILE_ID", resourceCulture);
             }
         }
         
@@ -124,6 +160,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go Live.
+        /// </summary>
+        public static string GOLIVE {
+            get {
+                return ResourceManager.GetString("GOLIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fixed In Complete.
         /// </summary>
         public static string INCOMPLETE {
@@ -138,6 +183,33 @@ namespace Translation.MIS {
         public static string INDEX {
             get {
                 return ResourceManager.GetString("INDEX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close DAte.
+        /// </summary>
+        public static string ISE_DATE_CLOSE {
+            get {
+                return ResourceManager.GetString("ISE_DATE_CLOSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow up Date.
+        /// </summary>
+        public static string ISE_DATE_FOLLOWUP {
+            get {
+                return ResourceManager.GetString("ISE_DATE_FOLLOWUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go Live Date.
+        /// </summary>
+        public static string ISE_DATE_GOLIVE {
+            get {
+                return ResourceManager.GetString("ISE_DATE_GOLIVE", resourceCulture);
             }
         }
         
@@ -165,6 +237,15 @@ namespace Translation.MIS {
         public static string ISE_STATUS {
             get {
                 return ResourceManager.GetString("ISE_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue By.
+        /// </summary>
+        public static string ISSUE_BY {
+            get {
+                return ResourceManager.GetString("ISSUE_BY", resourceCulture);
             }
         }
         
@@ -210,6 +291,15 @@ namespace Translation.MIS {
         public static string OWNER {
             get {
                 return ResourceManager.GetString("OWNER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Re Open.
+        /// </summary>
+        public static string REOPEN {
+            get {
+                return ResourceManager.GetString("REOPEN", resourceCulture);
             }
         }
         
@@ -304,6 +394,33 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time Out.
+        /// </summary>
+        public static string TIMEOUT {
+            get {
+                return ResourceManager.GetString("TIMEOUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Stemp PD.
+        /// </summary>
+        public static string TIMESTEMP_PD {
+            get {
+                return ResourceManager.GetString("TIMESTEMP_PD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Stemp QA.
+        /// </summary>
+        public static string TIMESTEMP_QA {
+            get {
+                return ResourceManager.GetString("TIMESTEMP_QA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fixed Total.
         /// </summary>
         public static string TOTAL {
@@ -318,6 +435,15 @@ namespace Translation.MIS {
         public static string USER_ID {
             get {
                 return ResourceManager.GetString("USER_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time out of 7 Day.
+        /// </summary>
+        public static string WAIT_CONFIRM {
+            get {
+                return ResourceManager.GetString("WAIT_CONFIRM", resourceCulture);
             }
         }
     }

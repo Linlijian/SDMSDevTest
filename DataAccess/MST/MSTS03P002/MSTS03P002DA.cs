@@ -41,10 +41,10 @@ namespace DataAccess.MST
                 parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
             }
 
-            if (!dto.Model.COM_CODE.IsNullOrEmpty())
+            if (!dto.Model.APP_CODE.IsNullOrEmpty())
             {
-                strSQL += " AND COM_CODE = @COM_CODE";
-                parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+                strSQL += " AND COM_CODE = @APP_CODE";
+                parameters.AddParameter("APP_CODE", dto.Model.APP_CODE);
             }
 
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
@@ -156,6 +156,7 @@ namespace DataAccess.MST
 			                    [ISSUE_TYPE] = @ISSUE_TYPE
 			                    ,[REMASK] = @REMASK
 			                    ,[IS_FREE] = @IS_FREE
+                                ,[IS_CONS] = @IS_CONS
 			                    ,[MNT_BY] = @CRET_BY
 			                    ,[MNT_DATE] = @CRET_DATE
 			                WHERE PIT_ID = @PIT_ID
@@ -168,6 +169,7 @@ namespace DataAccess.MST
             parameters.AddParameter("PIT_ID", dto.Model.PIT_ID);
             parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
             parameters.AddParameter("IS_FREE", dto.Model.IS_FREE);
+            parameters.AddParameter("IS_CONS", dto.Model.IS_CONS);
             parameters.AddParameter("REMASK", dto.Model.REMASK);
             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);

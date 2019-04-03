@@ -69,7 +69,6 @@ namespace WEBAPP.Areas.MST.Controllers
             }
             da.DTO.Model = TempSearch;
             SetStandardField(da.DTO.Model);
-            da.DTO.Model.COM_CODE = da.DTO.Model.APP_CODE;
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
@@ -151,10 +150,13 @@ namespace WEBAPP.Areas.MST.Controllers
 
         #region Mehtod  
         //----------------------- DDL-----------------------
+        private List<DDLCenterModel> BindAppCode()
+        {
+            return GetDDLCenter(KEY_ID: DDLCenterKey.DD_MISS01P002_001);
+        }
         private void SetDefaultData(string mode = "")
         {
             localModel.TYPE_RATE_MODEL = BindTyprRate();
-            //localModel.ISSUE_TYPE_MODEL = BindIssueType();
             localModel.APP_CODE_MODEL = BindAppCode();
         }
         private List<DDLCenterModel> BindIssueType()
@@ -164,11 +166,6 @@ namespace WEBAPP.Areas.MST.Controllers
         private List<DDLCenterModel> BindTyprRate()
         {
             return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_TYPE_RATE);
-        }
-
-        private List<DDLCenterModel> BindAppCode()
-        {
-            return GetDDLCenter(DDLCenterKey.DD_MISS01P002_001);
         }
 
         //----------------------------------------------//

@@ -28,16 +28,24 @@ namespace DataAccess.MIS
                 case MISS01P001ExecuteType.GetByID: return GetByID(dto);
                 case MISS01P001ExecuteType.GetNo: return GetNo(dto);
                 case MISS01P001ExecuteType.GetMenuPrgName: return GetMenuPrgName(dto);
+                case MISS01P001ExecuteType.GetReOpen: return GetReOpen(dto);
             }
             return dto;
         }
         private MISS01P001DTO GetMenuPrgName(MISS01P001DTO dto)
         {
-            string strSQL = @"	SELECT *
-                                FROM VSMS_MOBULE
-                                WHERE NO = @NO
-                                AND COM_CODE = @APP_CODE
-                                AND FLAG  ='P'
+            string strSQL = @"	SELECT COM_CODE
+	                                ,PS_ID
+	                                ,NO
+	                                ,PRG_CODE PRG_NAME
+	                                ,MENU
+	                                ,MODULE
+	                                ,ISSUE_BY
+	                                ,CRET_BY
+	                                ,CRET_DATE
+                                FROM SDDB.dbo.VSMS_PRGASYS
+                                WHERE COM_CODE = @APP_CODE
+	                                AND NO = @NO
                                 ";
             var parameters = CreateParameter();
             parameters.AddParameter("APP_CODE", dto.Model.APP_CODE); //checked
@@ -134,7 +142,63 @@ namespace DataAccess.MIS
             {
                 dto.Model = result.OutputDataSet.Tables[0].ToObject<MISS01P001Model>();
                 dto.Model.APP_CODE = dto.Model.COM_CODE; //checked
+                if (!dto.Model.REF_NO.IsNullOrEmpty())
+                {
+                    GetRef(dto);
+                }
             }
+            return dto;
+        }
+        private MISS01P001DTO GetReOpen(MISS01P001DTO dto)
+        {
+            string strSQL = @"	SELECT NO
+	                                ,PRG_CODE PRG_NAME
+	                                ,MENU
+	                                ,MODULE
+                                FROM VSMS_PRGASYS
+                                WHERE COM_CODE = @app_code
+                                    AND NO = @ref_no
+                                ";
+            var parameters = CreateParameter();
+            parameters.AddParameter("app_code", dto.Model.APP_CODE); //checked
+            parameters.AddParameter("ref_no", dto.Model.REF_NO);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model.PROGRAM_NAME_R = result.OutputDataSet.Tables[0].Rows[0][1].ToString();
+                dto.Model.MENU_R = result.OutputDataSet.Tables[0].Rows[0][2].ToString();
+                dto.Model.MODULE_R = result.OutputDataSet.Tables[0].Rows[0][3].ToString();
+                dto.Model.COM_CODE = dto.Model.APP_CODE;
+                GetNo(dto);
+            }
+
+            return dto;
+        }
+        private MISS01P001DTO GetRef(MISS01P001DTO dto)
+        {
+            string strSQL = @"	SELECT NO
+	                                ,PRG_CODE PRG_NAME
+	                                ,MENU
+	                                ,MODULE
+                                FROM VSMS_PRGASYS
+                                WHERE COM_CODE = @app_code
+                                    AND NO = @ref_no
+                                ";
+            var parameters = CreateParameter();
+            parameters.AddParameter("app_code", dto.Model.APP_CODE); //checked
+            parameters.AddParameter("ref_no", dto.Model.REF_NO);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model.PROGRAM_NAME_R = result.OutputDataSet.Tables[0].Rows[0][1].ToString();
+                dto.Model.MENU_R = result.OutputDataSet.Tables[0].Rows[0][2].ToString();
+                dto.Model.MODULE_R = result.OutputDataSet.Tables[0].Rows[0][3].ToString();
+            }
+
             return dto;
         }
         #endregion

@@ -32,14 +32,11 @@ namespace DataAccess.MST
         [Display(Name = "RES_TYPE", ResourceType = typeof(Translation.MST.MSTS03P001))]
         public string RES_TYPE { get; set; }
         public IEnumerable<DDLCenterModel> RES_TYPE_MODEL { get; set; }
-
-        [Display(Name = "APP_CODE", ResourceType = typeof(Translation.MST.MSTS03P001))]
-        public string APP_CODE { get; set; }
+        
         public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
 
         public decimal? PIT_ID { get; set; }
         public bool IS_USED { get; set; }
-        public string IS_CONS { get; set; }
     }
     public class MSTS03P001Validator : AbstractValidator<MSTS03P001Model>
     {
@@ -58,13 +55,12 @@ namespace DataAccess.MST
         
         private void Valid()
         {
-            RuleFor(m => m.PRIORITY_NAME).Store("CD_MSTS03P001_001", m => m.ISSUE_TYPE).NotEmpty();
-            RuleFor(m => m.ISSUE_TYPE).Store("CD_MSTS03P001_001", m => m.PRIORITY_NAME).NotEmpty();
+            RuleFor(m => m.APP_CODE).Store("CD_MSTS03P001_001", m => m.PRIORITY_NAME).NotEmpty();
+            RuleFor(m => m.PRIORITY_NAME).Store("CD_MSTS03P001_001", m => m.APP_CODE).NotEmpty();
             RuleFor(t => t.RES_TIME).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
             RuleFor(t => t.T_RES_TIME).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
             RuleFor(t => t.T_RES_TYPE).NotEmpty();
             RuleFor(t => t.RES_TYPE).NotEmpty();
-            RuleFor(t => t.APP_CODE).NotEmpty();
         }
     }
 }

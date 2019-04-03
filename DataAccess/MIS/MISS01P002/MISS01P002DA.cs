@@ -29,6 +29,156 @@ namespace DataAccess.MIS
                 case MISS01P002ExecuteType.GetByIdOpening: return GetByIdOpening(dto);
                 case MISS01P002ExecuteType.GetFiexd: return GetFiexd(dto);
                 case MISS01P002ExecuteType.GetAllFixed: return GetAllFixed(dto);
+                case MISS01P002ExecuteType.GetAllFollowUp: return GetAllFollowUp(dto);
+                case MISS01P002ExecuteType.GetAllGolive: return GetAllGolive(dto);
+                case MISS01P002ExecuteType.GetFilePacket: return GetFilePacket(dto);
+                case MISS01P002ExecuteType.GetAllClose: return GetAllClose(dto);
+            }
+            return dto;
+        }
+        private MISS01P002DTO GetAllClose(MISS01P002DTO dto)
+        {
+            string strSQL = @"	SELECT t.COM_CODE
+	                                ,t.ISE_NO
+	                                ,t.RESPONSE_BY
+	                                ,t.ISE_DATE_CLOSE
+	                                ,t.ASSIGN_STATUS
+	                                ,tt.COM_NAME_E
+	                                ,t.ISE_KEY
+	                                ,t.ISE_STATUS
+	                                ,t.ISE_DATE_OPENING
+	                                ,t.ISSUE_BY
+                                FROM VSMS_COMPANY tt
+                                INNER JOIN (
+	                                SELECT t.COM_CODE
+		                                ,t.ISE_NO
+		                                ,tt.RESPONSE_BY
+		                                ,t.ISE_DATE_CLOSE
+		                                ,t.ASSIGN_STATUS
+		                                ,t.ISE_KEY
+		                                ,t.ISE_STATUS
+		                                ,t.ISE_DATE_OPENING
+		                                ,tt.ISSUE_BY
+	                                FROM VSMS_ISSTATOPSS t
+	                                INNER JOIN VSMS_ISSUE tt ON t.COM_CODE = tt.COM_CODE
+		                                AND t.ISE_NO = tt.NO
+	                                ) t ON t.COM_CODE = tt.COM_CODE
+                                WHERE (1 = 1)
+	                                AND t.ASSIGN_STATUS = 'E'
+	                                AND t.ISE_STATUS = 'S'
+                                     ";
+
+            var parameters = CreateParameter();
+
+            if (!dto.Model.COM_CODE.IsNullOrEmpty())
+            {
+                strSQL += " AND t.COM_CODE = @COM_CODE";
+                parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            }
+            if (!dto.Model.ASSIGN_USER.IsNullOrEmpty())
+            {
+                strSQL += " AND t.USER_ID = @ASSIGN_USER";
+                parameters.AddParameter("ASSIGN_USER", dto.Model.ASSIGN_USER);
+            }
+            if (!dto.Model.ISSUE_DATE_F.IsNullOrEmpty())
+            {
+                strSQL += " AND t.ISE_DATE_CLOSE >= @ISSUE_DATE_F";
+                parameters.AddParameter("ISSUE_DATE_F", dto.Model.ISSUE_DATE_F);
+            }
+            if (!dto.Model.ISSUE_DATE_T.IsNullOrEmpty())
+            {
+                strSQL += " AND t.ISE_DATE_CLOSE <= @ISSUE_DATE_T";
+                parameters.AddParameter("ISSUE_DATE_T", dto.Model.ISSUE_DATE_T);
+            }
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+            if (result.Success(dto))
+            {
+                dto.Models = result.OutputDataSet.Tables[0].ToList<MISS01P002Model>();
+            }
+            return dto;
+        }
+        private MISS01P002DTO GetAllGolive(MISS01P002DTO dto)
+        {
+            var parameters = CreateParameter();
+            parameters.AddParameter("error_code", null, ParameterDirection.Output);
+            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE);
+            parameters.AddParameter("RESPONSE_BY", dto.Model.ASSIGN_USER);
+            parameters.AddParameter("ISSUE_DATE_F", dto.Model.ISSUE_DATE_F);
+            parameters.AddParameter("ISSUE_DATE_T", dto.Model.ISSUE_DATE_T);
+            parameters.AddParameter("TIMEOUT", dto.Model.TIMEOUT);
+
+            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSTATOPSS_005]", parameters);
+            if (result.Success(dto))
+            {
+                dto.Models = result.OutputDataSet.Tables[0].ToList<MISS01P002Model>();
+            }
+            return dto;
+        }
+        private MISS01P002DTO GetAllFollowUp(MISS01P002DTO dto)
+        {
+            string strSQL = @"	SELECT t.COM_CODE
+	                                ,t.ISE_NO
+	                                ,t.RESPONSE_BY
+	                                ,t.ISE_DATE_FOLLOWUP
+	                                ,t.ASSIGN_STATUS
+	                                ,tt.COM_NAME_E
+	                                ,t.ISE_KEY
+	                                ,t.ISE_STATUS
+	                                ,t.ISE_DATE_OPENING
+	                                ,t.USER_ID
+	                                ,t.ISSUE_BY
+	                                ,t.DEPLOY_QA
+	                                ,t.DEPLOY_PD
+                                FROM VSMS_COMPANY tt
+                                INNER JOIN (
+	                                SELECT t.COM_CODE
+		                                ,t.ISE_NO
+		                                ,tt.RESPONSE_BY
+		                                ,t.ISE_DATE_FOLLOWUP
+		                                ,t.ASSIGN_STATUS
+		                                ,t.ISE_KEY
+		                                ,t.ISE_STATUS
+		                                ,t.ISE_DATE_OPENING
+		                                ,t.USER_ID
+		                                ,tt.ISSUE_BY
+		                                ,tt.DEPLOY_QA
+		                                ,tt.DEPLOY_PD
+	                                FROM VSMS_ISSTATOPSS t
+	                                INNER JOIN VSMS_ISSUE tt ON t.COM_CODE = tt.COM_CODE
+		                                AND t.ISE_NO = tt.NO
+	                                ) t ON t.COM_CODE = tt.COM_CODE
+                                WHERE (1 = 1)
+	                                AND t.ASSIGN_STATUS = 'E'
+	                                AND t.ISE_STATUS = 'F' ";
+
+            var parameters = CreateParameter();
+
+            if (!dto.Model.COM_CODE.IsNullOrEmpty())
+            {
+                strSQL += " AND t.COM_CODE = @COM_CODE";
+                parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            }
+            if (!dto.Model.ASSIGN_USER.IsNullOrEmpty())
+            {
+                strSQL += " AND t.USER_ID = @ASSIGN_USER";
+                parameters.AddParameter("ASSIGN_USER", dto.Model.ASSIGN_USER);
+            }
+            if (!dto.Model.ISSUE_DATE_F.IsNullOrEmpty())
+            {
+                strSQL += " AND t.ISE_DATE_FOLLOWUP >= @ISSUE_DATE_F";
+                parameters.AddParameter("ISSUE_DATE_F", dto.Model.ISSUE_DATE_F);
+            }
+            if (!dto.Model.ISSUE_DATE_T.IsNullOrEmpty())
+            {
+                strSQL += " AND t.ISE_DATE_FOLLOWUP <= @ISSUE_DATE_T";
+                parameters.AddParameter("ISSUE_DATE_T", dto.Model.ISSUE_DATE_T);
+            }
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+            if (result.Success(dto))
+            {
+                dto.Models = result.OutputDataSet.Tables[0].ToList<MISS01P002Model>();
             }
             return dto;
         }
@@ -178,7 +328,20 @@ namespace DataAccess.MIS
         }
         private MISS01P002DTO GetFilePacket(MISS01P002DTO dto)
         {
+            string strSQL = @"	SELECT *
+                                FROM VSMS_ISSUE
+                                WHERE COM_CODE = @COM_CODE
+                                AND NO = @NO";
+            var parameters = CreateParameter();
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("NO", dto.Model.ISE_NO); //cheked
 
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model = result.OutputDataSet.Tables[0].ToObject<MISS01P002Model>();
+            }
 
             return dto;
         }
@@ -211,7 +374,43 @@ namespace DataAccess.MIS
                 case MISS01P002ExecuteType.UpdateAssignment: return UpdateAssignment(dto);
                 case MISS01P002ExecuteType.ConfirmTest: return ConfirmTest(dto);
                 case MISS01P002ExecuteType.MoveToFollowUp: return ConfirmTest(dto);
+                case MISS01P002ExecuteType.MoveToGolive: return ConfirmTest(dto);
+                case MISS01P002ExecuteType.UpdateFilePacket: return UpdateFilePacket(dto);
+                case MISS01P002ExecuteType.TimeStemp: return TimeStemp(dto);
+                case MISS01P002ExecuteType.MoveToClose: return ConfirmTest(dto);
             }
+            return dto;
+        }
+        private MISS01P002DTO TimeStemp(MISS01P002DTO dto)
+        {
+            var parameters = CreateParameter();
+            parameters.AddParameter("error_code", null, ParameterDirection.Output);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("NO", dto.Model.ISE_NO);
+            parameters.AddParameter("FALG", dto.Model.FLAG);
+            parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
+
+            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSTATOPSS_004]", parameters);
+            if (!result.Status)
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+                dto.Model.FLAG = "N";
+            }
+            else
+            {
+                if (result.OutputData["error_code"].ToString().Trim() != "0")
+                {
+                    dto.Result.IsResult = false;
+                    dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
+                    dto.Model.FLAG = result.OutputData["error_code"].ToString().Trim();
+                }
+                else
+                {
+                    dto.Model.FLAG = "Y";
+                }
+            }
+
             return dto;
         }
         private MISS01P002DTO ConfirmTest(MISS01P002DTO dto)
@@ -238,6 +437,7 @@ namespace DataAccess.MIS
                 {
                     dto.Result.IsResult = false;
                     dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
+                    dto.Model.FLAG = result.OutputData["error_code"].ToString().Trim();
                 }
                 else
                 {
@@ -260,6 +460,35 @@ namespace DataAccess.MIS
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
 
             var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSUE_002]", parameters, CommandType.StoredProcedure);
+
+            if (!result.Status)
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+            }
+            else
+            {
+                if (result.OutputData["error_code"].ToString().Trim() != "0")
+                {
+                    dto.Result.IsResult = false;
+                    dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
+                }
+            }
+
+            return dto;
+        }
+        private MISS01P002DTO UpdateFilePacket(MISS01P002DTO dto)
+        {
+            var parameters = CreateParameter();
+
+            parameters.AddParameter("error_code", null, ParameterDirection.Output);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("FILE_ID", dto.Model.FILE_ID);
+            parameters.AddParameter("NO", dto.Model.NO);
+            parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
+            parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
+
+            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSUE_003]", parameters, CommandType.StoredProcedure);
 
             if (!result.Status)
             {

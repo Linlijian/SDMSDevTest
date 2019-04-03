@@ -69,7 +69,6 @@ namespace WEBAPP.Areas.MST.Controllers
                 TempSearch = model;
             }
             da.DTO.Model = TempSearch;
-            da.DTO.Model.COM_CODE = da.DTO.Model.APP_CODE;
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
@@ -157,19 +156,25 @@ namespace WEBAPP.Areas.MST.Controllers
         //----------------------- DDL-----------------------
         private void SetDefaultData(string mode = "")
         {
-            localModel.APP_CODE_MODEL = BindAppCode();
-            if (mode == "Index")
+            if(mode == "Index")
             {
                 localModel.KEY_ID_MODEL = BindKeyId();
+                localModel.APP_CODE_MODEL = BindAppCode();
+                localModel.T_RES_TYPE_MODEL = BindTypeTime();
+                localModel.RES_TYPE_MODEL = BindTypeTime();
             }
             else if(mode == "Edit" || mode == "Add")
             {
+                localModel.APP_CODE_MODEL = BindAppCode();
                 localModel.KEY_ID_MODEL = BindKeyId();
                 localModel.T_RES_TYPE_MODEL = BindTypeTime();
                 localModel.RES_TYPE_MODEL = BindTypeTime();
             }
         }
-
+        private List<DDLCenterModel> BindAppCode()
+        {
+            return GetDDLCenter(KEY_ID: DDLCenterKey.DD_MISS01P002_001);
+        }
         private List<DDLCenterModel> BindKeyId()
         {
             return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_KEY_ID);
@@ -177,11 +182,6 @@ namespace WEBAPP.Areas.MST.Controllers
         private List<DDLCenterModel> BindTypeTime()
         {
             return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_TYPETIME);
-        }
-
-        private List<DDLCenterModel> BindAppCode()
-        {
-            return GetDDLCenter(DDLCenterKey.DD_MISS01P002_001);
         }
 
         //----------------------------------------------//

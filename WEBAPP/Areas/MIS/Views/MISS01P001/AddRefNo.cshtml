@@ -65,7 +65,7 @@
                 }
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true, addValidateMessage: true)
+                    @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true, addValidateMessage: true).IsDisabled()
                     //@form.HiddenFor(m => m.USER_ID)
                     //@form.InputJAutocompleteFor(t => t.APP_CODE, isRequired: true).JAutoKeySource("AC_APPLICATION_CODE").JAutoBindField("COM_CODE").SetSelectOnly()//.JAutoSetExtraParamsByCtrl("USER_ID")
                 }
@@ -276,19 +276,6 @@
             src="@Url.Content("~/Scripts/master-datetimepicker.min.js")">
     </script>
     <script>
-
-        $(document).ready(function () {
-            $("#APP_CODE").change(function (e) {
-                $("#ISSUE_TYPE").BindSelect({
-                    Url: '@Url.Action("BindIssueType")',
-                    Parameters: [{
-                        type: 'ControlId',//ControlId,FixValue
-                        name: 'APP_CODE',
-                        value: 'APP_CODE'
-                    }]
-                });
-            });
-        })
 
         $(document).ready(function () {
             //=========================CLOSE_DATE============================//

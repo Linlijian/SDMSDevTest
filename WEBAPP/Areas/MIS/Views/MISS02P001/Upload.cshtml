@@ -22,9 +22,13 @@
                 @Html.GetVSMWidgetsBegin(Translation.CenterLang.Center.UPLOAD_INSTRUCTION)
                 using (var r = Html.Bootstrap().GridRow().Begin())
                 {
-                    using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    using (r.GridColumn(6).Begin())
                     {
-                      @form.InputFor(m => m.YEAR, isRequired: true).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4)
+                        @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
+                    }
+                    using (r.GridColumn(6).Begin())
+                    {
+                        @form.InputFor(m => m.YEAR, isRequired: true).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4)
                     }
 
                 }
@@ -66,6 +70,8 @@
             ScrollX = false,
         },
             new GridColumn("YEAR").SetNotVisible().SetKey(),
+            new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+            new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10, ColumnsTextAlign.Right),
             new GridColumn("YEAR", Translation.MIS.MISS02P001.YEAR, 10, ColumnsTextAlign.Right),
             new GridColumn("DEPLOYMENT_DATE", Translation.MIS.MISS02P001.DATE_INFO, 10, ColumnsTextAlign.Center),
             new GridColumn("TYPE_DAY", Translation.MIS.MISS02P001.TYPE_DAY, 10, render: "RENDER_TYPEDAY"),

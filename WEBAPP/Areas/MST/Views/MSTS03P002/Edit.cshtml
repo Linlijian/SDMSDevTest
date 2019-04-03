@@ -34,9 +34,11 @@
                 {
                     using (r.GridColumn(8).SetMdOffset(1).Begin())
                     {
-                        // @form.HiddenFor(m => m.CRET_BY)
-                        //@form.InputJAutocompleteFor(t => t.APP_CODE, isRequired: true).JAutoKeySource("AC_APPLICATION_CODE").JAutoBindField("COM_CODE").SetSelectOnly().SetReadonly()//.JAutoSetExtraParamsByCtrl("CRET_BY")
-                        @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
+                        @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true).IsDisabled()
+                    }
+                    using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    {
+                        @form.InputFor(t => t.PRIORITY_NAME).SetReadonly()
                     }
                 }
                 using (var r = Html.Bootstrap().GridRow().Begin())
@@ -52,6 +54,10 @@
                 }
                 using (var r = Html.Bootstrap().GridRow().Begin())
                 {
+                    using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    {
+                        @form.CheckBoxFor(m => m.IS_CONS)
+                    }
                     using (r.GridColumn(8).SetMdOffset(1).Begin())
                     {
                         @form.TextAreaFor(m => m.REMASK, 4).SetMaxLength(400)

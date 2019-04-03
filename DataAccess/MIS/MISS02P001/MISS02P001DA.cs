@@ -28,45 +28,68 @@ namespace DataAccess.MIS
                 case MISS02P001ExecuteType.GetByID: return GetByID(dto);
                 case MISS02P001ExecuteType.GetDetailByID: return GetDetailByID(dto);
                 case MISS02P001ExecuteType.GetExl: return GetExl(dto);
-
+                case MISS02P001ExecuteType.cd_dup: return CD_DUP(dto);
             }
             return dto;
         }
+        private MISS02P001DTO CD_DUP(MISS02P001DTO dto)
+        {
+            string strSQL1 = @"SELECT COUNT(YEAR) AS YEAR
+                                        FROM VSMS_DEPLOY
+                                        WHERE YEAR = @YEAR
+                                        AND COM_CODE = @COM_CODE";
 
+            var parameters1 = CreateParameter();
+
+            parameters1.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
+            parameters1.AddParameter("YEAR", dto.Model.YEAR);
+
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL1, parameters1, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                string a = result.OutputDataSet.Tables[0].Rows[0][0].ToString();
+                if (a == "0")
+                    dto.Model.ERROR_CODE = "0";
+                else
+                    dto.Model.ERROR_CODE = "1";
+            }
+            else
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+            }
+
+            return dto;
+        }
         private MISS02P001DTO GetAll(MISS02P001DTO dto)
         {
             string strSQL;
             var parameters = CreateParameter();
 
-            if (dto.Model.YEAR != null)
-            {
-                strSQL = @"  SELECT YEAR, 
+            strSQL = @"  SELECT YEAR,
+                                    COM_CODE, 
                                      SUM(CASE TYPE_DAY WHEN 'W'      THEN 1 ELSE 0 END) as ALL_SATURDAY_W ,
                                      SUM(CASE TYPE_DAY WHEN 'H'      THEN 1 ELSE 0 END) as ALL_HOLIDAY,
                                      SUM(CASE TYPE_DAY WHEN 'S'      THEN 1 ELSE 0 END) as ALL_SPP,
                                      SUM(CASE TYPE_DAY WHEN 'I'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_IT,
                                      SUM(CASE TYPE_DAY WHEN 'D'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_DATE
                                FROM [SDDB].[dbo].[VSMS_DEPLOY]
-                               WHERE (1=1) AND YEAR = @YEAR AND COM_CODE = @COM_CODE
-                               GROUP BY YEAR";
+                               WHERE (1=1) ";
 
-                parameters.AddParameter("YEAR", dto.Model.YEAR);
-                parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
-            }
-            else
+            if (!dto.Model.APP_CODE.IsNullOrEmpty())
             {
-                strSQL = @"  SELECT YEAR, 
-                                      SUM(CASE TYPE_DAY WHEN 'W'      THEN 1 ELSE 0 END) as ALL_SATURDAY_W ,
-                                      SUM(CASE TYPE_DAY WHEN 'H'      THEN 1 ELSE 0 END) as ALL_HOLIDAY,
-                                      SUM(CASE TYPE_DAY WHEN 'S'      THEN 1 ELSE 0 END) as ALL_SPP,
-                                      SUM(CASE TYPE_DAY WHEN 'I'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_IT,
-                                      SUM(CASE TYPE_DAY WHEN 'D'      THEN 1 ELSE 0 END) as ALL_DEPLOYMENT_DATE
-                                FROM [SDDB].[dbo].[VSMS_DEPLOY]
-                                WHERE (1=1) AND COM_CODE = @COM_CODE
-                                GROUP BY YEAR";
-
-                parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+                strSQL += " AND COM_CODE = @APP_CODE ";
+                parameters.AddParameter("APP_CODE", dto.Model.APP_CODE);
             }
+            if (!dto.Model.YEAR.IsNullOrEmpty())
+            {
+                strSQL += " AND YEAR = @YEAR  GROUP BY YEAR";
+                parameters.AddParameter("YEAR", dto.Model.YEAR);
+            }
+
+            strSQL += "  GROUP BY YEAR, COM_CODE";
 
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
 
@@ -100,7 +123,7 @@ namespace DataAccess.MIS
             var parameters = CreateParameter();
 
             parameters.AddParameter("YEAR", dto.Model.YEAR);
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE); //checked
 
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
 
@@ -120,7 +143,7 @@ namespace DataAccess.MIS
             var parameters = CreateParameter();
 
             parameters.AddParameter("YEAR", dto.Model.YEAR);
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE); //checked
 
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
 
@@ -182,7 +205,7 @@ namespace DataAccess.MIS
 
                         var parameters1 = CreateParameter();
 
-                        parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
+                        parameters1.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
                         parameters1.AddParameter("DAY", item.DAY);
                         parameters1.AddParameter("MONTH", item.MONTH);
                         parameters1.AddParameter("YEAR", item.YEAR);
@@ -228,7 +251,7 @@ namespace DataAccess.MIS
 
             var parameters1 = CreateParameter();
 
-            parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters1.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
             parameters1.AddParameter("YEAR", dto.Model.YEAR);
 
 
@@ -255,7 +278,7 @@ namespace DataAccess.MIS
             var parameters1 = CreateParameter();
 
             parameters1.AddParameter("error_code", null, ParameterDirection.Output);
-            parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters1.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
             parameters1.AddParameter("YEAR", dto.Model.YEAR);
 
             var result = _DBMangerNoEF.ExecuteDataSet("dbo.SP_VSMS_DEPLOY", parameters1);
@@ -276,7 +299,7 @@ namespace DataAccess.MIS
             parameters.AddParameter("flag", null, ParameterDirection.Output);
             parameters.AddParameter("CLIENT_ID ", dto.Model.CLIENT_ID);
             parameters.AddParameter("YEAR", dto.Model.YEAR);
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE);
             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
 
@@ -308,16 +331,17 @@ namespace DataAccess.MIS
                 var ds = dto.Model.ds;
                 var CLIENT_ID = dto.Model.CLIENT_ID;
                 var YEAR = dto.Model.YEAR;
+                var APP_CODE = dto.Model.APP_CODE;
                 foreach (var item in ds.Tables[0].ToList<MISS02P001Model>())
                 {
                     int i = item.DEPLOYMENT_DATE.Length;
-                    if(i == 10)
+                    if (i == 10)
                     {
                         SplitDate(item);
                         var parameters = CreateParameter();
 
                         parameters.AddParameter("error_code", null, ParameterDirection.Output);
-                        parameters.AddParameter("COM_CODE ", dto.Model.COM_CODE);
+                        parameters.AddParameter("COM_CODE ", item.APP_CODE);
                         parameters.AddParameter("CLIENT_ID ", dto.Model.CLIENT_ID);
                         parameters.AddParameter("DAY", item.DD);
                         parameters.AddParameter("MONTH", item.MM);
@@ -509,7 +533,7 @@ namespace DataAccess.MIS
                 {
                     foreach (var item in dto.Model.Details)
                     {
-                        if (isInsert(item, dto.Model.COM_CODE))
+                        if (isInsert(item, dto.Model.APP_CODE)) //checked
                         {
                             #region ====Insert==========
                             string strSQL = @"INSERT INTO [dbo].[VSMS_DEPLOY]
@@ -541,7 +565,7 @@ namespace DataAccess.MIS
 
                             var parameters = CreateParameter();
 
-                            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+                            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
                             parameters.AddParameter("DAY", item.DAY);
                             parameters.AddParameter("MONTH", item.MONTH);
                             parameters.AddParameter("YEAR", item.YEAR);
@@ -570,7 +594,7 @@ namespace DataAccess.MIS
                             var parameters1 = CreateParameter();
 
                             parameters1.AddParameter("error_code", null, ParameterDirection.Output);
-                            parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
+                            parameters1.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
                             parameters1.AddParameter("DAY", item.DAY);
                             parameters1.AddParameter("MONTH", item.MONTH);
                             parameters1.AddParameter("YEAR", item.YEAR);
@@ -643,7 +667,7 @@ namespace DataAccess.MIS
 
                     var parameters1 = CreateParameter();
 
-                    parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
+                    parameters1.AddParameter("COM_CODE", item.COM_CODE); //checked
                     parameters1.AddParameter("YEAR", item.YEAR);
 
                     var result = _DBMangerNoEF.ExecuteNonQuery(strSQL1, parameters1, CommandType.Text);

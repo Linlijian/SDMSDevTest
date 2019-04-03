@@ -330,3 +330,23 @@ ERROR 2019-03-21 21:32:20,651 BaseController.OnException -
 Path : MIS/MISS01P002/Index
 Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status3Followup.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
 
+ERROR 2019-03-27 15:37:13,456 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: Cannot retrieve property 'Name' because localization failed.  Type 'Translation.MIS.MISS01P001' is not public or does not contain a public static string property with the name 'TIMEOUT'.
+
+ERROR 2019-03-29 11:00:40,568 BaseController.OnException - 
+Path : MST/MSTS03P001/Index
+Error Messages: Method not found: 'Void DataAccess.MST.MSTS03P001Model.set_APP_CODE_MODEL(System.Collections.Generic.IEnumerable`1<DataAccess.DDLCenterModel>)'.
+
+ERROR 2019-03-29 11:18:35,504 BaseController.OnException - 
+Path : MST/MSTS03P001/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MST\Views\MSTS03P001\Index.cshtml(35): error CS0103: The name 'r' does not exist in the current context
+
+ERROR 2019-03-29 13:52:21,108 BaseController.OnException - 
+Path : MST/MSTS03P001/Add
+Error Messages: Validation type names in unobtrusive client validation rules must be unique. The following validation type was seen more than once: required
+
+ERROR 2019-04-01 15:18:45,226 BaseController.OnException - 
+Path : MIS/MISS02P001/Add
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS02P001\Add.cshtml(33): error CS1061: 'HtmlHelper<MISS02P001Model>' does not contain a definition for 'InputFor' and no extension method 'InputFor' accepting a first argument of type 'HtmlHelper<MISS02P001Model>' could be found (are you missing a using directive or an assembly reference?)
+

@@ -33,6 +33,12 @@ namespace DataAccess.MIS
         public string ISE_STATUS { get; set; }
         [Display(Name = "USER_ID", ResourceType = typeof(Translation.MIS.MISS01P002))]
         public string USER_ID { get; set; }
+        [Display(Name = "FILE_ID", ResourceType = typeof(Translation.MIS.MISS01P002))]
+        public string FILE_ID { get; set; }
+        [Display(Name = "ISSUE_BY", ResourceType = typeof(Translation.MIS.MISS01P002))]
+        public string ISSUE_BY { get; set; }
+        [Display(Name = "TIMEOUT", ResourceType = typeof(Translation.MIS.MISS01P002))]
+        public string TIMEOUT { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
@@ -58,6 +64,26 @@ namespace DataAccess.MIS
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "ISE_DATE_ONPROCESS", ResourceType = typeof(Translation.MIS.MISS01P002))]
         public Nullable<System.DateTime> ISE_DATE_ONPROCESS { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
+        [Display(Name = "ISE_DATE_FOLLOWUP", ResourceType = typeof(Translation.MIS.MISS01P002))]
+        public Nullable<System.DateTime> ISE_DATE_FOLLOWUP { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
+        [Display(Name = "DEPLOY_QA", ResourceType = typeof(Translation.MIS.MISS01P002))]
+        public Nullable<System.DateTime> DEPLOY_QA { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
+        [Display(Name = "DEPLOY_PD", ResourceType = typeof(Translation.MIS.MISS01P002))]
+        public Nullable<System.DateTime> DEPLOY_PD { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
+        [Display(Name = "ISE_DATE_GOLIVE", ResourceType = typeof(Translation.MIS.MISS01P002))]
+        public Nullable<System.DateTime> ISE_DATE_GOLIVE { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
+        [Display(Name = "ISE_DATE_CLOSE", ResourceType = typeof(Translation.MIS.MISS01P002))]
+        public Nullable<System.DateTime> ISE_DATE_CLOSE { get; set; }
 
         [Display(Name = "STATUS", ResourceType = typeof(Translation.MIS.MISS01P002))]
         public string STATUS { get; set; }
@@ -66,6 +92,7 @@ namespace DataAccess.MIS
         //===================================STATUS OPENING===========================================
         public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
         public IEnumerable<DDLCenterModel> ASSIGN_USER_MODEL { get; set; }
+        public IEnumerable<DDLCenterModel> TIMEOUT_MODEL { get; set; }
 
         public string ACTIVE_STEP { get; set; }
         public string FLAG { get; set; }
@@ -79,13 +106,13 @@ namespace DataAccess.MIS
             {
                 Valid();
             });
-            RuleSet("Edit", () =>
-            {
-                Valid();
-            });
             RuleSet("FilePacket", () =>
             {
-              
+                RuleFor(t => t.FILE_ID).NotEmpty();
+            });
+            RuleSet("Status3Followup", () =>
+            {
+               // RuleFor(t => t.APP_CODE).NotEmpty();
             });
             RuleSet("Assignment", () =>
             {

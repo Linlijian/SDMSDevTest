@@ -23,7 +23,7 @@
                 {
                     using (row.GridColumn(6).Begin())
                     {
-                        @form.InputJAutocompleteFor(t => t.REF_NO).JAutoKeySource("AC_REF_NO").JAutoBindField("NO").JAutoSetExtraParamsByCtrl("APP_CODE").JAutoFieldToInput(new
+                        @form.InputJAutocompleteFor(t => t.REF_NO).JAutoKeySource("AC_REF_NO").JAutoBindField("NO").JAutoSetExtraParamsByCtrl("APP_CODE,NO").JAutoFieldToInput(new
                    {
                        MENU = "MENU_R",
                        MODULE = "MODULE_R",
@@ -267,6 +267,19 @@
             src="@Url.Content("~/Scripts/master-datetimepicker.min.js")">
     </script>
     <script>
+
+        $(document).ready(function () {
+            $("#APP_CODE").change(function (e) {
+                $("#ISSUE_TYPE").BindSelect({
+                    Url: '@Url.Action("BindIssueType")',
+                    Parameters: [{
+                        type: 'ControlId',//ControlId,FixValue
+                        name: 'APP_CODE',
+                        value: 'APP_CODE'
+                    }]
+                });
+            });
+        })
 
         $(document).ready(function () {
             //=========================CLOSE_DATE============================//

@@ -43,8 +43,10 @@ namespace DataAccess.MIS
 
         public string ERROR_CODE { get; set; }
         public string ERROR_MSG { get; set; }
+        public string APP_CODE { get; set; }
 
         public List<MISS02P001DetailPModel> Details { get; set; }
+        public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
 
         public System.Data.DataSet ds { get; set; }
     }
@@ -78,29 +80,31 @@ namespace DataAccess.MIS
         {
             RuleSet("Add", () =>
             {
+                RuleFor(t => t.TYPE_DAY).NotEmpty();
                 Valid();
-                RuleFor(m => m.YEAR).Store("CD_MISS02P001_001", m => m.COM_CODE, m => m.MONTH, m => m.DAY).NotEmpty();
-                RuleFor(m => m.COM_CODE).Store("CD_MISS02P001_001", m => m.YEAR, m => m.MONTH, m => m.DAY).NotEmpty();
-                RuleFor(m => m.MONTH).Store("CD_MISS02P001_001", m => m.COM_CODE, m => m.YEAR, m => m.DAY).NotEmpty();
-                RuleFor(m => m.DAY).Store("CD_MISS02P001_001", m => m.COM_CODE, m => m.MONTH, m => m.YEAR).NotEmpty();
             });
             RuleSet("Edit", () =>
             {
+                RuleFor(t => t.TYPE_DAY).NotEmpty();
                 Valid();
-                RuleFor(m => m.YEAR).Store("CD_MISS02P001_001", m => m.COM_CODE, m => m.MONTH, m => m.DAY).NotEmpty();
-                RuleFor(m => m.COM_CODE).Store("CD_MISS02P001_001", m => m.YEAR, m => m.MONTH, m => m.DAY).NotEmpty();
-                RuleFor(m => m.MONTH).Store("CD_MISS02P001_001", m => m.COM_CODE, m => m.YEAR, m => m.DAY).NotEmpty();
-                RuleFor(m => m.DAY).Store("CD_MISS02P001_001", m => m.COM_CODE, m => m.MONTH, m => m.YEAR).NotEmpty();
             });
             RuleSet("Upload", () =>
             {
-                RuleFor(t => t.YEAR).NotEmpty();
+                Valid();
             });
         }
 
         private void Valid()
         {
-            RuleFor(t => t.TYPE_DAY).NotEmpty();
+            RuleFor(t => t.YEAR).NotEmpty();
+            RuleFor(t => t.APP_CODE).NotEmpty();
+        }
+        private void CD_OLD()
+        {
+            RuleFor(m => m.YEAR).Store("CD_MISS02P001_001", m => m.APP_CODE, m => m.MONTH, m => m.DAY).NotEmpty();
+            RuleFor(m => m.APP_CODE).Store("CD_MISS02P001_001", m => m.YEAR, m => m.MONTH, m => m.DAY).NotEmpty();
+            RuleFor(m => m.MONTH).Store("CD_MISS02P001_001", m => m.APP_CODE, m => m.YEAR, m => m.DAY).NotEmpty();
+            RuleFor(m => m.DAY).Store("CD_MISS02P001_001", m => m.APP_CODE, m => m.MONTH, m => m.YEAR).NotEmpty();
         }
     }
 }

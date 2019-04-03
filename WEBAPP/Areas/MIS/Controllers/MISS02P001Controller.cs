@@ -57,6 +57,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             {
                 localModel = TempSearch.CloneObject();
             }
+            SetDefaultData();
             return View(StandardActionName.Index, localModel);
         }
         public ActionResult Search(MISS02P001Model model)
@@ -95,7 +96,6 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             SetDefaulButton(StandardButtonMode.Create);
             SetDefaultData();
-            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
 
             return View(StandardActionName.Add, localModel);
         }
@@ -121,11 +121,11 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             SetDefaulButton(StandardButtonMode.Modify);
             TempModel.YEAR = model.YEAR;
-            localModel.YEAR = model.YEAR; 
-            TempModel.COM_CODE = SessionHelper.SYS_COM_CODE;
-            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
-            SetDefaultData();   //set ค่า DDL
+            localModel.YEAR = model.YEAR;
+            TempModel.APP_CODE = model.COM_CODE;
+            localModel.APP_CODE = model.COM_CODE;
 
+            SetDefaultData();   //set ค่า DDL
 
             return View(StandardActionName.Edit, localModel);
         }
@@ -171,19 +171,20 @@ namespace WEBAPP.Areas.MIS.Controllers
             var da = new MISS02P001DA();
             SetStandardErrorLog(da.DTO);
             da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.GetDetailByID;
-            da.DTO.Model.COM_CODE = TempModel.COM_CODE;
+            da.DTO.Model.COM_CODE = TempModel.APP_CODE;
             da.DTO.Model.YEAR = TempModel.YEAR;
 
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Model.Details);
         }
         [HttpGet]
-        public ActionResult Info(string YEAR)
+        public ActionResult Info(string YEAR, string COM_CODE)
         {
             AddButton(StandButtonType.Button, "Back", Translation.CenterLang.Center.Back, iconCssClass: FaIcons.FaBackward, iconPosition: StandardIconPosition.BeforeText, url: Url.Action("Index"), isValidate: false, index: 0);
 
             localModel.YEAR = TempModel.YEAR = YEAR;
-            
+            localModel.COM_CODE = TempModel.COM_CODE = COM_CODE;
+
             return View(StandardActionName.Info, localModel);
         }
         public ActionResult SearchInfo()
@@ -191,7 +192,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             var da = new MISS02P001DA();
             SetStandardErrorLog(da.DTO);
             da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.GetByID;
-            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
+            da.DTO.Model.COM_CODE = TempModel.COM_CODE;
             da.DTO.Model.YEAR = TempModel.YEAR;
             da.SelectNoEF(da.DTO);
 
@@ -201,6 +202,7 @@ namespace WEBAPP.Areas.MIS.Controllers
         public ActionResult Upload()
         {
             SetDefaulButton(StandardButtonMode.Other);
+            SetDefaultData();
             AddStandardButton(StandardButtonName.LoadFile);
             return View(localModel);
         }
@@ -211,7 +213,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             {
                 model.ds = ExcelData.TBL_SELECT;
                 model.CLIENT_ID = TempModel.CLIENT_ID = Guid.NewGuid().ToString();
-                model.COM_CODE = SessionHelper.SYS_COM_CODE;
+                model.COM_CODE = model.APP_CODE; //checked
                 model.FILE_EXCEL = ExcelData.UPLOAD_FILENAME;
 
                 var result = SaveData("Upload", model);
@@ -253,8 +255,12 @@ namespace WEBAPP.Areas.MIS.Controllers
         private void SetDefaultData(string mode = "")
         {
             localModel.TYPE_DAY_MODEL = BindTypeDate();
+            localModel.APP_CODE_MODEL = BindAppCode();
         }
-
+        private List<DDLCenterModel> BindAppCode()
+        {
+            return GetDDLCenter(DDLCenterKey.DD_APPLICATION);
+        }
         private List<DDLCenterModel> BindTypeDate()
         {
             return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_TYPEDATE);
@@ -314,7 +320,18 @@ namespace WEBAPP.Areas.MIS.Controllers
             }
             return da.DTO.Result;
         }
+        public ActionResult CD_DUP(MISS02P001Model model)
+        {
+            var da = new MISS02P001DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.cd_dup;
 
+            da.DTO.Model = model;
+            da.SelectNoEF(da.DTO);
+
+
+            return JsonAllowGet(da.DTO.Model);
+        }
         #endregion
     }
 }

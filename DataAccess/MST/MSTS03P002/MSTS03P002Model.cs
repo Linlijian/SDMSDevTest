@@ -22,6 +22,8 @@ namespace DataAccess.MST
         public string REMASK { get; set; }
         [Display(Name = "IS_FREE", ResourceType = typeof(Translation.MST.MSTS03P002))]
         public string IS_FREE { get; set; }
+        [Display(Name = "IS_CONS", ResourceType = typeof(Translation.MST.MSTS03P002))]
+        public string IS_CONS { get; set; }
 
         [Display(Name = "KEY_ID", ResourceType = typeof(Translation.MST.MSTS03P002))]
         public string KEY_ID { get; set; }
@@ -33,13 +35,11 @@ namespace DataAccess.MST
         public string RES_TYPE { get; set; }
         public IEnumerable<DDLCenterModel> RES_TYPE_MODEL { get; set; }
 
+        public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
+        public IEnumerable<DDLCenterModel> PRIORITY_NAME_MODEL { get; set; }
+
         public decimal? PIT_ID { get; set; }
         public bool IS_USED { get; set; }
-        public string IS_CONS { get; set; }
-
-        [Display(Name = "APP_CODE", ResourceType = typeof(Translation.MST.MSTS03P002))]
-        public string APP_CODE { get; set; }
-        public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
     }
     public class MSTS03P002Validator : AbstractValidator<MSTS03P002Model>
     {
@@ -48,22 +48,19 @@ namespace DataAccess.MST
             RuleSet("Add", () =>
             {
                 Valid();
-                RuleFor(t => t.KEY_ID).NotEmpty();
+                //RuleFor(t => t.KEY_ID).NotEmpty();
             });
             RuleSet("Edit", () =>
             {
                 Valid();
             });
         }
-        
+
         private void Valid()
         {
-            RuleFor(m => m.PRIORITY_NAME).Store("CD_MSTS03P002_001", m => m.ISSUE_TYPE).NotEmpty();
-            RuleFor(m => m.ISSUE_TYPE).Store("CD_MSTS03P002_001", m => m.PRIORITY_NAME).NotEmpty();
-            RuleFor(t => t.RES_TIME).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
-            RuleFor(t => t.T_RES_TIME).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
-            RuleFor(t => t.T_RES_TYPE).NotEmpty();
-            RuleFor(t => t.RES_TYPE).NotEmpty();
+            RuleFor(m => m.APP_CODE).Store("CD_MSTS03P001_002", m => m.ISSUE_TYPE).NotEmpty();
+            RuleFor(m => m.ISSUE_TYPE).Store("CD_MSTS03P001_002", m => m.APP_CODE).NotEmpty();
+            RuleFor(t => t.PRIORITY_NAME).NotEmpty();
         }
     }
 }

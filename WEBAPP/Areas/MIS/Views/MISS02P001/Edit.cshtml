@@ -14,9 +14,13 @@
     @Html.AntiForgeryToken()
     using (var row1 = Html.Bootstrap().GridRow().Begin())
     {
-        using (row1.GridColumn(6).SetMdOffset(2).Begin())
+        using (row1.GridColumn(6).Begin())
         {
-            @form.InputFor(m => m.YEAR).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4).SetReadonly()
+            @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true).IsDisabled()
+        }
+        using (row1.GridColumn(6).Begin())
+        {
+            @form.InputFor(m => m.YEAR, isRequired: true).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4).SetReadonly()
         }
     }
 
@@ -25,7 +29,6 @@
         using (row1.GridColumn(12).Begin())
         {
             @Html.GetVSMDetailFor(m => m.Details, isRequired: true)
-            @Html.HiddenFor(m => m.COM_CODE, new { data_indexparameter = 1 })
         }
     }
 }
@@ -40,7 +43,6 @@
         {
             using (rowInfo.GridColumn(6).SetXs(6).Begin())
             {
-                //@formPopup.InputFor(t => t.DEPLOY_PRG)
                 @formPopup.SelectFor(t => t.TYPE_DAY, Model.TYPE_DAY_MODEL.ToSelectList("Value", "Text"), isRequired: true)
             }
         }
@@ -49,33 +51,32 @@
             using (rowInfo.GridColumn(6).SetXs(6).Begin())
             {
                 @formPopup.InputFor(t => t.DEPLOY_PRG)
-                //@formPopup.SelectFor(t => t.TYPE_DAY, Model.TYPE_DAY_MODEL.ToSelectList("Value", "Text"), isRequired: true)
             }
             using (rowInfo.GridColumn(6).SetXs(6).Begin())
             {
                 @formPopup.InputFor(t => t.DEPLOY_USER)
-                //@formPopup.SelectFor(t => t.TYPE_DAY, Model.TYPE_DAY_MODEL.ToSelectList("Value", "Text"), isRequired: true)
             }
         }
         using (var rowInfo = Html.Bootstrap().GridRow().Begin())
         {
             using (rowInfo.GridColumn(6).Begin())
             {
-                @formPopup.InputFor(t => t.DAY, isRequired: true, addValidateMessage: true).RemoveCss(Css.TextRight, "number-format").SetHelp("Formate: dd Example: (14)").SetIndexParameter(3).SetMaxLength(2)
+                @formPopup.InputFor(t => t.DAY, isRequired: true, addValidateMessage: true).RemoveCss(Css.TextRight, "number-format").SetHelp("Formate: dd Example: (14)").SetMaxLength(2)
             }
             using (rowInfo.GridColumn(6).Begin())
             {
-                @formPopup.InputFor(t => t.MONTH, isRequired: true, addValidateMessage: true).RemoveCss(Css.TextRight, "number-format").SetHelp("Formate: mm Example: (02)").SetIndexParameter(2).SetMaxLength(2)
+                @formPopup.InputFor(t => t.MONTH, isRequired: true, addValidateMessage: true).RemoveCss(Css.TextRight, "number-format").SetHelp("Formate: mm Example: (02)").SetMaxLength(2)
             }
         }
         using (var rowInfo = Html.Bootstrap().GridRow().Begin())
         {
             using (rowInfo.GridColumn(6).Begin())
             {
-                @formPopup.InputFor(t => t.YEAR, addValidateMessage: true).SetReadonly().RemoveCss(Css.TextRight, "number-format").SetIndexParameter(0)
+                @formPopup.InputFor(t => t.YEAR, addValidateMessage: true).SetReadonly().RemoveCss(Css.TextRight, "number-format")
             }
         }
         @formPopup.HiddenFor(t => t.DEPLOYMENT_DATE)
+        @formPopup.HiddenFor(t => t.APP_CODE)
     }
     @Html.GetVSMModalDetailEnd()
 }
@@ -109,58 +110,58 @@
 
     <script>
 
-    //year
-    function OnBeforeAddDetail(e) {
-        $("#formDetails #YEAR").val($("#form1 #YEAR").val());
-        //$("#formDetails #COM_CODE").val($("#form1 #COM_CODE").val());
-    }
+        /*********************************************SET_VALUE***********************************************/
+        $("#APP_CODE").val($("#APP_CODE").val());
 
-    var RENDER_TYPEDAY = function (data, type, full, meta) {
-        var tag = '';
-
-        if (!isNullOrEmpty(data)) {
-            if (data == "H") {
-                tag = "Holiday";
-            } else if (data == "W") {
-                tag = "Saturday Working";
-            } else if (data == "S") {
-                tag = "Send Program Package";
-            } else if (data == "D") {
-                tag = "Deployment on PROD/QA.";
-            } else {
-                tag = "V-Smart infrom issue no deployment";
-            }
+        function OnBeforeAddDetail(e) {
+            $("#formDetails #YEAR").val($("#form1 #YEAR").val());
+            $("#formDetails #APP_CODE").val($("#form1 #APP_CODE").val());
         }
+        /**********************************************END****************************************************/
+        /******************************************RENDER_TYPEDAY*********************************************/
+        var RENDER_TYPEDAY = function (data, type, full, meta) {
+            var tag = '';
 
-        return tag;
-    };
+            if (!isNullOrEmpty(data)) {
+                if (data == "H") {
+                    tag = "Holiday";
+                } else if (data == "W") {
+                    tag = "Saturday Working";
+                } else if (data == "S") {
+                    tag = "Send Program Package";
+                } else if (data == "D") {
+                    tag = "Deployment on PROD/QA.";
+                } else {
+                    tag = "V-Smart infrom issue no deployment";
+                }
+            }
 
-   // $("#btnAddDetails").hide()
-    $("#formDetails").change(function () { $("#form1 #YEAR").prop("readonly", true); })
-    //$("#form1 #YEAR").change(function () { $("#btnAddDetails").show() })
+            return tag;
+        };
+        /**********************************************END****************************************************/
+        /*******************************************CCONCAT_DATE**********************************************/
+        $("#btnSaveDetails").on("click", function () {
+            var d = $("#formDetails #DAY").val();
+            var m = $("#formDetails #MONTH").val();
+            var y = $("#formDetails #YEAR").val();
 
-    $("#btnSaveDetails").on("click", function () {
-        var d = $("#formDetails #DAY").val();
-        var m = $("#formDetails #MONTH").val();
-        var y = $("#formDetails #YEAR").val();
-
-        var date = d + "/" + m + "/" + y;
-        //var strdate = new Date(date);
-        $("#formDetails #DEPLOYMENT_DATE").val(date);
-        console.log(date);
-        @*$.ajax({
+            var date = d + "/" + m + "/" + y;
+            //date = new Date(date);
+            $("#formDetails #DEPLOYMENT_DATE").val(date);
+            $("#notification").hide()
+            @*$.ajax({
             url: '@Url.Action("Bind_DetailAdd")',
             type: "post",
             data: date
         });*@
 
-    });
+        });
+        /************************************************END**************************************************/
+        /************************************************DATE*************************************************/
+        $(document).ready(function () {
 
-
-
-    $(document).ready(function () {
-        $("#MONTH").attr("autocomplete", "off");
-        $("#DAY").attr("autocomplete", "off");
+            $("#MONTH").attr("autocomplete", "off");
+            $("#DAY").attr("autocomplete", "off");
             //month
             $("#MONTH").JDatepicker();
             $("#MONTH").datepicker({
@@ -187,6 +188,7 @@
                 orientation: 'bottom',
                 enableOnReadonly: false
 
+
             });
 
             var sortable1 = $("#sortable-format").html();
@@ -201,8 +203,8 @@
                 }
             });
         });
+        /************************************************END**************************************************/
 
-    
     </script>
 
 

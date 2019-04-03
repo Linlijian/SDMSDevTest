@@ -61,11 +61,11 @@ namespace Translation.MST {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Application Code.
+        ///   Looks up a localized string similar to App.
         /// </summary>
-        public static string APP_CODE {
+        public static string APP_CODE1 {
             get {
-                return ResourceManager.GetString("APP_CODE", resourceCulture);
+                return ResourceManager.GetString("APP_CODE1", resourceCulture);
             }
         }
         

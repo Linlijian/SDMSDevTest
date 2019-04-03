@@ -61,7 +61,7 @@ namespace Translation.CenterLang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;Add Application&apos; should not be empty..
+        ///   Looks up a localized string similar to &apos;Application Code&apos; should not be empty..
         /// </summary>
         public static string APP_CODE {
             get {
@@ -84,6 +84,15 @@ namespace Translation.CenterLang {
         public static string OneNumber2Digit1 {
             get {
                 return ResourceManager.GetString("OneNumber2Digit1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the number between 1 - 999.9.
+        /// </summary>
+        public static string OneNumber3Digit1 {
+            get {
+                return ResourceManager.GetString("OneNumber3Digit1", resourceCulture);
             }
         }
         

@@ -23,14 +23,18 @@
             {
                 using (row1.GridColumn(6).Begin())
                 {
-                   // @form.HiddenFor(m => m.CRET_BY)
-                    //@form.InputJAutocompleteFor(t => t.APP_CODE).JAutoKeySource("AC_APPLICATION_CODE").JAutoBindField("COM_CODE")//.JAutoSetExtraParamsByCtrl("CRET_BY")
-                    @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
+                   @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.RES_TYPE, Model.RES_TYPE_MODEL.ToSelectList("Value", "Text", Model.RES_TYPE), IsSearch: true).SetControlLabel(Translation.MST.MSTS03P001.RES_TIME)
                 }
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.InputFor(t => t.PRIORITY_NAME)
-                    //@form.SelectFor(t => t.KEY_ID, Model.KEY_ID_MODEL.ToSelectList("Value", "Text", Model.KEY_ID), IsSearch: true)
+                    @form.SelectFor(t => t.T_RES_TYPE, Model.T_RES_TYPE_MODEL.ToSelectList("Value", "Text", Model.T_RES_TYPE), IsSearch: true).SetControlLabel(Translation.MST.MSTS03P001.T_RES_TIME)
                 }
             }
         }

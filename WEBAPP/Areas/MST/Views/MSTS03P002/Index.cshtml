@@ -23,9 +23,7 @@
             {
                 using (row1.GridColumn(6).Begin())
                 {
-                    // @form.HiddenFor(m => m.CRET_BY)
-                    //@form.InputJAutocompleteFor(t => t.APP_CODE).JAutoKeySource("AC_APPLICATION_CODE").JAutoBindField("COM_CODE")//.JAutoSetExtraParamsByCtrl("CRET_BY")
-                    @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
+                   @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
                 }
                 using (row1.GridColumn(6).Begin())
                 {
@@ -59,6 +57,7 @@
         new GridColumn("COM_CODE").SetNotVisible().SetKey(),
         new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10),
         new GridColumn("ISSUE_TYPE", Translation.MST.MSTS03P001.ISSUE_TYPE, 10).SetKey(),
+        new GridColumn("PRIORITY_NAME", Translation.MST.MSTS03P001.PRIORITY_NAME, 10),
         new GridColumn("REMASK", Translation.MST.MSTS03P001.REMASK, 90),
         new GridColumn("IS_FREE", Translation.MST.MSTS03P001.IS_FREE, 10, render: "RENDER_ISUSE")
         )

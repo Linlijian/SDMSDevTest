@@ -68,12 +68,7 @@ namespace WEBAPP.Areas.MST.Controllers
                 TempSearch = model;
             }
             da.DTO.Model = TempSearch;
-
-            
             SetStandardField(da.DTO.Model);
-
-            da.DTO.Model.COM_CODE = da.DTO.Model.APP_CODE;
-
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
@@ -96,8 +91,8 @@ namespace WEBAPP.Areas.MST.Controllers
         public ActionResult Add()
         {
             SetDefaulButton(StandardButtonMode.Create);
-            SetDefaultData(StandardActionName.Add);
-            //localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+            SetDefaultData();
+            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
 
             return View(StandardActionName.Add, localModel);
         }
@@ -159,18 +154,15 @@ namespace WEBAPP.Areas.MST.Controllers
         //----------------------- DDL-----------------------
         private void SetDefaultData(string mode = "")
         {
-          localModel.APP_CODE_MODEL = BindAppCode();
+            localModel.APP_CODE_MODEL = BindAppCode();
         }
-
+        private List<DDLCenterModel> BindAppCode()
+        {
+            return GetDDLCenter(KEY_ID: DDLCenterKey.DD_MISS01P002_001);
+        }
         private List<DDLCenterModel> BindTypeDate()
         {
             return GetDDLCenter(DDLCenterKey.DD_VSMS_FIX_TYPEDATE);
-        }
-
-
-        private List<DDLCenterModel> BindAppCode()
-        {
-            return GetDDLCenter(DDLCenterKey.DD_MISS01P002_001);
         }
 
         //----------------------------------------------//

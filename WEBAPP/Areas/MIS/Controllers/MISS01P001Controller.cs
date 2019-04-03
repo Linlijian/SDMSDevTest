@@ -100,7 +100,7 @@ namespace WEBAPP.Areas.MIS.Controllers
         public ActionResult Add()
         {
             SetDefaulButton(StandardButtonMode.Create);
-            AddButton(StandButtonType.ButtonAjax, "GetRefNo", "Reference No", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print");
+            AddButton(StandButtonType.ButtonAjax, "GetRefNo", "Reference No", iconCssClass: FaIcons.FaPrint);
             SetDefaultData(StandardActionName.Add);
             localModel.USER_ID = SessionHelper.SYS_USER_ID;
 
@@ -114,6 +114,39 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return View(StandardActionName.Add, localModel);
         }
+        [RuleSetForClientSideMessages("Add")]
+        public ActionResult AddRefNo(MISS01P001Model model)
+        {
+            SetDefaulButton(StandardButtonMode.Create);
+            AddButton(StandButtonType.ButtonAjax, "GetRefNo", "Reference No", iconCssClass: FaIcons.FaPrint);
+            SetDefaultData(StandardActionName.Add);
+            localModel.USER_ID = SessionHelper.SYS_USER_ID;
+            string view = "AddRefNo";
+
+            #region set ref_no 
+            if (!model.REF_NO.IsNullOrEmpty())
+            {
+                var da = new MISS01P001DA();
+                da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetReOpen;
+                da.DTO.Model.NO = model.REF_NO;
+                da.DTO.Model.REF_NO = model.REF_NO;
+                da.DTO.Model.APP_CODE = model.COM_CODE;
+                da.SelectNoEF(da.DTO);
+
+                da.DTO.Model.NO = da.DTO.Model.NO + 1;
+
+                localModel = da.DTO.Model;
+
+                SetDefaultData(StandardActionName.Add);
+            }
+            #endregion
+
+            return View(view, localModel);
+        }
+        //public ActionResult ReOpen(MISS01P001Model model)
+        //{
+
+        //}
         public ActionResult GetNo(MISS01P001Model model)
         {
             var jsonResult = new JsonResult();
@@ -190,7 +223,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             SetDefaultData(StandardActionName.Edit);
             SetDateToString(da.DTO.Model);
             SetDefaulButton(StandardButtonMode.Modify);
-            AddButton(StandButtonType.ButtonAjax, "GetRefNo", "Reference No", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print");
+            AddButton(StandButtonType.ButtonAjax, "GetRefNo", "Reference No", iconCssClass: FaIcons.FaPrint);
 
             return View(StandardActionName.Edit, localModel);
         }
@@ -243,12 +276,12 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             if (mode == "Add")
             {
-                localModel.ISSUE_TYPE_MODEL = BindIssueType();
+                //localModel.ISSUE_TYPE_MODEL = BindIssueType();
                 localModel.APP_CODE_MODEL = BindAppCode();
             }
             else if (mode == "Edit")
             {
-                localModel.ISSUE_TYPE_MODEL = BindIssueType();
+                //localModel.ISSUE_TYPE_MODEL = BindIssueType();
                 localModel.APP_CODE_MODEL = BindAppCode();
             }
             else if (mode == "Index")
@@ -307,6 +340,11 @@ namespace WEBAPP.Areas.MIS.Controllers
             if (!model.STR_TARGET_DATE.IsNullOrEmpty())
                 model.TARGET_DATE = model.STR_TARGET_DATE.AsDateTimes();
             return model;
+        }
+        public ActionResult BindIssueType(string APP_CODE)
+        {
+            var model = GetDDLCenter(DDLCenterKey.DD_MISS01P001_001, new VSMParameter(APP_CODE.Trim()));
+            return JsonAllowGet(model);
         }
         private List<DDLCenterModel> BindIssueType()
         {

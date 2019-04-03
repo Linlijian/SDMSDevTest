@@ -25,8 +25,9 @@ namespace DataAccess.MIS
         public const string Confirm = "Confirm";
         public const string Update = "Update"; 
         public const string ValidateExl = "ValidateExl";
+        public const string cd_dup = "cd_dup";
         public const string GetExl = "GetExl";
-
+        
 
     }
 }

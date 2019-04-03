@@ -517,6 +517,31 @@ namespace WEBAPP.Controllers
             return model;
         }
 
+        protected T SetStandardFieldWithoutComCode<T>(T model) where T : class, new()
+        {
+            foreach (var prop in model.GetType().GetProperties().Where(m =>
+            m.Name.Equals("CRET_BY") ||
+            m.Name.Equals("CRET_DATE") ||
+            m.Name.Equals("MNT_BY") ||
+            m.Name.Equals("MNT_DATE")))
+            {
+                var propertyInfo = model.GetType().GetProperty(prop.Name);
+
+                if (prop.Name == "CRET_BY")
+                    propertyInfo.SetValue(model, SessionHelper.SYS_USER_ID, null);
+
+                if (prop.Name == "CRET_DATE")
+                    propertyInfo.SetValue(model, DateTime.Now, null);
+
+                if (prop.Name == "MNT_BY")
+                    propertyInfo.SetValue(model, SessionHelper.SYS_USER_ID, null);
+
+                if (prop.Name == "MNT_DATE")
+                    propertyInfo.SetValue(model, DateTime.Now, null);
+            }
+            return model;
+        }
+
         protected BaseDTO SetStandardErrorLog(BaseDTO dto)
         {
             var log = new TransactionLogModel();

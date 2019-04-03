@@ -31,16 +31,18 @@
                 {
                     using (r.GridColumn(8).SetMdOffset(1).Begin())
                     {
-                        // @form.HiddenFor(m => m.CRET_BY)
-                        //@form.InputJAutocompleteFor(t => t.APP_CODE, isRequired: true).JAutoKeySource("AC_APPLICATION_CODE").JAutoBindField("COM_CODE").SetSelectOnly()//.JAutoSetExtraParamsByCtrl("CRET_BY")
-                        @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
+                        @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true, addValidateMessage: true).SetIndexParameter(1)
+                    }
+                    using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    {
+                        @form.SelectFor(t => t.PRIORITY_NAME, Model.PRIORITY_NAME_MODEL.ToSelectList("Value", "Text", Model.PRIORITY_NAME), isRequired: true, addValidateMessage: true)
                     }
                 }
                 using (var r = Html.Bootstrap().GridRow().Begin())
                 {
                     using (r.GridColumn(8).SetMdOffset(1).Begin())
                     {
-                        @form.InputFor(m => m.ISSUE_TYPE, isRequired: true).SetIndexParameter(1)
+                        @form.InputFor(m => m.ISSUE_TYPE, isRequired: true).SetIndexParameter(0)
                     }
                     using (r.GridColumn(8).SetMdOffset(1).Begin())
                     {
@@ -49,6 +51,10 @@
                 }
                 using (var r = Html.Bootstrap().GridRow().Begin())
                 {
+                    using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    {
+                        @form.CheckBoxFor(m => m.IS_CONS)
+                    }
                     using (r.GridColumn(8).SetMdOffset(1).Begin())
                     {
                         @form.TextAreaFor(m => m.REMASK, 4).SetMaxLength(400)
@@ -63,4 +69,17 @@
 
 <script type="text/javascript">
     $("#form1 #HEADER").removeClass('@Css.Hidden');
+
+    $(document).ready(function () {
+        $("#APP_CODE").change(function (e) {
+            $("#PRIORITY_NAME").BindSelect({
+                Url: '@Url.Action("BindPriority")',
+                Parameters: [{
+                    type: 'ControlId',//ControlId,FixValue
+                    name: 'APP_CODE',
+                    value: 'APP_CODE'
+                }]
+            });
+        });
+    })
 </script>

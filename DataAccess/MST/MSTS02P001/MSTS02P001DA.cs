@@ -32,19 +32,15 @@ namespace DataAccess.MST
 
         private MSTS02P001DTO GetAll(MSTS02P001DTO dto)
         {
-            //string strSql = @"SELECT * FROM [dbo].[VSMS_MANDAY_T] WHERE (1=1) AND COM_CODE = @COM_CODE";
             string strSql = @"SELECT * FROM [dbo].[VSMS_MANDAY_T] WHERE (1=1) ";
 
             var parameters = CreateParameter();
 
-            if (dto.Model.COM_CODE != null)
+            if (!dto.Model.APP_CODE.IsNullOrEmpty())
             {
-                strSql += "AND COM_CODE = @COM_CODE";
-                parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+                strSql += " AND COM_CODE = @APP_CODE";
+                parameters.AddParameter("APP_CODE", dto.Model.APP_CODE); //checked
             }
-            
-
-
             if (!dto.Model.YEAR.IsNullOrEmpty())
             {
                 strSql += " AND YEAR = @YEAR";
@@ -68,7 +64,7 @@ namespace DataAccess.MST
                                 AND YEAR = @YEAR";
 
             var parameters = CreateParameter();
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE); //checked
             parameters.AddParameter("YEAR", dto.Model.YEAR);
 
             var result = _DBMangerNoEF.ExecuteDataSet(strSql, parameters, commandType: CommandType.Text);
@@ -76,6 +72,7 @@ namespace DataAccess.MST
             if (result.Success(dto))
             {
                 dto.Model = result.OutputDataSet.Tables[0].ToObject<MSTS02P001Model>();
+                dto.Model.APP_CODE = dto.Model.COM_CODE;
             }
 
             return dto;
@@ -115,7 +112,7 @@ namespace DataAccess.MST
                                 ,@MNT_DATE)";
 
             var parameters = CreateParameter();
-            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE); //COM_CODE
+            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
             parameters.AddParameter("YEAR", dto.Model.YEAR);
             parameters.AddParameter("MANDAY_VAL", dto.Model.MANDAY_VAL);
             parameters.AddParameter("IS_USE", dto.Model.IS_USE);
@@ -157,7 +154,7 @@ namespace DataAccess.MST
 
             var parameters = CreateParameter();
             parameters.AddParameter("YEAR", dto.Model.YEAR);
-            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE);
 
             parameters.AddParameter("MANDAY_VAL", dto.Model.MANDAY_VAL);
             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
@@ -188,7 +185,7 @@ namespace DataAccess.MST
                                         AND YEAR = @YEAR";
                         var parameters = CreateParameter();
                         parameters.AddParameter("YEAR", item.YEAR);
-                        parameters.AddParameter("COM_CODE", item.COM_CODE);
+                        parameters.AddParameter("COM_CODE", item.COM_CODE); //checked
 
                         var result = _DBMangerNoEF.ExecuteNonQuery(sql, parameters, CommandType.Text);
                         if (!result.Status)

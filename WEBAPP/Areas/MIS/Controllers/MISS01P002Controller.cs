@@ -51,76 +51,7 @@ namespace WEBAPP.Areas.MIS.Controllers
         }
         #endregion
 
-        #region Action 
-        public ActionResult Index(string ACTIVE_STEP = "1")
-        {
-            //ViewBag.UrlToClosePage = Url.Action(StandardActionName.Index, "Default", new { Area = "Admin" });
-            #region Set Close Page
-            var menu = SessionHelper.SYS_MenuModel;
-            if (menu != null)
-            {
-                var home = menu.Where(m => m.SYS_CODE.AsString().ToUpper() == "HOME").FirstOrDefault();
-                if (home != null && AppExtensions.ExistsAction(home.PRG_ACTION, home.PRG_CONTROLLER, home.PRG_AREA))
-                {
-                    ViewBag.UrlToClosePage = Url.Action(home.PRG_ACTION, home.PRG_CONTROLLER, new { Area = home.PRG_AREA, SYS_SYS_CODE = home.SYS_CODE, SYS_PRG_CODE = home.PRG_CODE });
-                }
-            }
-            #endregion
-
-            var view = string.Empty;
-            localModel.ACTIVE_STEP = "5"; //if set 2 then block step3 end
-            if (ACTIVE_STEP == "1")
-            {
-                view = "Status1Open";
-                SetButton(ACTIVE_STEP);
-                SetDefaultData(ACTIVE_STEP);
-                SetClientSideRuleSet("Status1Open");
-
-            }
-            else if (ACTIVE_STEP == "2")
-            {
-                view = "Status2Onprocess";
-                SetButton(ACTIVE_STEP);
-                SetDefaultData(ACTIVE_STEP);
-                SetClientSideRuleSet("Status2Onprocess");
-
-            }
-            else if (ACTIVE_STEP == "3")
-            {
-                view = "Status3Followup";
-                SetButton(ACTIVE_STEP);
-                SetDefaultData(ACTIVE_STEP);
-                SetClientSideRuleSet("Status3Followup");
-
-            }
-            else if (ACTIVE_STEP == "4")
-            {
-                view = "Status4Golive";
-                SetButton(ACTIVE_STEP);
-                SetDefaultData(ACTIVE_STEP);
-                SetClientSideRuleSet("Status4Golive");
-
-            }
-            else if (ACTIVE_STEP == "5")
-            {
-                view = "Status5Close";
-                SetButton(ACTIVE_STEP);
-                SetDefaultData(ACTIVE_STEP);
-                SetClientSideRuleSet("Status5Close");
-
-            }
-
-            SetHeaderWizard(new WizardHelper.WizardHeaderConfig(
-                ACTIVE_STEP,
-                localModel.ACTIVE_STEP,
-                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_1, Url.Action("Index", new { ACTIVE_STEP = "1" }), iconCssClass: FaIcons.FaAreaChart),
-                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_2, Url.Action("Index", new { ACTIVE_STEP = "2" }), iconCssClass: FaIcons.FaFile),
-                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_3, Url.Action("Index", new { ACTIVE_STEP = "3" }), iconCssClass: FaIcons.FaFile),
-                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_4, Url.Action("Index", new { ACTIVE_STEP = "4" }), iconCssClass: FaIcons.FaFile),
-                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_5, Url.Action("Index", new { ACTIVE_STEP = "5" }), iconCssClass: FaIcons.FaFile)));
-
-            return View(view, localModel);
-        }
+        #region Opening 
         public ActionResult SearchOpening(MISS01P002Model model)
         {
             var da = new MISS01P002DA();
@@ -141,40 +72,6 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             da.DTO.Model = TempSearch;
             da.DTO.Model.COM_CODE = model.APP_CODE;
-            da.SelectNoEF(da.DTO);
-            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
-        }
-        public ActionResult SearchOnProcess(MISS01P002Model model)
-        {
-            var da = new MISS01P002DA();
-            SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAllOnProcess;
-
-            if (Request.GetRequest("page").IsNullOrEmpty())
-            {
-                model.IsDefaultSearch = true;
-                TempSearch = model;
-            }
-
-            //if (model.APP_CODE.IsNullOrEmpty())
-            //{ 
-            //    var app = BindAppCode();
-            //    model.APP_CODE = app[0].Value.ToString();
-            //}
-
-            da.DTO.Model = TempSearch;
-            da.DTO.Model.COM_CODE = model.APP_CODE;
-            da.SelectNoEF(da.DTO);
-            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
-        }
-        public ActionResult SearchFixed(MISS01P002Model model)
-        {
-            var da = new MISS01P002DA();
-            SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAllFixed;
-
-            da.DTO.Model = TempSearch;
-            da.DTO.Model.ASSIGN_USER = TempModel.ASSIGN_USER;
             da.SelectNoEF(da.DTO);
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
@@ -219,13 +116,252 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return jsonResult;
         }
+        public ActionResult SearchFixed(MISS01P002Model model)
+        {
+            var da = new MISS01P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAllFixed;
+
+            da.DTO.Model = TempSearch;
+            da.DTO.Model.ASSIGN_USER = TempModel.ASSIGN_USER;
+            da.SelectNoEF(da.DTO);
+            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
+        }
+        #endregion
+
+        #region OnProcess 
+        public ActionResult SearchOnProcess(MISS01P002Model model)
+        {
+            var da = new MISS01P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAllOnProcess;
+
+            if (Request.GetRequest("page").IsNullOrEmpty())
+            {
+                model.IsDefaultSearch = true;
+                TempSearch = model;
+            }
+
+            //if (model.APP_CODE.IsNullOrEmpty())
+            //{ 
+            //    var app = BindAppCode();
+            //    model.APP_CODE = app[0].Value.ToString();
+            //}
+
+            da.DTO.Model = TempSearch;
+            da.DTO.Model.COM_CODE = model.APP_CODE;
+            da.SelectNoEF(da.DTO);
+            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
+        }
+        #endregion
+
+        #region FollowUp 
+        public ActionResult SearchFollowUp(MISS01P002Model model)
+        {
+            var da = new MISS01P002DA();
+
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAllFollowUp;
+
+            if (Request.GetRequest("page").IsNullOrEmpty())
+            {
+                model.IsDefaultSearch = true;
+                TempSearch = model;
+            }
+
+            //if (model.APP_CODE.IsNullOrEmpty())
+            //{ 
+            //    var app = BindAppCode();
+            //    model.APP_CODE = app[0].Value.ToString();
+            //}
+
+            da.DTO.Model = TempSearch;
+            da.DTO.Model.COM_CODE = model.APP_CODE;
+            da.SelectNoEF(da.DTO);
+
+
+            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
+        }
+        [RuleSetForClientSideMessages("FilePacket")]
+        public ActionResult FilePacket(MISS01P002Model model)
+        {
+            SetDefaulButton(StandardButtonMode.Create);
+            SetDefaultData();
+            SetButton("FilePacket");
+
+            #region set default 
+            var view = string.Empty;
+            view = "FilePacket";
+
+            var da = new MISS01P002DA();
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetFilePacket;
+            da.DTO.Model.COM_CODE = model.COM_CODE;
+            da.DTO.Model.ISE_NO = model.ISE_NO;
+            da.SelectNoEF(da.DTO);
+
+            localModel = da.DTO.Model;
+            localModel.FILE_ID = da.DTO.Model.FILE_ID.Trim();
+            //localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
+            #endregion
+
+            return View(view, localModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveFilePacket(MISS01P002Model model)
+        {
+            var jsonResult = new JsonResult();
+            if (ModelState.IsValid)
+            {
+                var result = SaveData("FilePacket", model);
+                jsonResult = Success(result, StandardActionName.SaveCreate, Url.Action(StandardActionName.Index, new { ACTIVE_STEP = 3 }));
+            }
+            else
+            {
+                jsonResult = ValidateError(ModelState, StandardActionName.SaveCreate);
+            }
+
+            return jsonResult;
+        }
+        #endregion
+
+        #region Golive 
+        public ActionResult SearchGolive(MISS01P002Model model)
+        {
+            var da = new MISS01P002DA();
+
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAllGolive;
+
+            if (Request.GetRequest("page").IsNullOrEmpty())
+            {
+                model.IsDefaultSearch = true;
+                TempSearch = model;
+            }
+
+            //if (model.APP_CODE.IsNullOrEmpty())
+            //{ 
+            //    var app = BindAppCode();
+            //    model.APP_CODE = app[0].Value.ToString();
+            //}
+
+            da.DTO.Model = TempSearch;
+            da.DTO.Model.COM_CODE = model.APP_CODE;
+            da.SelectNoEF(da.DTO);
+
+
+            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
+        }
+        #endregion
+
+        #region Close 
+        public ActionResult SearchClose(MISS01P002Model model)
+        {
+            var da = new MISS01P002DA();
+
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAllClose;
+
+            if (Request.GetRequest("page").IsNullOrEmpty())
+            {
+                model.IsDefaultSearch = true;
+                TempSearch = model;
+            }
+
+            //if (model.APP_CODE.IsNullOrEmpty())
+            //{ 
+            //    var app = BindAppCode();
+            //    model.APP_CODE = app[0].Value.ToString();
+            //}
+
+            da.DTO.Model = TempSearch;
+            da.DTO.Model.COM_CODE = model.APP_CODE;
+            da.SelectNoEF(da.DTO);
+
+
+            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
+        }
+        #endregion
+
+        #region Action 
+        public ActionResult Index(string ACTIVE_STEP = "1")
+        {
+            //ViewBag.UrlToClosePage = Url.Action(StandardActionName.Index, "Default", new { Area = "Admin" });
+            #region Set Close Page
+            var menu = SessionHelper.SYS_MenuModel;
+            if (menu != null)
+            {
+                var home = menu.Where(m => m.SYS_CODE.AsString().ToUpper() == "HOME").FirstOrDefault();
+                if (home != null && AppExtensions.ExistsAction(home.PRG_ACTION, home.PRG_CONTROLLER, home.PRG_AREA))
+                {
+                    ViewBag.UrlToClosePage = Url.Action(home.PRG_ACTION, home.PRG_CONTROLLER, new { Area = home.PRG_AREA, SYS_SYS_CODE = home.SYS_CODE, SYS_PRG_CODE = home.PRG_CODE });
+                }
+            }
+            #endregion
+
+            var view = string.Empty;
+            localModel.ACTIVE_STEP = "5"; //if set 2 then block step3 end
+            if (ACTIVE_STEP == "1")
+            {
+                view = "Status1Open";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Status1Open");
+
+            }
+            else if (ACTIVE_STEP == "2")
+            {
+                view = "Status2Onprocess";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Status2Onprocess");
+
+            }
+            else if (ACTIVE_STEP == "3")
+            {
+                view = "Status3Followup";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Status3Followup");
+            }
+            else if (ACTIVE_STEP == "4")
+            {
+                view = "Status4Golive";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Status4Golive");
+
+            }
+            else if (ACTIVE_STEP == "5")
+            {
+                view = "Status5Close";
+                SetButton(ACTIVE_STEP);
+                SetDefaultData(ACTIVE_STEP);
+                SetClientSideRuleSet("Status5Close");
+
+            }
+
+            SetHeaderWizard(new WizardHelper.WizardHeaderConfig(
+                ACTIVE_STEP,
+                localModel.ACTIVE_STEP,
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_1, Url.Action("Index", new { ACTIVE_STEP = "1" }), iconCssClass: FaIcons.FaAreaChart),
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_2, Url.Action("Index", new { ACTIVE_STEP = "2" }), iconCssClass: FaIcons.FaFile),
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_3, Url.Action("Index", new { ACTIVE_STEP = "3" }), iconCssClass: FaIcons.FaFile),
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_4, Url.Action("Index", new { ACTIVE_STEP = "4" }), iconCssClass: FaIcons.FaFile),
+                new WizardHelper.WizardHeader(Translation.MIS.MISS01P002.STEP_5, Url.Action("Index", new { ACTIVE_STEP = "5" }), iconCssClass: FaIcons.FaFile)));
+
+            return View(view, localModel);
+        }
         #endregion
 
         #region Mehtod  
-        //----------------------- DDL-----------------------
         private List<DDLCenterModel> BindAppCode()
         {
             return GetDDLCenter(KEY_ID: DDLCenterKey.DD_MISS01P002_001);
+        }
+        private List<DDLCenterModel> BindTimeOut()
+        {
+            return GetDDLCenter(KEY_ID: DDLCenterKey.DD_GOLIVE_TIMEOUT);
         }
         private List<DDLCenterModel> BindOwner()
         {
@@ -277,6 +413,88 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return JsonAllowGet(da.DTO.Model);
         }
+        public ActionResult Golive(MISS01P002Model model)
+        {
+            var da = new MISS01P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.MoveToGolive;
+
+            da.DTO.Model = model;
+            da.DTO.Model.FLAG = "G";
+            da.DTO.Model.CRET_BY = SessionHelper.SYS_USER_ID;
+            da.DTO.Model.CRET_DATE = DateTime.Now;
+            da.UpdateNoEF(da.DTO);
+
+
+            return JsonAllowGet(da.DTO.Model);
+        }
+        public ActionResult StempTimeQA(MISS01P002Model model)
+        {
+            var da = new MISS01P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.TimeStemp;
+
+            da.DTO.Model = model;
+            da.DTO.Model.FLAG = "QA";
+            da.DTO.Model.CRET_BY = SessionHelper.SYS_USER_ID;
+            da.UpdateNoEF(da.DTO);
+
+
+            return JsonAllowGet(da.DTO.Model);
+        }
+        public ActionResult StempTimePD(MISS01P002Model model)
+        {
+            var da = new MISS01P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.TimeStemp;
+
+            da.DTO.Model = model;
+            da.DTO.Model.FLAG = "PD";
+            da.DTO.Model.CRET_BY = SessionHelper.SYS_USER_ID;
+            da.UpdateNoEF(da.DTO);
+
+
+            return JsonAllowGet(da.DTO.Model);
+        }
+        public ActionResult Close(MISS01P002Model model)
+        {
+            var da = new MISS01P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.MoveToClose;
+
+            da.DTO.Model = model;
+            da.DTO.Model.FLAG = "S";
+            da.DTO.Model.CRET_BY = SessionHelper.SYS_USER_ID;
+            da.DTO.Model.CRET_DATE = DateTime.Now;
+            da.UpdateNoEF(da.DTO);
+
+
+            return JsonAllowGet(da.DTO.Model);
+        }
+        public ActionResult Cancel(MISS01P002Model model)
+        {
+            var da = new MISS01P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.MoveToClose;
+
+            da.DTO.Model = model;
+            da.DTO.Model.FLAG = "S";
+            da.DTO.Model.CRET_BY = SessionHelper.SYS_USER_ID;
+            da.DTO.Model.CRET_DATE = DateTime.Now;
+            da.UpdateNoEF(da.DTO);
+
+
+            return JsonAllowGet(da.DTO.Model);
+        }
+        public ActionResult ReOpen(MISS01P002Model model)
+        {
+            string PRG_CODE = "MISS01P001";
+            string PRG_ACTTION = "Add";
+            string REF_NO = model.ISE_NO.ToString();
+            string COM_CODE = model.COM_CODE;
+
+            return RedirectToAction(PRG_ACTTION, PRG_CODE, new { REF_NO = REF_NO, COM_CODE = COM_CODE});
+        }
         private void SetDefaultData(string mode = "")
         {
             if (mode == "1")
@@ -286,6 +504,15 @@ namespace WEBAPP.Areas.MIS.Controllers
             else if (mode == "2")
             {
                 localModel.APP_CODE_MODEL = BindAppCode();
+            }
+            else if (mode == "3")
+            {
+                localModel.APP_CODE_MODEL = BindAppCode();
+            }
+            else if (mode == "4")
+            {
+                localModel.APP_CODE_MODEL = BindAppCode();
+                localModel.TIMEOUT_MODEL = BindTimeOut();
             }
         }
         private void SetButton(string ACTIVE_STEP = "")
@@ -304,9 +531,26 @@ namespace WEBAPP.Areas.MIS.Controllers
                 RemoveStandardButton("DeleteSearch");
                 RemoveStandardButton("Add");
             }
+            else if (ACTIVE_STEP == "3")
+            {
+                SetDefaulButton(StandardButtonMode.Index);
+                RemoveStandardButton("DeleteSearch");
+                RemoveStandardButton("Add");
+                //AddButton(StandButtonType.ButtonAjax, "btnSearchFollowUp", Translation.CenterLang.Center.Save, iconCssClass: FaIcons.FaSearch, url: Url.Action("SearchFollowUp"), isValidate: true);
+            }
+            else if (ACTIVE_STEP == "4")
+            {
+                SetDefaulButton(StandardButtonMode.Index);
+                RemoveStandardButton("DeleteSearch");
+                RemoveStandardButton("Add");
+            }
             else if (ACTIVE_STEP == "Assignment")
             {
-                AddButton(StandButtonType.ButtonComfirmAjax, "btnSAVEASSIGNMENT", Translation.CenterLang.Center.Save, iconCssClass: FaIcons.FaCopy, url: Url.Action("SaveAssignMent"), isValidate: true);
+                AddButton(StandButtonType.ButtonComfirmAjax, "btnSAVEASSIGNMENT", Translation.CenterLang.Center.Save, iconCssClass: FaIcons.FaSave, url: Url.Action("SaveAssignMent"), isValidate: true);
+            }
+            else if (ACTIVE_STEP == "FilePacket")
+            {
+                AddButton(StandButtonType.ButtonComfirmAjax, "btnSAVEFILEPACKET", Translation.CenterLang.Center.Save, iconCssClass: FaIcons.FaSave, url: Url.Action("SaveFilePacket"), isValidate: true);
             }
         }
         private DTOResult SaveData(string mode, object model)
@@ -338,6 +582,13 @@ namespace WEBAPP.Areas.MIS.Controllers
             {
                 SetStandardField(model);
                 da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.UpdateAssignment;
+                da.DTO.Model = (MISS01P002Model)model;
+                da.UpdateNoEF(da.DTO);
+            }
+            else if (mode == "FilePacket")
+            {
+                SetStandardFieldWithoutComCode(model);
+                da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.UpdateFilePacket;
                 da.DTO.Model = (MISS01P002Model)model;
                 da.UpdateNoEF(da.DTO);
             }

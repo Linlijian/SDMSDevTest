@@ -37,10 +37,16 @@ namespace DataAccess.MST
                                 AND KEY_ID = 'P' ";
             var parameters = CreateParameter();
 
-            if (!dto.Model.PRIORITY_NAME.IsNullOrEmpty())
+            if (!dto.Model.RES_TYPE.IsNullOrEmpty())
             {
-                strSQL += " AND PRIORITY_NAME like @PRIORITY_NAME";
-                parameters.AddParameter("PRIORITY_NAME", dto.Model.PRIORITY_NAME);
+                strSQL += " AND RES_TYPE = @RES_TYPE";
+                parameters.AddParameter("RES_TYPE", dto.Model.RES_TYPE);
+            }
+
+            if (!dto.Model.T_RES_TYPE.IsNullOrEmpty())
+            {
+                strSQL += " AND T_RES_TYPE = @T_RES_TYPE";
+                parameters.AddParameter("T_RES_TYPE", dto.Model.T_RES_TYPE);
             }
 
             if (!dto.Model.APP_CODE.IsNullOrEmpty())
@@ -117,7 +123,7 @@ namespace DataAccess.MST
             parameters.AddParameter("RES_TIME", dto.Model.RES_TIME);
             parameters.AddParameter("T_RES_TIME", dto.Model.T_RES_TIME);
             parameters.AddParameter("IS_FREE", dto.Model.IS_FREE);
-            parameters.AddParameter("IS_CONS", dto.Model.IS_CONS);
+            parameters.AddParameter("IS_CONS", dto.Model.IS_FREE);
             parameters.AddParameter("REMASK", dto.Model.REMASK);
             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
