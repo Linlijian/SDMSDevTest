@@ -62,6 +62,7 @@
         },
         new GridColumn("ISE_KEY").SetNotVisible().SetKey(),
         new GridColumn("ASSIGN_STATUS", null, 2, align: ColumnsTextAlign.Center, render: "RENDER_CONFIRM_TEST"),
+        new GridColumn(null, Translation.MIS.MISS01P002.CANCEL, 2, align: ColumnsTextAlign.Center, render: "RENDER_CANCEL"),
         new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 4),
         new GridColumn("ISE_NO", Translation.MIS.MISS01P002.NO, 4),
         new GridColumn("ISE_DATE_OPENING", Translation.MIS.MISS01P002.ISE_DATE_OPENING, 4, ColumnsType.DateTime),
@@ -72,7 +73,86 @@
 
         )
     <script>
+        /********************************************RENDER_CANCEL*********************************************/
+        var RENDER_CANCEL = function (data, type, full, meta, status) {
+            var tag = '';
 
+            if (!isNullOrEmpty(data)) {
+                var tag = '';
+
+                tag += '<a href="javascript:void(0)" id="btnCANCEL" name="btnCANCEL" >';
+                tag += '<i class="ace-icon fa @FaIcons.FaClose align-top bigger-160 red"></i>';
+                tag += '</a>';
+            }
+            return tag;
+        };
+
+        $(document).ready(function () {
+            $("#GridSearch tbody").on("click", "a[name='btnCANCEL']", function (e) {
+                var idx = GridSearch.row($(this).parent()).index();
+                var data = GridSearch.row(idx).data();
+                data.FLAG = 'P'
+                data.NO = data.ISE_NO
+
+                $.confirm({
+                    title: null,
+                    content: "Are you sure to continue?",
+                    columnClass: 'medium',
+                    buttons: {
+                        confirm: {
+                            text: $("#hdSysOK").val(),
+                            btnClass: "btn-primary",
+                            action: function () {
+                                waitingDialog.show();
+
+                                $.ajax({
+                                    url: '@Url.Action("Cancel")',
+                                    type: 'post',
+                                    data: data,
+                                    success: function (result) {
+                                        if (result.data.FLAG == 'Y') {
+                                            waitingDialog.hide();
+                                            GridSearch.ajax.reload();
+                                            alertSucs();
+                                        }
+                                        else {
+                                            alertErr(result.data.FLAG);
+                                            GridSearch.ajax.reload();
+                                        }
+                                    },
+                                    error: OnAjaxError
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: $("#hdSysCancel").val(),
+                            btnClass: "btn-primary"
+                        }
+                    }
+                });
+            });
+        })
+        /************************************************END**************************************************/
+        /***********************************************ALERT*************************************************/
+        function alertSucs() {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'success' + ' alert-dismissable alert-' + 'success' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += 'ผ่าน ๆ' + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        function alertErr(data) {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += data + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        /************************************************END**************************************************/
         $(document).ready(function () {
             $("#APP_CODE").change(function (e) {
                 $("#ASSIGN_USER").BindSelect({

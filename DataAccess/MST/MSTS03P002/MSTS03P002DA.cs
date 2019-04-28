@@ -165,7 +165,7 @@ namespace DataAccess.MST
             var parameters = CreateParameter();
 
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
-            parameters.AddParameter("COM_CODE ", dto.Model.APP_CODE); //checked
+            parameters.AddParameter("COM_CODE ", dto.Model.COM_CODE); //checked
             parameters.AddParameter("PIT_ID", dto.Model.PIT_ID);
             parameters.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
             parameters.AddParameter("IS_FREE", dto.Model.IS_FREE);

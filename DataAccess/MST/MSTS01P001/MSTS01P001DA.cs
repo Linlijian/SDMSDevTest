@@ -116,7 +116,7 @@ namespace DataAccess.MST
                                         ,@MNT_DATE)";
 
             var parameters1 = CreateParameter();
-            parameters1.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
+            parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE); //checked
             parameters1.AddParameter("ISSUE_TYPE", dto.Model.ISSUE_TYPE);
             parameters1.AddParameter("TYPE_RATE", dto.Model.TYPE_RATE);
             parameters1.AddParameter("MAN_PLM_SA", dto.Model.MAN_PLM_SA);

@@ -129,6 +129,9 @@
   <data name="ASSIGN_USER" xml:space="preserve">
     <value>Assignment</value>
   </data>
+  <data name="CANCEL" xml:space="preserve">
+    <value>Cannel</value>
+  </data>
   <data name="CLOSE" xml:space="preserve">
     <value>Close</value>
   </data>
@@ -160,7 +163,7 @@
     <value>Assignment Issue</value>
   </data>
   <data name="ISE_DATE_CLOSE" xml:space="preserve">
-    <value>Close DAte</value>
+    <value>Close Date</value>
   </data>
   <data name="ISE_DATE_FOLLOWUP" xml:space="preserve">
     <value>Follow up Date</value>
@@ -194,6 +197,9 @@
   </data>
   <data name="OWNER" xml:space="preserve">
     <value>Owner Issue</value>
+  </data>
+  <data name="REDO" xml:space="preserve">
+    <value>ReDo</value>
   </data>
   <data name="REOPEN" xml:space="preserve">
     <value>Re Open</value>

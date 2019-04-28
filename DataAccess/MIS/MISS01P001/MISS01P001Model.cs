@@ -70,6 +70,16 @@ namespace DataAccess.MIS
         public string STR_RDEPLOY_PD { get; set; }
         public string STR_DEPLOY_QA { get; set; }
         public string USER_ID { get; set; }
+        public string CLIENT_ID { get; set; }
+        public string FILE_EXCEL { get; set; }
+        public string ERROR_CODE { get; set; }
+        public string FLAG { get; set; }
+        public string PRG_CODE { get; set; }
+        public string ISS_YEAR { get; set; }
+        public string ISS_TYPE { get; set; }
+
+        public System.Data.DataSet ds { get; set; }
+
 
         [Display(Name = "NO", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public decimal? NO { get; set; }
@@ -144,22 +154,30 @@ namespace DataAccess.MIS
         {
             RuleSet("Add", () =>
             {
-                Valid();
+                NewValid();
+            });
+            RuleSet("AddRefNo", () =>
+            {
+                NewValid();
             });
             RuleSet("Edit", () =>
             {
                 Valid();
             });
-            RuleSet("FilePacket", () =>
+            RuleSet("Upload", () =>
             {
-                RuleFor(t => t.FILE_ID).NotEmpty();
-            });
-            RuleSet("Assignment", () =>
-            {
-                RuleFor(t => t.ASSIGN_USER).NotEmpty();
+                RuleFor(t => t.APP_CODE).NotEmpty();
             });
         }
-
+        private void NewValid()
+        {
+            RuleFor(t => t.ISSUE_BY).NotEmpty();
+            RuleFor(t => t.STR_ISSUE_DATE).NotEmpty().WithMessage(Translation.CenterLang.Validate.Issue_date);
+            RuleFor(t => t.MODULE).NotEmpty();
+            RuleFor(t => t.NO).NotEmpty();
+            RuleFor(t => t.APP_CODE).NotEmpty();
+            RuleFor(t => t.DETAIL).NotEmpty();
+        }
         private void Valid()
         {
             RuleFor(t => t.ISSUE_BY).NotEmpty();
@@ -170,6 +188,10 @@ namespace DataAccess.MIS
             RuleFor(t => t.ISSUE_TYPE).NotEmpty();
             RuleFor(t => t.DEFECT).NotEmpty();
             RuleFor(t => t.STR_TARGET_DATE).NotEmpty().WithMessage(Translation.CenterLang.Validate.Traget_date);
+
+            RuleFor(t => t.NO).NotEmpty();
+            RuleFor(t => t.APP_CODE).NotEmpty();
+            RuleFor(t => t.DETAIL).NotEmpty();
 
             RuleFor(t => t.MAN_PLM_PL).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
             RuleFor(t => t.MAN_PLM_DBA).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);

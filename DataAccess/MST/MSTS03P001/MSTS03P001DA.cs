@@ -175,7 +175,7 @@ namespace DataAccess.MST
             var parameters = CreateParameter();
 
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
-            parameters.AddParameter("COM_CODE ", dto.Model.APP_CODE);
+            parameters.AddParameter("COM_CODE ", dto.Model.COM_CODE);
             parameters.AddParameter("PIT_ID", dto.Model.PIT_ID);
             parameters.AddParameter("PRIORITY_NAME", dto.Model.PRIORITY_NAME);
             parameters.AddParameter("RES_TIME", dto.Model.RES_TIME);

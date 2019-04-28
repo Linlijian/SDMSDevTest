@@ -14,6 +14,13 @@ namespace WEBAPP.Helper
                 return Convert.ToString(HttpContext.Current.Session[SessionSystemName.SYS_COM_CODE]);
             }
         }
+        public static string SYS_APP_CODE
+        {
+            get
+            {
+                return Convert.ToString(HttpContext.Current.Session[SessionSystemName.SYS_APPS]);
+            }
+        }
         public static string SYS_USER_ID
         {
             get

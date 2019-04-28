@@ -583,6 +583,7 @@ namespace WEBAPP.Controllers
             log.SYS_CODE = SessionHelper.SYS_CurrentSYS_CODE;
             log.PRG_CODE = SessionHelper.SYS_CurrentPRG_CODE;
             log.LOG_HEADER = SessionHelper.SYS_CurrentAction;
+
             log.ACTIVITY_TYPE = GetActivityType();
             log.IP_ADDRESS = GetUserIP();
             log.DoInsertLog = true;
@@ -593,6 +594,7 @@ namespace WEBAPP.Controllers
             log.ObjectValue = objectValue;
 
             SetStandardField(log);
+            log.COM_CODE = SessionHelper.SYS_APP_CODE;
 
             dto.TransactionLog = log;
             return dto;

@@ -56,6 +56,7 @@
         new GridConfig
         {
             GetConfig = new DefaultConfig(Url.Action("SearchFollowUp")),
+            DeleteConfig = new DefaultConfig(Url.Action("StempTimeQA")),
             DefaultBinding = true,
             ScrollX = false,
             WidthType = ColumnsWidthType.Percentage
@@ -71,14 +72,137 @@
         new GridColumn("ISE_DATE_OPENING", Translation.MIS.MISS01P002.ISE_DATE_OPENING, 4, ColumnsType.DateTime),
         new GridColumn("DEPLOY_QA", Translation.MIS.MISS01P002.DEPLOY_QA, 4, ColumnsType.DateTime, align: ColumnsTextAlign.Center, render: "RENDER_DATE_QA"),
         new GridColumn("DEPLOY_PD", Translation.MIS.MISS01P002.DEPLOY_PD, 4, ColumnsType.DateTime, align: ColumnsTextAlign.Center, render: "RENDER_DATE_PD"),
-        new GridColumn(null, Translation.MIS.MISS01P002.TIMESTEMP_QA, 2, align: ColumnsTextAlign.Center, render: "RENDER_STEMP_QA"),
-        new GridColumn(null, Translation.MIS.MISS01P002.TIMESTEMP_PD, 2, align: ColumnsTextAlign.Center, render: "RENDER_STEMP_PD"),
-        new GridColumn(null, Translation.MIS.MISS01P002.GOLIVE, 2, align: ColumnsTextAlign.Center, render: "RENDER_MOVE_GOLIVE")
+        //new GridColumn(null, Translation.MIS.MISS01P002.TIMESTEMP_QA, 2, align: ColumnsTextAlign.Center, render: "RENDER_STEMP_QA"),
+        //new GridColumn(null, Translation.MIS.MISS01P002.TIMESTEMP_PD, 2, align: ColumnsTextAlign.Center, render: "RENDER_STEMP_PD"),
+        new GridColumn(null, Translation.MIS.MISS01P002.GOLIVE, 2, align: ColumnsTextAlign.Center, render: "RENDER_MOVE_GOLIVE"),
+        new GridColumn(null, Translation.MIS.MISS01P002.REDO, 2, align: ColumnsTextAlign.Center, render: "RENDER_REDO"),
+        new GridColumn(null, Translation.MIS.MISS01P002.CANCEL, 2, align: ColumnsTextAlign.Center, render: "RENDER_CANCEL")
 
         )
 
 
     <script>
+
+        /********************************************RENDER_REDO*********************************************/
+        var RENDER_REDO = function (data, type, full, meta, status) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                var tag = '';
+
+                tag += '<a href="javascript:void(0)" id="btnREDO" name="btnREDO" >';
+                tag += '<i class="ace-icon fa @FaIcons.FaReply align-top bigger-160 red"></i>';
+                tag += '</a>';
+            }
+            return tag;
+        };
+
+        $(document).ready(function () {
+            $("#GridSearch tbody").on("click", "a[name='btnREDO']", function (e) {
+                var idx = GridSearch.row($(this).parent()).index();
+                var data = GridSearch.row(idx).data();
+                data.FLAG = 'P'
+                data.NO = data.ISE_NO
+
+                $.confirm({
+                    title: null,
+                    content: "Are you sure to continue?",
+                    columnClass: 'medium',
+                    buttons: {
+                        confirm: {
+                            text: $("#hdSysOK").val(),
+                            btnClass: "btn-primary",
+                            action: function () {
+                                waitingDialog.show();
+
+                                $.ajax({
+                                    url: '@Url.Action("ReDo")',
+                                    type: 'post',
+                                    data: data,
+                                    success: function (result) {
+                                        if (result.data.FLAG == 'Y') {
+                                            waitingDialog.hide();
+                                            GridSearch.ajax.reload();
+                                            alertSucs();
+                                        }
+                                        else {
+                                            alertErr(result.data.FLAG);
+                                            GridSearch.ajax.reload();
+                                        }
+                                    },
+                                    error: OnAjaxError
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: $("#hdSysCancel").val(),
+                            btnClass: "btn-primary"
+                        }
+                    }
+                });
+            });
+        })
+        /************************************************END**************************************************/
+        /********************************************RENDER_CANCEL*********************************************/
+        var RENDER_CANCEL = function (data, type, full, meta, status) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                var tag = '';
+
+                tag += '<a href="javascript:void(0)" id="btnCANCEL" name="btnCANCEL" >';
+                tag += '<i class="ace-icon fa @FaIcons.FaClose align-top bigger-160 red"></i>';
+                tag += '</a>';
+            }
+            return tag;
+        };
+
+        $(document).ready(function () {
+            $("#GridSearch tbody").on("click", "a[name='btnCANCEL']", function (e) {
+                var idx = GridSearch.row($(this).parent()).index();
+                var data = GridSearch.row(idx).data();
+                data.FLAG = 'P'
+                data.NO = data.ISE_NO
+
+                $.confirm({
+                    title: null,
+                    content: "Are you sure to continue?",
+                    columnClass: 'medium',
+                    buttons: {
+                        confirm: {
+                            text: $("#hdSysOK").val(),
+                            btnClass: "btn-primary",
+                            action: function () {
+                                waitingDialog.show();
+
+                                $.ajax({
+                                    url: '@Url.Action("Cancel")',
+                                    type: 'post',
+                                    data: data,
+                                    success: function (result) {
+                                        if (result.data.FLAG == 'Y') {
+                                            waitingDialog.hide();
+                                            GridSearch.ajax.reload();
+                                            alertSucs();
+                                        }
+                                        else {
+                                            alertErr(result.data.FLAG);
+                                            GridSearch.ajax.reload();
+                                        }
+                                    },
+                                    error: OnAjaxError
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: $("#hdSysCancel").val(),
+                            btnClass: "btn-primary"
+                        }
+                    }
+                });
+            });
+        })
+        /************************************************END**************************************************/
         /************************************************DLL**************************************************/
         $(document).ready(function () {
             $("#APP_CODE").change(function (e) {
@@ -209,6 +333,64 @@
             });
         })
         /************************************************END**************************************************/
+        /*********************************************STEMP_QA_V2*********************************************/
+        $("#btnStamTimeQA").confirm({
+            title: null,
+            content: "<br/>Are you sure to continue?",
+            columnClass: 'medium',
+            buttons: {
+                confirm: {
+                    text: 'OK',
+                    btnClass: "btn-primary",
+                    action: DeleteDetail
+                },
+                cancel: {
+                    text: 'Cancel',
+                    btnClass: "btn-primary"
+                }
+            }
+        })
+
+        function DeleteDetail() {
+            var data = GridSearch.rows({ selected: true }).data();
+            if (data != undefined && data != null && data.length > 0) {
+                var nData = { data: [] };
+                $.each(data, function (i, item) {
+                    nData.data.push({
+                        COM_CODE: item.COM_CODE,
+                        ISE_NO: item.ISE_NO,
+                        ISE_KEY: item.ISE_KEY
+                    });
+                });
+                $.ajax({
+                    url: "@Url.Action("StempTimeQA")",
+                    type: "post",
+                    data: nData,
+                    success: function (result) {
+                        if (result.data.FLAG == 'Y') {
+                            waitingDialog.hide();
+                            GridSearch.ajax.reload();
+                            alertSucs();
+                        }
+                        else {
+                            alertErr(result.data.FLAG);
+                            GridSearch.ajax.reload();
+                        }
+                    },
+                    error: OnAjaxError
+                });
+            }
+            else {
+                var result = {
+                    Mode: 'Delete',
+                    Status: false,
+                    Message: 'Please Specify Data',
+                    Style: 'danger'
+                };
+                OnAjaxSuccess(result);
+            }
+        }
+        /************************************************END**************************************************/
         /*****************************************RENDER_STEMP_PD*********************************************/
         var RENDER_STEMP_PD = function (data, type, full, meta, status) {
             var tag = '';
@@ -267,6 +449,64 @@
             });
         })
         /************************************************END**************************************************/
+        /*********************************************STEMP_QA_V2*********************************************/
+        $("#btnStamTimePD").confirm({
+            title: null,
+            content: "<br/>Are you sure to continue?",
+            columnClass: 'medium',
+            buttons: {
+                confirm: {
+                    text: 'OK',
+                    btnClass: "btn-primary",
+                    action: DeleteDetail
+                },
+                cancel: {
+                    text: 'Cancel',
+                    btnClass: "btn-primary"
+                }
+            }
+        })
+
+        function DeleteDetail() {
+            var data = GridSearch.rows({ selected: true }).data();
+            if (data != undefined && data != null && data.length > 0) {
+                var nData = { data: [] };
+                $.each(data, function (i, item) {
+                    nData.data.push({
+                        COM_CODE: item.COM_CODE,
+                        ISE_NO: item.ISE_NO,
+                        ISE_KEY: item.ISE_KEY
+                    });
+                });
+                $.ajax({
+                    url: "@Url.Action("StempTimePD")",
+                    type: "post",
+                    data: nData,
+                    success: function (result) {
+                        if (result.data.FLAG == 'Y') {
+                            waitingDialog.hide();
+                            GridSearch.ajax.reload();
+                            alertSucs();
+                        }
+                        else {
+                            alertErr(result.data.FLAG);
+                            GridSearch.ajax.reload();
+                        }
+                    },
+                    error: OnAjaxError
+                });
+            }
+            else {
+                var result = {
+                    Mode: 'Delete',
+                    Status: false,
+                    Message: 'Please Specify Data',
+                    Style: 'danger'
+                };
+                OnAjaxSuccess(result);
+            }
+        }
+        /************************************************END**************************************************/
         /***********************************************RENDER************************************************/
         var RENDER_DATE_QA = function (data, type, full, meta, status) {
             var tag = '';
@@ -274,8 +514,7 @@
             if (isNullOrEmpty(data)) {
                 tag += '<i class="ace-icon fa @FaIcons.FaClose align-top bigger-200 greed"></i>';
             }
-            else
-            {
+            else {
                 tag += $.jsonDateToFormat(data, 'DD/MM/YYYY HH:mm:ss');;
             }
 
@@ -288,8 +527,7 @@
             if (isNullOrEmpty(data)) {
                 tag += '<i class="ace-icon fa @FaIcons.FaClose align-top bigger-200 greed"></i>';
             }
-            else
-            {
+            else {
                 tag += $.jsonDateToFormat(data, 'DD/MM/YYYY HH:mm:ss');;
             }
 
@@ -334,4 +572,4 @@
 
 
     </script>
-    }
+}

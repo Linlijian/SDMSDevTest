@@ -38,6 +38,8 @@ namespace DataAccess.MIS
         public const string GetAllGolive = "GetAllGolive";
         public const string GetAllClose = "GetAllClose"; 
         public const string MoveToClose = "MoveToClose";
+        public const string MoveToCancel = "MoveToCancel";
         public const string ReOpen = "ReOpen";
+        public const string ReDo = "ReDo";
     }
 }

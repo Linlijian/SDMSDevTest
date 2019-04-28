@@ -76,12 +76,73 @@
         new GridColumn("ISE_DATE_OPENING", Translation.MIS.MISS01P002.ISE_DATE_OPENING, 4, ColumnsType.DateTime),
         new GridColumn("ISE_DATE_GOLIVE", Translation.MIS.MISS01P002.ISE_DATE_GOLIVE, 4, ColumnsType.DateTime),
         new GridColumn("TIMEOUT", Translation.MIS.MISS01P002.WAIT_CONFIRM, 4, align: ColumnsTextAlign.Center, render: "RENDER_TIMEOUT"),
+        new GridColumn(null, Translation.MIS.MISS01P002.REDO, 2, align: ColumnsTextAlign.Center, render: "RENDER_REDO"),
         new GridColumn(null, Translation.MIS.MISS01P002.CLOSE, 2, align: ColumnsTextAlign.Center, render: "RENDER_MOVE_CLOSE")
 
         )
 
 
     <script>
+        /********************************************RENDER_REDO*********************************************/
+        var RENDER_REDO = function (data, type, full, meta, status) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                var tag = '';
+
+                tag += '<a href="javascript:void(0)" id="btnREDO" name="btnREDO" >';
+                tag += '<i class="ace-icon fa @FaIcons.FaReply align-top bigger-160 red"></i>';
+                tag += '</a>';
+            }
+            return tag;
+        };
+
+        $(document).ready(function () {
+            $("#GridSearch tbody").on("click", "a[name='btnREDO']", function (e) {
+                var idx = GridSearch.row($(this).parent()).index();
+                var data = GridSearch.row(idx).data();
+                data.FLAG = 'P'
+                data.NO = data.ISE_NO
+
+                $.confirm({
+                    title: null,
+                    content: "Are you sure to continue?",
+                    columnClass: 'medium',
+                    buttons: {
+                        confirm: {
+                            text: $("#hdSysOK").val(),
+                            btnClass: "btn-primary",
+                            action: function () {
+                                waitingDialog.show();
+
+                                $.ajax({
+                                    url: '@Url.Action("ReDo")',
+                                    type: 'post',
+                                    data: data,
+                                    success: function (result) {
+                                        if (result.data.FLAG == 'Y') {
+                                            waitingDialog.hide();
+                                            GridSearch.ajax.reload();
+                                            alertSucs();
+                                        }
+                                        else {
+                                            alertErr(result.data.FLAG);
+                                            GridSearch.ajax.reload();
+                                        }
+                                    },
+                                    error: OnAjaxError
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: $("#hdSysCancel").val(),
+                            btnClass: "btn-primary"
+                        }
+                    }
+                });
+            });
+        })
+        /************************************************END**************************************************/
         /************************************************DLL**************************************************/
         $(document).ready(function () {
             $("#APP_CODE").change(function (e) {

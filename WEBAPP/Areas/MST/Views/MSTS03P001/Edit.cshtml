@@ -27,11 +27,7 @@
                     {
                         using (r.GridColumn(6).Begin())
                         {
-                           @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true).IsDisabled()
-                        }
-                        using (r.GridColumn(6).Begin())
-                        {
-                            @form.InputFor(m => m.PRIORITY_NAME, isRequired: true).SetMaxLength(50).SetIndexParameter(0)
+                            @form.InputFor(m => m.PRIORITY_NAME).SetMaxLength(50).SetIndexParameter(0).SetReadonly()
                         }
                     }
                     using (var r = Html.Bootstrap().GridRow().Begin())

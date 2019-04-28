@@ -51,7 +51,7 @@ namespace DataAccess.MIS
 		                        AND t.ISE_NO = tt.no
 	                        WHERE t.USER_ID = @USER_ID
 	                        ) t ON t.COM_CODE = tt.COM_CODE
-                        WHERE t.RESPONSE_BY = @USER_ID
+                        --WHERE t.RESPONSE_BY = @USER_ID
                         ";
 
 

@@ -32,10 +32,7 @@
             {
                 using (var r = Html.Bootstrap().GridRow().Begin())
                 {
-                    using (r.GridColumn(8).SetMdOffset(1).Begin())
-                    {
-                        @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true).IsDisabled()
-                    }
+                    
                     using (r.GridColumn(8).SetMdOffset(1).Begin())
                     {
                         @form.InputFor(t => t.PRIORITY_NAME).SetReadonly()
@@ -47,17 +44,17 @@
                     {
                         @form.InputFor(m => m.ISSUE_TYPE, isRequired: true).SetIndexParameter(1)
                     }
-                    using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    @*using (r.GridColumn(8).SetMdOffset(1).Begin())
                     {
                         @form.CheckBoxFor(m => m.IS_FREE)
-                    }
+                    }*@
                 }
                 using (var r = Html.Bootstrap().GridRow().Begin())
                 {
-                    using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    @*using (r.GridColumn(8).SetMdOffset(1).Begin())
                     {
                         @form.CheckBoxFor(m => m.IS_CONS)
-                    }
+                    }*@
                     using (r.GridColumn(8).SetMdOffset(1).Begin())
                     {
                         @form.TextAreaFor(m => m.REMASK, 4).SetMaxLength(400)

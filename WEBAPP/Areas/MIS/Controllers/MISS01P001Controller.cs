@@ -56,6 +56,8 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             SetDefaulButton(StandardButtonMode.Index);
             RemoveStandardButton("DeleteSearch");
+            AddStandardButton(StandardButtonName.Upload);
+            AddStandardButton(StandardButtonName.DownloadTemplate, url: "MISS01TP001");
             if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
             {
                 localModel = TempSearch.CloneObject();
@@ -114,7 +116,7 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return View(StandardActionName.Add, localModel);
         }
-        [RuleSetForClientSideMessages("Add")]
+        [RuleSetForClientSideMessages("AddRefNo")]
         public ActionResult AddRefNo(MISS01P001Model model)
         {
             SetDefaulButton(StandardButtonMode.Create);
@@ -155,7 +157,15 @@ namespace WEBAPP.Areas.MIS.Controllers
             da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetNo;
             da.DTO.Model.COM_CODE = model.APP_CODE;
             da.SelectNoEF(da.DTO);
-            da.DTO.Model.NO = da.DTO.Model.NO + 1;
+            if (da.DTO.Model.NO.IsNullOrEmpty())
+            {
+                da.DTO.Model.NO = 1;
+            }
+            else
+            {
+                da.DTO.Model.NO = da.DTO.Model.NO + 1;
+            }
+            
 
             //jsonResult = Success(da.DTO.Result, StandardActionName.Add);
 
@@ -186,6 +196,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             {
                 model = SetModelDateTime(model);
                 model = RemoveSpace(model);
+                model.COM_CODE = TempModel.APP_CODE = model.APP_CODE;
                 var result = SaveData(StandardActionName.SaveCreate, model);
                 //if(result.ResultMsg != null)
                 //{
@@ -205,6 +216,7 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return jsonResult;
         }
+        [RuleSetForClientSideMessages("Edit")]
         public ActionResult Edit(MISS01P001Model model)
         {
             var da = new MISS01P001DA();
@@ -234,7 +246,9 @@ namespace WEBAPP.Areas.MIS.Controllers
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
             {
+                model = SetModelDateTime(model);
                 model = RemoveSpace(model);
+                model.COM_CODE = TempModel.APP_CODE = model.APP_CODE;
                 var result = SaveData(StandardActionName.SaveModify, model);
                 jsonResult = Success(result, StandardActionName.SaveModify, Url.Action(StandardActionName.Index, new { page = 1 }));
             }
@@ -267,11 +281,86 @@ namespace WEBAPP.Areas.MIS.Controllers
                 Console.WriteLine(ex.ToString());
             }
         }
+        [RuleSetForClientSideMessages("Upload")]
+        public ActionResult Upload()
+        {
+            SetDefaulButton(StandardButtonMode.Other);
+            SetDefaultData(StandardActionName.Upload);
+            AddStandardButton(StandardButtonName.LoadFile);
+            AddStandardButton(StandardButtonName.Save);
+            return View(localModel);
+        }
+        public ActionResult LoadExcel(MISS01P001Model model)
+        {
+            var jsonResult = new JsonResult();
+            if (ModelState.IsValid)
+            {
+                model.ds = ExcelData.TBL_SELECT;
+                model.CLIENT_ID = TempModel.CLIENT_ID = Guid.NewGuid().ToString();
+                model.COM_CODE = model.APP_CODE;
+                model.FILE_EXCEL = ExcelData.UPLOAD_FILENAME;
+
+                var result = SaveData("Upload", model);
+                if (result.IsResult)
+                {
+                    if (model.ERROR_CODE == "0")
+                    {
+                        return Json(new WEBAPP.Models.AjaxResult("Upload", true, AlertStyles.Success, "Load Excel File Completed!"));
+                    }
+                    else
+                    {
+                        return Json(new WEBAPP.Models.AjaxResult("Upload", false, AlertStyles.Error, "Load Excel File InComplete!"));
+                    }
+                }
+
+                return Json(new WEBAPP.Models.AjaxResult("Upload", false, AlertStyles.Error, "Load Excel File InComplete!" + " " + result.ResultMsg));
+            }
+            else
+            {
+                jsonResult = ValidateError(ModelState, StandardActionName.SaveModify);
+            }
+
+            return jsonResult;
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(MISS01P001Model model)
+        {
+            var jsonResult = new JsonResult();
+            if (ModelState.IsValid)
+            {
+                model.CLIENT_ID = TempModel.CLIENT_ID;
+                model.COM_CODE = TempModel.APP_CODE = model.APP_CODE;
+                var result = SaveData("SaveUpload", model);
+                if (result.IsResult)
+                {
+                    jsonResult = Success(result, "SaveUpload", Url.Action(StandardActionName.Index, new { page = 1 }));
+                }
+                else
+                {
+                    return Json(new WEBAPP.Models.AjaxResult("Upload", false, AlertStyles.Error, "Save InComplete " + result.ResultMsg));
+                }
+            }
+            else
+            {
+                jsonResult = ValidateError(ModelState, "SaveUpload");
+            }
+            return jsonResult;
+        }
+        public ActionResult SearchExl()
+        {
+            var da = new MISS01P001DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetExl;
+            da.SelectNoEF(da.DTO);
+
+            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
+        }
         #endregion
 
         #region Mehtod  
         //----------------------- DDL-----------------------
-       
+
         private void SetDefaultData(string mode = "")
         {
             if (mode == "Add")
@@ -280,6 +369,11 @@ namespace WEBAPP.Areas.MIS.Controllers
                 localModel.APP_CODE_MODEL = BindAppCode();
             }
             else if (mode == "Edit")
+            {
+                localModel.ISSUE_TYPE_MODEL = BindIssueType();
+                localModel.APP_CODE_MODEL = BindAppCode();
+            }
+            else if (mode == "Upload")
             {
                 //localModel.ISSUE_TYPE_MODEL = BindIssueType();
                 localModel.APP_CODE_MODEL = BindAppCode();
@@ -348,7 +442,7 @@ namespace WEBAPP.Areas.MIS.Controllers
         }
         private List<DDLCenterModel> BindIssueType()
         {
-            return GetDDLCenter(DDLCenterKey.DD_MISS01P001_001, new VSMParameter(SessionHelper.SYS_COM_CODE.Trim()));
+            return GetDDLCenter(DDLCenterKey.DD_MISS01P001_001, new VSMParameter(localModel.COM_CODE.Trim()));
         }
         private List<DDLCenterModel> BindDefect()
         {
@@ -371,29 +465,49 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             var da = new MISS01P001DA();
             //ในกรณีที่มีการ SaveLog ให้ Include SetStandardLog ด้วย
-            //SetStandardLog(
-            //   da.DTO,
-            //   model,
-            //   GetSaveLogConfig("dbo", "VSMS_COMPANY", "COM_CODE"));
+            Session[SessionSystemName.SYS_APPS] = TempModel.APP_CODE;
+            SetStandardLog(
+               da.DTO,
+               model,
+               GetSaveLogConfig("dbo", "VSMS_ISSUE", "COM_CODE", "NO"));
 
 
             if (mode == StandardActionName.SaveCreate)
             {
-                SetStandardField(model);
+                SetStandardFieldWithoutComCode(model);
                 da.DTO.Model = (MISS01P001Model)model;
                 da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.Insert;
-                da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
 
                 da.InsertNoEF(da.DTO);
             }
             else if (mode == StandardActionName.SaveModify)
             {
-                SetStandardField(model);
+                SetStandardFieldWithoutComCode(model);
                 da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.Update;
                 da.DTO.Model = (MISS01P001Model)model;
-
-                da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
                 da.UpdateNoEF(da.DTO);
+            }
+            else if (mode == "Upload")
+            {
+                da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.CallSPInsertExcel;
+                SetStandardFieldWithoutComCode(model);
+                da.DTO.Model = (MISS01P001Model)model;
+
+                da.InsertNoEF(da.DTO);
+
+                if (da.DTO.Result.IsResult)
+                {
+                    da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.ValidateExl;
+                    da.UpdateNoEF(da.DTO);
+                }
+            }
+            else if (mode == "SaveUpload")
+            {
+                da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.SaveExl;
+                SetStandardFieldWithoutComCode(model);
+                da.DTO.Model = (MISS01P001Model)model;
+
+                da.InsertNoEF(da.DTO);
             }
 
             return da.DTO.Result;

@@ -350,3 +350,199 @@ ERROR 2019-04-01 15:18:45,226 BaseController.OnException -
 Path : MIS/MISS02P001/Add
 Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS02P001\Add.cshtml(33): error CS1061: 'HtmlHelper<MISS02P001Model>' does not contain a definition for 'InputFor' and no extension method 'InputFor' accepting a first argument of type 'HtmlHelper<MISS02P001Model>' could be found (are you missing a using directive or an assembly reference?)
 
+ERROR 2019-04-09 16:19:44,011 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:22:30,009 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:22:33,791 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:31:48,769 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:31:48,885 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:32:16,029 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:32:16,076 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:40:58,661 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:41:00,480 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:41:36,161 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:41:36,213 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:42:39,521 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:43:18,004 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:26:38,294 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:26:39,076 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:28:39,963 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:28:41,542 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:30:36,231 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:33:14,347 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:54:56,160 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-11 18:39:30,051 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Cannot find column 1.
+
+ERROR 2019-04-13 22:37:19,924 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Cannot find column 1.
+
+ERROR 2019-04-13 22:40:55,736 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Cannot find table 0.
+
+ERROR 2019-04-13 22:41:45,762 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Cannot find table 0.
+
+ERROR 2019-04-13 22:43:59,695 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Cannot find table 0.
+
+ERROR 2019-04-14 16:52:17,677 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'App Code' does not belong to table Sheet1.
+
+ERROR 2019-04-14 23:25:59,845 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'App Code' does not belong to table Sheet1.
+
+ERROR 2019-04-14 23:32:02,535 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'App Code' does not belong to table Sheet1.
+
+ERROR 2019-04-19 13:41:55,348 BaseController.OnException - 
+Path : MIS/MISS01P001/LoadExcel
+Error Messages: This SqlTransaction has completed; it is no longer usable.
+
+ERROR 2019-04-19 13:46:30,995 BaseController.OnException - 
+Path : MIS/MISS01P001/LoadExcel
+Error Messages: This SqlTransaction has completed; it is no longer usable.
+
+ERROR 2019-04-19 16:11:28,617 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:12:53,680 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:13:30,779 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:14:46,088 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:15:06,449 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Object cannot be cast from DBNull to other types.
+
+ERROR 2019-04-19 16:15:22,682 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Object cannot be cast from DBNull to other types.
+
+ERROR 2019-04-19 16:15:30,023 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Object cannot be cast from DBNull to other types.
+
+ERROR 2019-04-19 16:16:48,765 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:20:24,482 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:20:38,916 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:20:54,484 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:21:29,796 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 09:35:09,291 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 09:41:36,756 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 09:48:52,556 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 09:49:34,740 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:19:34,370 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:22:02,269 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:23:58,725 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:25:04,987 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:27:58,503 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:29:37,401 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:30:55,546 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:31:51,988 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:33:32,109 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:34:13,466 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:39:26,356 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:39:55,584 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:41:20,506 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:42:21,019 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:43:11,772 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:45:06,279 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:49:11,449 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-26 17:17:40,251 BaseController.OnException - 
+Path : MST/MSTS01P001/Add
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MST\Views\MSTS01P001\Add.cshtml(24): error CS0311: The type 'FluentBootstrap.Mvc.Forms.HiddenFor<DataAccess.MST.MSTS01P001Model, string>' cannot be used as type parameter 'TTag' in the generic type or method 'TagExtensions.SetIndexParameter<TConfig, TTag>(ComponentBuilder<TConfig, TTag>, int)'. There is no implicit reference conversion from 'FluentBootstrap.Mvc.Forms.HiddenFor<DataAccess.MST.MSTS01P001Model, string>' to 'FluentBootstrap.Tag'.
+

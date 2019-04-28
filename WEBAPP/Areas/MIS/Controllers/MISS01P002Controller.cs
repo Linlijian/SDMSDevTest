@@ -428,13 +428,15 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return JsonAllowGet(da.DTO.Model);
         }
-        public ActionResult StempTimeQA(MISS01P002Model model)
+        [HttpPost]
+        public ActionResult StempTimeQA(List<MISS01P002Model> data)
         {
             var da = new MISS01P002DA();
             SetStandardErrorLog(da.DTO);
             da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.TimeStemp;
 
-            da.DTO.Model = model;
+            //da.DTO.Model = model;
+            da.DTO.Models = (List<MISS01P002Model>)data;
             da.DTO.Model.FLAG = "QA";
             da.DTO.Model.CRET_BY = SessionHelper.SYS_USER_ID;
             da.UpdateNoEF(da.DTO);
@@ -442,13 +444,15 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return JsonAllowGet(da.DTO.Model);
         }
-        public ActionResult StempTimePD(MISS01P002Model model)
+        [HttpPost]
+        public ActionResult StempTimePD(List<MISS01P002Model> data)
         {
             var da = new MISS01P002DA();
             SetStandardErrorLog(da.DTO);
             da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.TimeStemp;
 
-            da.DTO.Model = model;
+            //da.DTO.Model = model;
+            da.DTO.Models = (List<MISS01P002Model>)data;
             da.DTO.Model.FLAG = "PD";
             da.DTO.Model.CRET_BY = SessionHelper.SYS_USER_ID;
             da.UpdateNoEF(da.DTO);
@@ -475,12 +479,23 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             var da = new MISS01P002DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.MoveToClose;
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.MoveToCancel;
 
             da.DTO.Model = model;
-            da.DTO.Model.FLAG = "S";
             da.DTO.Model.CRET_BY = SessionHelper.SYS_USER_ID;
-            da.DTO.Model.CRET_DATE = DateTime.Now;
+            da.UpdateNoEF(da.DTO);
+
+
+            return JsonAllowGet(da.DTO.Model);
+        }
+        public ActionResult ReDo(MISS01P002Model model)
+        {
+            var da = new MISS01P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.ReDo;
+
+            da.DTO.Model = model;
+            da.DTO.Model.CRET_BY = SessionHelper.SYS_USER_ID;
             da.UpdateNoEF(da.DTO);
 
 
@@ -536,7 +551,8 @@ namespace WEBAPP.Areas.MIS.Controllers
                 SetDefaulButton(StandardButtonMode.Index);
                 RemoveStandardButton("DeleteSearch");
                 RemoveStandardButton("Add");
-                //AddButton(StandButtonType.ButtonAjax, "btnSearchFollowUp", Translation.CenterLang.Center.Save, iconCssClass: FaIcons.FaSearch, url: Url.Action("SearchFollowUp"), isValidate: true);
+                AddButton(StandButtonType.ButtonAjax, "btnStamTimeQA", Translation.MIS.MISS01P002.TIMESTEMP_QA, iconCssClass: FaIcons.FaClockO, url: Url.Action("StempTimeQA"));
+                AddButton(StandButtonType.ButtonAjax, "btnStamTimePD", Translation.MIS.MISS01P002.TIMESTEMP_PD, iconCssClass: FaIcons.FaClockO, url: Url.Action("StempTimePD"));
             }
             else if (ACTIVE_STEP == "4")
             {

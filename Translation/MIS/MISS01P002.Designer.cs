@@ -97,6 +97,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannel.
+        /// </summary>
+        public static string CANCEL {
+            get {
+                return ResourceManager.GetString("CANCEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string CLOSE {
@@ -187,7 +196,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Close DAte.
+        ///   Looks up a localized string similar to Close Date.
         /// </summary>
         public static string ISE_DATE_CLOSE {
             get {
@@ -291,6 +300,15 @@ namespace Translation.MIS {
         public static string OWNER {
             get {
                 return ResourceManager.GetString("OWNER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ReDo.
+        /// </summary>
+        public static string REDO {
+            get {
+                return ResourceManager.GetString("REDO", resourceCulture);
             }
         }
         

@@ -88,7 +88,7 @@ namespace Translation.MST {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Issue Type.
+        ///   Looks up a localized string similar to Defect.
         /// </summary>
         public static string ISSUE_TYPE {
             get {

@@ -21,15 +21,7 @@
         {
             using (var row1 = Html.Bootstrap().GridRow().Begin())
             {
-                using (row1.GridColumn(6).Begin())
-                {
-                   @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
-                }
-                using (row1.GridColumn(6).Begin())
-                {
-                    @form.InputFor(t => t.ISSUE_TYPE)
-                    //@form.SelectFor(t => t.KEY_ID, Model.KEY_ID_MODEL.ToSelectList("Value", "Text", Model.KEY_ID), IsSearch: true)
-                }
+
             }
         }
     }
@@ -47,19 +39,19 @@
         new GridConfig
         {
             GetConfig = new DefaultConfig(Url.Action("Search")),
-            DeleteConfig = new DefaultConfig(Url.Action("DeleteSearch")),
-            DefaultBinding = Model.IsDefaultSearch,
+            DefaultBinding = true,
             ScrollX = false,
             WidthType = ColumnsWidthType.Percentage
         },
-        Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("PIT_ID"))),
+        //Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("PIT_ID"))),
         new GridColumn("PIT_ID").SetNotVisible().SetKey(),
         new GridColumn("COM_CODE").SetNotVisible().SetKey(),
-        new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10),
-        new GridColumn("ISSUE_TYPE", Translation.MST.MSTS03P001.ISSUE_TYPE, 10).SetKey(),
-        new GridColumn("PRIORITY_NAME", Translation.MST.MSTS03P001.PRIORITY_NAME, 10),
-        new GridColumn("REMASK", Translation.MST.MSTS03P001.REMASK, 90),
-        new GridColumn("IS_FREE", Translation.MST.MSTS03P001.IS_FREE, 10, render: "RENDER_ISUSE")
+        //new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10),
+        new GridColumn("ISSUE_TYPE", Translation.MST.MSTS03P002.ISSUE_TYPE, 10).SetKey(),
+        new GridColumn("PRIORITY_NAME", Translation.MST.MSTS03P002.PRIORITY_NAME, 10),
+        new GridColumn("REMASK", Translation.MST.MSTS03P002.REMASK, 90),
+        new GridColumn("IS_FREE", Translation.MST.MSTS03P002.IS_FREE, 10, render: "RENDER_ISUSE"),
+        new GridColumn("IS_CONS", Translation.MST.MSTS03P002.IS_CONS, 10, render: "RENDER_ISCONS")
         )
 
     <script>
@@ -67,9 +59,22 @@
             var tag = '';
 
             if (!isNullOrEmpty(data)) {
-                if (data == "N") {
+                @*if (data == "N") {
                     tag += '<center><i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-180 red"></i></center>';
-                } else if (data == "Y") {
+                } else*@ if (data == "Y") {
+                    tag += '<center><i class="ace-icon fa @FaIcons.FaCheckCircle align-top bigger-180 green"></i></center>'
+                }
+            }
+
+            return tag;
+        };
+        var RENDER_ISCONS = function (data, type, full, meta) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                @*if (data == "N") {
+                    tag += '<center><i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-180 red"></i></center>';
+                } else*@ if (data == "Y") {
                     tag += '<center><i class="ace-icon fa @FaIcons.FaCheckCircle align-top bigger-180 green"></i></center>'
                 }
             }

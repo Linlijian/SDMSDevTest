@@ -30,6 +30,9 @@ namespace DataAccess.MIS
         public const string GetAllStatus = "GetAllStatus";
         public const string GetMenuPrgName = "GetMenuPrgName";
         public const string GetReOpen = "GetReOpen";
-
+        public const string GetExl = "GetExl";
+        public const string CallSPInsertExcel = "CallSPInsertExcel"; 
+        public const string ValidateExl = "ValidateExl";
+        public const string SaveExl = "SaveExl";
     }
 }

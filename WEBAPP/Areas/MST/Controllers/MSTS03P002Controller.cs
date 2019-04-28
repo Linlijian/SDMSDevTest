@@ -49,7 +49,7 @@ namespace WEBAPP.Areas.MST.Controllers
         #region Action 
         public ActionResult Index()
         {
-            SetDefaulButton(StandardButtonMode.Index);
+            SetDefaulButton(StandardButtonMode.Other);
             if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
             {
                 localModel = TempSearch.CloneObject();

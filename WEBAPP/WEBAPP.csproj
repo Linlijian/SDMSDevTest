@@ -839,6 +839,7 @@
     <Content Include="Areas\SEC\Views\SECS01P001\ConfMod.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P002\FilePacket.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P001\AddRefNo.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P001\Upload.cshtml" />
     <None Include="Properties\PublishProfiles\A.pubxml" />
     <None Include="Properties\PublishProfiles\March.pubxml" />
     <None Include="Properties\PublishProfiles\Meiio.pubxml" />
@@ -1072,6 +1073,7 @@
     <Content Include="Views\Partials\_ButtonHeaderWizardCircle.cshtml" />
     <Content Include="Uploads\Template\MIS\MISS02TP001.xlsx" />
     <Content Include="Views\Partials\_LayoutNotification.cshtml" />
+    <Content Include="Uploads\Template\MIS\MISS01TP001.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\AdminBase\" />

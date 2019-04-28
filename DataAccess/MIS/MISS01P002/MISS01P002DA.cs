@@ -45,7 +45,13 @@ namespace DataAccess.MIS
 	                                ,t.ASSIGN_STATUS
 	                                ,tt.COM_NAME_E
 	                                ,t.ISE_KEY
-	                                ,t.ISE_STATUS
+	                                ,(
+		                                CASE t.ISE_STATUS
+			                                WHEN 'S'
+				                                THEN 'Close'
+			                                ELSE 'Cancel'
+			                                END
+		                             ) ISE_STATUS
 	                                ,t.ISE_DATE_OPENING
 	                                ,t.ISSUE_BY
                                 FROM VSMS_COMPANY tt
@@ -59,13 +65,14 @@ namespace DataAccess.MIS
 		                                ,t.ISE_STATUS
 		                                ,t.ISE_DATE_OPENING
 		                                ,tt.ISSUE_BY
+                                        ,t.USER_ID
 	                                FROM VSMS_ISSTATOPSS t
 	                                INNER JOIN VSMS_ISSUE tt ON t.COM_CODE = tt.COM_CODE
 		                                AND t.ISE_NO = tt.NO
 	                                ) t ON t.COM_CODE = tt.COM_CODE
                                 WHERE (1 = 1)
-	                                AND t.ASSIGN_STATUS = 'E'
-	                                AND t.ISE_STATUS = 'S'
+	                                AND t.ASSIGN_STATUS in ('E', 'C')
+	                                AND t.ISE_STATUS in ('S', 'C') 
                                      ";
 
             var parameters = CreateParameter();
@@ -378,19 +385,21 @@ namespace DataAccess.MIS
                 case MISS01P002ExecuteType.UpdateFilePacket: return UpdateFilePacket(dto);
                 case MISS01P002ExecuteType.TimeStemp: return TimeStemp(dto);
                 case MISS01P002ExecuteType.MoveToClose: return ConfirmTest(dto);
+                case MISS01P002ExecuteType.MoveToCancel: return ConfirmCancel(dto);
+                case MISS01P002ExecuteType.ReDo: return ConfirmReDo(dto);
             }
             return dto;
         }
-        private MISS01P002DTO TimeStemp(MISS01P002DTO dto)
+        private MISS01P002DTO ConfirmReDo(MISS01P002DTO dto)
         {
             var parameters = CreateParameter();
             parameters.AddParameter("error_code", null, ParameterDirection.Output);
             parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
-            parameters.AddParameter("NO", dto.Model.ISE_NO);
-            parameters.AddParameter("FALG", dto.Model.FLAG);
+            parameters.AddParameter("NO", dto.Model.NO);
+            parameters.AddParameter("ISE_KEY", dto.Model.ISE_KEY);
             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
 
-            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSTATOPSS_004]", parameters);
+            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSTATOPSS_007]", parameters);
             if (!result.Status)
             {
                 dto.Result.IsResult = false;
@@ -411,6 +420,83 @@ namespace DataAccess.MIS
                 }
             }
 
+            return dto;
+        }
+        private MISS01P002DTO ConfirmCancel(MISS01P002DTO dto)
+        {
+            var parameters = CreateParameter();
+            parameters.AddParameter("error_code", null, ParameterDirection.Output);
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("NO", dto.Model.NO);
+            parameters.AddParameter("FLAG", dto.Model.FLAG);
+            parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
+
+            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSTATOPSS_006]", parameters);
+            if (!result.Status)
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+                dto.Model.FLAG = "N";
+            }
+            else
+            {
+                if (result.OutputData["error_code"].ToString().Trim() != "0")
+                {
+                    dto.Result.IsResult = false;
+                    dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
+                    dto.Model.FLAG = result.OutputData["error_code"].ToString().Trim();
+                }
+                else
+                {
+                    dto.Model.FLAG = "Y";
+                }
+            }
+
+            return dto;
+        }
+        private MISS01P002DTO TimeStemp(MISS01P002DTO dto)
+        {
+            if (dto.Models.Count() > 0)
+            {
+                var FLAG = dto.Model.FLAG;
+                foreach (var item in dto.Models)
+                {
+                    var parameters = CreateParameter();
+                    parameters.AddParameter("error_code", null, ParameterDirection.Output);
+                    parameters.AddParameter("COM_CODE", item.COM_CODE);
+                    parameters.AddParameter("NO",item.ISE_NO);
+                    parameters.AddParameter("FALG", FLAG);
+                    parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
+
+                    var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_ISSTATOPSS_004]", parameters);
+                    if (!result.Status)
+                    {
+                        dto.Result.IsResult = false;
+                        dto.Result.ResultMsg = result.ErrorMessage;
+                        dto.Model.FLAG = "N";
+                        break;
+                    }
+                    else
+                    {
+                        if (result.OutputData["error_code"].ToString().Trim() != "0")
+                        {
+                            dto.Result.IsResult = false;
+                            dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
+                            dto.Model.FLAG = result.OutputData["error_code"].ToString().Trim();
+                            break;
+                        }
+                        else
+                        {
+                            dto.Model.FLAG = "Y";
+                        }
+                    }
+                }
+            }
+            else
+            {
+                dto.Model.FLAG = "Are you select list yet?";
+            }
+            
             return dto;
         }
         private MISS01P002DTO ConfirmTest(MISS01P002DTO dto)
