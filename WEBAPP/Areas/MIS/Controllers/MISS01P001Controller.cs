@@ -71,11 +71,14 @@ namespace WEBAPP.Areas.MIS.Controllers
         public ActionResult Info(MISS01P001Model model)
         {
             var da = new MISS01P001DA();
+            //model.APP_CODE = model.COM_CODE;
             da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetByID;
             da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
             da.DTO.Model.NO = model.NO;
+            da.DTO.Model.APP_CODE = model.COM_CODE;
             da.SelectNoEF(da.DTO);
             localModel = da.DTO.Model;
+
 
             SetDateToString(da.DTO.Model);
             SetDefaulButton(StandardButtonMode.Other);

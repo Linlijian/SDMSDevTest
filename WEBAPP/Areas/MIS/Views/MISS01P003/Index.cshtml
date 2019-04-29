@@ -20,13 +20,21 @@
         {
             using (var row1 = Html.Bootstrap().GridRow().Begin())
             {
-                using (row1.GridColumn(6).Begin())
+                using (row1.GridColumn(2).Begin())
+                {
+                    
+                }
+                using (row1.GridColumn(4).Begin())
                 {
                     @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
                 }
-                using (row1.GridColumn(6).Begin())
+                using (row1.GridColumn(4).Begin())
                 {
                     @form.SelectFor(t => t.STATUS, Model.STATUS_MODEL.ToSelectList("Value", "Text", Model.STATUS), IsSearch: true)
+                }
+                using (row1.GridColumn(2).Begin())
+                {
+                   
                 }
             }
         }
@@ -51,12 +59,12 @@
             WidthType = ColumnsWidthType.Percentage
         },
         new GridColumn("ISE_KEY").SetNotVisible().SetKey(),
-        new GridColumn("ASSIGN_STATUS", null, 1, align: ColumnsTextAlign.Center, render: "RENDER_DONE"),
+        new GridColumn("ASSIGN_STATUS", Translation.MIS.MISS01P003.CONFIRM_FIXED, 1, align: ColumnsTextAlign.Center, render: "RENDER_DONE"),
         new GridColumn("COM_NAME_E", Translation.CenterLang.Center.APP_CODE, 10).SetKey(),
         new GridColumn("ISE_NO", Translation.MIS.MISS01P003.ISE_NO, 10, ColumnsTextAlign.Right).SetKey(),
         new GridColumn("RESPONSE_BY", Translation.MIS.MISS01P003.RESPONSE_BY, 10).SetKey(),
         new GridColumn("ISE_DATE_OPENING", Translation.MIS.MISS01P003.ISE_DATE_OPENING, 10, ColumnsType.DateTime),
-        new GridColumn("ASSIGN_STATUS", "", 4, align : ColumnsTextAlign.Center, render: "RENDER_CONFIRM")
+        new GridColumn("ASSIGN_STATUS", Translation.MIS.MISS01P003.ACCEPT_REJECT, 4, align : ColumnsTextAlign.Center, render: "RENDER_CONFIRM")
 
         )
 
@@ -120,11 +128,11 @@
             var tag = '';
             if (data == 'W') {
                 tag += '<a href="javascript:void(0)" id="btnAGREED" name="btnAGREED" >';
-                tag += '<i class="ace-icon fa @FaIcons.FaCheckCircle align-top bigger-200 blue"></i>';
+                tag += '<i class="ace-icon fa @FaIcons.FaCheck align-top bigger-200 blue"></i>';
                 tag += '</a>';
                 //tag += ' || '
                 tag += '<a href="javascript:void(0)" id="btnCANCEL" name="btnCANCEL" >';
-                tag += '<i class="ace-icon fa @FaIcons.FaCheckCircleO align-top bigger-200 blue"></i>';
+                tag += '<i class="ace-icon fa @FaIcons.FaClose align-top bigger-200 red"></i>';
                 tag += '</a>';
             }
             else if (data == 'D') {
@@ -134,10 +142,10 @@
                 tag += 'Done';
             }
             else if (data == 'T') {
-               tag += 'Testing';
+                tag += 'Testing';
             }
             else if (data == 'C') {
-               tag += 'Cancel';
+                tag += 'Cancel';
             }
             return tag;
         };
@@ -213,7 +221,7 @@
                 tag += '<i class="ace-icon fa @FaIcons.FaCogs align-top bigger-130 blue"></i>';
                 tag += '</a>';
             } else {
-                tag+='XXX'
+                tag += 'XXX'
             }
 
             return tag;

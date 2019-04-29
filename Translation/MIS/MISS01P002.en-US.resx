@@ -138,6 +138,9 @@
   <data name="COMPLETE" xml:space="preserve">
     <value>Fixed Complete</value>
   </data>
+  <data name="CONFIRM" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
   <data name="DEPLOY_PD" xml:space="preserve">
     <value>Deploy PD Date</value>
   </data>
@@ -214,19 +217,19 @@
     <value>Status</value>
   </data>
   <data name="STEP_1" xml:space="preserve">
-    <value>Issue Information</value>
+    <value>Opening</value>
   </data>
   <data name="STEP_2" xml:space="preserve">
-    <value>Assignment Issue</value>
+    <value>On Process</value>
   </data>
   <data name="STEP_3" xml:space="preserve">
-    <value>Issue Status</value>
+    <value>Follow Up</value>
   </data>
   <data name="STEP_4" xml:space="preserve">
-    <value>Status4Golive</value>
+    <value>Go live</value>
   </data>
   <data name="STEP_5" xml:space="preserve">
-    <value>Status5Close</value>
+    <value>Close</value>
   </data>
   <data name="TARGET_DATE" xml:space="preserve">
     <value>Target Date</value>

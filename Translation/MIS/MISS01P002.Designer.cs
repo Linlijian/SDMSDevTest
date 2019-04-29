@@ -124,6 +124,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        public static string CONFIRM {
+            get {
+                return ResourceManager.GetString("CONFIRM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deploy PD Date.
         /// </summary>
         public static string DEPLOY_PD {
@@ -349,7 +358,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Issue Information.
+        ///   Looks up a localized string similar to Opening.
         /// </summary>
         public static string STEP_1 {
             get {
@@ -358,7 +367,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assignment Issue.
+        ///   Looks up a localized string similar to On Process.
         /// </summary>
         public static string STEP_2 {
             get {
@@ -367,7 +376,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Issue Status.
+        ///   Looks up a localized string similar to Follow Up.
         /// </summary>
         public static string STEP_3 {
             get {
@@ -376,7 +385,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Status4Golive.
+        ///   Looks up a localized string similar to Go live.
         /// </summary>
         public static string STEP_4 {
             get {
@@ -385,7 +394,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Status5Close.
+        ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string STEP_5 {
             get {

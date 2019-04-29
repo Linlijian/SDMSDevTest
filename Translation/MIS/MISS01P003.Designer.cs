@@ -61,6 +61,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept | Reject.
+        /// </summary>
+        public static string ACCEPT_REJECT {
+            get {
+                return ResourceManager.GetString("ACCEPT_REJECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Agreed.
         /// </summary>
         public static string AGREED {
@@ -75,6 +84,15 @@ namespace Translation.MIS {
         public static string CANCEL {
             get {
                 return ResourceManager.GetString("CANCEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fixed Done.
+        /// </summary>
+        public static string CONFIRM_FIXED {
+            get {
+                return ResourceManager.GetString("CONFIRM_FIXED", resourceCulture);
             }
         }
         
