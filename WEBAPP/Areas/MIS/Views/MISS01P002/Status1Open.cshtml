@@ -91,14 +91,14 @@
         new GridColumn("NO").SetNotVisible().SetKey(),
 
         Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.MIS.MISS01P002.ASSIGN, Url.Action("Assignment"), FaIcons.FaPencil, TextColor.orange2, "(data.ASSIGN_USER == 'X')", new VSMParameter("NO"), new VSMParameter("COM_CODE"))),
-       // Html.GridColumnCommand(Html.GridCommand(Translation.MIS.MISS01P002.CANCEL, Translation.MIS.MISS01P002.CANCEL, Url.Action("Cancel"), FaIcons.FaClose, TextColor.red, new VSMParameter("NO"), new VSMParameter("COM_CODE"))),
+        //Html.GridColumnCommand(Html.GridCommand(Translation.MIS.MISS01P002.CANCEL, Translation.MIS.MISS01P002.CANCEL, Url.Action("Cancel"), FaIcons.FaClose, TextColor.red, new VSMParameter("NO"), new VSMParameter("COM_CODE"))),
         new GridColumn(null, Translation.MIS.MISS01P002.CANCEL, 2, align: ColumnsTextAlign.Center, render: "RENDER_CANCEL"),
         new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 4),
         new GridColumn("NO", Translation.MIS.MISS01P002.NO, 4,ColumnsTextAlign.Right),
         new GridColumn("ISSUE_DATE", Translation.MIS.MISS01P002.ISSUE_DATE, 10, ColumnsType.DateTime),
         new GridColumn("TARGET_DATE", Translation.MIS.MISS01P002.TARGET_DATE, 10, ColumnsType.DateTime),
-        new GridColumn("RESPONSE_BY", Translation.MIS.MISS01P002.OWNER, 10),
-        new GridColumn("ASSIGN_USER", Translation.MIS.MISS01P002.ASSIGN_USER, 10, render: "RENDER_ASSIGNMENT")
+        new GridColumn("RESPONSE_BY", Translation.MIS.MISS01P002.OWNER, 6),
+        new GridColumn("ASSIGN_USER", Translation.MIS.MISS01P002.ASSIGN_USER, 10, align: ColumnsTextAlign.Center, render: "RENDER_ASSIGNMENT")
 
         )
     <script>
