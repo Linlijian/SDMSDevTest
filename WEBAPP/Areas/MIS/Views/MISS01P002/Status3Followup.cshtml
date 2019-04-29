@@ -20,40 +20,24 @@
         {
             using (var row1 = Html.Bootstrap().GridRow().Begin())
             {
-                using (row1.GridColumn(2).Begin())
-                {
-
-                }
-                using (row1.GridColumn(4).Begin())
+                using (row1.GridColumn(6).Begin())
                 {
                     @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
                 }
-                using (row1.GridColumn(4).Begin())
+                using (row1.GridColumn(6).Begin())
                 {
                     @form.SelectFor(t => t.ASSIGN_USER, Model.ASSIGN_USER_MODEL.ToSelectList("Value", "Text", Model.ASSIGN_USER), IsSearch: true).SetControlLabel(Translation.MIS.MISS01P002.USER_ID)
-                }
-                using (row1.GridColumn(2).Begin())
-                {
-
                 }
             }
             using (var row1 = Html.Bootstrap().GridRow().Begin())
             {
-                using (row1.GridColumn(2).Begin())
-                {
-
-                }
-                using (row1.GridColumn(4).Begin())
+                using (row1.GridColumn(6).Begin())
                 {
                     @form.DatepickerFor(a => a.ISSUE_DATE_F).SetControlLabel(Translation.MIS.MISS01P002.ISE_DATE_FOLLOWUP)
                 }
-                using (row1.GridColumn(4).Begin())
+                using (row1.GridColumn(6).Begin())
                 {
                     @form.DatepickerFor(a => a.ISSUE_DATE_T)
-                }
-                using (row1.GridColumn(2).Begin())
-                {
-
                 }
             }
         }
@@ -358,7 +342,7 @@
                 confirm: {
                     text: 'OK',
                     btnClass: "btn-primary",
-                    action: DeleteDetail
+                    action: STEMP_QA
                 },
                 cancel: {
                     text: 'Cancel',
@@ -367,7 +351,7 @@
             }
         })
 
-        function DeleteDetail() {
+        function STEMP_QA() {
             var data = GridSearch.rows({ selected: true }).data();
             if (data != undefined && data != null && data.length > 0) {
                 var nData = { data: [] };
@@ -465,7 +449,7 @@
             });
         })
         /************************************************END**************************************************/
-        /*********************************************STEMP_QA_V2*********************************************/
+        /*********************************************STEMP_PD_V2*********************************************/
         $("#btnStamTimePD").confirm({
             title: null,
             content: "<br/>Are you sure to continue?",
@@ -474,7 +458,7 @@
                 confirm: {
                     text: 'OK',
                     btnClass: "btn-primary",
-                    action: DeleteDetail
+                    action: STEMP_PD
                 },
                 cancel: {
                     text: 'Cancel',
@@ -483,7 +467,7 @@
             }
         })
 
-        function DeleteDetail() {
+        function STEMP_PD() {
             var data = GridSearch.rows({ selected: true }).data();
             if (data != undefined && data != null && data.length > 0) {
                 var nData = { data: [] };
