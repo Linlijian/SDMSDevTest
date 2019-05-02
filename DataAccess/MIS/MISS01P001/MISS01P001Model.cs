@@ -61,6 +61,7 @@ namespace DataAccess.MIS
         public string STATUS { get; set; }
         public IEnumerable<DDLCenterModel> STATUS_MODEL { get; set; }
         public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
+        public IEnumerable<DDLCenterModel> RESPONSE_BY_MODEL { get; set; }
 
         public string ACTIVE_STEP { get; set; }
         public string STR_ISSUE_DATE { get; set; }
@@ -177,6 +178,7 @@ namespace DataAccess.MIS
             RuleFor(t => t.NO).NotEmpty();
             RuleFor(t => t.APP_CODE).NotEmpty();
             RuleFor(t => t.DETAIL).NotEmpty();
+            RuleFor(t => t.RESPONSE_BY).NotEmpty();
         }
         private void Valid()
         {
@@ -192,6 +194,7 @@ namespace DataAccess.MIS
             RuleFor(t => t.NO).NotEmpty();
             RuleFor(t => t.APP_CODE).NotEmpty();
             RuleFor(t => t.DETAIL).NotEmpty();
+            RuleFor(t => t.RESPONSE_BY).NotEmpty();
 
             RuleFor(t => t.MAN_PLM_PL).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
             RuleFor(t => t.MAN_PLM_DBA).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(99.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
