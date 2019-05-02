@@ -27,38 +27,9 @@ namespace DataAccess.MIS
                 case MISS01P001ExecuteType.GetAll: return GetAll(dto);
                 case MISS01P001ExecuteType.GetByID: return GetByID(dto);
                 case MISS01P001ExecuteType.GetNo: return GetNo(dto);
-                case MISS01P001ExecuteType.GetMenuPrgName: return GetMenuPrgName(dto);
                 case MISS01P001ExecuteType.GetReOpen: return GetReOpen(dto);
                 case MISS01P001ExecuteType.GetExl: return GetExl(dto);
             }
-            return dto;
-        }
-        private MISS01P001DTO GetMenuPrgName(MISS01P001DTO dto)
-        {
-            string strSQL = @"	SELECT COM_CODE
-	                                ,PS_ID
-	                                ,NO
-	                                ,PRG_CODE PRG_NAME
-	                                ,MENU
-	                                ,MODULE
-	                                ,ISSUE_BY
-	                                ,CRET_BY
-	                                ,CRET_DATE
-                                FROM SDDB.dbo.VSMS_PRGASYS
-                                WHERE COM_CODE = @APP_CODE
-	                                AND NO = @NO
-                                ";
-            var parameters = CreateParameter();
-            parameters.AddParameter("APP_CODE", dto.Model.APP_CODE); //checked
-            parameters.AddParameter("NO", dto.Model.NO);
-
-            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
-
-            if (result.Success(dto))
-            {
-                dto.Model = result.OutputDataSet.Tables[0].ToObject<MISS01P001Model>();
-            }
-
             return dto;
         }
         private MISS01P001DTO GetExl(MISS01P001DTO dto)
@@ -115,8 +86,8 @@ namespace DataAccess.MIS
             }
             if (!dto.Model.MODULE.IsNullOrEmpty())
             {
-                strSQL += " AND MODULE = @MODULE";
-                parameters.AddParameter("MODULE", dto.Model.MODULE);
+                strSQL += " AND MODULE = @DEFECT";
+                parameters.AddParameter("MODULE", dto.Model.DEFECT);
             }
             if (!dto.Model.STATUS.IsNullOrEmpty())
             {
@@ -160,63 +131,14 @@ namespace DataAccess.MIS
             if (result.Success(dto))
             {
                 dto.Model = result.OutputDataSet.Tables[0].ToObject<MISS01P001Model>();
-                dto.Model.APP_CODE = dto.Model.COM_CODE; //checked
-                if (!dto.Model.REF_NO.IsNullOrEmpty())
-                {
-                    GetRef(dto);
-                }
+                dto.Model.APP_CODE = dto.Model.COM_CODE; //checked=
             }
             return dto;
         }
         private MISS01P001DTO GetReOpen(MISS01P001DTO dto)
         {
-            string strSQL = @"	SELECT NO
-	                                ,PRG_CODE PRG_NAME
-	                                ,MENU
-	                                ,MODULE
-                                FROM VSMS_PRGASYS
-                                WHERE COM_CODE = @app_code
-                                    AND NO = @ref_no
-                                ";
-            var parameters = CreateParameter();
-            parameters.AddParameter("app_code", dto.Model.APP_CODE); //checked
-            parameters.AddParameter("ref_no", dto.Model.REF_NO);
-
-            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
-
-            if (result.Success(dto))
-            {
-                dto.Model.PROGRAM_NAME_R = result.OutputDataSet.Tables[0].Rows[0][1].ToString();
-                dto.Model.MENU_R = result.OutputDataSet.Tables[0].Rows[0][2].ToString();
-                dto.Model.MODULE_R = result.OutputDataSet.Tables[0].Rows[0][3].ToString();
-                dto.Model.COM_CODE = dto.Model.APP_CODE;
-                GetNo(dto);
-            }
-
-            return dto;
-        }
-        private MISS01P001DTO GetRef(MISS01P001DTO dto)
-        {
-            string strSQL = @"	SELECT NO
-	                                ,PRG_CODE PRG_NAME
-	                                ,MENU
-	                                ,MODULE
-                                FROM VSMS_PRGASYS
-                                WHERE COM_CODE = @app_code
-                                    AND NO = @ref_no
-                                ";
-            var parameters = CreateParameter();
-            parameters.AddParameter("app_code", dto.Model.APP_CODE); //checked
-            parameters.AddParameter("ref_no", dto.Model.REF_NO);
-
-            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
-
-            if (result.Success(dto))
-            {
-                dto.Model.PROGRAM_NAME_R = result.OutputDataSet.Tables[0].Rows[0][1].ToString();
-                dto.Model.MENU_R = result.OutputDataSet.Tables[0].Rows[0][2].ToString();
-                dto.Model.MODULE_R = result.OutputDataSet.Tables[0].Rows[0][3].ToString();
-            }
+            dto.Model.COM_CODE = dto.Model.APP_CODE;
+            GetNo(dto);
 
             return dto;
         }
@@ -269,8 +191,6 @@ namespace DataAccess.MIS
             parameters.AddParameter("ISSUE_IMG", dto.Model.ISSUE_IMG);
             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
-            parameters.AddParameter("MENU", dto.Model.MENU);
-            parameters.AddParameter("PRG_NAME", dto.Model.PRG_NAME);
             parameters.AddParameter("REF_NO", dto.Model.REF_NO);
             parameters.AddParameter("ISS_TYPE", dto.Model.ISS_TYPE);
             parameters.AddParameter("ISS_YEAR", dto.Model.ISS_YEAR);
@@ -351,8 +271,6 @@ namespace DataAccess.MIS
                     parameters.AddParameter("ISSUE_DATE", item.ISSUE_DATE);
                     parameters.AddParameter("ISSUE_DATE_PERIOD", item.ISSUE_DATE_PERIOD);
                     parameters.AddParameter("MODULE", item.MODULE);
-                    parameters.AddParameter("PRG_CODE", item.PRG_CODE);
-                    parameters.AddParameter("MENU", item.MENU);
                     parameters.AddParameter("DETAIL", item.DETAIL);
                     parameters.AddParameter("ROOT_CAUSE", item.ROOT_CAUSE);
                     parameters.AddParameter("SOLUTION", item.SOLUTION);
@@ -446,8 +364,6 @@ namespace DataAccess.MIS
             parameters.AddParameter("MAN_PLM_DBA", dto.Model.MAN_PLM_DBA);
             parameters.AddParameter("CRET_BY", dto.Model.CRET_BY);
             parameters.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
-            parameters.AddParameter("MENU", dto.Model.MENU);
-            parameters.AddParameter("PRG_NAME", dto.Model.PRG_NAME);
             parameters.AddParameter("REF_NO", dto.Model.REF_NO);
             parameters.AddParameter("CLOSE_DATE", dto.Model.CLOSE_DATE);
             parameters.AddParameter("DEPLOY_QA", dto.Model.DEPLOY_QA);

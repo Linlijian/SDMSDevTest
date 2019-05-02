@@ -122,8 +122,12 @@
             {
                 @formPopup.InputFor(t => t.USER_ID, isRequired: true).SetReadonly()
             }
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.SelectFor(t => t.COM_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
+            }
         }
-        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        @*using (var rowInfo = Html.Bootstrap().GridRow().Begin())
         {
             using (rowInfo.GridColumn(6).Begin())
             {
@@ -133,7 +137,7 @@
             {
                 @formPopup.InputFor(t => t.MODULE, isRequired: true)
             }
-        }
+        }*@
     }
     @Html.GetVSMModalDetailEnd()
 }
@@ -152,10 +156,10 @@
 
             new GridColumn("COM_CODE").SetNotVisible().SetKey(),
             new GridColumn("USER_ID").SetNotVisible().SetKey(),
-            new GridColumn("MODULE").SetNotVisible().SetKey(),
+            //new GridColumn("MODULE").SetNotVisible().SetKey(),
 
             new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 20),
-            new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20),
+            //new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20),
             new GridColumn("USER_ID", Translation.SEC.SECS01P001.USER_ID, 20)
         )
 

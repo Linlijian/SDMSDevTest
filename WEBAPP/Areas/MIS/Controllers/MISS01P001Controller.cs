@@ -71,14 +71,12 @@ namespace WEBAPP.Areas.MIS.Controllers
         public ActionResult Info(MISS01P001Model model)
         {
             var da = new MISS01P001DA();
-            //model.APP_CODE = model.COM_CODE;
             da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetByID;
-            da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
-            da.DTO.Model.NO = model.NO;
+            //da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;
             da.DTO.Model.APP_CODE = model.COM_CODE;
+            da.DTO.Model.NO = model.NO;
             da.SelectNoEF(da.DTO);
             localModel = da.DTO.Model;
-
 
             SetDateToString(da.DTO.Model);
             SetDefaulButton(StandardButtonMode.Other);
@@ -148,10 +146,6 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return View(view, localModel);
         }
-        //public ActionResult ReOpen(MISS01P001Model model)
-        //{
-
-        //}
         public ActionResult GetNo(MISS01P001Model model)
         {
             var jsonResult = new JsonResult();
@@ -181,10 +175,10 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             var da = new MISS01P001DA();
             da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetNo;
-            da.DTO.Model.COM_CODE = model.APP_CODE;
+            TempModel.APP_CODE = da.DTO.Model.COM_CODE = model.APP_CODE;
             da.SelectNoEF(da.DTO);
             da.DTO.Model.NO = da.DTO.Model.NO + 1;
-
+            localModel.RESPONSE_BY_MODEL = BindResponseByIn();
             //jsonResult = Success(da.DTO.Result, StandardActionName.Add);
 
             return JsonAllowGet(da.DTO.Model);
@@ -225,15 +219,12 @@ namespace WEBAPP.Areas.MIS.Controllers
             var da = new MISS01P001DA();
             da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetByID;
             da.DTO.Model.NO = model.NO;
-            da.DTO.Model.APP_CODE = model.COM_CODE;
+            TempModel.APP_CODE = da.DTO.Model.APP_CODE = model.COM_CODE;
             da.SelectNoEF(da.DTO);
             localModel = da.DTO.Model;
 
-            #region set default 
-            var MenuPrgName = GetMenuPrgName(da.DTO.Model);
-            localModel.MENU = MenuPrgName.MENU;
-            localModel.PRG_NAME = MenuPrgName.PRG_NAME;
-            #endregion
+            localModel.RESPONSE_BY_MODEL = BindResponseByIn();
+            Set(localModel);
 
             SetDefaultData(StandardActionName.Edit);
             SetDateToString(da.DTO.Model);
@@ -384,7 +375,16 @@ namespace WEBAPP.Areas.MIS.Controllers
             else if (mode == "Index")
             {
                 localModel.STATUS_MODEL = BindStatus();
+                localModel.DEFECT_MODEL = BindDefect();
+                localModel.PRIORITY_MODEL = BindPriority();
                 localModel.APP_CODE_MODEL = BindAppCode();
+            }
+        }
+        private void Set(MISS01P001Model model)
+        {
+            foreach (var item in model.RESPONSE_BY_MODEL)
+            {
+                item.Value = item.Value.Trim();
             }
         }
         private void SetDateToString(MISS01P001Model model)
@@ -410,17 +410,6 @@ namespace WEBAPP.Areas.MIS.Controllers
                 model.PRG_NAME = model.PRG_NAME.Trim();
 
             return model;
-        }
-        private MISS01P001Model GetMenuPrgName(MISS01P001Model model)
-        {
-            var da = new MISS01P001DA();
-            da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetMenuPrgName;
-            da.DTO.Model.NO = model.NO;
-            da.DTO.Model.APP_CODE = model.APP_CODE;
-            da.DTO.Model.ISSUE_BY = model.ISSUE_BY;
-            da.SelectNoEF(da.DTO);
-
-            return da.DTO.Model;
         }
         private MISS01P001Model SetModelDateTime(MISS01P001Model model)
         {
@@ -462,6 +451,15 @@ namespace WEBAPP.Areas.MIS.Controllers
         private List<DDLCenterModel> BindAppCode()
         {
             return GetDDLCenter(DDLCenterKey.DD_APPLICATION);
+        }
+        public ActionResult BindResponseBy(string APP_CODE)
+        {
+            var model = GetDDLCenter(DDLCenterKey.DD_MISS01P002_002, new VSMParameter(APP_CODE.Trim()));
+            return JsonAllowGet(model);
+        }
+        public List<DDLCenterModel> BindResponseByIn()
+        {
+            return GetDDLCenter(DDLCenterKey.DD_MISS01P002_002, new VSMParameter(TempModel.APP_CODE.Trim()));
         }
         //----------------------------------------------//
         private DTOResult SaveData(string mode, object model)

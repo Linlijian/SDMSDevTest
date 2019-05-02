@@ -25,26 +25,9 @@
                     {
                         @form.InputJAutocompleteFor(t => t.REF_NO).JAutoKeySource("AC_REF_NO").JAutoBindField("NO").JAutoSetExtraParamsByCtrl("APP_CODE,NO").JAutoFieldToInput(new
                    {
-                       MENU = "MENU_R",
-                       MODULE = "MODULE_R",
-                       PRG_NAME = "PROGRAM_NAME_R"
+                       MODULE = "MODULE_R"
                    }
                                    ).SetSelectOnly()
-                    }
-                    using (row.GridColumn(6).Begin())
-                    {
-                        @form.InputFor(t => t.MENU_R).SetReadonly()
-                    }
-                }
-                using (var r = Html.Bootstrap().GridRow().Begin())
-                {
-                    using (row.GridColumn(6).Begin())
-                    {
-                        @form.InputFor(t => t.MODULE_R).SetReadonly()
-                    }
-                    using (row.GridColumn(6).Begin())
-                    {
-                        @form.InputFor(t => t.PROGRAM_NAME_R).SetReadonly()
                     }
                 }
             }
@@ -94,26 +77,12 @@
             {
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.InputJAutocompleteFor(t => t.MODULE, isRequired: true, addValidateMessage: true).JAutoKeySource("AC_MISS01P001_001").JAutoBindField("MODULE").JAutoSetExtraParamsByCtrl("APP_CODE").JAutoFieldToInput(new
-               {
-                   RESPONSE_BY = "RESPONSE_BY"
-               }).SetSelectOnly().IsDisabled()
+                    @form.TextAreaFor(m => m.MODULE, 4, isRequired: true)
                     @form.HiddenFor(m => m.APP_CODE)
                 }
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.InputFor(m => m.RESPONSE_BY).SetReadonly()
-                }
-            }
-            using (var r = Html.Bootstrap().GridRow().Begin())
-            {
-                using (row1.GridColumn(6).Begin())
-                {
-                    @form.InputFor(m => m.MENU)
-                }
-                using (row1.GridColumn(6).Begin())
-                {
-                    @form.InputFor(m => m.PRG_NAME)
+                   @form.SelectFor(t => t.RESPONSE_BY, Model.RESPONSE_BY_MODEL.ToSelectList("Value", "Text", Model.RESPONSE_BY), isRequired: true, addValidateMessage: true)
                 }
             }
             using (var r = Html.Bootstrap().GridRow().Begin())
@@ -182,7 +151,7 @@
                     }
                     using (row1.GridColumn(12).Begin())
                     {
-                        @form.InputJAutocompleteFor(t => t.DEFECT, isRequired:true, addValidateMessage: true).JAutoKeySource("AC_MISS01P001_002").JAutoBindField("ISSUE_TYPE").JAutoFieldToInput(new
+                        @form.InputJAutocompleteFor(t => t.DEFECT, addValidateMessage: true, isRequired: true).JAutoKeySource("AC_MISS01P001_002").JAutoBindField("ISSUE_TYPE").JAutoFieldToInput(new
                    {
                        MAN_PLM_SA = "MAN_PLM_SA",
                        MAN_PLM_QA = "MAN_PLM_QA",
@@ -279,6 +248,19 @@
             $("#APP_CODE").change(function (e) {
                 $("#ISSUE_TYPE").BindSelect({
                     Url: '@Url.Action("BindIssueType")',
+                    Parameters: [{
+                        type: 'ControlId',//ControlId,FixValue
+                        name: 'APP_CODE',
+                        value: 'APP_CODE'
+                    }]
+                });
+            });
+        })
+
+        $(document).ready(function () {
+            $("#APP_CODE").change(function (e) {
+                $("#RESPONSE_BY").BindSelect({
+                    Url: '@Url.Action("BindResponseBy")',
                     Parameters: [{
                         type: 'ControlId',//ControlId,FixValue
                         name: 'APP_CODE',

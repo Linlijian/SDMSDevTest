@@ -546,3 +546,15 @@ ERROR 2019-04-26 17:17:40,251 BaseController.OnException -
 Path : MST/MSTS01P001/Add
 Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MST\Views\MSTS01P001\Add.cshtml(24): error CS0311: The type 'FluentBootstrap.Mvc.Forms.HiddenFor<DataAccess.MST.MSTS01P001Model, string>' cannot be used as type parameter 'TTag' in the generic type or method 'TagExtensions.SetIndexParameter<TConfig, TTag>(ComponentBuilder<TConfig, TTag>, int)'. There is no implicit reference conversion from 'FluentBootstrap.Mvc.Forms.HiddenFor<DataAccess.MST.MSTS01P001Model, string>' to 'FluentBootstrap.Tag'.
 
+ERROR 2019-04-29 14:15:29,084 BaseController.OnException - 
+Path : Users/Account/ReloadNotification
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-04-29 16:09:57,486 BaseController.OnException - 
+Path : MIS/MISS01P001/Add
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P001\Add.cshtml(86): error CS1001: Identifier expected
+
+ERROR 2019-04-29 16:20:25,886 BaseController.OnException - 
+Path : MIS/MISS01P001/Edit
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P001\Edit.cshtml(85): error CS1001: Identifier expected
+
