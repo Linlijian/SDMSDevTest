@@ -22,7 +22,7 @@
     "Name": "AATEntities",
     "ConnectionString": "metadata=res://*/ModelManger.csdl|res://*/ModelManger.ssdl|res://*/ModelManger.msl;provider=System.Data.SqlClient;provider connection string=\"{tpConnectionString};MultipleActiveResultSets=True;App=EntityFramework\""
   },
-  {
+  { 
     "Comment": "Server DB Name",
     "Name": "WIN-GD24EEJ5ODK",
     "ConnectionString": "WIN-GD24EEJ5ODK_DEV"
