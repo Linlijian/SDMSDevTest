@@ -50,6 +50,8 @@
             ScrollX = false,
             WidthType = ColumnsWidthType.Percentage
         },
+        Html.GridColumnCommand(Html.GridCommand("Infomation", "Infomation", Url.Action(StandardButtonName.Info), FaIcons.FaInfo, TextColor.grey, new VSMParameter("ISE_NO"), new VSMParameter("COM_CODE"))),
+        //Html.GridColumnCommand(Html.GridCommand("Infomation", "Infomation", Url.Action(StandardButtonName.Info), FaIcons.FaInfo, TextColor.grey, new VSMParameter("NO"), new VSMParameter("COM_CODE"))),
         new GridColumn("ISE_KEY").SetNotVisible().SetKey(),
         new GridColumn("ASSIGN_STATUS", Translation.MIS.MISS01P003.CONFIRM_FIXED, 1, align: ColumnsTextAlign.Center, render: "RENDER_DONE"),
         new GridColumn("COM_NAME_E", Translation.CenterLang.Center.APP_CODE, 10).SetKey(),

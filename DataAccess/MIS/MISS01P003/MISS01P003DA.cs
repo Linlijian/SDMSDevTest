@@ -25,6 +25,7 @@ namespace DataAccess.MIS
             switch (dto.Execute.ExecuteType)
             {
                 case MISS01P003ExecuteType.GetAll: return GetAll(dto);
+                case MISS01P003ExecuteType.GetByID: return GetByID(dto);
             }
             return dto;
         }
@@ -82,6 +83,27 @@ namespace DataAccess.MIS
         {
 
 
+            return dto;
+        }
+        private MISS01P003DTO GetByID(MISS01P003DTO dto)
+        {
+            string strSQL = @"	SELECT *
+	                            FROM VSMS_ISSUE
+	                            WHERE (1=1)
+	                            AND COM_CODE = @COM_CODE
+                                AND NO = @NO";
+
+            var parameters = CreateParameter();
+            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
+            parameters.AddParameter("NO", dto.Model.NO);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model = result.OutputDataSet.Tables[0].ToObject<MISS01P003Model>();
+                dto.Model.APP_CODE = dto.Model.COM_CODE; //checked=
+            }
             return dto;
         }
 

@@ -88,11 +88,83 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close Date.
+        /// </summary>
+        public static string CLOSE_DATE {
+            get {
+                return ResourceManager.GetString("CLOSE_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string COMMENT {
+            get {
+                return ResourceManager.GetString("COMMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fixed Done.
         /// </summary>
         public static string CONFIRM_FIXED {
             get {
                 return ResourceManager.GetString("CONFIRM_FIXED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Defect.
+        /// </summary>
+        public static string DEFECT {
+            get {
+                return ResourceManager.GetString("DEFECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deploy PD Date.
+        /// </summary>
+        public static string DEPLOY_PD {
+            get {
+                return ResourceManager.GetString("DEPLOY_PD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deploy QA Date.
+        /// </summary>
+        public static string DEPLOY_QA {
+            get {
+                return ResourceManager.GetString("DEPLOY_QA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detail.
+        /// </summary>
+        public static string DETAIL {
+            get {
+                return ResourceManager.GetString("DETAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effects.
+        /// </summary>
+        public static string EFFECTS {
+            get {
+                return ResourceManager.GetString("EFFECTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ESSR No.
+        /// </summary>
+        public static string ESSR_NO {
+            get {
+                return ResourceManager.GetString("ESSR_NO", resourceCulture);
             }
         }
         
@@ -115,6 +187,150 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Issue By.
+        /// </summary>
+        public static string ISSUE_BY {
+            get {
+                return ResourceManager.GetString("ISSUE_BY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Calculate.
+        /// </summary>
+        public static string ISSUE_CALCULATE {
+            get {
+                return ResourceManager.GetString("ISSUE_CALCULATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Date.
+        /// </summary>
+        public static string ISSUE_DATE {
+            get {
+                return ResourceManager.GetString("ISSUE_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Date Period.
+        /// </summary>
+        public static string ISSUE_DATE_PERIOD {
+            get {
+                return ResourceManager.GetString("ISSUE_DATE_PERIOD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Datetime.
+        /// </summary>
+        public static string ISSUE_DATETIME {
+            get {
+                return ResourceManager.GetString("ISSUE_DATETIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Property.
+        /// </summary>
+        public static string ISSUE_PROPERTY {
+            get {
+                return ResourceManager.GetString("ISSUE_PROPERTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Type.
+        /// </summary>
+        public static string ISSUE_TYPE {
+            get {
+                return ResourceManager.GetString("ISSUE_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DBA.
+        /// </summary>
+        public static string MAN_PLM_DBA {
+            get {
+                return ResourceManager.GetString("MAN_PLM_DBA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PL.
+        /// </summary>
+        public static string MAN_PLM_PL {
+            get {
+                return ResourceManager.GetString("MAN_PLM_PL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PRG.
+        /// </summary>
+        public static string MAN_PLM_PRG {
+            get {
+                return ResourceManager.GetString("MAN_PLM_PRG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QA.
+        /// </summary>
+        public static string MAN_PLM_QA {
+            get {
+                return ResourceManager.GetString("MAN_PLM_QA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SA.
+        /// </summary>
+        public static string MAN_PLM_SA {
+            get {
+                return ResourceManager.GetString("MAN_PLM_SA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menu.
+        /// </summary>
+        public static string MENU {
+            get {
+                return ResourceManager.GetString("MENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module Name.
+        /// </summary>
+        public static string MODULE {
+            get {
+                return ResourceManager.GetString("MODULE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Program Name.
+        /// </summary>
+        public static string PRG_NAME {
+            get {
+                return ResourceManager.GetString("PRG_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolution Target.
+        /// </summary>
+        public static string RESOLUTION_TARGET {
+            get {
+                return ResourceManager.GetString("RESOLUTION_TARGET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Response By.
         /// </summary>
         public static string RESPONSE_BY {
@@ -124,11 +340,56 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Response Date.
+        /// </summary>
+        public static string RESPONSE_DATE {
+            get {
+                return ResourceManager.GetString("RESPONSE_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Response Target.
+        /// </summary>
+        public static string RESPONSE_TARGET {
+            get {
+                return ResourceManager.GetString("RESPONSE_TARGET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Root Cause.
+        /// </summary>
+        public static string ROOT_CAUSE {
+            get {
+                return ResourceManager.GetString("ROOT_CAUSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solution.
+        /// </summary>
+        public static string SOLUTION {
+            get {
+                return ResourceManager.GetString("SOLUTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string STATUS {
             get {
                 return ResourceManager.GetString("STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target Date.
+        /// </summary>
+        public static string TARGET_DATE {
+            get {
+                return ResourceManager.GetString("TARGET_DATE", resourceCulture);
             }
         }
     }

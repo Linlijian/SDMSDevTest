@@ -126,8 +126,32 @@
   <data name="CANCEL" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="CLOSE_DATE" xml:space="preserve">
+    <value>Close Date</value>
+  </data>
+  <data name="COMMENT" xml:space="preserve">
+    <value>Comment</value>
+  </data>
   <data name="CONFIRM_FIXED" xml:space="preserve">
     <value>Fixed Done</value>
+  </data>
+  <data name="DEFECT" xml:space="preserve">
+    <value>Defect</value>
+  </data>
+  <data name="DEPLOY_PD" xml:space="preserve">
+    <value>Deploy PD Date</value>
+  </data>
+  <data name="DEPLOY_QA" xml:space="preserve">
+    <value>Deploy QA Date</value>
+  </data>
+  <data name="DETAIL" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="EFFECTS" xml:space="preserve">
+    <value>Effects</value>
+  </data>
+  <data name="ESSR_NO" xml:space="preserve">
+    <value>ESSR No</value>
   </data>
   <data name="ISE_DATE_OPENING" xml:space="preserve">
     <value>Issue Date</value>
@@ -135,10 +159,73 @@
   <data name="ISE_NO" xml:space="preserve">
     <value>Issue No</value>
   </data>
+  <data name="ISSUE_BY" xml:space="preserve">
+    <value>Issue By</value>
+  </data>
+  <data name="ISSUE_CALCULATE" xml:space="preserve">
+    <value>Issue Calculate</value>
+  </data>
+  <data name="ISSUE_DATE" xml:space="preserve">
+    <value>Issue Date</value>
+  </data>
+  <data name="ISSUE_DATETIME" xml:space="preserve">
+    <value>Issue Datetime</value>
+  </data>
+  <data name="ISSUE_DATE_PERIOD" xml:space="preserve">
+    <value>Issue Date Period</value>
+  </data>
+  <data name="ISSUE_PROPERTY" xml:space="preserve">
+    <value>Issue Property</value>
+  </data>
+  <data name="ISSUE_TYPE" xml:space="preserve">
+    <value>Issue Type</value>
+  </data>
+  <data name="MAN_PLM_DBA" xml:space="preserve">
+    <value>DBA</value>
+  </data>
+  <data name="MAN_PLM_PL" xml:space="preserve">
+    <value>PL</value>
+  </data>
+  <data name="MAN_PLM_PRG" xml:space="preserve">
+    <value>PRG</value>
+  </data>
+  <data name="MAN_PLM_QA" xml:space="preserve">
+    <value>QA</value>
+  </data>
+  <data name="MAN_PLM_SA" xml:space="preserve">
+    <value>SA</value>
+  </data>
+  <data name="MENU" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="MODULE" xml:space="preserve">
+    <value>Module Name</value>
+  </data>
+  <data name="PRG_NAME" xml:space="preserve">
+    <value>Program Name</value>
+  </data>
+  <data name="RESOLUTION_TARGET" xml:space="preserve">
+    <value>Resolution Target</value>
+  </data>
   <data name="RESPONSE_BY" xml:space="preserve">
     <value>Response By</value>
   </data>
+  <data name="RESPONSE_DATE" xml:space="preserve">
+    <value>Response Date</value>
+  </data>
+  <data name="RESPONSE_TARGET" xml:space="preserve">
+    <value>Response Target</value>
+  </data>
+  <data name="ROOT_CAUSE" xml:space="preserve">
+    <value>Root Cause</value>
+  </data>
+  <data name="SOLUTION" xml:space="preserve">
+    <value>Solution</value>
+  </data>
   <data name="STATUS" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="TARGET_DATE" xml:space="preserve">
+    <value>Target Date</value>
   </data>
 </root>
