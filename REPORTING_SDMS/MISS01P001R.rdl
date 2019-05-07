@@ -2765,19 +2765,6 @@
             <TablixRowHierarchy>
               <TablixMembers>
                 <TablixMember>
-                  <Group Name="list1_COM_CODE">
-                    <GroupExpressions>
-                      <GroupExpression>=Fields!COM_CODE.Value</GroupExpression>
-                    </GroupExpressions>
-                    <PageBreak>
-                      <BreakLocation>Between</BreakLocation>
-                    </PageBreak>
-                  </Group>
-                  <SortExpressions>
-                    <SortExpression>
-                      <Value>=Fields!COM_CODE.Value</Value>
-                    </SortExpression>
-                  </SortExpressions>
                   <DataElementOutput>Output</DataElementOutput>
                   <KeepTogether>true</KeepTogether>
                 </TablixMember>
