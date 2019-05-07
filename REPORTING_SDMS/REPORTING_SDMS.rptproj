@@ -52,16 +52,8 @@
     <DataSource Include="DTS_SDDB.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="AA.rdl" />
+    <Report Include="MISS01P001_report.rdl" />
     <Report Include="Report_MISS01P001.rdl" />
-    <Report Include="test001.rdl" />
-    <Report Include="test002.rdl" />
-    <Report Include="test004.rdl" />
-    <Report Include="test005.rdl" />
-    <Report Include="TestGrid2Check.rdl" />
-    <Report Include="TestPage.rdl" />
-    <Report Include="TestR01.rdl" />
-    <Report Include="text003.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

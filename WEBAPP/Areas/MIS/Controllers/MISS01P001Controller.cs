@@ -58,6 +58,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             RemoveStandardButton("DeleteSearch");
             AddStandardButton(StandardButtonName.Upload);
             AddStandardButton(StandardButtonName.DownloadTemplate, url: "MISS01TP001");
+            AddButton(StandButtonType.ButtonAjax, "report", "Report", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport"), isValidate: true);
             if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
             {
                 localModel = TempSearch.CloneObject();
@@ -67,6 +68,23 @@ namespace WEBAPP.Areas.MIS.Controllers
             SetDefaultData(StandardActionName.Index);
 
             return View(StandardActionName.Index, localModel);
+        }
+        public ActionResult ViewReport(MISS01P001Model model)
+        {
+            string error_code = "0";
+            string company_name = SessionHelper.SYS_COM_NAME;
+            string ReportName = "MISS01P001_report";
+
+            string Parameter = string.Concat
+                     (
+                         "&error_code=", error_code
+                       , "&CRET_BY=", model.CRET_BY
+                       , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
+                     );
+
+
+            return Content("http://" + AppConfigHelper.ReportServerName + "/ReportServer?/" + AppConfigHelper.ReportFolderName + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+
         }
         public ActionResult Info(MISS01P001Model model)
         {
