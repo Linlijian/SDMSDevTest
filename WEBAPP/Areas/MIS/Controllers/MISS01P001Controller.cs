@@ -73,7 +73,7 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             string error_code = "0";
             string company_name = SessionHelper.SYS_COM_NAME;
-            string ReportName = "MISS01P001_report";
+            string ReportName = "MISS01P001R";
 
             string Parameter = string.Concat
                      (
