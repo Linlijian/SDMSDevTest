@@ -322,6 +322,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reference No.
+        /// </summary>
+        public static string REF_NO {
+            get {
+                return ResourceManager.GetString("REF_NO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resolution Target.
         /// </summary>
         public static string RESOLUTION_TARGET {

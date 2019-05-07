@@ -12,7 +12,7 @@
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+    <TargetServerURL>http://chang/SDMSReport</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="AA.rdl" />
+    <Report Include="Report_MISS01P001.rdl" />
     <Report Include="test001.rdl" />
     <Report Include="test002.rdl" />
     <Report Include="test004.rdl" />

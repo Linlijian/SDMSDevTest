@@ -66,6 +66,8 @@ namespace DataAccess.MIS
         public string REMARK { get; set; }
         [Display(Name = "RESOLUTION_TARGET", ResourceType = typeof(Translation.MIS.MISS01P003))]
         public string RESOLUTION_TARGET { get; set; }
+        [Display(Name = "REF_NO", ResourceType = typeof(Translation.MIS.MISS01P003))]
+        public decimal? REF_NO { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
