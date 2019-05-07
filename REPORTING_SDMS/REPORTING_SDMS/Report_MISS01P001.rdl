@@ -3,10 +3,10 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="DataSource1">
+    <DataSource Name="DTS_SDDB">
       <DataSourceReference>DTS_SDDB</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>979ef74d-4651-4527-8c75-78e9cf2427dd</rd:DataSourceID>
+      <rd:DataSourceID>1f0ed6ca-9424-46c4-8ae3-2b2fd6061f15</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
