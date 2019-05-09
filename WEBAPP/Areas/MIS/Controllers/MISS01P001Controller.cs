@@ -69,6 +69,28 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return View(StandardActionName.Index, localModel);
         }
+
+        //report ของ SP_SECS02P002_001
+        //public ActionResult ViewReport(MISS01P001Model model)
+        //{
+        //    string error_code = "0";
+        //    model.CRET_BY = "Meiio";
+        //    model.ISSUE_DATE_PERIOD = "2019-04";
+        //    string ReportName = "MISS01P001R";
+
+        //    string Parameter = string.Concat
+        //             (
+        //                 "&error_code=", error_code
+        //               , "&CRET_BY=", model.CRET_BY
+        //               , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
+        //             );
+
+        //    return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMS" + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+        //    //return Content("http://" + AppConfigHelper.ReportServerName + "/ReportServer?/" + AppConfigHelper.ReportFolderName + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+
+
+        //}
+
         public ActionResult ViewReport(MISS01P001Model model)
         {
             string error_code = "0";
@@ -88,6 +110,7 @@ namespace WEBAPP.Areas.MIS.Controllers
 
 
         }
+
         public ActionResult Info(MISS01P001Model model)
         {
             var da = new MISS01P001DA();
