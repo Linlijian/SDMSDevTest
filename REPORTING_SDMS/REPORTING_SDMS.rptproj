@@ -53,8 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Report Include="MISS01P001R.rdl" />
+    <Report Include="testttttttt.rdl" />
     <Report Include="VSMS_ISSUE_R001R.rdl" />
-    <Report Include="VSMS_ISSUE_R002R.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

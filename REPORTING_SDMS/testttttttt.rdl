@@ -3,11 +3,10 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="DataSource1">
+    <DataSource Name="DataSource2">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=CHANG;Initial Catalog=SDDB</ConnectString>
-        <Prompt>Specify a user name and password for data source DataSource1:</Prompt>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>97517def-534c-4b1e-aa1f-62eeeabddfd3</rd:DataSourceID>
@@ -16,7 +15,7 @@
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>DataSource1</DataSourceName>
+        <DataSourceName>DataSource2</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="@error_code">
             <Value>=Parameters!error_code.Value</Value>
@@ -28,7 +27,7 @@
             <Value>=Parameters!ISSUE_DATE_PERIOD.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>EXEC	[bond].[SP_VSMS_ISSUE_R002]
+        <CommandText>EXEC	[bond].[SP_VSMS_ISSUE_R001]
                   @error_code  OUTPUT
 	,@CRET_BY 
 	,@ISSUE_DATE_PERIOD </CommandText>

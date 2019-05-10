@@ -70,7 +70,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             return View(StandardActionName.Index, localModel);
         }
 
-        //report ของ SP_SECS02P002_001
+        //report 
         //public ActionResult ViewReport(MISS01P001Model model)
         //{
         //    string error_code = "0";
@@ -87,8 +87,6 @@ namespace WEBAPP.Areas.MIS.Controllers
 
         //    return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMS" + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
         //    //return Content("http://" + AppConfigHelper.ReportServerName + "/ReportServer?/" + AppConfigHelper.ReportFolderName + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
-
-
         //}
 
         public ActionResult ViewReport(MISS01P001Model model)
@@ -96,7 +94,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             string error_code = "0";
             model.CRET_BY = "Meiio";
             model.ISSUE_DATE_PERIOD = "2019-04";
-            string ReportName = "MISS01P001R";
+            string ReportName = "VSMS_ISSUE_R001R";
 
             string Parameter = string.Concat
                      (
@@ -106,9 +104,7 @@ namespace WEBAPP.Areas.MIS.Controllers
                      );
 
             return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMS" + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
-            //return Content("http://" + AppConfigHelper.ReportServerName + "/ReportServer?/" + AppConfigHelper.ReportFolderName + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
-
-
+            
         }
 
         public ActionResult Info(MISS01P001Model model)
