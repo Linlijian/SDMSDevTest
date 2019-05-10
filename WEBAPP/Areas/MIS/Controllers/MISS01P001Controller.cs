@@ -136,13 +136,18 @@ namespace WEBAPP.Areas.MIS.Controllers
         public ActionResult ViewReport(MISS01P001Model model)
         {
             string error_code = "0";
-            model.CRET_BY = "Meiio";
-            model.ISSUE_DATE_PERIOD = "2019-04";
+            if (model.CRET_BY == null)
+            {
+                model.CRET_BY = SessionHelper.SYS_USER_ID;
+            }
+
+            //model.CRET_BY = "Meiio";
+            //model.ISSUE_DATE_PERIOD = "2019-04";
             string ReportName = "VSMS_ISSUE_R001R";
 
             if(model.ISSUE_DATE_PERIOD == null)
             {
-                model.ISSUE_DATE_PERIOD = "";
+                model.ISSUE_DATE_PERIOD = "2019-04";
             }
 
             string Parameter = string.Concat
