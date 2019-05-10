@@ -169,6 +169,10 @@ namespace DataAccess.MIS
             {
                 RuleFor(t => t.APP_CODE).NotEmpty();
             });
+            RuleSet("Index2", () =>
+            {
+                RuleFor(t => t.ISSUE_DATE_PERIOD).NotEmpty();
+            });
         }
         private void NewValid()
         {

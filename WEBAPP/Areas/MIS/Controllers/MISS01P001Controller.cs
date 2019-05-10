@@ -52,25 +52,50 @@ namespace WEBAPP.Areas.MIS.Controllers
         #endregion
 
         #region Action 
-        public ActionResult Index()
+        public ActionResult Index(string ACTIVE_STEP = "1")
         {
-            SetDefaulButton(StandardButtonMode.Index);
-            RemoveStandardButton("DeleteSearch");
-            AddStandardButton(StandardButtonName.Upload);
-            AddStandardButton(StandardButtonName.DownloadTemplate, url: "MISS01TP001");
-            AddButton(StandButtonType.ButtonAjax, "report", "Report", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport"), isValidate: true);
-            if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
+            string ACTIVE_WIZARD_MAX = "2";
+            var view = string.Empty;
+            var da = new MISS01P001DA();
+
+
+            if (ACTIVE_STEP == "1")
             {
-                localModel = TempSearch.CloneObject();
+                view = "Index1";
+                SetDefaulButton(StandardButtonMode.Index);
+                RemoveStandardButton("DeleteSearch");
+                AddStandardButton(StandardButtonName.Upload);
+                AddStandardButton(StandardButtonName.DownloadTemplate, url: "MISS01TP001");
+                
+                if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
+                {
+                    localModel = TempSearch.CloneObject();
+                }
+
+                localModel.USER_ID = SessionHelper.SYS_USER_ID;
+                SetDefaultData(StandardActionName.Index);
+
+                //return View(StandardActionName.Index, localModel);
             }
-
-            localModel.USER_ID = SessionHelper.SYS_USER_ID;
-            SetDefaultData(StandardActionName.Index);
-
-            return View(StandardActionName.Index, localModel);
+            else if (ACTIVE_STEP == "2")
+            {
+                view = "Index2";
+                AddButton(StandButtonType.ButtonAjax, "report", "Report", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport"), isValidate: true);
+                if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
+                {
+                    localModel = TempSearch.CloneObject();
+                }
+            }
+            SetHeaderWizard(new WizardHelper.WizardHeaderConfig(
+                ACTIVE_STEP,
+                ACTIVE_WIZARD_MAX,
+                new WizardHelper.WizardHeader("", Url.Action("Index", new { ACTIVE_STEP = "1" }), iconCssClass: FaIcons.FaPencil, textStep: Translation.MIS.MISS01P001.Index1),
+                new WizardHelper.WizardHeader("", Url.Action("Index", new { ACTIVE_STEP = "2" }), iconCssClass: FaIcons.FaSearch, textStep: Translation.MIS.MISS01P001.Index2)));
+            
+            return View(view, localModel);
         }
 
-        //report 
+        //report Test
         //public ActionResult ViewReport(MISS01P001Model model)
         //{
         //    string error_code = "0";
@@ -89,12 +114,36 @@ namespace WEBAPP.Areas.MIS.Controllers
         //    //return Content("http://" + AppConfigHelper.ReportServerName + "/ReportServer?/" + AppConfigHelper.ReportFolderName + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
         //}
 
+        // call SP VSMS_ISSUE_R001
+        //public ActionResult ViewReport(MISS01P001Model model)
+        //{
+        //    string error_code = "0";
+        //    model.CRET_BY = "Meiio";
+        //    model.ISSUE_DATE_PERIOD = "2019-04";
+        //    string ReportName = "VSMS_ISSUE_R001R";
+
+        //    string Parameter = string.Concat
+        //             (
+        //                 "&error_code=", error_code
+        //               , "&CRET_BY=", model.CRET_BY
+        //               , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
+        //             );
+
+        //    return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMS" + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+
+        //}
+        
         public ActionResult ViewReport(MISS01P001Model model)
         {
             string error_code = "0";
             model.CRET_BY = "Meiio";
             model.ISSUE_DATE_PERIOD = "2019-04";
             string ReportName = "VSMS_ISSUE_R001R";
+
+            if(model.ISSUE_DATE_PERIOD == null)
+            {
+                model.ISSUE_DATE_PERIOD = "";
+            }
 
             string Parameter = string.Concat
                      (
@@ -104,7 +153,7 @@ namespace WEBAPP.Areas.MIS.Controllers
                      );
 
             return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMS" + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
-            
+
         }
 
         public ActionResult Info(MISS01P001Model model)

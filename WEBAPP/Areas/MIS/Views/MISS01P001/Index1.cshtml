@@ -51,6 +51,13 @@
                      @form.SelectFor(t => t.PRIORITY, Model.PRIORITY_MODEL.ToSelectList("Value", "Text", Model.PRIORITY), IsSearch: true)
                 }
             }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(t => t.ISSUE_DATE_PERIOD).SetHelp("Format : YYYY-DD Example: (2019-04)")
+                }
+            }
         }
     }
 }
@@ -79,6 +86,7 @@
         new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10).SetKey(),
         new GridColumn("NO", Translation.MIS.MISS01P001.NO, 10),
         new GridColumn("ISSUE_DATE", Translation.MIS.MISS01P001.ISSUE_DATE, 10,ColumnsType.DateTime),
+        new GridColumn("ISSUE_DATE_PERIOD", Translation.MIS.MISS01P001.ISSUE_DATE_PERIOD, 10),
         new GridColumn("RESPONSE_BY", Translation.MIS.MISS01P001.RESPONSE_BY, 10),
         new GridColumn("DEFECT", Translation.MIS.MISS01P001.DEFECT, 10),
         new GridColumn("PRIORITY", Translation.MIS.MISS01P001.PRIORITY, 10),
