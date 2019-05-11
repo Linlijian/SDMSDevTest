@@ -63,6 +63,8 @@ namespace DataAccess.MIS
         public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
         public IEnumerable<DDLCenterModel> RESPONSE_BY_MODEL { get; set; }
 
+        //public string APP_CODE { get; set; }
+
         public string ACTIVE_STEP { get; set; }
         public string STR_ISSUE_DATE { get; set; }
         public string STR_RESPONSE_DATE { get; set; }

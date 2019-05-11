@@ -313,6 +313,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             da.DTO.Execute.ExecuteType = MISS01P001ExecuteType.GetByID;
             da.DTO.Model.NO = model.NO;
             TempModel.APP_CODE = da.DTO.Model.APP_CODE = model.COM_CODE;
+            //TempModel.APP_CODE = model.COM_CODE;
             da.SelectNoEF(da.DTO);
             localModel = da.DTO.Model;
 
