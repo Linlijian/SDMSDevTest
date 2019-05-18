@@ -22,10 +22,11 @@ namespace DataAccess.SEC
         public const string GetQuerySearchAll = "GetQuerySearchAll";
         public const string GetQueryCheckUserAdmin = "GetQueryCheckUserAdmin";
         public const string GetDetailByID = "GetDetailByID";
-        public const string Delete = "Delete";
+        public const string Delete = "Delete"; 
         public const string DeleteDetail = "DeleteDetail";
+        public const string GetOldPwd = "GetOldPwd";
         public const string CheckAdmin = "CheckAdmin";
         public const string GetUserCOM = "GetUserCOM";
-        
+        public const string GetUser = "GetUser";
     }
 }

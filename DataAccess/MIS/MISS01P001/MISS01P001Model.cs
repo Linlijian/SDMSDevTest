@@ -59,9 +59,13 @@ namespace DataAccess.MIS
         public IEnumerable<DDLCenterModel> DEFECT_MODEL { get; set; }
         [Display(Name = "STATUS", ResourceType = typeof(Translation.MIS.MISS01P001))]
         public string STATUS { get; set; }
+        [Display(Name = "REPORT_TYPR", ResourceType = typeof(Translation.MIS.MISS01P001))]
+        public string REPORT_TYPR { get; set; }
         public IEnumerable<DDLCenterModel> STATUS_MODEL { get; set; }
         public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
         public IEnumerable<DDLCenterModel> RESPONSE_BY_MODEL { get; set; }
+        public IEnumerable<DDLCenterModel> REPORT_TYPE_MODEL { get; set; }
+
 
         public string ACTIVE_STEP { get; set; }
         public string STR_ISSUE_DATE { get; set; }

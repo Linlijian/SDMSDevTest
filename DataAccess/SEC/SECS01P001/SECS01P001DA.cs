@@ -134,6 +134,7 @@ namespace DataAccess.SEC
                 {
                     var m = item.ToNewObject(new VSMS_MODULE());
                     m.CRET_BY = dto.Model.CRET_BY;
+                    m.USER_ID = "N/G";
                     m.CRET_DATE = dto.Model.CRET_DATE;
                     m.COM_CODE = dto.Model.COM_CODE;
 

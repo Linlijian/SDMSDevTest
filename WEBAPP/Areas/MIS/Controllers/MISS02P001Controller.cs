@@ -106,7 +106,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             var jsonResult = new JsonResult();
             if (ModelState.IsValid)
             {
-                model.COM_CODE = TempModel.APP_CODE = model.APP_CODE;
+                //model.COM_CODE = TempModel.APP_CODE = model.APP_CODE;
                 var result = SaveData(StandardActionName.SaveCreate, model);
                 jsonResult = Success(result, StandardActionName.SaveCreate, Url.Action(StandardActionName.Index, new { page = 1 }));
             }
@@ -258,6 +258,7 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             localModel.TYPE_DAY_MODEL = BindTypeDate();
             localModel.APP_CODE_MODEL = BindAppCode();
+            localModel.COM_CODE = SessionHelper.SYS_COM_CODE;
         }
         private List<DDLCenterModel> BindAppCode()
         {
@@ -272,24 +273,24 @@ namespace WEBAPP.Areas.MIS.Controllers
         private DTOResult SaveData(string mode, object model)
         {
             var da = new MISS02P001DA();
-            Session[SessionSystemName.SYS_APPS] = TempModel.APP_CODE;
-            //ในกรณีที่มีการ SaveLog ให้ Include SetStandardLog ด้วย
-            SetStandardLog(
-               da.DTO,
-               model,
-               GetSaveLogConfig("dbo", "VSMS_DEPLOY", "COM_CODE", "YEAR"));
+            //Session[SessionSystemName.SYS_APPS] = TempModel.APP_CODE;
+            ////ในกรณีที่มีการ SaveLog ให้ Include SetStandardLog ด้วย
+            //SetStandardLog(
+            //   da.DTO,
+            //   model,
+            //   GetSaveLogConfig("dbo", "VSMS_DEPLOY", "COM_CODE", "YEAR"));
 
 
             if (mode == StandardActionName.SaveCreate)
             {
-                SetStandardFieldWithoutComCode(model);
+                SetStandardField(model);
                 da.DTO.Model = (MISS02P001Model)model;
                 da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.Insert;
                 da.InsertNoEF(da.DTO);
             }
             else if (mode == StandardActionName.SaveModify)
             {
-                SetStandardFieldWithoutComCode(model);
+                SetStandardField(model);
                 da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.Update;
                 da.DTO.Model = (MISS02P001Model)model;
                 da.UpdateNoEF(da.DTO);
@@ -302,7 +303,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             else if (mode == "Upload")
             {
                 da.DTO.Execute.ExecuteType = MISS02P001ExecuteType.CallSPInsertExcel;
-                SetStandardFieldWithoutComCode(model);
+                SetStandardField(model);
 
                 da.DTO.Model = (MISS02P001Model)model;
                 da.DTO.Model.COM_CODE = SessionHelper.SYS_COM_CODE;

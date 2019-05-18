@@ -135,4 +135,7 @@
   <data name="Traget_date" xml:space="preserve">
     <value>'Traget Date' should not be empty.</value>
   </data>
+  <data name="USER_PWD_OLD_ERR" xml:space="preserve">
+    <value>'Old Password' should not be empty.</value>
+  </data>
 </root>

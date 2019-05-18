@@ -151,6 +151,15 @@ namespace Translation.SEC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password Criteria.
+        /// </summary>
+        public static string RE_PWD_CRITERIA {
+            get {
+                return ResourceManager.GetString("RE_PWD_CRITERIA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string STATUS {
@@ -255,6 +264,42 @@ namespace Translation.SEC {
         public static string USER_LNAME_TH {
             get {
                 return ResourceManager.GetString("USER_LNAME_TH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string USER_PWD {
+            get {
+                return ResourceManager.GetString("USER_PWD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Password.
+        /// </summary>
+        public static string USER_PWD_NEW {
+            get {
+                return ResourceManager.GetString("USER_PWD_NEW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old Password.
+        /// </summary>
+        public static string USER_PWD_OLD {
+            get {
+                return ResourceManager.GetString("USER_PWD_OLD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Password.
+        /// </summary>
+        public static string USER_PWD_R {
+            get {
+                return ResourceManager.GetString("USER_PWD_R", resourceCulture);
             }
         }
         

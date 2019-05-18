@@ -24,7 +24,7 @@
             {
                 using (row1.GridColumn(1).Begin())
                 {
-                   
+
                 }
                 using (row1.GridColumn(2).Begin())
                 {
@@ -165,34 +165,34 @@
                 {
                     @Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P001.ISSUE_PROPERTY)
                     @*using (row1.GridColumn(12).Begin())
-                    {
-                        <label> <b>Prioriry :</b> @Model.PRIORITY</label>
-                    }*@
-
-                    using (row1.GridColumn(12).Begin())
-                    {
-                        using (row1.GridColumn(2).Begin())
-                        {
-                                
-                        }
-                        using (row1.GridColumn(3).Begin())
                         {
                             <label> <b>Prioriry :</b> @Model.PRIORITY</label>
-                        }
-                        using (row1.GridColumn(7).Begin())
-                        {
-                            <label> <b>Response Target :</b> @Model.RESPONSE_TARGET</label>
-                        }
-                    }
-                    using (row1.GridColumn(12).Begin())
-                    {
-                        using (row1.GridColumn(2).Begin())
-                        {
-                                
-                        }
-                        using (row1.GridColumn(3).Begin())
-                        {
-                            <label> <b>Defect :</b> @Model.DEFECT</label>
+                        }*@
+
+using (row1.GridColumn(12).Begin())
+{
+    using (row1.GridColumn(2).Begin())
+    {
+
+    }
+    using (row1.GridColumn(3).Begin())
+    {
+        <label> <b>Prioriry :</b> @Model.PRIORITY</label>
+    }
+    using (row1.GridColumn(7).Begin())
+    {
+        <label> <b>Response Target :</b> @Model.RESPONSE_TARGET</label>
+    }
+}
+using (row1.GridColumn(12).Begin())
+{
+    using (row1.GridColumn(2).Begin())
+    {
+
+    }
+    using (row1.GridColumn(3).Begin())
+    {
+        <label> <b>Defect :</b> @Model.DEFECT</label>
                         }
                         using (row1.GridColumn(7).Begin())
                         {
@@ -289,7 +289,7 @@
                         }
                         using (row1.GridColumn(5).Begin())
                         {
-                            
+
                         }
                     }
                     @Html.GetVSMWidgetsEnd()

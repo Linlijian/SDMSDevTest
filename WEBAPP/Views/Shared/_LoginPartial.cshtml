@@ -17,34 +17,38 @@
 else
 {
     <center>
-        <br><br><br><br><br><br><br><br><br><br>
-        @RenderBody() @*//this content on .cshtml*@
+        <br><br><br><br>
+
+        <br><br><br>
+
         <ul class="nav navbar-nav navbar-right">
             @using (Html.BeginForm("SignIn", "Account", null, FormMethod.Get,
-                                                  new { enctype = "multipart/form-data" }))
+                                                              new { enctype = "multipart/form-data" }))
             {
-                <div class="loginbox">
-                    <img src="https://image.flaticon.com/icons/svg/622/622848.svg" class="avatar">
-                    <br><br><br><br>
-                    <label>User Name</label>
-                    <br><br>
-                    
-                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                    <br><br><br>
-                    <label>Password</label>
-                    <br><br>
-                    
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                    <br><br><br>
-                    
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Submit" class="btn btn-default" />
+                <div class="col-md-12 col-xs-12">
+                    <div class="loginbox">
+                        <img src="@Url.Content("~/Uploads/Image/logo/login_w.png")" class="avatar">
+                        <br><br><br><br>
+                        <label>User Name</label>
+                        <br><br>
+
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                        <br><br><br>
+                        <label>Password</label>
+                        <br><br>
+
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                        <br><br><br>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Submit" class="btn btn-default" />
+                            </div>
                         </div>
+                        @RenderBody()
+                        <br>
+
                     </div>
-                    <br>
-                    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
-                    @*@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })*@
                 </div>
             }
 
@@ -57,37 +61,36 @@ else
     body {
         margin: 0;
         padding: 0;
-        /*background: url(https://images.pexels.com/photos/242236/pexels-photo-242236.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);*/	
-        background: #eee !important;	
+        /*background: url(https://images.pexels.com/photos/242236/pexels-photo-242236.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);*/
+        background: #eee !important;
         background-size: cover;
         background-position: center;
-        
-
     }
 
-    .loginbox{
-        /*width: 430px;
-        height: 460px;
-        background: #000;
-        color: #fff;
-        top: 50%;*/
-        
+    .loginbox {
         max-width: 480px;
-        min-height: 500px;
+        min-height: 400px;
         margin: 30px auto;
         background-color: rgba(10,10,10,.68);
     }
 
-    .avatar{
-        width: 100px;
-        height: 100px;
+    .msgbox {
+        max-width: 480px;
+        min-height: 20px;
+        margin: 30px auto;
+        background-color: rgba(10,10,10,.68);
+    }
+
+    .avatar {
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
         position: absolute;
-        top: 190px;
+        top: 100px;
         left: calc(51% - 50px);
     }
 
-    h1{
+    h1 {
         margin: 0;
         padding: 0 0 0px;
         text-align: center;
@@ -108,7 +111,6 @@ else
         font-size: 16px;
         font-weight: 400;
         padding: 4px;*/
-
         border: none;
         border-bottom: 1px solid #fff;
         background: transparent;

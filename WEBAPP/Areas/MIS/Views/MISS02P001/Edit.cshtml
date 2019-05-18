@@ -16,7 +16,7 @@
     {
         using (row1.GridColumn(6).Begin())
         {
-            @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true).IsDisabled()
+            @form.InputFor(m => m.COM_CODE).SetReadonly()
         }
         using (row1.GridColumn(6).Begin())
         {
@@ -76,7 +76,7 @@
             }
         }
         @formPopup.HiddenFor(t => t.DEPLOYMENT_DATE)
-        @formPopup.HiddenFor(t => t.APP_CODE)
+        @formPopup.HiddenFor(t => t.COM_CODE)
     }
     @Html.GetVSMModalDetailEnd()
 }
@@ -111,11 +111,11 @@
     <script>
 
         /*********************************************SET_VALUE***********************************************/
-        $("#APP_CODE").val($("#APP_CODE").val());
+        //$("#APP_CODE").val($("#APP_CODE").val());
 
         function OnBeforeAddDetail(e) {
             $("#formDetails #YEAR").val($("#form1 #YEAR").val());
-            $("#formDetails #APP_CODE").val($("#form1 #APP_CODE").val());
+            $("#formDetails #COM_CODE").val($("#form1 #COM_CODE").val());
         }
         /**********************************************END****************************************************/
         /******************************************RENDER_TYPEDAY*********************************************/
