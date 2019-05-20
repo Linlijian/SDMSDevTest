@@ -85,9 +85,9 @@ namespace WEBAPP.Areas.MIS.Controllers
                 view = "Index2";
                 AddButton(StandButtonType.ButtonAjax, "report", "Report Issue", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport"), isValidate: true);
 
-                AddButton(StandButtonType.ButtonAjax, "report", "Summary Issue", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReportSummary"), isValidate: true);
+                AddButton(StandButtonType.ButtonAjax, "report", "Issue Summary", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReportSummary"), isValidate: true);
 
-                AddButton(StandButtonType.ButtonAjax, "report", "Report02", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport02"), isValidate: true);
+                AddButton(StandButtonType.ButtonAjax, "report", "Defect Summary", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport02"), isValidate: true);
 
                 if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
                 {
@@ -126,7 +126,7 @@ namespace WEBAPP.Areas.MIS.Controllers
                        , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
                      );
 
-            return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMSBBK" + "/" + ReportName1 + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+            return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMS" + "/" + ReportName1 + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
         }
 
         public ActionResult ViewReportSummary(MISS01P001Model model)
@@ -151,7 +151,7 @@ namespace WEBAPP.Areas.MIS.Controllers
                        , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
                      );
 
-            return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMSBBK" + "/" + ReportNameSum1 + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+            return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMS" + "/" + ReportNameSum1 + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
         }
 
         public ActionResult ViewReport02(MISS01P001Model model)
