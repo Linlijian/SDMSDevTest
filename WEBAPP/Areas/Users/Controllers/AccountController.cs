@@ -66,24 +66,25 @@ namespace WEBAPP.Areas.Users.Controllers
 
         [HttpGet]
         [AuthAttribute]
-        public ActionResult SignIn(string returnUrl, string Username)
+        public ActionResult SignIn(string returnUrl, string Username, string Password)
         {
             ViewBag.message = string.Empty;
             ViewBag.messageHeader = string.Empty;
             string cdsid = Username;
+            string cdspw = Password;
 
             if (!string.IsNullOrEmpty(Request.ServerVariables["AUTH_USER"].ToString().Trim()))
             {
                 cdsid = Request.ServerVariables["AUTH_USER"].ToString().Split('\\')[0];
             }
 
-            SECS02P002Model dsSys = GET_VSMS_USER(cdsid);
+            SECS02P002Model dsSys = GET_VSMS_USER(cdsid, cdspw);
 
             if (!dsSys.USER_ID.IsNullOrEmpty())
             {
                 if (dsSys.IS_DISABLED == "Y")
                 {
-                    ViewBag.message = string.Concat("-", "Your account is disabled,please contact your system administrator", "<br/>");
+                    ViewBag.message = string.Concat("Message : ", "-", "Your account is disabled,please contact your system administrator", "<br/>");
                 }
                 else
                 {
@@ -97,7 +98,7 @@ namespace WEBAPP.Areas.Users.Controllers
                             if (!dsUSerGroup.USG_STATUS.IsNullOrEmpty() &&
                                 dsUSerGroup.USG_STATUS == "D")
                             {
-                                ViewBag.message = string.Concat("-", "Your user group is disable,plase contarct your system administrator", "<br/>");
+                                ViewBag.message = string.Concat("Message : ", "-", "Your user group is disable,plase contarct your system administrator", "<br/>");
                             }
                             else
                             {
@@ -106,20 +107,27 @@ namespace WEBAPP.Areas.Users.Controllers
                                 LogInResult enmLogInResult = CheckUserLogInForWindowAuthen(cdsid.Trim());
                                 if (enmLogInResult == LogInResult.WrongUserNameOrPassword)
                                 {
-                                    ViewBag.message = string.Concat("-", "Wrong username or password", "<br/>");
+                                    ViewBag.message = string.Concat("Message : ", "-", "Wrong username or password", "<br/>");
                                 }
                                 else if (enmLogInResult == LogInResult.Success)
-                                 {
+                                {
                                     return RedirectToAction("SelectModule");
                                 }
                             }
                         }
                     }
+                    else
+                    {
+                        ViewBag.message = string.Concat("Message : ", "Wrong user name or password");
+                    }
                 }
             }
             else
             {
-                ViewBag.message = string.Concat("User ", cdsid, ": Wrong user name or password");
+                if (!cdsid.IsNullOrEmpty())
+                {
+                    ViewBag.message = string.Concat("Message : ", "User ", cdsid, ": Wrong user name or password");
+                }
             }
 
             return View("SignIn");
@@ -177,7 +185,7 @@ namespace WEBAPP.Areas.Users.Controllers
 
             return RedirectToAction("SelectModule");
         }
-        
+
         [HttpGet]
         [AuthAttribute]
         public ActionResult SelectModule()
@@ -190,7 +198,7 @@ namespace WEBAPP.Areas.Users.Controllers
             if (SessionHelper.SYS_USG_LEVEL != "A" && SessionHelper.SYS_USG_LEVEL != "S")
             {
                 string name = "1 Manage Issue";
-                return RedirectToAction("SelectedModule" , new { NAME = name });
+                return RedirectToAction("SelectedModule", new { NAME = name });
             }
 
             var da = new UserDA();
@@ -560,14 +568,15 @@ namespace WEBAPP.Areas.Users.Controllers
         }
 
 
-        private SECS02P002Model GET_VSMS_USER(string USER_ID)
+        private SECS02P002Model GET_VSMS_USER(string USER_ID, string USER_PWD)
         {
             var da = new SECS02P002DA();
             SetStandardErrorLog(da.DTO);
             da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.GetByID;
             da.DTO.Model.USER_ID = USER_ID;
+            da.DTO.Model.USER_PWD = USER_PWD;
 
-            da.Select(da.DTO);
+            da.SelectNoEF(da.DTO);
 
             return da.DTO.Model;
         }

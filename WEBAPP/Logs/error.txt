@@ -546,3 +546,92 @@ ERROR 2019-04-26 17:17:40,251 BaseController.OnException -
 Path : MST/MSTS01P001/Add
 Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MST\Views\MSTS01P001\Add.cshtml(24): error CS0311: The type 'FluentBootstrap.Mvc.Forms.HiddenFor<DataAccess.MST.MSTS01P001Model, string>' cannot be used as type parameter 'TTag' in the generic type or method 'TagExtensions.SetIndexParameter<TConfig, TTag>(ComponentBuilder<TConfig, TTag>, int)'. There is no implicit reference conversion from 'FluentBootstrap.Mvc.Forms.HiddenFor<DataAccess.MST.MSTS01P001Model, string>' to 'FluentBootstrap.Tag'.
 
+ERROR 2019-04-29 14:15:29,084 BaseController.OnException - 
+Path : Users/Account/ReloadNotification
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-04-29 16:09:57,486 BaseController.OnException - 
+Path : MIS/MISS01P001/Add
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P001\Add.cshtml(86): error CS1001: Identifier expected
+
+ERROR 2019-04-29 16:20:25,886 BaseController.OnException - 
+Path : MIS/MISS01P001/Edit
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P001\Edit.cshtml(85): error CS1001: Identifier expected
+
+ERROR 2019-05-18 02:10:34,610 BaseController.OnException - 
+Path : SEC/SECS02P002/Add
+Error Messages: Cannot retrieve property 'Name' because localization failed.  Type 'Translation.SEC.SECS02P002' is not public or does not contain a public static string property with the name 'USER_PWD'.
+
+ERROR 2019-05-18 02:13:33,601 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 02:15:27,920 BaseController.OnException - 
+Path : SEC/SECS02P002/Add
+Error Messages: Cannot retrieve property 'Name' because localization failed.  Type 'Translation.SEC.SECS02P002' is not public or does not contain a public static string property with the name 'USER_PWD'.
+
+ERROR 2019-05-18 02:16:55,258 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 02:27:17,153 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 11:16:46,092 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 11:16:49,460 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 11:16:51,779 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 11:16:56,781 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 11:46:15,947 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 13:42:33,309 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 13:44:05,429 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 13:51:48,824 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 13:52:16,734 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 13:52:17,493 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 14:21:26,796 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: Encountered end tag "center" with no matching start tag.  Are your start/end tags properly balanced?
+
+
+ERROR 2019-05-18 18:07:04,371 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 18:07:31,944 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-05-18 18:07:37,060 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+

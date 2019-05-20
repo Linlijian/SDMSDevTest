@@ -250,6 +250,42 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Issue Information.
+        /// </summary>
+        public static string Index1 {
+            get {
+                return ResourceManager.GetString("Index1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Information.
+        /// </summary>
+        public static string Index11 {
+            get {
+                return ResourceManager.GetString("Index11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report Issue.
+        /// </summary>
+        public static string Index2 {
+            get {
+                return ResourceManager.GetString("Index2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report Issue.
+        /// </summary>
+        public static string Index21 {
+            get {
+                return ResourceManager.GetString("Index21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Issue By.
         /// </summary>
         public static string ISSUE_BY {
@@ -376,7 +412,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Module Name.
+        ///   Looks up a localized string similar to Module Name / etc..
         /// </summary>
         public static string MODULE {
             get {
@@ -462,6 +498,15 @@ namespace Translation.MIS {
         public static string REF_NO_CRITERIA {
             get {
                 return ResourceManager.GetString("REF_NO_CRITERIA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report Type.
+        /// </summary>
+        public static string REPORT_TYPR {
+            get {
+                return ResourceManager.GetString("REPORT_TYPR", resourceCulture);
             }
         }
         

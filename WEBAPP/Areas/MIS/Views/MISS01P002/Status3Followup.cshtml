@@ -67,7 +67,7 @@
 
         Html.GridColumnCommand(Html.GridCommand(Translation.MIS.MISS01P002.FILEPACKET, Translation.MIS.MISS01P002.FILEPACKET, Url.Action("FilePacket"), FaIcons.FaArchive, TextColor.orange, new VSMParameter("ISE_NO"), new VSMParameter("COM_CODE"))),
         new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 4),
-        new GridColumn("ISE_NO", Translation.MIS.MISS01P002.NO, 4, align: ColumnsTextAlign.Right),
+        new GridColumn("ISE_NO", Translation.MIS.MISS01P002.NO, 4),
         new GridColumn("ISSUE_BY", Translation.MIS.MISS01P002.ISSUE_BY, 4),
         new GridColumn("ISE_DATE_OPENING", Translation.MIS.MISS01P002.ISE_DATE_OPENING, 4, ColumnsType.DateTime),
         new GridColumn("DEPLOY_QA", Translation.MIS.MISS01P002.DEPLOY_QA, 4, ColumnsType.DateTime, align: ColumnsTextAlign.Center, render: "RENDER_DATE_QA"),

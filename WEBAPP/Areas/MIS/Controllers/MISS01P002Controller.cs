@@ -132,7 +132,6 @@ namespace WEBAPP.Areas.MIS.Controllers
         #region OnProcess 
         public ActionResult SearchOnProcess(MISS01P002Model model)
         {
-           
             var da = new MISS01P002DA();
             SetStandardErrorLog(da.DTO);
             da.DTO.Execute.ExecuteType = MISS01P002ExecuteType.GetAllOnProcess;
@@ -152,7 +151,6 @@ namespace WEBAPP.Areas.MIS.Controllers
             da.DTO.Model = TempSearch;
             da.DTO.Model.COM_CODE = model.APP_CODE;
             da.SelectNoEF(da.DTO);
-
             return JsonAllowGet(da.DTO.Models, da.DTO.Result);
         }
         #endregion
@@ -517,7 +515,6 @@ namespace WEBAPP.Areas.MIS.Controllers
             if (mode == "1")
             {
                 localModel.APP_CODE_MODEL = BindAppCode();
-                localModel.ASSIGN_USER_MODEL = BindOwner();
             }
             else if (mode == "2")
             {

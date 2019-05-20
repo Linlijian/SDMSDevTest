@@ -13,6 +13,7 @@
 @using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
 {
     @Html.AntiForgeryToken()
+
     using (var row = Html.Bootstrap().GridRow().Begin())
     {
         using (row.GridColumn(12).SetXs(12).Begin())
@@ -24,7 +25,33 @@
                     @form.InputFor(m => m.USER_ID, isRequired: true).IsDisabled()
                 }
             }
-
+            using (Html.Bootstrap().Div().SetId("REPWD").SetVisibility(Visibility.Hidden).Begin())
+            {
+                @Html.GetVSMWidgetsBegin(Translation.SEC.SECS02P002.RE_PWD_CRITERIA)
+                using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (row.GridColumn(12).SetXs(12).Begin())
+                    {
+                        using (var ra = Html.Bootstrap().GridRow().Begin())
+                        {
+                            using (ra.GridColumn(8).SetMdOffset(2).Begin())
+                            {
+                                @form.PasswordFor(m => m.USER_PWD_OLD, isRequired: true).SetControlLabel(Translation.SEC.SECS02P002.USER_PWD_OLD).AddCss("col-md-4")
+                            }
+                            using (ra.GridColumn(8).SetMdOffset(2).Begin())
+                            {
+                                @form.PasswordFor(m => m.USER_PWD, isRequired: true).SetControlLabel(Translation.SEC.SECS02P002.USER_PWD_NEW).AddCss("col-md-4")
+                            }
+                            using (ra.GridColumn(8).SetMdOffset(2).Begin())
+                            {
+                                @form.PasswordFor(m => m.USER_PWD_R, isRequired: true).SetControlLabel(Translation.SEC.SECS02P002.USER_PWD_R).AddCss("col-md-4")
+                            }
+                        }
+                    }
+                    @form.HiddenFor(m => m.IDCPWD)
+                }
+                @Html.GetVSMWidgetsEnd()
+            }
             <fieldset>
                 <legend></legend>
                 @using (var r = Html.Bootstrap().GridRow().Begin())
@@ -121,16 +148,9 @@
             {
                 @formPopup.InputFor(t => t.USER_ID, isRequired: true).SetReadonly()
             }
-        }
-        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
-        {
             using (rowInfo.GridColumn(6).Begin())
             {
                 @formPopup.SelectFor(t => t.COM_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
-            }
-            using (rowInfo.GridColumn(6).Begin())
-            {
-                @formPopup.InputFor(t => t.MODULE, isRequired: true)
             }
         }
     }
@@ -152,10 +172,10 @@
 
             new GridColumn("COM_CODE").SetNotVisible().SetKey(),
             new GridColumn("USER_ID").SetNotVisible().SetKey(),
-            new GridColumn("MODULE").SetNotVisible().SetKey(),
+            // new GridColumn("MODULE").SetNotVisible().SetKey(),
 
             new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 20),
-            new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20),
+            // new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20),
             new GridColumn("USER_ID", Translation.SEC.SECS01P001.USER_ID, 20)
         )
 
@@ -165,6 +185,124 @@
             $("#formDetails #USER_ID").val($("#form1 #USER_ID").val());
         }
         //$("#btnAddDetails").hide()
+        /*********************************************CHECK PW************************************************/
+        $("#REPWD").addClass("@Css.Hidden")
+
+        $('#USER_PWD_R').val('0');
+        $('#USER_PWD').val('0');
+        $('#USER_PWD_OLD').val('0');
+
+        $("#RePassword").click(function () {
+            $("#REPWD").removeClass("@Css.Hidden")
+            $("#notification").hide()
+            $('#USER_PWD_R').val('');
+            $('#USER_PWD').val('');
+            $('#USER_PWD_OLD').val('');
+        });
+
+        function checkpw(pw) {
+            var number = /([0-9])/;
+            var alphabets = /([a-zA-Z])/;
+            var special_characters = /([~,!,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+            $("#SaveModify").addClass('@Css.Hidden');
+            if (pw.length < 6) {
+                alertErr("Password is Weak (should be atleast 6 characters.)");
+            } else {
+                if (pw.match(number) && pw.match(alphabets) && pw.match(special_characters)) {
+                    alertSucs("Password is Strong");
+                } else {
+                    alertErr("Password is Medium (should include alphabets, numbers and special characters.)");
+                }
+            }
+        }
+        function checkl(pw) {
+            if (pw.length < 6) {
+                return true
+            } else {
+                return false
+            }
+        }
+        $("#USER_PWD_R").keyup(function () {
+            if (checkl($("#USER_PWD_R").val())) {
+                alertErr("Confirm Password Should be atleast 6 characters.");
+            } else {
+                $("#notification").hide()
+                if ($('#USER_PWD').val().match($('#USER_PWD_R').val())) {
+                    $("#SaveModify").removeClass('@Css.Hidden');
+                    $("#notification").hide()
+                    $('#IDCPWD').val('0');
+                } else {
+                    alertErr("New Password and Confirm Password is not matching");
+                    $("#SaveModify").addClass('@Css.Hidden');
+                }
+            }
+            
+        });
+        $("#USER_PWD").keyup(function () {
+            if (checkl($("#USER_PWD").val())) {
+                alertErr("New Password Should be atleast 6 characters.");
+            } else {
+                $("#notification").hide()
+                if ($('#USER_PWD').val().match($('#USER_PWD_R').val())) {
+                    $("#SaveModify").removeClass('@Css.Hidden');
+                    $("#notification").hide()
+                    $('#IDCPWD').val('0');
+                } else {
+                    alertErr("Password is not matching");
+                    $("#SaveModify").addClass('@Css.Hidden');
+                }
+            }
+        });
+
+        $("#USER_PWD_OLD").change(function (e) {
+            waitingDialog.show();
+            var OLD_PWD = $('#USER_PWD_OLD').val();
+            var USER_ID = $('#USER_ID').val();
+            $.ajax({
+                url: '@Url.Action("GetOldPwd")',
+                type: 'post',
+                processData: false,
+                data: JSON.stringify({ OLD_PWD: OLD_PWD, USER_ID: USER_ID }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resultAfter) {
+                    if (resultAfter.data.ERROR_CODE != '0') {
+                        alertErr(resultAfter.data.ERROR_CODE)
+                        $("#SaveModify").addClass('@Css.Hidden');
+                    } else {
+                        $("#notification").hide()
+                        $("#SaveModify").removeClass('@Css.Hidden');
+                    }
+                    waitingDialog.hide();
+                },
+                error: function () {
+                    OnAjaxError
+                    waitingDialog.hide();
+                }
+            })
+        });
+        /************************************************END**************************************************/
+        /***********************************************ALERT*************************************************/
+        function alertSucs(data) {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'success' + ' alert-dismissable alert-' + 'success' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += data + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        function alertErr(data) {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += data + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        /************************************************END**************************************************/
+
 
         $(document).ready(function () {
             var formData = $("#form1").serializeFormData();
@@ -249,55 +387,35 @@
                 $.ajax({
                     url: "@Url.Action("DeleteDetails")",
                     type: "post",
-                data: nData,
-                success: function (result) {
-                    if (result != null && result != undefined) {
-                        if (result.data.IsResult) {
-                            GridDetails.rows({ selected: true }).remove().draw();
-                            OnAjaxSuccess
-                            $("#notification").hide()
-                        }
-                        else
-                        {
-                            alertErr()
-                        }
+                    data: nData,
+                    success: function (result) {
+                        if (result != null && result != undefined) {
+                            if (result.data.IsResult) {
+                                GridDetails.rows({ selected: true }).remove().draw();
+                                OnAjaxSuccess
+                                $("#notification").hide()
+                            }
+                            else {
+                                alertErr('Cannot Delete')
+                            }
 
-                    }
-                    OnAjaxSuccess
-                },
-                error: OnAjaxError
-            });
-        }
-        else {
+                        }
+                        OnAjaxSuccess
+                    },
+                    error: OnAjaxError
+                });
+            }
+            else {
                 var result = {
                     Mode: 'Delete',
                     Status: false,
                     Message: 'Please Specify Data',
                     Style: 'danger'
                 };
-        OnAjaxSuccess(result);
-        }
+                OnAjaxSuccess(result);
+            }
 
-        // bindGridDetails({ page: 1 });
-        }
-
-        function alertErr() {
-            $("#notification").hide()
-            var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
-            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
-            content += 'พัง' + '</h2>';
-            content += '</div>';
-
-            $("#notification").html(content).fadeTo(2000, 500);
-        }
-        function alertSucs() {
-            $("#notification").hide()
-            var content = '<div class="alert alert-' + 'success' + ' alert-dismissable alert-' + 'success' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
-            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
-            content += 'ผ่าน ๆ' + '</h2>';
-            content += '</div>';
-
-            $("#notification").html(content).fadeTo(2000, 500);
+            // bindGridDetails({ page: 1 });
         }
     </script>
 }

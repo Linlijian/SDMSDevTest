@@ -52,21 +52,47 @@ namespace WEBAPP.Areas.MIS.Controllers
         #endregion
 
         #region Action 
-        public ActionResult Index()
+        public ActionResult Index(string ACTIVE_STEP = "1")
         {
-            SetDefaulButton(StandardButtonMode.Index);
-            RemoveStandardButton("DeleteSearch");
-            AddStandardButton(StandardButtonName.Upload);
-            AddStandardButton(StandardButtonName.DownloadTemplate, url: "MISS01TP001");
-            if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
+            string ACTIVE_WIZARD_MAX = "2";
+            var view = string.Empty;
+            var da = new MISS01P001DA();
+
+
+            if (ACTIVE_STEP == "1")
             {
-                localModel = TempSearch.CloneObject();
+                view = "Index1";
+                SetDefaulButton(StandardButtonMode.Index);
+                RemoveStandardButton("DeleteSearch");
+                AddStandardButton(StandardButtonName.Upload);
+                AddStandardButton(StandardButtonName.DownloadTemplate, url: "MISS01TP001");
+                if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
+                {
+                    localModel = TempSearch.CloneObject();
+                }
+
+                localModel.USER_ID = SessionHelper.SYS_USER_ID;
+                SetDefaultData(StandardActionName.Index);
             }
+            else if (ACTIVE_STEP == "2")
+            {
+                view = "Index2";
+                SetClientSideRuleSet("Index2");
+                AddButton(StandButtonType.ButtonAjax, "report", "Report", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport"), isValidate: true);
+                if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
+                {
+                    localModel = TempSearch.CloneObject();
+                }
+                SetDefaultData("Index2");
+            }
+            SetHeaderWizard(new WizardHelper.WizardHeaderConfig(
+                ACTIVE_STEP,
+                ACTIVE_WIZARD_MAX,
+                new WizardHelper.WizardHeader("", Url.Action("Index", new { ACTIVE_STEP = "1" }), iconCssClass: FaIcons.FaPencil, textStep: Translation.MIS.MISS01P001.Index1),
+                new WizardHelper.WizardHeader("", Url.Action("Index", new { ACTIVE_STEP = "2" }), iconCssClass: FaIcons.FaSearch, textStep: Translation.MIS.MISS01P001.Index2)));
 
-            localModel.USER_ID = SessionHelper.SYS_USER_ID;
-            SetDefaultData(StandardActionName.Index);
 
-            return View(StandardActionName.Index, localModel);
+            return View(view, localModel);
         }
         public ActionResult Info(MISS01P001Model model)
         {
@@ -162,7 +188,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             {
                 da.DTO.Model.NO = da.DTO.Model.NO + 1;
             }
-
+            
 
             //jsonResult = Success(da.DTO.Result, StandardActionName.Add);
 
@@ -379,6 +405,10 @@ namespace WEBAPP.Areas.MIS.Controllers
                 localModel.PRIORITY_MODEL = BindPriority();
                 localModel.APP_CODE_MODEL = BindAppCode();
             }
+            else if (mode == "Index2")
+            {
+                localModel.REPORT_TYPE_MODEL = BindReport();
+            }
         }
         private void Set(MISS01P001Model model)
         {
@@ -404,9 +434,9 @@ namespace WEBAPP.Areas.MIS.Controllers
         }
         private MISS01P001Model RemoveSpace(MISS01P001Model model)
         {
-            if (!model.MENU.IsNullOrEmpty())
+            if(!model.MENU.IsNullOrEmpty())
                 model.MENU = model.MENU.Trim();
-            if (!model.PRG_NAME.IsNullOrEmpty())
+            if(!model.PRG_NAME.IsNullOrEmpty())
                 model.PRG_NAME = model.PRG_NAME.Trim();
 
             return model;
@@ -451,6 +481,10 @@ namespace WEBAPP.Areas.MIS.Controllers
         private List<DDLCenterModel> BindAppCode()
         {
             return GetDDLCenter(DDLCenterKey.DD_APPLICATION);
+        }
+        public List<DDLCenterModel> BindReport()
+        {
+            return GetDDLCenter(DDLCenterKey.DD_REPORT);
         }
         public ActionResult BindResponseBy(string APP_CODE)
         {

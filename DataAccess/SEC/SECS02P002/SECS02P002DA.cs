@@ -24,8 +24,10 @@ namespace DataAccess.SEC
             {
                 case SECS02P002ExecuteType.GetAll: return GetAll(dto);
                 case SECS02P002ExecuteType.GetByID: return GetByID(dto);
-                case SECS02P002ExecuteType.GetQuerySearchAll:return GetQuerySearchAll(dto);
-                case SECS02P002ExecuteType.GetQueryCheckUserAdmin:return GetQueryCheckUserAdmin(dto);
+                case SECS02P002ExecuteType.GetUser: return GetUser(dto);
+                case SECS02P002ExecuteType.GetOldPwd: return GetOldPwd(dto);
+                case SECS02P002ExecuteType.GetQuerySearchAll: return GetQuerySearchAll(dto);
+                case SECS02P002ExecuteType.GetQueryCheckUserAdmin: return GetQueryCheckUserAdmin(dto);
                 case SECS02P002ExecuteType.GetDetailByID: return GetDetailByID(dto);
                 case SECS02P002ExecuteType.CheckAdmin: return CheckAdmin(dto);
             }
@@ -100,9 +102,57 @@ namespace DataAccess.SEC
         }
         private SECS02P002DTO GetByID(SECS02P002DTO dto)
         {
+            //dto.Model = _DBManger.VSMS_USER
+            //    .Where(m => m.USER_ID == dto.Model.USER_ID &&  m.USER_PWD == dto.Model.USER_PWD)
+            //    .FirstOrDefault().ToNewObject(new SECS02P002Model());
+            //return dto;
+
+            var parameters = CreateParameter();
+            parameters.AddParameter("error_code", null, ParameterDirection.Output);
+            parameters.AddParameter("USER_ID", dto.Model.USER_ID);
+            parameters.AddParameter("USER_PWD", dto.Model.USER_PWD);
+
+            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_VSMS_USER]", parameters);
+            if (result.Success(dto))
+            {
+                dto.Model = result.OutputDataSet.Tables[0].ToObject<SECS02P002Model>();
+            }
+            return dto;
+        }
+        private SECS02P002DTO GetUser(SECS02P002DTO dto)
+        {
             dto.Model = _DBManger.VSMS_USER
                 .Where(m => m.USER_ID == dto.Model.USER_ID)
                 .FirstOrDefault().ToNewObject(new SECS02P002Model());
+            return dto;
+        }
+        private SECS02P002DTO GetOldPwd(SECS02P002DTO dto)
+        {
+            var parameters = CreateParameter();
+            parameters.AddParameter("error_code", null, ParameterDirection.Output);
+            parameters.AddParameter("USER_PWD", dto.Model.USER_PWD);
+            parameters.AddParameter("USER_ID", dto.Model.USER_ID);
+
+            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_SECS02P002_003]", parameters);
+            if (!result.Status)
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+                dto.Model.ERROR_CODE = result.ErrorMessage; ;
+            }
+            else
+            {
+                if (result.OutputData["error_code"].ToString().Trim() != "0")
+                {
+                    dto.Result.IsResult = false;
+                    dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
+                    dto.Model.ERROR_CODE = result.OutputData["error_code"].ToString().Trim();
+                }
+                else
+                {
+                    dto.Model.ERROR_CODE = "0";
+                }
+            }
             return dto;
         }
         private SECS02P002DTO GetQuerySearchAll(SECS02P002DTO dto)
@@ -198,13 +248,13 @@ namespace DataAccess.SEC
         //private SECS02P002DTO GetUserCOM(SECS02P002DTO dto)
         //{
         //    string strSQL = @"  select VUC.*
-		      //                          ,VC.COM_NAME_E
+        //                          ,VC.COM_NAME_E
         //                        from VSMS_USERCOM VUC
-	       //                         left join VSMS_COMPANY VC on VUC.COM_CODE = VC.COM_CODE
+        //                         left join VSMS_COMPANY VC on VUC.COM_CODE = VC.COM_CODE
         //                        where (1=1) ";
 
         //    var parameters = CreateParameter();
-          
+
         //    if (!dto.Model.USER_ID.IsNullOrEmpty())
         //    {
         //        strSQL += " and VUC.USER_ID = @USER_ID ";
@@ -228,55 +278,19 @@ namespace DataAccess.SEC
             var dto = (SECS02P002DTO)baseDTO;
 
             #region  insert VSMS_USER 
-            string strSQL1 = @"INSERT INTO [dbo].[VSMS_USER]
-                                       ([COM_CODE]
-                                       ,[USER_ID]
-                                       ,[USER_FNAME_TH]
-                                       ,[USER_LNAME_TH]
-                                       ,[USER_FNAME_EN]
-                                       ,[USER_LNAME_EN]
-                                       ,[TITLE_ID]
-                                       ,[USG_ID]
-                                       ,[USER_PWD]
-                                       ,[TELEPHONE]
-                                       ,[EMAIL]
-                                       ,[USER_STATUS]
-                                       ,[IS_DISABLED]
-                                       ,[LAST_LOGIN_DATE]
-                                       ,[CRET_BY]
-                                       ,[CRET_DATE]
-                                       ,[MNT_BY]
-                                       ,[MNT_DATE])
-                            VALUES
-                                        (@COM_CODE 
-                                        ,@USER_ID 
-                                        ,@USER_FNAME_TH 
-                                        ,@USER_LNAME_TH 
-                                        ,@USER_FNAME_EN 
-                                        ,@USER_LNAME_EN 
-                                        ,@TITLE_ID 
-                                        ,@USG_ID 
-                                        ,@USER_PWD 
-                                        ,@TELEPHONE 
-                                        ,@EMAIL 
-                                        ,@USER_STATUS 
-                                        ,@IS_DISABLED 
-                                        ,@LAST_LOGIN_DATE 
-                                        ,@CRET_BY 
-                                        ,@CRET_DATE 
-                                        ,@MNT_BY 
-                                        ,@MNT_DATE)";
-
             var parameters1 = CreateParameter();
+
+            parameters1.AddParameter("error_code", null, ParameterDirection.Output);
             parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
-            parameters1.AddParameter("TITLE_ID", dto.Model.TITLE_NAME_TH);
             parameters1.AddParameter("USER_ID", dto.Model.USER_ID);
             parameters1.AddParameter("USER_FNAME_TH", dto.Model.USER_FNAME_TH);
             parameters1.AddParameter("USER_LNAME_TH", dto.Model.USER_LNAME_TH);
             parameters1.AddParameter("USER_FNAME_EN", dto.Model.USER_FNAME_EN);
             parameters1.AddParameter("USER_LNAME_EN", dto.Model.USER_LNAME_EN);
+            parameters1.AddParameter("TITLE_ID", dto.Model.TITLE_NAME_TH);
             parameters1.AddParameter("USG_ID", dto.Model.USG_ID);
             parameters1.AddParameter("USER_PWD", dto.Model.USER_PWD);
+            parameters1.AddParameter("USER_PWD_R", dto.Model.USER_PWD_R);
             parameters1.AddParameter("TELEPHONE", dto.Model.TELEPHONE);
             parameters1.AddParameter("EMAIL", dto.Model.EMAIL);
             parameters1.AddParameter("USER_STATUS", dto.Model.USER_STATUS);
@@ -287,14 +301,19 @@ namespace DataAccess.SEC
             parameters1.AddParameter("MNT_BY", dto.Model.MNT_BY);
             parameters1.AddParameter("MNT_DATE", dto.Model.MNT_DATE);
 
+            var result = _DBMangerNoEF.ExecuteNonQuery("[bond].[SP_SECS02P002_002]", parameters1);
 
-            var result = _DBMangerNoEF.ExecuteNonQuery(strSQL1, parameters1, CommandType.Text);
             if (result.Success(dto))
             {
                 INSERT_USERCOM(dto);
             }
+            else
+            {
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.OutputData["error_code"].Trim();
+            }
             #endregion
-            
+
 
             return dto;
         }
@@ -328,7 +347,7 @@ namespace DataAccess.SEC
 
         private SECS02P002DTO INSERT_USERCOM(SECS02P002DTO dto)
         {
-           if(dto.Model.IS_ADMIN != "S" && dto.Model.IS_ADMIN != "A" && !dto.Model.IS_ADMIN.IsNullOrEmpty())
+            if (dto.Model.IS_ADMIN != "S" && dto.Model.IS_ADMIN != "A" && !dto.Model.IS_ADMIN.IsNullOrEmpty())
             {
                 if (!dto.Model.Details.IsNullOrEmpty())
                 {
@@ -403,46 +422,49 @@ namespace DataAccess.SEC
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
             var dto = (SECS02P002DTO)baseDTO;
-            string strSQL1 = @" UPDATE VSMS_USER  SET
-                                    USER_FNAME_TH = @USER_FNAME_TH
-                                    ,USER_LNAME_TH = @USER_LNAME_TH
-                                    ,USER_FNAME_EN = @USER_FNAME_EN
-                                    ,USER_LNAME_EN = @USER_LNAME_EN
-                                    ,TITLE_ID = @TITLE_ID
-                                    ,USG_ID = @USG_ID
-                                    ,TELEPHONE = @TELEPHONE
-                                    ,EMAIL = @EMAIL
-                                    ,USER_STATUS = @USER_STATUS
-                                    ,IS_DISABLED = @IS_DISABLED
-                                    ,MNT_BY = @MNT_DATE
-                                    ,MNT_DATE = @MNT_DATE
-                                    ,COM_CODE = @COM_CODE
-                              WHERE COM_CODE = @COM_CODE
-                                    AND USER_ID = @USER_ID ";
-
             var parameters1 = CreateParameter();
 
+            parameters1.AddParameter("error_code", null, ParameterDirection.Output);
             parameters1.AddParameter("COM_CODE", dto.Model.COM_CODE);
             parameters1.AddParameter("USER_ID", dto.Model.USER_ID);
-
-           // parameters1.AddParameter("APP_CODE", dto.Model.APP_CODE);
-            parameters1.AddParameter("TITLE_ID", dto.Model.TITLE_NAME_TH);
             parameters1.AddParameter("USER_FNAME_TH", dto.Model.USER_FNAME_TH);
             parameters1.AddParameter("USER_LNAME_TH", dto.Model.USER_LNAME_TH);
             parameters1.AddParameter("USER_FNAME_EN", dto.Model.USER_FNAME_EN);
             parameters1.AddParameter("USER_LNAME_EN", dto.Model.USER_LNAME_EN);
+            parameters1.AddParameter("TITLE_ID", dto.Model.TITLE_NAME_TH);
             parameters1.AddParameter("USG_ID", dto.Model.USG_ID);
+            parameters1.AddParameter("USER_PWD", dto.Model.USER_PWD);
+            parameters1.AddParameter("USER_PWD_R", dto.Model.USER_PWD_R);
+            parameters1.AddParameter("USER_PWD_OLD", dto.Model.USER_PWD_OLD);
             parameters1.AddParameter("TELEPHONE", dto.Model.TELEPHONE);
             parameters1.AddParameter("EMAIL", dto.Model.EMAIL);
             parameters1.AddParameter("USER_STATUS", dto.Model.USER_STATUS);
             parameters1.AddParameter("IS_DISABLED", dto.Model.IS_DISABLED);
+            parameters1.AddParameter("LAST_LOGIN_DATE", dto.Model.LAST_LOGIN_DATE);
+            parameters1.AddParameter("CRET_BY", dto.Model.CRET_BY);
+            parameters1.AddParameter("CRET_DATE", dto.Model.CRET_DATE);
             parameters1.AddParameter("MNT_BY", dto.Model.MNT_BY);
             parameters1.AddParameter("MNT_DATE", dto.Model.MNT_DATE);
+            parameters1.AddParameter("IDCPWD", dto.Model.IDCPWD);
 
-            var result = _DBMangerNoEF.ExecuteNonQuery(strSQL1, parameters1, CommandType.Text);
-            if (result.Success(dto))
+            var result = _DBMangerNoEF.ExecuteDataSet("[bond].[SP_SECS02P002_004]", parameters1);
+
+            if (!result.Status)
             {
-                INSERT_USERCOM(dto);
+                dto.Result.IsResult = false;
+                dto.Result.ResultMsg = result.ErrorMessage;
+            }
+            else
+            {
+                if (result.OutputData["error_code"].ToString().Trim() != "0")
+                {
+                    dto.Result.IsResult = false;
+                    dto.Result.ResultMsg = result.OutputData["error_code"].ToString().Trim();
+                }
+                else
+                {
+                    INSERT_USERCOM(dto);
+                }
             }
 
             return dto;
@@ -457,7 +479,7 @@ namespace DataAccess.SEC
             {
                 case SECS02P002ExecuteType.Delete: return Delete(dto);
                 case SECS02P002ExecuteType.DeleteDetail: return DeleteDetail(dto);
-                
+
             }
             return dto;
         }

@@ -24,7 +24,7 @@
                 {
                     using (r.GridColumn(6).Begin())
                     {
-                        @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
+                        @form.InputFor(m => m.COM_CODE).SetReadonly()
                     }
                     using (r.GridColumn(6).Begin())
                     {

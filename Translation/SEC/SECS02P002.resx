@@ -195,4 +195,19 @@
   <data name="SUPPORT" xml:space="preserve">
     <value>Support Name</value>
   </data>
+  <data name="USER_PWD" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="USER_PWD_R" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="USER_PWD_NEW" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="USER_PWD_OLD" xml:space="preserve">
+    <value>Old Password</value>
+  </data>
+  <data name="RE_PWD_CRITERIA" xml:space="preserve">
+    <value>Password Criteria</value>
+  </data>
 </root>

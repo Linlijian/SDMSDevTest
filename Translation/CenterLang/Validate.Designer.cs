@@ -113,5 +113,14 @@ namespace Translation.CenterLang {
                 return ResourceManager.GetString("Traget_date", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;Old Password&apos; should not be empty..
+        /// </summary>
+        public static string USER_PWD_OLD_ERR {
+            get {
+                return ResourceManager.GetString("USER_PWD_OLD_ERR", resourceCulture);
+            }
+        }
     }
 }

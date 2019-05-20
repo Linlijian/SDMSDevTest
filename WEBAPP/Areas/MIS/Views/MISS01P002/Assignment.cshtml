@@ -20,41 +20,21 @@
         {
             using (var row1 = Html.Bootstrap().GridRow().Begin())
             {
-                using (row1.GridColumn(2).Begin())
-                {
-
-                }
-                using (row1.GridColumn(4).Begin())
+                using (row1.GridColumn(6).Begin())
                 {
                     @form.InputFor(m => m.NO).SetReadonly()
                     @form.HiddenFor(m => m.COM_CODE)
                 }
-                using (row1.GridColumn(4).Begin())
-                {
-
-                }
-                using (row1.GridColumn(2).Begin())
-                {
-
-                }
             }
             using (var row1 = Html.Bootstrap().GridRow().Begin())
             {
-                using (row1.GridColumn(2).Begin())
-                {
-
-                }
-                using (row1.GridColumn(4).Begin())
+                using (row1.GridColumn(6).Begin())
                 {
                     @form.InputFor(m => m.RESPONSE_BY).SetReadonly()
                 }
-                using (row1.GridColumn(4).Begin())
+                using (row1.GridColumn(6).Begin())
                 {
                     @form.SelectFor(t => t.ASSIGN_USER, Model.ASSIGN_USER_MODEL.ToSelectList("Value", "Text", Model.ASSIGN_USER), isRequired: true)
-                }
-                using (row1.GridColumn(2).Begin())
-                {
-
                 }
             }
 

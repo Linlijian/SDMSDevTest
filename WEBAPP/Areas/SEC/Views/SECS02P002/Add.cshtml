@@ -24,7 +24,17 @@
                     @form.InputFor(m => m.USER_ID, isRequired: true)
                 }
             }
-           
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.PasswordFor(m => m.USER_PWD, isRequired: true)
+                }
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.PasswordFor(m => m.USER_PWD_R, isRequired: true)
+                }
+            }
             <fieldset>
                 <legend></legend>
                 @using (var r = Html.Bootstrap().GridRow().Begin())
@@ -92,8 +102,8 @@
                     }
                     using (r.GridColumn(6).Begin())
                     {
-                       @form.HiddenFor(t => t.IS_ADMIN)
-                      //  @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
+                        @form.HiddenFor(t => t.IS_ADMIN)
+                        //  @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
                     }
                 }
 
@@ -122,18 +132,22 @@
             {
                 @formPopup.InputFor(t => t.USER_ID, isRequired: true).SetReadonly()
             }
-        }
-        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
-        {
             using (rowInfo.GridColumn(6).Begin())
             {
                 @formPopup.SelectFor(t => t.COM_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
             }
-            using (rowInfo.GridColumn(6).Begin())
-            {
-                @formPopup.InputFor(t => t.MODULE, isRequired: true)
-            }
         }
+        @*using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+            {
+                using (rowInfo.GridColumn(6).Begin())
+                {
+                    @formPopup.SelectFor(t => t.COM_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
+                }
+                using (rowInfo.GridColumn(6).Begin())
+                {
+                    @formPopup.InputFor(t => t.MODULE, isRequired: true)
+                }
+            }*@
     }
     @Html.GetVSMModalDetailEnd()
 }
@@ -152,10 +166,10 @@
 
             new GridColumn("COM_CODE").SetNotVisible().SetKey(),
             new GridColumn("USER_ID").SetNotVisible().SetKey(),
-            new GridColumn("MODULE").SetNotVisible().SetKey(),
+            //new GridColumn("MODULE").SetNotVisible().SetKey(),
 
             new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 20),
-            new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20),
+            //new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20),
             new GridColumn("USER_ID", Translation.SEC.SECS01P001.USER_ID, 20)
         )
 
@@ -166,7 +180,7 @@
         }
 
         $("#btnAddDetails").hide()
-        
+
         //$("#formDetails").change(function () { $("#form1 #USER_ID").prop("readonly", true); })
         $("#form1 #USER_ID").change(function () { $("#btnAddDetails").show() })
 
@@ -199,6 +213,82 @@
             });
         })
 
-       
+        /*********************************************CHECK PW************************************************/
+        function checkpw(pw) {
+            var number = /([0-9])/;
+            var alphabets = /([a-zA-Z])/;
+            var special_characters = /([~,!,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+            $("#SaveCreate").addClass('@Css.Hidden');
+            if (pw.length < 6) {
+                alertErr("Password is Weak (should be atleast 6 characters.)");
+            } else {
+                if (pw.match(number) && pw.match(alphabets) && pw.match(special_characters)) {
+                    alertSucs("Password is Strong");
+                } else {
+                    alertErr("Password is Medium (should include alphabets, numbers and special characters.)");
+                }
+            }
+        }
+
+       function checkl(pw) {
+            if (pw.length < 6) {
+                return true
+            } else {
+                return false
+            }
+        }
+        $("#USER_PWD_R").keyup(function () {
+            if (checkl($("#USER_PWD_R").val())) {
+                alertErr("Confirm Password Should be atleast 6 characters.");
+            } else {
+                $("#notification").hide()
+                if ($('#USER_PWD').val().match($('#USER_PWD_R').val())) {
+                    $("#SaveModify").removeClass('@Css.Hidden');
+                    $("#notification").hide()
+                    $('#IDCPWD').val('0');
+                } else {
+                    alertErr("New Password and Confirm Password is not matching");
+                    $("#SaveModify").addClass('@Css.Hidden');
+                }
+            }
+
+        });
+        $("#USER_PWD").keyup(function () {
+            if (checkl($("#USER_PWD").val())) {
+                alertErr("New Password Should be atleast 6 characters.");
+            } else {
+                $("#notification").hide()
+                if ($('#USER_PWD').val().match($('#USER_PWD_R').val())) {
+                    $("#SaveModify").removeClass('@Css.Hidden');
+                    $("#notification").hide()
+                    $('#IDCPWD').val('0');
+                } else {
+                    alertErr("Password is not matching");
+                    $("#SaveModify").addClass('@Css.Hidden');
+                }
+            }
+        });
+
+        /************************************************END**************************************************/
+        /***********************************************ALERT*************************************************/
+        function alertSucs(data) {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'success' + ' alert-dismissable alert-' + 'success' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += data + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        function alertErr(data) {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += data + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        /************************************************END**************************************************/
     </script>
 }

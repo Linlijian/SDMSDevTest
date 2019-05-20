@@ -79,7 +79,7 @@ namespace WEBAPP.Areas.SEC.Controllers
 
             var da = new SECS02P002DA();
             SetStandardErrorLog(da.DTO);
-            da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.GetByID;
+            da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.GetUser;
             TempModel.USER_ID = da.DTO.Model.USER_ID = USER_ID;
             da.Select(da.DTO);
             if (da.DTO.Model != null)
@@ -90,6 +90,7 @@ namespace WEBAPP.Areas.SEC.Controllers
             }
 
             SetDefaultData(StandardActionName.Edit);
+            AddButton(StandButtonType.ButtonAjax, "RePassword", "RePassword", iconCssClass: FaIcons.FaRefresh);
 
             return View(StandardActionName.Edit, localModel);
         }
@@ -306,7 +307,18 @@ namespace WEBAPP.Areas.SEC.Controllers
             }
             return da.DTO.Result;
         }
+        public ActionResult GetOldPwd(string OLD_PWD, string USER_ID)
+        {
+            var da = new SECS02P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.GetOldPwd;
+            da.DTO.Model.USER_PWD = OLD_PWD;
+            da.DTO.Model.USER_ID = USER_ID;
 
+            da.SelectNoEF(da.DTO);
+
+            return JsonAllowGet(da.DTO.Model);
+        }
         private void SetDefaultData(string mode = "")
         {
             if (mode == StandardActionName.Index)

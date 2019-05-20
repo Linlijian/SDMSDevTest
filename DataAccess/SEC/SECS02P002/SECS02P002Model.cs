@@ -30,7 +30,7 @@ namespace DataAccess.SEC
         public decimal? TITLE_ID { get; set; }
         [Display(Name = "TITLE_NAME_TH", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string TITLE_NAME_TH { get; set; }
-        public IEnumerable<DDLCenterModel> TITLE_ID_MODEL { get; set; }       
+        public IEnumerable<DDLCenterModel> TITLE_ID_MODEL { get; set; }
 
         public string USG_NAME_TH { get; set; }
 
@@ -39,6 +39,7 @@ namespace DataAccess.SEC
         public IEnumerable<DDLCenterModel> USG_ID_MODEL { get; set; }
 
         public string USG_LEVEL { get; set; }
+        public string USER_PWD_OLD { get; set; }
 
         [Display(Name = "USER_STATUS", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string USER_STATUS { get; set; }
@@ -48,7 +49,11 @@ namespace DataAccess.SEC
         public string IS_DISABLED { get; set; }
         public IEnumerable<DDLCenterModel> IS_DISABLED_MODEL { get; set; }
 
+        [Display(Name = "USER_PWD", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string USER_PWD { get; set; }
+
+        [Display(Name = "USER_PWD_R", ResourceType = typeof(Translation.SEC.SECS02P002))]
+        public string USER_PWD_R { get; set; }
 
         [Display(Name = "TELEPHONE", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string TELEPHONE { get; set; }
@@ -59,7 +64,9 @@ namespace DataAccess.SEC
         public DateTime? LAST_LOGIN_DATE { get; set; }
 
         public int IS_DUP { get; set; }
+        public string IDCPWD { get; set; }
         public string IS_ADMIN { get; set; }
+        public string ERROR_CODE { get; set; }
 
         public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
 
@@ -96,6 +103,9 @@ namespace DataAccess.SEC
             RuleSet("Edit", () =>
             {
                 Valid();
+                RuleFor(m => m.USER_PWD).NotEmpty();
+                RuleFor(m => m.USER_PWD_OLD).NotEmpty().WithMessage(Translation.CenterLang.Validate.USER_PWD_OLD_ERR);
+                RuleFor(m => m.USER_PWD_R).NotEmpty();
             });
         }
 
