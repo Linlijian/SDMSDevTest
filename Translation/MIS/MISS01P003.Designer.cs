@@ -133,11 +133,29 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NO.
+        /// </summary>
+        public static string NO {
+            get {
+                return ResourceManager.GetString("NO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Response By.
         /// </summary>
         public static string RESPONSE_BY {
             get {
                 return ResourceManager.GetString("RESPONSE_BY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solution.
+        /// </summary>
+        public static string SOLUTION {
+            get {
+                return ResourceManager.GetString("SOLUTION", resourceCulture);
             }
         }
         

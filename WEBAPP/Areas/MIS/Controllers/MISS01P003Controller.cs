@@ -174,6 +174,35 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return JsonAllowGet(da.DTO.Model);
         }
+        [RuleSetForClientSideMessages("Edit")]
+        public ActionResult Edit(MISS01P003Model model)
+        {
+            var da = new MISS01P003DA();
+            da.DTO.Execute.ExecuteType = MISS01P003ExecuteType.GetByID;
+            da.DTO.Model.ISE_NO = model.ISE_NO;
+            TempModel.APP_CODE = da.DTO.Model.APP_CODE = model.COM_NAME_E;
+            da.SelectNoEF(da.DTO);
+            localModel = da.DTO.Model;
+            SetDefaultData(StandardActionName.Edit);
+            SetDefaulButton(StandardButtonMode.Modify);
+            return View(StandardActionName.Edit, localModel);
+        }
+        [HttpPost]
+        public ActionResult SaveModify(MISS01P003Model model)
+        {
+            var jsonResult = new JsonResult();
+            if (ModelState.IsValid)
+            {
+                model.COM_CODE = TempModel.APP_CODE = model.COM_CODE;
+                var result = SaveData(StandardActionName.SaveModify, model);
+                jsonResult = Success(result, StandardActionName.SaveModify, Url.Action(StandardActionName.Index, new { page = 1 }));
+            }
+            else
+            {
+                jsonResult = ValidateError(ModelState, StandardActionName.SaveModify);
+            }
+            return jsonResult;
+        }
         #endregion
 
         #region Mehtod  
@@ -195,7 +224,27 @@ namespace WEBAPP.Areas.MIS.Controllers
         {
             return GetDDLCenter(DDLCenterKey.DD_APPLICATION);
         }
+        private DTOResult SaveData(string mode, object model)
+        {
+            var da = new MISS01P003DA();
+            //ในกรณีที่มีการ SaveLog ให้ Include SetStandardLog ด้วย
+            Session[SessionSystemName.SYS_APPS] = TempModel.APP_CODE;
+            SetStandardLog(
+               da.DTO,
+               model,
+               GetSaveLogConfig("dbo", "VSMS_ISSUE", "COM_CODE", "NO"));
 
+            
+            if (mode == StandardActionName.SaveModify)
+            {
+                SetStandardFieldWithoutComCode(model);
+                da.DTO.Execute.ExecuteType = MISS01P003ExecuteType.Update;
+                da.DTO.Model = (MISS01P003Model)model;
+                da.UpdateNoEF(da.DTO);
+            }
+
+            return da.DTO.Result;
+        }
         #endregion
     }
 }

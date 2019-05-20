@@ -50,6 +50,7 @@
             ScrollX = false,
             WidthType = ColumnsWidthType.Percentage
         },
+        Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, "(data.STATUS != 'C')", new VSMParameter("ISE_NO"), new VSMParameter("COM_NAME_E"))),
         new GridColumn("ISE_KEY").SetNotVisible().SetKey(),
         new GridColumn("ASSIGN_STATUS", Translation.MIS.MISS01P003.CONFIRM_FIXED, 1, align: ColumnsTextAlign.Center, render: "RENDER_DONE"),
         new GridColumn("COM_NAME_E", Translation.CenterLang.Center.APP_CODE, 10).SetKey(),

@@ -26,6 +26,7 @@ namespace DataAccess.MIS
             {
                 case MISS01P003ExecuteType.GetAll: return GetAll(dto);
                 case MISS01P003ExecuteType.GetAll2: return GetAll2(dto);
+                case MISS01P003ExecuteType.GetByID: return GetByID(dto);
             }
             return dto;
         }
@@ -144,6 +145,28 @@ namespace DataAccess.MIS
 
             return dto;
         }
+        private MISS01P003DTO GetByID(MISS01P003DTO dto)
+        {
+            string strSQL = @"	SELECT *
+	                            FROM VSMS_ISSUE
+	                            WHERE (1=1)
+	                            AND COM_CODE = @COM_CODE
+                                AND NO = @ISE_NO";
+
+            var parameters = CreateParameter();
+            parameters.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
+            parameters.AddParameter("ISE_NO", dto.Model.ISE_NO);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model = result.OutputDataSet.Tables[0].ToObject<MISS01P003Model>();
+                //dto.Model.APP_CODE = dto.Model.APP_CODE; //checked=
+                dto.Model.ISE_NO = dto.Model.NO;
+            }
+            return dto;
+        }
 
         #endregion
 
@@ -170,6 +193,7 @@ namespace DataAccess.MIS
             switch (dto.Execute.ExecuteType)
             {
                 case MISS01P003ExecuteType.ConfirmStatus: return ConfirmStatus(dto);
+                case MISS01P003ExecuteType.Update: return Update(dto);
             }
             return dto;
         }
@@ -206,9 +230,25 @@ namespace DataAccess.MIS
 
             return dto;
         }
+        private MISS01P003DTO Update(MISS01P003DTO dto)
+        {
+            dto.Model.NO = dto.Model.ISE_NO;
+            string strSQL = @"	UPDATE VSMS_ISSUE
+                                SET SOLUTION = @SOLUTION
+                                WHERE COM_CODE = @COM_CODE
+                                AND NO = @NO";
+            var parameters = CreateParameter();
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+            parameters.AddParameter("NO", dto.Model.NO);
+            parameters.AddParameter("SOLUTION", dto.Model.SOLUTION);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+            
+            return dto;
+        }
         #endregion
 
-        #region ====Delete==========
+            #region ====Delete==========
         protected override BaseDTO DoDelete(BaseDTO baseDTO)
         {
             var dto = (MISS02P001DTO)baseDTO;

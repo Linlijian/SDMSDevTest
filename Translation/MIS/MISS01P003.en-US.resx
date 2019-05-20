@@ -153,4 +153,10 @@
   <data name="STEP_2" xml:space="preserve">
     <value>Step 2</value>
   </data>
+  <data name="SOLUTION" xml:space="preserve">
+    <value>Solution</value>
+  </data>
+  <data name="NO" xml:space="preserve">
+    <value>NO</value>
+  </data>
 </root>

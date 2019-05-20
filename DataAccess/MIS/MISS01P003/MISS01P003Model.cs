@@ -27,7 +27,11 @@ namespace DataAccess.MIS
         [Display(Name = "COM_NAME_E", ResourceType = typeof(Translation.MIS.MISS01P003))]
         public string COM_NAME_E { get; set; }
         [Display(Name = "ISE_NO", ResourceType = typeof(Translation.MIS.MISS01P003))]
-        public string ISE_NO { get; set; }
+        public decimal? ISE_NO { get; set; }
+        [Display(Name = "SOLUTION", ResourceType = typeof(Translation.MIS.MISS01P003))]
+        public string SOLUTION { get; set; }
+        [Display(Name = "NO", ResourceType = typeof(Translation.MIS.MISS01P003))]
+        public decimal? NO { get; set; }
 
         public string ISE_KEY { get; set; }
         public string FALG { get; set; }

@@ -21,5 +21,6 @@ namespace DataAccess.MIS
     {
         public const string ConfirmStatus = "ConfirmStatus";
         public const string GetAll2 = "GetAll2";
+        public const string Update = "Update";
     }
 }
