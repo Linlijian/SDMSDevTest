@@ -36,9 +36,9 @@ namespace DataAccess.MIS
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "ISE_DATE_OPENING", ResourceType = typeof(Translation.MIS.MISS01P003))]
         public Nullable<System.DateTime> ISE_DATE_OPENING { get; set; }
-        
 
-        
+
+
 
     }
     public class MISS01P003Validator : AbstractValidator<MISS01P003Model>
@@ -49,7 +49,7 @@ namespace DataAccess.MIS
             {
                 Valid();
             });
-            
+
         }
 
         private void Valid()

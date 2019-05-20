@@ -635,3 +635,7 @@ ERROR 2019-05-18 18:07:37,060 BaseController.OnException -
 Path : Users/Account/SignIn
 Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
 
+ERROR 2019-05-21 00:12:26,864 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
