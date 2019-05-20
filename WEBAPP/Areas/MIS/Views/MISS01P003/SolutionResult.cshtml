@@ -1,0 +1,44 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MIS
+@using UtilityLib
+
+@model MISS01P003Model
+
+@{
+    ViewBag.Title = Translation.MIS.MISS01P003.SOLUTION_TEXT;
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @form.ValidationSummary(true).AddCss(Css.Hidden)
+    @Html.AntiForgeryToken()
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        @Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P003.SOLUTION_TEXT)
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).SetMdOffset(2).Begin())
+                {
+                    <div class="form-group">
+                        <label for="ISE_NO_TXT" class="control-label col-md-4">Issue No:</label>
+                        <div class="col-md-8">
+                            <label for="ISE_NO" class="control-label col-md-1">@Model.ISE_NO</label>
+                        </div>
+                    </div>
+                }
+                using (row1.GridColumn(6).SetMdOffset(2).Begin())
+                {
+                    @form.TextAreaFor(a => a.SOLUTION, 2, isRequired: true, addValidateMessage: true)
+                }
+                @form.HiddenFor(a => a.COM_CODE)
+                @form.HiddenFor(a => a.ISE_NO)
+            }
+        }
+        @Html.GetVSMWidgetsEnd()
+    }
+}
+
