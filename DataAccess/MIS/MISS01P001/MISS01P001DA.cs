@@ -72,7 +72,7 @@ namespace DataAccess.MIS
             string strSQL = @"	SELECT *
 	                            FROM VSMS_ISSUE
 	                            WHERE (1=1) ";
-            var parameters = CreateParameter();            
+            var parameters = CreateParameter();
 
             if (!dto.Model.APP_CODE.IsNullOrEmpty()) //checked
             {
@@ -125,7 +125,7 @@ namespace DataAccess.MIS
             var parameters = CreateParameter();
             parameters.AddParameter("COM_CODE", dto.Model.APP_CODE); //checked
             parameters.AddParameter("NO", dto.Model.NO);
-            
+
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
 
             if (result.Success(dto))
@@ -216,8 +216,8 @@ namespace DataAccess.MIS
         }
         public MISS01P001DTO SplitDate(MISS01P001DTO item)
         {
-           item.Model.ISS_TYPE = item.Model.ISSUE_TYPE.Substring(0,1);
-           item.Model.ISS_YEAR = item.Model.ISSUE_TYPE.Substring(1);            
+            item.Model.ISS_TYPE = item.Model.ISSUE_TYPE.Substring(0, 1);
+            item.Model.ISS_YEAR = item.Model.ISSUE_TYPE.Substring(1);
 
             return item;
         }

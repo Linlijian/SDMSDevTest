@@ -66,7 +66,6 @@ namespace DataAccess.MIS
         public IEnumerable<DDLCenterModel> RESPONSE_BY_MODEL { get; set; }
         public IEnumerable<DDLCenterModel> REPORT_TYPE_MODEL { get; set; }
 
-
         public string ACTIVE_STEP { get; set; }
         public string STR_ISSUE_DATE { get; set; }
         public string STR_RESPONSE_DATE { get; set; }
@@ -172,6 +171,11 @@ namespace DataAccess.MIS
             RuleSet("Upload", () =>
             {
                 RuleFor(t => t.APP_CODE).NotEmpty();
+            });
+            RuleSet("Index2", () =>
+            {
+                RuleFor(t => t.REPORT_TYPR).NotEmpty();
+                RuleFor(t => t.ISSUE_DATE).NotEmpty();
             });
         }
         private void NewValid()

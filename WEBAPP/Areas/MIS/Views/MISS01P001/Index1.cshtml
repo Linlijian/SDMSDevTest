@@ -37,18 +37,18 @@
                 }
                 using (row1.GridColumn(6).Begin())
                 {
-                   @form.SelectFor(t => t.RESPONSE_BY, Model.RESPONSE_BY_MODEL.ToSelectList("Value", "Text", Model.RESPONSE_BY), IsSearch: true)
+                    @form.SelectFor(t => t.RESPONSE_BY, Model.RESPONSE_BY_MODEL.ToSelectList("Value", "Text", Model.RESPONSE_BY), IsSearch: true)
                 }
             }
             using (var row1 = Html.Bootstrap().GridRow().Begin())
             {
                 using (row1.GridColumn(6).Begin())
                 {
-                     @form.SelectFor(t => t.DEFECT, Model.DEFECT_MODEL.ToSelectList("Value", "Text", Model.DEFECT), IsSearch: true)
+                    @form.SelectFor(t => t.DEFECT, Model.DEFECT_MODEL.ToSelectList("Value", "Text", Model.DEFECT), IsSearch: true)
                 }
                 using (row1.GridColumn(6).Begin())
                 {
-                     @form.SelectFor(t => t.PRIORITY, Model.PRIORITY_MODEL.ToSelectList("Value", "Text", Model.PRIORITY), IsSearch: true)
+                    @form.SelectFor(t => t.PRIORITY, Model.PRIORITY_MODEL.ToSelectList("Value", "Text", Model.PRIORITY), IsSearch: true)
                 }
             }
         }
@@ -78,7 +78,7 @@
         new GridColumn("COM_CODE").SetNotVisible().SetKey(),
         new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10).SetKey(),
         new GridColumn("NO", Translation.MIS.MISS01P001.NO, 10),
-        new GridColumn("ISSUE_DATE", Translation.MIS.MISS01P001.ISSUE_DATE, 10,ColumnsType.DateTime),
+        new GridColumn("ISSUE_DATE", Translation.MIS.MISS01P001.ISSUE_DATE, 10, ColumnsType.DateTime),
         new GridColumn("RESPONSE_BY", Translation.MIS.MISS01P001.RESPONSE_BY, 10),
         new GridColumn("DEFECT", Translation.MIS.MISS01P001.DEFECT, 10),
         new GridColumn("PRIORITY", Translation.MIS.MISS01P001.PRIORITY, 10),

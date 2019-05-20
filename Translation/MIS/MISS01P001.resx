@@ -258,6 +258,9 @@
   <data name="REF_NO_CRITERIA" xml:space="preserve">
     <value>Reference No Criteria</value>
   </data>
+  <data name="REPORT_TYPR" xml:space="preserve">
+    <value>Report Type</value>
+  </data>
   <data name="RESOLUTION_TARGET" xml:space="preserve">
     <value>Resolution Target</value>
   </data>
@@ -302,14 +305,5 @@
   </data>
   <data name="TARGET_DATE" xml:space="preserve">
     <value>Target Date</value>
-  </data>
-  <data name="REPORT_TYPR" xml:space="preserve">
-    <value>Report Type</value>
-  </data>
-  <data name="Index11" xml:space="preserve">
-    <value>Issue Information</value>
-  </data>
-  <data name="Index21" xml:space="preserve">
-    <value>Report Issue</value>
   </data>
 </root>

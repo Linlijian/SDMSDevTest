@@ -49,6 +49,12 @@ namespace WEBAPP.Areas.MIS.Controllers
             }
             set { TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] = value; }
         }
+
+        string ReportName1 = "VSMS_ISSUE_R001R";
+        //string ReportName = "VSMS_ISSUE_R002R";
+        string ReportName2 = "VSMS_ISSUE_R002R_TEST";
+        string ReportNameSum1 = "RSUM";
+
         #endregion
 
         #region Action 
@@ -77,13 +83,16 @@ namespace WEBAPP.Areas.MIS.Controllers
             else if (ACTIVE_STEP == "2")
             {
                 view = "Index2";
-                SetClientSideRuleSet("Index2");
-                AddButton(StandButtonType.ButtonAjax, "report", "Report", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport"), isValidate: true);
+                AddButton(StandButtonType.ButtonAjax, "report", "Report Issue", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport"), isValidate: true);
+
+                AddButton(StandButtonType.ButtonAjax, "report", "Summary Issue", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReportSummary"), isValidate: true);
+
+                AddButton(StandButtonType.ButtonAjax, "report", "Report02", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport02"), isValidate: true);
+
                 if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
                 {
                     localModel = TempSearch.CloneObject();
                 }
-                SetDefaultData("Index2");
             }
             SetHeaderWizard(new WizardHelper.WizardHeaderConfig(
                 ACTIVE_STEP,
@@ -94,6 +103,107 @@ namespace WEBAPP.Areas.MIS.Controllers
 
             return View(view, localModel);
         }
+
+        public ActionResult ViewReport(MISS01P001Model model)
+        {
+            string error_code = "0";
+            string RE_BUG = " ";
+            if (model.CRET_BY == null)
+            {
+                model.CRET_BY = SessionHelper.SYS_USER_ID;
+            }
+
+            if (model.ISSUE_DATE_PERIOD == null)
+            {
+                model.ISSUE_DATE_PERIOD = "2019-04";
+            }
+
+            string Parameter = string.Concat
+                     (
+                         "&error_code=", error_code
+                       , "&CRET_BY=", model.CRET_BY
+                       //, "&RE_BUG" , HttpUtility.UrlEncode(RE_BUG)
+                       , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
+                     );
+
+            return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMSBBK" + "/" + ReportName1 + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+        }
+
+        public ActionResult ViewReportSummary(MISS01P001Model model)
+        {
+            string error_code = "0";
+            string RE_BUG = " ";
+            if (model.CRET_BY == null)
+            {
+                model.CRET_BY = SessionHelper.SYS_USER_ID;
+            }
+
+            if (model.ISSUE_DATE_PERIOD == null)
+            {
+                model.ISSUE_DATE_PERIOD = "2019-04";
+            }
+
+            string Parameter = string.Concat
+                     (
+                         "&error_code=", error_code
+                       , "&CRET_BY=", model.CRET_BY
+                       //, "&RE_BUG" , HttpUtility.UrlEncode(RE_BUG)
+                       , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
+                     );
+
+            return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMSBBK" + "/" + ReportNameSum1 + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+        }
+
+        public ActionResult ViewReport02(MISS01P001Model model)
+        {
+            string error_code = "0";
+            string RE_BUG = " ";
+            if (model.CRET_BY == null)
+            {
+                model.CRET_BY = SessionHelper.SYS_USER_ID;
+            }
+
+            if (model.ISSUE_DATE_PERIOD == null)
+            {
+                model.ISSUE_DATE_PERIOD = "2019-04";
+            }
+
+            string Parameter = string.Concat
+                     (
+                         "&error_code=", error_code
+                       , "&CRET_BY=", model.CRET_BY
+                       //, "&RE_BUG" , HttpUtility.UrlEncode(RE_BUG)
+                       , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
+                     );
+
+            return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMSBBK" + "/" + ReportName2 + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+        }
+
+        //public ActionResult ViewReport(MISS01P001Model model)
+        //{
+        //    string error_code = "0";
+        //    if (model.CRET_BY == null)
+        //    {
+        //        model.CRET_BY = SessionHelper.SYS_USER_ID;
+        //    }
+
+        //    string ReportName = "VSMS_ISSUE_R002R";
+
+        //    if (model.ISSUE_DATE_PERIOD == null)
+        //    {
+        //        model.ISSUE_DATE_PERIOD = "2019-04";
+        //    }
+
+        //    string Parameter = string.Concat
+        //             (
+        //                 "&error_code=", error_code
+        //               , "&CRET_BY=", model.CRET_BY
+        //               , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
+        //             );
+
+        //    return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMSBBK" + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+        //}
+
         public ActionResult Info(MISS01P001Model model)
         {
             var da = new MISS01P001DA();
@@ -188,7 +298,7 @@ namespace WEBAPP.Areas.MIS.Controllers
             {
                 da.DTO.Model.NO = da.DTO.Model.NO + 1;
             }
-            
+
 
             //jsonResult = Success(da.DTO.Result, StandardActionName.Add);
 
@@ -405,10 +515,6 @@ namespace WEBAPP.Areas.MIS.Controllers
                 localModel.PRIORITY_MODEL = BindPriority();
                 localModel.APP_CODE_MODEL = BindAppCode();
             }
-            else if (mode == "Index2")
-            {
-                localModel.REPORT_TYPE_MODEL = BindReport();
-            }
         }
         private void Set(MISS01P001Model model)
         {
@@ -434,9 +540,9 @@ namespace WEBAPP.Areas.MIS.Controllers
         }
         private MISS01P001Model RemoveSpace(MISS01P001Model model)
         {
-            if(!model.MENU.IsNullOrEmpty())
+            if (!model.MENU.IsNullOrEmpty())
                 model.MENU = model.MENU.Trim();
-            if(!model.PRG_NAME.IsNullOrEmpty())
+            if (!model.PRG_NAME.IsNullOrEmpty())
                 model.PRG_NAME = model.PRG_NAME.Trim();
 
             return model;
@@ -481,10 +587,6 @@ namespace WEBAPP.Areas.MIS.Controllers
         private List<DDLCenterModel> BindAppCode()
         {
             return GetDDLCenter(DDLCenterKey.DD_APPLICATION);
-        }
-        public List<DDLCenterModel> BindReport()
-        {
-            return GetDDLCenter(DDLCenterKey.DD_REPORT);
         }
         public ActionResult BindResponseBy(string APP_CODE)
         {

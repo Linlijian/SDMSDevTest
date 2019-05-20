@@ -259,29 +259,11 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Issue Information.
-        /// </summary>
-        public static string Index11 {
-            get {
-                return ResourceManager.GetString("Index11", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Report Issue.
         /// </summary>
         public static string Index2 {
             get {
                 return ResourceManager.GetString("Index2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Report Issue.
-        /// </summary>
-        public static string Index21 {
-            get {
-                return ResourceManager.GetString("Index21", resourceCulture);
             }
         }
         
