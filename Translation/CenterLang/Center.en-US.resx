@@ -584,4 +584,10 @@
   <data name="APP_CODE" xml:space="preserve">
     <value>Application Code</value>
   </data>
+  <data name="COM_NAME_E" xml:space="preserve">
+    <value>Application Name EN</value>
+  </data>
+  <data name="COM_NAME_T" xml:space="preserve">
+    <value>Application Name TH</value>
+  </data>
 </root>

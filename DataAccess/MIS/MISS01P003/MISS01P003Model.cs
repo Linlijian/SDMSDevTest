@@ -28,9 +28,13 @@ namespace DataAccess.MIS
         public string COM_NAME_E { get; set; }
         [Display(Name = "ISE_NO", ResourceType = typeof(Translation.MIS.MISS01P003))]
         public string ISE_NO { get; set; }
-
+        [Display(Name = "SOLUTION_TEXT", ResourceType = typeof(Translation.MIS.MISS01P003))]
+        public string SOLUTION { get; set; }
+        
         public string ISE_KEY { get; set; }
         public string FALG { get; set; }
+        public string ACTIVE_STEP { get; set; }
+        
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
@@ -45,7 +49,7 @@ namespace DataAccess.MIS
     {
         public MISS01P003Validator()
         {
-            RuleSet("Add", () =>
+            RuleSet("SolutionResult", () =>
             {
                 Valid();
             });
@@ -54,7 +58,7 @@ namespace DataAccess.MIS
 
         private void Valid()
         {
-
+            RuleFor(t => t.SOLUTION).NotEmpty();
         }
     }
 }

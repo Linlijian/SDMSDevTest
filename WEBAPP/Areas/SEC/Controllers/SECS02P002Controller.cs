@@ -51,6 +51,11 @@ namespace WEBAPP.Areas.SEC.Controllers
         #region View
         public ActionResult Index()
         {
+            if (SessionHelper.SYS_USG_LEVEL != "A" && SessionHelper.SYS_USG_LEVEL != "S")
+            {
+                return RedirectToAction("EditMySelf", new { USER_ID = SessionHelper .SYS_USER_ID});
+            }
+
             SetDefaulButton(StandardButtonMode.Index);
 
             //AddButton(StandButtonType.ButtonAjax, "report", "Report", cssClass: "std-btn-print", iconCssClass: FaIcons.FaPrint, url: Url.Action("ViewReport"));
@@ -93,6 +98,31 @@ namespace WEBAPP.Areas.SEC.Controllers
             AddButton(StandButtonType.ButtonAjax, "RePassword", "RePassword", iconCssClass: FaIcons.FaRefresh);
 
             return View(StandardActionName.Edit, localModel);
+        }
+
+        [RuleSetForClientSideMessages("Edit")]
+        public ActionResult EditMySelf(string USER_ID)
+        {
+            SetDefaulButton(StandardButtonMode.Modify);
+
+            var da = new SECS02P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.GetUser;
+            TempModel.USER_ID = da.DTO.Model.USER_ID = USER_ID;
+            da.Select(da.DTO);
+            if (da.DTO.Model != null)
+            {
+                localModel = da.DTO.Model;
+                localModel.APP_CODE = da.DTO.Model.COM_CODE;
+                TempModel.COM_CODE = da.DTO.Model.COM_CODE;
+                TempModel.IS_DISABLED = "N";
+            }
+
+            SetDefaultData(StandardActionName.Edit);
+            string view = "EditMySelf";
+            AddButton(StandButtonType.ButtonAjax, "RePassword", "RePassword", iconCssClass: FaIcons.FaRefresh);
+
+            return View(view, localModel);
         }
 
         [HttpGet]
@@ -288,6 +318,7 @@ namespace WEBAPP.Areas.SEC.Controllers
                 SetStandardField(model);               
                 da.DTO.Model = (SECS02P002Model)model;
                 da.DTO.Model.COM_CODE = TempModel.COM_CODE;
+                da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.Update;
                 //SetStandardField(da.DTO.Model.ComUserModel);
                 da.UpdateNoEF(da.DTO);
             }
@@ -316,8 +347,18 @@ namespace WEBAPP.Areas.SEC.Controllers
             da.DTO.Model.USER_ID = USER_ID;
 
             da.SelectNoEF(da.DTO);
-
+            
             return JsonAllowGet(da.DTO.Model);
+        }
+        public ActionResult GetFullAppName(SECS02P002Model model)
+        {
+            var da = new SECS02P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.GetFullAppName;
+            da.DTO.Model.COM_CODE = model.APP_CODE;
+
+            da.SelectNoEF(da.DTO);
+            return JsonAllowGet(da.DTO.Model.Details[0]);
         }
         private void SetDefaultData(string mode = "")
         {

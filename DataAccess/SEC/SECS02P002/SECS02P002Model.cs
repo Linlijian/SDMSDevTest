@@ -73,6 +73,11 @@ namespace DataAccess.SEC
         [Display(Name = "MODULE", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string MODULE { get; set; }
 
+        [Display(Name = "COM_CODE_T", ResourceType = typeof(Translation.SEC.SECS02P002))]
+        public string COM_CODE_T { get; set; }
+        [Display(Name = "COM_CODE_E", ResourceType = typeof(Translation.SEC.SECS02P002))]
+        public string COM_CODE_E { get; set; }
+
         public List<SECS02P002ModuleAndSystemDetail> Details { get; set; }
 
     }
@@ -83,6 +88,10 @@ namespace DataAccess.SEC
         public string MODULE { get; set; }
         [Display(Name = "USER_ID", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string USER_ID { get; set; }
+        [Display(Name = "COM_CODE_T", ResourceType = typeof(Translation.SEC.SECS02P002))]
+        public string COM_CODE_T { get; set; }
+        [Display(Name = "COM_CODE_E", ResourceType = typeof(Translation.SEC.SECS02P002))]
+        public string COM_CODE_E { get; set; }
 
         [Display(Name = "APP_CODE", ResourceType = typeof(Translation.SEC.SECS02P002))]
         public string COM_CODE { get; set; }
@@ -98,14 +107,16 @@ namespace DataAccess.SEC
             {
                 Valid();
                 RuleFor(m => m.USER_ID).Store("CD_SECS02P002_001").NotEmpty();
+                RuleFor(m => m.USER_PWD).NotEmpty().Length(6, 12);
+                RuleFor(m => m.USER_PWD_R).NotEmpty().Length(6, 12);
             });
 
             RuleSet("Edit", () =>
             {
                 Valid();
-                RuleFor(m => m.USER_PWD).NotEmpty();
+                RuleFor(m => m.USER_PWD).NotEmpty().Length(6, 12);
                 RuleFor(m => m.USER_PWD_OLD).NotEmpty().WithMessage(Translation.CenterLang.Validate.USER_PWD_OLD_ERR);
-                RuleFor(m => m.USER_PWD_R).NotEmpty();
+                RuleFor(m => m.USER_PWD_R).NotEmpty().Length(6, 12);
             });
         }
 
@@ -116,7 +127,7 @@ namespace DataAccess.SEC
             RuleFor(m => m.TITLE_ID).NotEmpty();
             RuleFor(m => m.USER_STATUS).NotEmpty();
             RuleFor(m => m.USG_ID).NotEmpty();
-            RuleFor(m => m.COM_CODE).NotEmpty().WithMessage(Translation.CenterLang.Validate.APP_CODE); ;
+            RuleFor(m => m.APP_CODE).NotEmpty().WithMessage(Translation.CenterLang.Validate.APP_CODE);
             RuleFor(m => m.MODULE).NotEmpty();
         }
     }

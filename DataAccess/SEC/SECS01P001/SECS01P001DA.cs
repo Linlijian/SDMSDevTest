@@ -159,7 +159,7 @@ namespace DataAccess.SEC
             var model = _DBManger.VSMS_COMPANY.First(m => m.COM_CODE == COM_CODE && m.COM_BRANCH == COM_BRANCH);
             model.MergeObject(dto.Model);
 
-            UpdateDetail(dto);
+            //UpdateDetail(dto);
 
             return dto;
         }

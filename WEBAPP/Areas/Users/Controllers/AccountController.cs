@@ -111,6 +111,7 @@ namespace WEBAPP.Areas.Users.Controllers
                                 }
                                 else if (enmLogInResult == LogInResult.Success)
                                 {
+                                    UpdateLastLogin(dsSys.USER_ID);
                                     return RedirectToAction("SelectModule");
                                 }
                             }
@@ -195,11 +196,11 @@ namespace WEBAPP.Areas.Users.Controllers
                 return RedirectToAction("SignIn");
             }
 
-            if (SessionHelper.SYS_USG_LEVEL != "A" && SessionHelper.SYS_USG_LEVEL != "S")
-            {
-                string name = "1 Manage Issue";
-                return RedirectToAction("SelectedModule", new { NAME = name });
-            }
+            //if (SessionHelper.SYS_USG_LEVEL != "A" && SessionHelper.SYS_USG_LEVEL != "S")
+            //{
+            //    string name = "1 Manage Issue";
+            //    return RedirectToAction("SelectedModule", new { NAME = name });
+            //}
 
             var da = new UserDA();
             da.DTO.Execute.ExecuteType = UserExecuteType.GetConfigGeraral;
@@ -591,6 +592,16 @@ namespace WEBAPP.Areas.Users.Controllers
             da.Select(da.DTO);
 
             return da.DTO.Model;
+        }
+        private void UpdateLastLogin(string USER_ID)
+        {
+            var da = new SECS02P002DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = SECS02P002ExecuteType.UpdateLastLogin;
+            da.DTO.Model.USER_ID = USER_ID;
+            da.DTO.Model.CRET_DATE = DateTime.Now;
+            da.UpdateNoEF(da.DTO);
+
         }
 
         private LogInResult CheckUserLogInForWindowAuthen(string USER_ID)

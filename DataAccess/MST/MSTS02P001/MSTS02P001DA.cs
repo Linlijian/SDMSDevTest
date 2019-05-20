@@ -32,18 +32,24 @@ namespace DataAccess.MST
 
         private MSTS02P001DTO GetAll(MSTS02P001DTO dto)
         {
-            string strSql = @"SELECT * FROM [dbo].[VSMS_MANDAY_T] WHERE (1=1) ";
+            string strSql = @"  SELECT aa.*
+	                                ,a.COM_NAME_E
+	                                ,a.COM_NAME_T
+                                FROM VSMS_MANDAY_T aa
+                                INNER JOIN VSMS_COMPANY a ON a.COM_CODE = aa.COM_CODE
+                                WHERE (1 = 1)
+                                 ";
 
             var parameters = CreateParameter();
 
             if (!dto.Model.APP_CODE.IsNullOrEmpty())
             {
-                strSql += " AND COM_CODE = @APP_CODE";
+                strSql += " AND aa.COM_CODE = @APP_CODE";
                 parameters.AddParameter("APP_CODE", dto.Model.APP_CODE); //checked
             }
             if (!dto.Model.YEAR.IsNullOrEmpty())
             {
-                strSql += " AND YEAR = @YEAR";
+                strSql += " AND aa.YEAR = @YEAR";
                 parameters.AddParameter("YEAR", dto.Model.YEAR);
             }
 

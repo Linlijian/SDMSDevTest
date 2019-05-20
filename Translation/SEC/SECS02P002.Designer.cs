@@ -79,6 +79,24 @@ namespace Translation.SEC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Application Eng.
+        /// </summary>
+        public static string COM_CODE_E {
+            get {
+                return ResourceManager.GetString("COM_CODE_E", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Application Thai.
+        /// </summary>
+        public static string COM_CODE_T {
+            get {
+                return ResourceManager.GetString("COM_CODE_T", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company Name.
         /// </summary>
         public static string COM_NAME_E {

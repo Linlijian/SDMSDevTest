@@ -146,13 +146,54 @@
         {
             using (rowInfo.GridColumn(6).Begin())
             {
-                @formPopup.InputFor(t => t.USER_ID, isRequired: true).SetReadonly()
+                @formPopup.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
             }
             using (rowInfo.GridColumn(6).Begin())
             {
-                @formPopup.SelectFor(t => t.COM_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
+                <div class="form-group">
+                    <label for="COM_CODE_TXT" class="control-label col-md-4">@Translation.SEC.SECS02P002.COM_CODE:</label>
+                    <div class="col-md-8">
+                        <label for="COM_CODE" id="L_COM_CODE" class="control-label"></label>
+                    </div>
+                </div>
             }
         }
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                <div class="form-group">
+                    <label for="COM_CODE_T_TXT" class="control-label col-md-4">@Translation.SEC.SECS02P002.COM_CODE_T:</label>
+                    <div class="col-md-8">
+                        <label for="COM_CODE_T" id="L_COM_CODE_T" class="control-label"></label>
+                    </div>
+                </div>
+            }
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                <div class="form-group">
+                    <label for="COM_CODE_E_TXT" class="control-label col-md-4">@Translation.SEC.SECS02P002.COM_CODE_E:</label>
+                    <div class="col-md-8">
+                        <label for="COM_CODE_E" id="L_COM_CODE_E" class="control-label"></label>
+                    </div>
+                </div>
+            }
+        }
+        @formPopup.HiddenFor(a => a.COM_CODE)
+        @formPopup.HiddenFor(a => a.COM_CODE_E)
+        @formPopup.HiddenFor(a => a.COM_CODE_T)
+        @formPopup.HiddenFor(a => a.USER_ID)
+        @*using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+            {
+                using (rowInfo.GridColumn(6).Begin())
+                {
+                    @formPopup.SelectFor(t => t.COM_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
+                }
+                using (rowInfo.GridColumn(6).Begin())
+                {
+                    @formPopup.InputFor(t => t.MODULE, isRequired: true)
+                }
+            }*@
     }
     @Html.GetVSMModalDetailEnd()
 }
@@ -170,21 +211,89 @@
                 WidthType = ColumnsWidthType.Pixel
             },
 
-            new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+           new GridColumn("COM_CODE").SetNotVisible().SetKey(),
             new GridColumn("USER_ID").SetNotVisible().SetKey(),
-            // new GridColumn("MODULE").SetNotVisible().SetKey(),
+            //new GridColumn("MODULE").SetNotVisible().SetKey(),
 
             new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 20),
-            // new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20),
-            new GridColumn("USER_ID", Translation.SEC.SECS01P001.USER_ID, 20)
+            new GridColumn("COM_CODE_T", Translation.CenterLang.Center.COM_NAME_T, 20),
+            new GridColumn("COM_CODE_E", Translation.CenterLang.Center.COM_NAME_E, 20),
+            //new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20),
+            new GridColumn("USER_ID", Translation.SEC.SECS01P001.USER_ID, 20).SetNotVisible()
         )
 
 
     <script>
         function OnBeforeAddDetail(e) {
-            $("#formDetails #USER_ID").val($("#form1 #USER_ID").val());
+            $("#L_COM_CODE").text('');
+            $("#L_COM_CODE_T").text('');
+            $("#L_COM_CODE_E").text('');
+
+            $("#COM_CODE_E").val('')
+            $("#COM_CODE_T").val('')
+            $("#COM_CODE").val('')
+
+            $("#formDetails #USER_ID").val($("#form1 #USER_ID").val())
         }
-        //$("#btnAddDetails").hide()
+
+        function OnEditDetails(i, name) {
+            var data = GridDetails.row(i).data();
+            $.each($("#formDetails").serializeArray(), function (i, element) {
+                var ctrl = $("#formDetails [name='" + element.name + "']");
+                if (ctrl != undefined && ctrl != null && data[element.name] != undefined && data[element.name] != null && !isNullOrEmpty(data[element.name])) {
+                    if (ctrl[0].type == "checkbox") {
+                        ctrl.prop("checked", data[element.name] == "Y");
+                        ctrl.val(data[element.name] + "");
+                    } else if (ctrl[0].type == "text" && ctrl.hasClass("datepicker-input")) {
+                        ctrl.val(jsonDateToFormat(data[element.name]));
+                        if (ctrl.hasClass("datepicker")) {
+                            ctrl.datepicker("setDate", $.stringToDate(jsonDateToFormat(data[element.name])));
+                        }
+                    } else if (ctrl[0].type == "text" && ctrl.hasClass("number-format")) {
+                        ctrl.val(toNumberFormat(data[element.name]));
+                        ctrl.focusout();
+                    } else {
+                        ctrl.val(data[element.name] + "");
+                    }
+                }
+            });
+            $("#mdTitleDetails").text("Edit Details");
+            $("#btnSaveDetails").data("index", i);
+            $("#btnSaveDetails").data("mode", "edit"); $("#mdDetails").modal();
+
+            $("#L_COM_CODE").text(data.COM_CODE);
+            $("#L_COM_CODE_T").text(data.COM_CODE_T);
+            $("#L_COM_CODE_E").text(data.COM_CODE_E);
+
+            $("#COM_CODE_E").val(data.COM_CODE_E)
+            $("#COM_CODE_T").val(data.COM_CODE_T)
+            $("#COM_CODE").val(data.COM_CODE)
+
+            return false;
+        }
+
+        $(document).ready(function () {
+            $("#formDetails #APP_CODE").change(function () {
+                var formData = $("#formDetails").serializeFormData();
+                $.ajax({
+                    url: '@Url.Action("GetFullAppName")',
+                    type: 'post',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $("#L_COM_CODE").text(response.data.COM_CODE);
+                        $("#L_COM_CODE_T").text(response.data.COM_CODE_T);
+                        $("#L_COM_CODE_E").text(response.data.COM_CODE_E);
+
+                        $("#COM_CODE_E").val(response.data.COM_CODE_E)
+                        $("#COM_CODE_T").val(response.data.COM_CODE_T)
+                        $("#COM_CODE").val(response.data.COM_CODE)
+                    },
+                    error: OnAjaxError
+                });
+            })
+        })
         /*********************************************CHECK PW************************************************/
         $("#REPWD").addClass("@Css.Hidden")
 
@@ -236,7 +345,7 @@
                     $("#SaveModify").addClass('@Css.Hidden');
                 }
             }
-            
+
         });
         $("#USER_PWD").keyup(function () {
             if (checkl($("#USER_PWD").val())) {

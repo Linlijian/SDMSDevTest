@@ -30,11 +30,11 @@
             {
                 using (r.GridColumn(6).Begin())
                 {
-                    @form.InputFor(m => m.COM_CODE, isRequired: true).SetReadonly()
+                    @form.InputFor(m => m.COM_CODE).SetReadonly()
                 }
                 using (r.GridColumn(6).Begin())
                 {
-                    @form.InputFor(m => m.COM_BRANCH).SetReadonly()
+                    @form.InputFor(m => m.COM_BRANCH, addValidateMessage:true).SetReadonly()
                 }
             }
 

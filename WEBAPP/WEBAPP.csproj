@@ -731,6 +731,8 @@
     <Content Include="Uploads\Image\bootstrap-colorpicker\hue-horizontal.png" />
     <Content Include="Uploads\Image\bootstrap-colorpicker\hue.png" />
     <Content Include="Uploads\Image\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Uploads\Image\logo\69867778_p0.png" />
+    <Content Include="Uploads\Image\logo\login_w.png" />
     <Content Include="Uploads\Image\logo\logoFz_74x40.png" />
     <Content Include="Uploads\Image\logo\rsz_unnamed.png" />
     <Content Include="Uploads\Image\pagenotfound.png" />
@@ -832,8 +834,6 @@
     <Content Include="Areas\MIS\Views\MISS01P002\Status3Followup.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P002\Status5Close.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P002\Status4Golive.cshtml" />
-    <Content Include="Areas\MIS\Views\MISS01P003\Add.cshtml" />
-    <Content Include="Areas\MIS\Views\MISS01P003\Edit.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P003\Index.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P002\Assignment.cshtml" />
     <Content Include="Areas\SEC\Views\SECS01P001\ConfMod.cshtml" />
@@ -841,6 +841,11 @@
     <Content Include="Areas\MIS\Views\MISS01P001\AddRefNo.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P001\Upload.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P001\Index2.cshtml" />
+    <Content Include="Areas\SEC\Views\SECS02P002\EditMySelf.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P003\DoneTask.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P003\NewTask.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P003\DoTask.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P003\SolutionResult.cshtml" />
     <None Include="Properties\PublishProfiles\A.pubxml" />
     <None Include="Properties\PublishProfiles\March.pubxml" />
     <None Include="Properties\PublishProfiles\Meiio.pubxml" />

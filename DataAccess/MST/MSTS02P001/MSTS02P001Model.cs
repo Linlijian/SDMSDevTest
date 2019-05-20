@@ -17,6 +17,10 @@ namespace DataAccess.MST
         [Display(Name = "MANDAY_VAL", ResourceType = typeof(Translation.MST.MSTS02P001))]
         //public string MANDAY_VAL { get; set; }
         public decimal? MANDAY_VAL { get; set; }
+        [Display(Name = "COM_NAME_E", ResourceType = typeof(Translation.CenterLang.Center))]
+        public string COM_NAME_E { get; set; }
+        [Display(Name = "COM_NAME_T", ResourceType = typeof(Translation.CenterLang.Center))]
+        public string COM_NAME_T { get; set; }
 
         public IEnumerable<DDLCenterModel> APP_CODE_MODEL { get; set; }
 
@@ -39,7 +43,7 @@ namespace DataAccess.MST
 
         private void Valid()
         {
-            RuleFor(t => t.MANDAY_VAL).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(999.9)).WithMessage(Translation.CenterLang.Validate.OneNumber2Digit1);
+            RuleFor(t => t.MANDAY_VAL).NotEmpty().GreaterThanOrEqualTo(0).LessThanOrEqualTo(Convert.ToDecimal(999.9)).WithMessage(Translation.CenterLang.Validate.OneNumber3Digit1);
         }
     }
 }

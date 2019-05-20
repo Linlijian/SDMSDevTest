@@ -24,9 +24,12 @@ namespace DataAccess.SEC
         public const string GetDetailByID = "GetDetailByID";
         public const string Delete = "Delete"; 
         public const string DeleteDetail = "DeleteDetail";
+        public const string UpdateLastLogin = "UpdateLastLogin";
+        public const string Update = "Update"; 
         public const string GetOldPwd = "GetOldPwd";
+        public const string GetFullAppName = "GetFullAppName";
         public const string CheckAdmin = "CheckAdmin";
         public const string GetUserCOM = "GetUserCOM";
-        public const string GetUser = "GetUser";
+        public const string GetUser = "GetUser"; 
     }
 }

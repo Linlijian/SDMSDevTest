@@ -37,46 +37,59 @@
     @Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P001.ISSUE_CALCULATE)
     using (var row1 = Html.Bootstrap().GridRow().Begin())
     {
-        using (row1.GridColumn(12).SetXs(12).Begin())
+        using (var r = Html.Bootstrap().GridRow().Begin())
         {
-            using (var r = Html.Bootstrap().GridRow().Begin())
+            using (row1.GridColumn(6).Begin())
             {
-                using (row1.GridColumn(6).Begin())
-                {
-                    @form.InputNumberFor(m => m.NO).SetReadonly()
-                }
-                using (row1.GridColumn(6).Begin())
-                {
-                    @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true, addValidateMessage: true).IsDisabled()
-                }
+                <div class="form-group">
+                    <label for="@Translation.MIS.MISS01P001.ID_APP" class="control-label col-md-4">@Translation.MIS.MISS01P001.APP_CODE :</label>
+                    <div class="col-md-8">
+                        <label for="@Translation.MIS.MISS01P001.ID_APP" id="@Translation.MIS.MISS01P001.ID_APP" class="control-label">@Model.APP_CODE</label>
+                    </div>
+                </div>
             }
-            using (var r = Html.Bootstrap().GridRow().Begin())
+            using (row1.GridColumn(6).Begin())
             {
-                using (row1.GridColumn(6).Begin())
-                {
-                    @form.InputFor(m => m.ISSUE_BY, isRequired: true, addValidateMessage: true)
-                }
-                using (row1.GridColumn(6).Begin())
-                {
-                    @form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), isRequired: true, addValidateMessage: true)
-                }
+                <div class="form-group">
+                    <label for="@Translation.MIS.MISS01P001.ID_NO" class="control-label col-md-4">@Translation.MIS.MISS01P001.NO :</label>
+                    <div class="col-md-8">
+                        <label for="@Translation.MIS.MISS01P001.ID_NO" id="@Translation.MIS.MISS01P001.ID_NO" class="control-label">@Model.NO</label>
+                    </div>
+                </div>
             }
-            using (var r = Html.Bootstrap().GridRow().Begin())
+        }
+        using (var r = Html.Bootstrap().GridRow().Begin())
+        {
+            using (row1.GridColumn(6).Begin())
             {
-                using (row1.GridColumn(6).Begin())
-                {
-                    @form.InputFor(m => m.STR_ISSUE_DATE, isRequired: true, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.ISSUE_DATE).AddCss("input-append").SetReadonly()
-                    @form.HiddenFor(m => m.ISSUE_DATE)
-                }
-                using (row1.GridColumn(6).Begin())
-                {
-                    @form.InputFor(m => m.ISSUE_DATE_PERIOD).SetReadonly()
-                }
+                @form.InputFor(m => m.STR_ISSUE_DATE, isRequired: true, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.ISSUE_DATE).AddCss("input-append")
+                @form.HiddenFor(m => m.ISSUE_DATE)
             }
-            using (var r = Html.Bootstrap().GridRow().Begin())
+            using (row1.GridColumn(6).Begin())
             {
-                using (row1.GridColumn(6).Begin())
-                {
+                <div class="form-group">
+                    <label for="@Translation.MIS.MISS01P001.ID_ISSUE_DATE_PERIOD" class="control-label col-md-4">@Translation.MIS.MISS01P001.ISSUE_DATE_PERIOD :</label>
+                    <div class="col-md-8">
+                        <label for="@Translation.MIS.MISS01P001.ID_ISSUE_DATE_PERIOD" id="@Translation.MIS.MISS01P001.ID_ISSUE_DATE_PERIOD" class="control-label"></label>
+                    </div>
+                </div>
+            }
+        }
+        using (var r = Html.Bootstrap().GridRow().Begin())
+        {
+            using (row1.GridColumn(6).Begin())
+            {
+                @form.InputFor(m => m.ISSUE_BY, isRequired: true, addValidateMessage: true)
+            }
+            using (row1.GridColumn(6).Begin())
+            {
+                @form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), isRequired: true, addValidateMessage: true)
+            }
+        }
+        using (var r = Html.Bootstrap().GridRow().Begin())
+        {
+            using (row1.GridColumn(6).Begin())
+            {
                     @form.TextAreaFor(m => m.MODULE, 4, isRequired: true)
                     @form.HiddenFor(m => m.APP_CODE)
                 }
@@ -134,23 +147,33 @@
                        RESPONSE_TARGET = "RESPONSE_TARGET",
                        RESOLUTION_TARGET = "RESOLUTION_TARGET"
                    }).SetSelectOnly().SetRequired()
-                        //@form.SelectFor(t => t.PRIORITY, Model.PRIORITY_MODEL.ToSelectList("Value", "Text", Model.PRIORITY), isRequired: true)
+                    //@form.SelectFor(t => t.PRIORITY, Model.PRIORITY_MODEL.ToSelectList("Value", "Text", Model.PRIORITY), isRequired: true)
 
-                    }
-                    using (row1.GridColumn(12).Begin())
-                    {
-                        // @form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), isRequired: true, addValidateMessage: true)
-                    }
-                    using (row1.GridColumn(12).Begin())
-                    {
-                        @form.InputFor(m => m.RESPONSE_TARGET).SetReadonly()
-                    }
-                    using (row1.GridColumn(12).Begin())
-                    {
-                        @form.InputFor(m => m.RESOLUTION_TARGET).SetReadonly()
-                    }
-                    using (row1.GridColumn(12).Begin())
-                    {
+                }
+                using (row1.GridColumn(12).Begin())
+                {
+                    // @form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), isRequired: true, addValidateMessage: true)
+                }
+                using (row1.GridColumn(12).Begin())
+                {
+                    <div class="form-group">
+                        <label for="@Translation.MIS.MISS01P001.ID_RESPONSE_TARGET" class="control-label col-md-4">@Translation.MIS.MISS01P001.RESPONSE_TARGET</label>
+                        <div class="col-md-8">
+                            <label for="@Translation.MIS.MISS01P001.ID_RESPONSE_TARGET" id="@Translation.MIS.MISS01P001.ID_RESPONSE_TARGET" class="control-label"></label>
+                        </div>
+                    </div>
+                }
+                using (row1.GridColumn(12).Begin())
+                {
+                    <div class="form-group">
+                        <label for="@Translation.MIS.MISS01P001.ID_RESOLUTION_TARGET" class="control-label col-md-4">@Translation.MIS.MISS01P001.RESOLUTION_TARGET</label>
+                        <div class="col-md-8">
+                            <label for="@Translation.MIS.MISS01P001.ID_RESOLUTION_TARGET" id="@Translation.MIS.MISS01P001.ID_RESOLUTION_TARGET" class="control-label"></label>
+                        </div>
+                    </div>
+                }
+                using (row1.GridColumn(12).Begin())
+                {
                         @form.InputJAutocompleteFor(t => t.DEFECT, addValidateMessage: true, isRequired: true).JAutoKeySource("AC_MISS01P001_002").JAutoBindField("ISSUE_TYPE").JAutoFieldToInput(new
                    {
                        MAN_PLM_SA = "MAN_PLM_SA",
@@ -228,6 +251,8 @@
                                 <span class="add-on"><i class="icon-th"></i></span>
                             </div>
                         }*@
+                @form.HiddenFor(a => a.RESPONSE_TARGET)
+                @form.HiddenFor(a => a.RESOLUTION_TARGET)
                     @Html.GetVSMWidgetsEnd()
                 }
 

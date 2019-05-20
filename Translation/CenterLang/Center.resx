@@ -584,4 +584,10 @@
   <data name="APP_CODE" xml:space="preserve">
     <value>รหัสแอพพลิเคชั่น</value>
   </data>
+  <data name="COM_NAME_E" xml:space="preserve">
+    <value>ชื่อแอพพลิเคชั่นภาษาไทย</value>
+  </data>
+  <data name="COM_NAME_T" xml:space="preserve">
+    <value>ชื่อแอพพลิเคชั่นภาษาอังกฤษ</value>
+  </data>
 </root>

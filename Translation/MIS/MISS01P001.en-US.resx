@@ -312,4 +312,22 @@
   <data name="Index21" xml:space="preserve">
     <value>Report Issue</value>
   </data>
+  <data name="ID_NO" xml:space="preserve">
+    <value>ID_NO</value>
+  </data>
+  <data name="ID_APP" xml:space="preserve">
+    <value>ID_APP</value>
+  </data>
+  <data name="ID_ISSUE_DATE_PERIOD" xml:space="preserve">
+    <value>ID_ISSUE_DATE_PERIOD</value>
+  </data>
+  <data name="ID_ISSUE_DATE_PERIOD1" xml:space="preserve">
+    <value>ID_ISSUE_DATE_PERIOD</value>
+  </data>
+  <data name="ID_RESOLUTION_TARGET" xml:space="preserve">
+    <value>ID_RESOLUTION_TARGET</value>
+  </data>
+  <data name="ID_RESPONSE_TARGET" xml:space="preserve">
+    <value>ID_RESPONSE_TARGET</value>
+  </data>
 </root>

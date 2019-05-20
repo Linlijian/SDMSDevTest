@@ -196,6 +196,24 @@ namespace Translation.CenterLang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ชื่อแอพพลิเคชั่นภาษาไทย.
+        /// </summary>
+        public static string COM_NAME_E {
+            get {
+                return ResourceManager.GetString("COM_NAME_E", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ชื่อแอพพลิเคชั่นภาษาอังกฤษ.
+        /// </summary>
+        public static string COM_NAME_T {
+            get {
+                return ResourceManager.GetString("COM_NAME_T", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to กำหนดบริษัท.
         /// </summary>
         public static string ConfigInsuranceCompany {

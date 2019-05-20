@@ -250,6 +250,51 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ID_APP.
+        /// </summary>
+        public static string ID_APP {
+            get {
+                return ResourceManager.GetString("ID_APP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID_ISSUE_DATE_PERIOD.
+        /// </summary>
+        public static string ID_ISSUE_DATE_PERIOD {
+            get {
+                return ResourceManager.GetString("ID_ISSUE_DATE_PERIOD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID_NO.
+        /// </summary>
+        public static string ID_NO {
+            get {
+                return ResourceManager.GetString("ID_NO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID_RESOLUTION_TARGET.
+        /// </summary>
+        public static string ID_RESOLUTION_TARGET {
+            get {
+                return ResourceManager.GetString("ID_RESOLUTION_TARGET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID_RESPONSE_TARGET.
+        /// </summary>
+        public static string ID_RESPONSE_TARGET {
+            get {
+                return ResourceManager.GetString("ID_RESPONSE_TARGET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Issue Information.
         /// </summary>
         public static string Index1 {

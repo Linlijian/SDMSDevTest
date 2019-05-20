@@ -210,4 +210,10 @@
   <data name="RE_PWD_CRITERIA" xml:space="preserve">
     <value>Password Criteria</value>
   </data>
+  <data name="COM_CODE_E" xml:space="preserve">
+    <value>Add Application Eng</value>
+  </data>
+  <data name="COM_CODE_T" xml:space="preserve">
+    <value>Add Application Thai</value>
+  </data>
 </root>

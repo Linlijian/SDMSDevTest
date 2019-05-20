@@ -73,10 +73,10 @@
                 {
                     @form.SelectFor(t => t.PRG_STATUS, Model.PRG_STATUS_MODEL.ToSelectList("Value", "Text", Model.PRG_STATUS), isRequired: true)
                 }
-                using (r.GridColumn(6).Begin())
+                @*using (r.GridColumn(6).Begin())
                 {
                     @form.InputFileuploadFor(m => m.PRG_IMG)
-                }
+                }*@
             }
         }
     }

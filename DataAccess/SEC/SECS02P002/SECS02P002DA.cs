@@ -30,7 +30,29 @@ namespace DataAccess.SEC
                 case SECS02P002ExecuteType.GetQueryCheckUserAdmin: return GetQueryCheckUserAdmin(dto);
                 case SECS02P002ExecuteType.GetDetailByID: return GetDetailByID(dto);
                 case SECS02P002ExecuteType.CheckAdmin: return CheckAdmin(dto);
+                case SECS02P002ExecuteType.GetFullAppName: return GetFullAppName(dto);
             }
+            return dto;
+        }
+        private SECS02P002DTO GetFullAppName(SECS02P002DTO dto)
+        {
+            string sql = @" SELECT COM_CODE
+	                            ,COM_NAME_T AS COM_CODE_T
+	                            ,COM_NAME_E AS COM_CODE_E
+                            FROM VSMS_COMPANY
+                            WHERE COM_CODE = @COM_CODE
+                            ";
+
+            var parameters = CreateParameter();
+            parameters.AddParameter("COM_CODE", dto.Model.COM_CODE);
+
+            var result = _DBMangerNoEF.ExecuteDataSet(sql, parameters, CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Model.Details = result.OutputDataSet.Tables[0].ToList<SECS02P002ModuleAndSystemDetail>();
+            }
+
             return dto;
         }
         private SECS02P002DTO CheckAdmin(SECS02P002DTO dto)
@@ -53,12 +75,19 @@ namespace DataAccess.SEC
         }
         private SECS02P002DTO GetDetailByID(SECS02P002DTO dto)
         {
-            string sql = @"SELECT COM_CODE,
-                                MODULE,
-                                USER_ID,
-                                USG_ID = (SELECT USG_ID FROM VSMS_USER WHERE USER_ID = @USER_ID)
-                          FROM VSMS_MODULE
-                          WHERE USER_ID = @USER_ID";
+            string sql = @" SELECT a.COM_CODE
+	                            ,a.USER_ID
+	                            ,USG_ID = (
+		                            SELECT USG_ID
+		                            FROM VSMS_USER
+		                            WHERE USER_ID = @USER_ID
+		                            )
+	                            ,aa.COM_NAME_E as COM_CODE_E
+	                            ,aa.COM_NAME_T as COM_CODE_T
+                            FROM VSMS_USERCOM a
+                            INNER JOIN VSMS_COMPANY aa ON a.COM_CODE = aa.COM_CODE
+                            WHERE USER_ID = @USER_ID
+                            ";
 
             var parameters = CreateParameter();
             parameters.AddParameter("USER_ID", dto.Model.USER_ID);
@@ -352,6 +381,7 @@ namespace DataAccess.SEC
                 if (!dto.Model.Details.IsNullOrEmpty())
                 {
                     var UDG_ID = dto.Model.USG_ID;
+                    var USER_ID = dto.Model.USER_ID;
                     DELETE_USERCOM(dto);
                     DELETE_MODUlE(dto);
 
@@ -361,7 +391,7 @@ namespace DataAccess.SEC
 
                         parameters1.AddParameter("error_code", null, ParameterDirection.Output);
                         parameters1.AddParameter("COM_CODE", item.COM_CODE);
-                        parameters1.AddParameter("USER_ID", item.USER_ID);
+                        parameters1.AddParameter("USER_ID", USER_ID);
                         parameters1.AddParameter("USG_ID", UDG_ID);
                         parameters1.AddParameter("MODULE", item.MODULE);
                         parameters1.AddParameter("CRET_BY", dto.Model.CRET_BY);
@@ -421,7 +451,17 @@ namespace DataAccess.SEC
         #region ====Update==========
         protected override BaseDTO DoUpdate(BaseDTO baseDTO)
         {
+
             var dto = (SECS02P002DTO)baseDTO;
+            switch (dto.Execute.ExecuteType)
+            {
+                case SECS02P002ExecuteType.UpdateLastLogin: return UpdateLastLogin(dto);
+                case SECS02P002ExecuteType.Update: return Update(dto);
+            }
+            return dto;
+        }
+        private SECS02P002DTO Update(SECS02P002DTO dto)
+        {
             var parameters1 = CreateParameter();
 
             parameters1.AddParameter("error_code", null, ParameterDirection.Output);
@@ -466,6 +506,18 @@ namespace DataAccess.SEC
                     INSERT_USERCOM(dto);
                 }
             }
+
+            return dto;
+        }
+        private SECS02P002DTO UpdateLastLogin(SECS02P002DTO dto)
+        {
+            string strSQL = @" update [dbo].[VSMS_USER] set LAST_LOGIN_DATE = @LAST_LOGIN_DATE
+                                   WHERE USER_ID = @USER_ID  ";
+
+            var parameters = CreateParameter();
+            parameters.AddParameter("USER_ID", dto.Model.USER_ID);
+            parameters.AddParameter("LAST_LOGIN_DATE", dto.Model.CRET_DATE);
+            _DBMangerNoEF.ExecuteNonQuery(strSQL, parameters, CommandType.Text);
 
             return dto;
         }

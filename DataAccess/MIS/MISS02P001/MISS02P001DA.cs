@@ -368,7 +368,7 @@ namespace DataAccess.MIS
                     else
                     {
                         dto.Result.IsResult = false;
-                        dto.Result.ResultMsg = "PLEASE RE-CHECK EXCEL FILE";
+                        dto.Result.ResultMsg = "PLEASE RE-CHECK DATE IN EXCEL FILE";
                         break;
                     }
 

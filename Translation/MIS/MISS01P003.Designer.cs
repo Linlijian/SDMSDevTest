@@ -61,6 +61,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept.
+        /// </summary>
+        public static string ACCEPT {
+            get {
+                return ResourceManager.GetString("ACCEPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accept | Reject.
         /// </summary>
         public static string ACCEPT_REJECT {
@@ -115,6 +124,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reject.
+        /// </summary>
+        public static string REJECT {
+            get {
+                return ResourceManager.GetString("REJECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Response By.
         /// </summary>
         public static string RESPONSE_BY {
@@ -124,11 +142,47 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Solution Result.
+        /// </summary>
+        public static string SOLUTION_TEXT {
+            get {
+                return ResourceManager.GetString("SOLUTION_TEXT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string STATUS {
             get {
                 return ResourceManager.GetString("STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NewTask.
+        /// </summary>
+        public static string STEP_1 {
+            get {
+                return ResourceManager.GetString("STEP_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DoTask.
+        /// </summary>
+        public static string STEP_2 {
+            get {
+                return ResourceManager.GetString("STEP_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DoneTask.
+        /// </summary>
+        public static string STEP_3 {
+            get {
+                return ResourceManager.GetString("STEP_3", resourceCulture);
             }
         }
     }
