@@ -175,8 +175,9 @@ namespace WEBAPP.Areas.MIS.Controllers
                        //, "&RE_BUG" , HttpUtility.UrlEncode(RE_BUG)
                        , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
                      );
-
+            
             return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMSBBK" + "/" + ReportName2 + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+            //return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMS" + "/" + ReportName2 + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
         }
 
         //public ActionResult ViewReport(MISS01P001Model model)

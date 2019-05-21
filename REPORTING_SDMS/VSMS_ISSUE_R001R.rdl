@@ -2505,13 +2505,13 @@
                     <Value>Report Issue</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>20pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>

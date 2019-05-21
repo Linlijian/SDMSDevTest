@@ -16,21 +16,8 @@
     <DataSet Name="DataSet1">
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
-        <QueryParameters>
-          <QueryParameter Name="@error_code">
-            <Value>=Parameters!error_code.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@CRET_BY">
-            <Value>=Parameters!CRET_BY.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@ISSUE_DATE_PERIOD">
-            <Value>=Parameters!ISSUE_DATE_PERIOD.Value</Value>
-          </QueryParameter>
-        </QueryParameters>
-        <CommandText>EXEC	[bond].[SP_VSMS_ISSUE_R002]
-                  @error_code  OUTPUT
-	,@CRET_BY 
-	,@ISSUE_DATE_PERIOD </CommandText>
+        <CommandText>
+	select * from VSMS_ISSUER002T</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
