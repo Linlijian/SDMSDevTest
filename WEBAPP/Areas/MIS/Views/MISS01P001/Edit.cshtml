@@ -42,15 +42,45 @@
 
             using (var r = Html.Bootstrap().GridRow().Begin())
             {
-                using (row1.GridColumn(6).Begin())
+                using (row1.GridColumn(2).Begin())
                 {
-                    @form.InputNumberFor(m => m.NO).SetReadonly()
-                    //<label> <b>Issue No : </b> @Model.NO </label>
+
                 }
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true, addValidateMessage: true).IsDisabled()
-                    //<label> <b>Application Code : </b> @Model.APP_CODE </label>
+                    //@form.InputNumberFor(m => m.NO).SetReadonly()
+                    <label> <b>Issue No : </b> @Model.NO </label>
+                }
+            }
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(2).Begin())
+                {
+
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    //@form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true, addValidateMessage: true).IsDisabled()
+                    <label> <b>Application Code : </b> @Model.APP_CODE </label>
+                }
+            }
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(2).Begin())
+                {
+
+                }
+                using (row1.GridColumn(2).Begin())
+                {
+                    //@form.InputFor(m => m.STR_ISSUE_DATE, isRequired: true, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.ISSUE_DATE).AddCss("input-append").SetReadonly()
+                    @form.HiddenFor(m => m.ISSUE_DATE)
+                    <label> <b>Issue Date Time : </b> @Model.STR_ISSUE_DATE </label>
+                }
+                using (row1.GridColumn(2).Begin())
+                {
+                    //@form.InputFor(m => m.STR_ISSUE_DATE, isRequired: true, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.ISSUE_DATE).AddCss("input-append").SetReadonly()
+                    @form.HiddenFor(m => m.ISSUE_DATE)
+                    <label> <b>Issue Date Period : </b> @Model.ISSUE_DATE_PERIOD </label>
                 }
             }
             using (var r = Html.Bootstrap().GridRow().Begin())
@@ -62,18 +92,6 @@
                 using (row1.GridColumn(6).Begin())
                 {
                     @form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), isRequired: true, addValidateMessage: true)
-                }
-            }
-            using (var r = Html.Bootstrap().GridRow().Begin())
-            {
-                using (row1.GridColumn(6).Begin())
-                {
-                    @form.InputFor(m => m.STR_ISSUE_DATE, isRequired: true, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.ISSUE_DATE).AddCss("input-append").SetReadonly()
-                    @form.HiddenFor(m => m.ISSUE_DATE)
-                }
-                using (row1.GridColumn(6).Begin())
-                {
-                    @form.InputFor(m => m.ISSUE_DATE_PERIOD).SetReadonly()
                 }
             }
             using (var r = Html.Bootstrap().GridRow().Begin())
@@ -105,7 +123,7 @@
             {
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.TextAreaFor(m => m.ROOT_CAUSE, 4)
+                    @form.TextAreaFor(m => m.DETAIL, 4, isRequired: true)
                 }
                 using (row1.GridColumn(6).Begin())
                 {
@@ -120,7 +138,7 @@
                 }
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.TextAreaFor(m => m.DETAIL, 4, isRequired: true)
+                    @form.TextAreaFor(m => m.ROOT_CAUSE, 4)
                 }
             }
             @Html.GetVSMWidgetsEnd()
