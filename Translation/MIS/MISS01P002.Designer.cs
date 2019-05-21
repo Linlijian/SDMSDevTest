@@ -79,6 +79,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assign To.
+        /// </summary>
+        public static string ASSIGN_TO {
+            get {
+                return ResourceManager.GetString("ASSIGN_TO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assignment.
         /// </summary>
         public static string ASSIGN_USER {

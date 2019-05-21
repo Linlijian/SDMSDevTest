@@ -126,6 +126,9 @@
   <data name="ASSIGN_STATUS" xml:space="preserve">
     <value>Fix Status</value>
   </data>
+  <data name="ASSIGN_TO" xml:space="preserve">
+    <value>Assign To</value>
+  </data>
   <data name="ASSIGN_USER" xml:space="preserve">
     <value>Assignment</value>
   </data>
